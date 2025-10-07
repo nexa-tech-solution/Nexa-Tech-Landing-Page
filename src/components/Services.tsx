@@ -1,5 +1,6 @@
 import { Card, CardDescription, CardHeader, CardTitle } from "./ui/card";
 import { MagnifierIcon, WalletIcon, ChartIcon } from "./Icons";
+import { Button, buttonVariants } from "@/components/ui/button";
 import cubeLeg from "../assets/cube-leg.png";
 
 interface ServiceProps {
@@ -10,47 +11,51 @@ interface ServiceProps {
 
 const serviceList: ServiceProps[] = [
   {
-    title: "Code Collaboration",
+    title: "Instant QR Scanning",
     description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi nesciunt est nostrum omnis ab sapiente.",
-    icon: <ChartIcon />,
+      "Scan any QR or barcode in real time using your device camera. Works offline and never uploads data to the cloud.",
+    icon: <MagnifierIcon />,
   },
   {
-    title: "Project Management",
+    title: "Scan from Photos",
     description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi nesciunt est nostrum omnis ab sapiente.",
+      "Choose any image from your gallery to detect QR codes securely. All image processing is done locally.",
     icon: <WalletIcon />,
   },
   {
-    title: "Task Automation",
+    title: "History & Privacy",
     description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi nesciunt est nostrum omnis ab sapiente.",
-    icon: <MagnifierIcon />,
+      "Keep your scan history private, stored only on your device. Manage, copy, or delete any scan anytime.",
+    icon: <ChartIcon />,
   },
 ];
 
 export const Services = () => {
   return (
-    <section className="container py-24 sm:py-32">
+    <section id="services" className="container py-24 sm:py-32">
       <div className="grid lg:grid-cols-[1fr,1fr] gap-8 place-items-center">
         <div>
           <h2 className="text-3xl md:text-4xl font-bold">
-            <span className="bg-gradient-to-b from-primary/60 to-primary text-transparent bg-clip-text">
-              Client-Centric{" "}
-            </span>
-            Services
+            <span className="bg-gradient-to-b from-emerald-400 to-green-600 text-transparent bg-clip-text">
+              Smart. Secure. Simple.
+            </span>{" "}
+            QR Scanning with Nexa-Tech
           </h2>
 
-          <p className="text-muted-foreground text-xl mt-4 mb-8 ">
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Veritatis
-            dolor.
+          <p className="text-muted-foreground text-lg mt-4 mb-8">
+            ScanQR by Nexa-Tech is a clean, privacy-first QR scanner designed
+            for everyday users. Experience instant scanning, offline security,
+            and complete control of your data.
           </p>
 
           <div className="flex flex-col gap-8">
             {serviceList.map(({ icon, title, description }: ServiceProps) => (
-              <Card key={title}>
+              <Card
+                key={title}
+                className="bg-gradient-to-b from-white/70 to-green-50/40 dark:from-neutral-900/50 dark:to-emerald-900/20 border border-green-100 dark:border-green-800 backdrop-blur-sm"
+              >
                 <CardHeader className="space-y-1 flex md:flex-row justify-start items-start gap-4">
-                  <div className="mt-1 bg-primary/20 p-1 rounded-2xl">
+                  <div className="mt-1 bg-green-500/10 p-2 rounded-2xl">
                     {icon}
                   </div>
                   <div>
@@ -63,13 +68,38 @@ export const Services = () => {
               </Card>
             ))}
           </div>
+
+          <div className="mt-10 flex flex-col sm:flex-row gap-4">
+            <a
+              href="https://play.google.com/store/apps/details?id=com.nexatech.scanqr"
+              target="_blank"
+              rel="noreferrer noopener"
+              className={buttonVariants({ variant: "default", size: "lg" })}
+            >
+              Get ScanQR on Google Play
+            </a>
+
+            <a
+              href="https://www.youtube.com/shorts/SSWVFh0kB5s"
+              target="_blank"
+              rel="noreferrer noopener"
+              className={buttonVariants({ variant: "outline", size: "lg" })}
+            >
+              Watch Demo Video
+            </a>
+          </div>
         </div>
 
-        <img
-          src={cubeLeg}
-          className="w-[300px] md:w-[500px] lg:w-[600px] object-contain"
-          alt="About services"
-        />
+        <div className="w-full flex flex-col items-center justify-center gap-8">
+          {/* YouTube video embed */}
+
+          {/* Decorative image */}
+          <img
+            src={cubeLeg}
+            className="w-[280px] md:w-[420px] lg:w-[520px] object-contain"
+            alt="ScanQR visual illustration"
+          />
+        </div>
       </div>
     </section>
   );

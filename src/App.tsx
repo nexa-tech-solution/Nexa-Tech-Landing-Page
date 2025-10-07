@@ -10,7 +10,6 @@ import { Newsletter } from "./components/Newsletter";
 import { Pricing } from "./components/Pricing";
 import { ScrollToTop } from "./components/ScrollToTop";
 import { Services } from "./components/Services";
-import { Sponsors } from "./components/Sponsors";
 import { Team } from "./components/Team";
 import { Testimonials } from "./components/Testimonials";
 import "./App.css";
@@ -20,18 +19,18 @@ function App() {
     <>
       <Navbar />
       <Hero />
-      <Sponsors />
+      {/* <Sponsors /> */}
       <About />
       <HowItWorks />
       <Features />
       <Services />
-      <Cta />
+      {/* <Cta /> */}
       <Testimonials />
-      <Team />
-      <Pricing />
-      <Newsletter />
+      {/* <Team /> */}
+      {/* <Pricing /> */}
+      {/* <Newsletter /> */}
       <FAQ />
-      <Footer />
+      {/* <Footer /> */}
       <ScrollToTop />
     </>
   );
