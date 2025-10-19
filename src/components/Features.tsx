@@ -1,179 +1,151 @@
-import { Badge } from "./ui/badge";
-import { Button, buttonVariants } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { buttonVariants } from "@/components/ui/button";
 import {
   Card,
   CardContent,
-  CardFooter,
   CardHeader,
   CardTitle,
+  CardFooter,
 } from "@/components/ui/card";
-import image from "../assets/growth.png";
-import image3 from "../assets/reflecting.png";
-import image4 from "../assets/looking-ahead.png";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
+import { useState } from "react";
+import { Maximize2 } from "lucide-react";
 
-type StoreLinks = {
-  playStore?: string;
-  appStore?: string;
-};
+import scanqrHero from "../assets/looking-ahead.png";
+import calcHero from "../assets/reflecting.png";
 
-interface FeatureProps {
+// Replace these with your real screenshots (PNG/JPG/WEBP)
+import scanqr1 from "../assets/scanqr/1.webp";
+import scanqr2 from "../assets/scanqr/2.webp";
+import scanqr3 from "../assets/scanqr/3.webp";
+import calc1 from "../assets/calc/1.png";
+import calc2 from "../assets/calc/2.png";
+import calc3 from "../assets/calc/3.png";
+import calc4 from "../assets/calc/4.png";
+
+type AppItem = {
+  id: string;
   title: string;
   description: string;
   image: string;
-}
-
-const store: StoreLinks = {
-  playStore: "https://play.google.com/store/apps/details?id=com.nexa.qr_code", // change to your real id
-  // appStore: "https://apps.apple.com/app/id0000000000", // optional; remove if Android-only
+  playStore: string;
+  tags: string[];
+  youtubeDemo?: string;
+  screenshots: string[];
 };
 
-const features: FeatureProps[] = [
+const apps: AppItem[] = [
   {
-    title: "Scan all QR & Barcodes",
+    id: "scanqr",
+    title: "ScanQR",
     description:
-      "Instant, accurate scanning with your camera. Works offline after first launch.",
-    image: image4,
+      "Fast, private QR & Barcode scanner. Works offline, saves history, and supports multiple content types.",
+    image: scanqrHero,
+    playStore: "https://play.google.com/store/apps/details?id=com.nexa.qr_code",
+    tags: ["Privacy-first", "Offline", "No ads", "Modern UI"],
+    youtubeDemo: "https://www.youtube.com/embed/SSWVFh0kB5s",
+    screenshots: [scanqr1, scanqr2, scanqr3],
   },
   {
-    title: "Scan from Photos",
+    id: "easy-math",
+    title: "Easy Math Calculator",
     description:
-      "Pick an image from your gallery to detect QR codes—no uploads, processed on-device.",
-    image: image3,
-  },
-  {
-    title: "History & Quick Actions",
-    description:
-      "Auto-save scans locally. Reopen links, copy text, share, or delete anytime.",
-    image,
+      "Simple, intuitive, and fast calculator for everyday use.\nNo clutter, just clean math.",
+    image: calcHero,
+    playStore:
+      "https://play.google.com/store/apps/details?id=com.nexa.easy_math_calculator",
+    tags: ["Lightweight", "Elegant UI", "Free forever", "No sign-in"],
+    youtubeDemo: undefined,
+    screenshots: [calc1, calc2, calc3, calc4],
   },
 ];
 
-const featureTags: string[] = [
-  "Privacy-first",
-  "Works offline",
-  "Multilingual",
-  "Wi-Fi / Contacts / URLs",
-  "Lightweight",
-  "Modern UI",
-  "History",
-  "No sign-in",
-];
+function ScreenshotGrid({
+  images,
+  title,
+}: {
+  images: string[];
+  title: string;
+}) {
+  return (
+    <div className="w-full">
+      <div className="grid grid-cols-3 sm:grid-cols-4 gap-2">
+        {images.map((src, idx) => (
+          <div className="group relative rounded-lg overflow-hidden border">
+            <AspectRatio ratio={9 / 16} className="bg-white">
+              <img
+                src={src}
+                alt={`${title} screenshot ${idx + 1}`}
+                className="h-full w-full object-scale-down"
+                loading="lazy"
+              />
+            </AspectRatio>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
 
 export const Features = () => {
   return (
-    <section id="features" className="container py-24 sm:py-32 space-y-10">
+    <section id="apps" className="container py-24 sm:py-32 space-y-16">
       <div className="text-center space-y-4">
         <h2 className="text-3xl lg:text-4xl font-bold">
-          Showcase{" "}
+          Explore{" "}
           <span className="bg-gradient-to-b from-emerald-400 to-green-600 text-transparent bg-clip-text">
-            ScanQR
+            Nexa-Tech Apps
           </span>
         </h2>
         <p className="mx-auto max-w-2xl text-muted-foreground text-lg">
-          Fast, secure, and minimal QR scanner by Nexa-Tech. Scan with camera or
-          from photos, keep a private history, and take action instantly.
+          Discover lightweight, privacy-focused tools built for speed and
+          simplicity.
         </p>
-
-        <div className="mt-4 flex flex-wrap justify-center gap-3">
-          {featureTags.map((feature) => (
-            <Badge key={feature} variant="secondary" className="text-sm">
-              {feature}
-            </Badge>
-          ))}
-        </div>
-
-        <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3">
-          {store.playStore && (
-            <a
-              href={store.playStore}
-              target="_blank"
-              rel="noreferrer noopener"
-              className={buttonVariants({
-                variant: "default",
-                size: "lg",
-              })}
-              aria-label="Get ScanQR on Google Play"
-            >
-              Get it on Google Play
-            </a>
-          )}
-          {store.appStore && (
-            <a
-              href={store.appStore}
-              target="_blank"
-              rel="noreferrer noopener"
-              className={buttonVariants({
-                variant: "outline",
-                size: "lg",
-              })}
-              aria-label="Download ScanQR on the App Store"
-            >
-              Download on the App Store
-            </a>
-          )}
-        </div>
       </div>
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {features.map(({ title, description, image: img }) => (
+
+      <div className="grid md:grid-cols-2 gap-10">
+        {apps.map((app) => (
           <Card
-            key={title}
+            key={app.id}
             className="bg-gradient-to-b from-white/70 to-green-50/40 dark:from-neutral-900/50 dark:to-emerald-900/20 border border-green-100 dark:border-emerald-800 backdrop-blur-sm"
           >
-            <CardHeader>
-              <CardTitle>{title}</CardTitle>
+            <CardHeader className="space-y-2">
+              <CardTitle className="text-2xl font-bold">{app.title}</CardTitle>
+              <p className="text-muted-foreground whitespace-pre-line">
+                {app.description}
+              </p>
+              <div className="flex flex-wrap gap-2 mt-2">
+                {app.tags.map((t) => (
+                  <Badge key={t} variant="secondary" className="text-xs">
+                    {t}
+                  </Badge>
+                ))}
+              </div>
             </CardHeader>
 
-            <CardContent className="text-muted-foreground">
-              {description}
+            <CardContent className="space-y-6">
+              <div>
+                <div className="mb-2 text-sm font-medium text-muted-foreground">
+                  Screenshots
+                </div>
+                <ScreenshotGrid images={app.screenshots} title={app.title} />
+              </div>
             </CardContent>
 
             <CardFooter className="flex flex-col items-center gap-4">
-              <img
-                src={img}
-                alt={title}
-                className="w-[220px] lg:w-[300px] mx-auto"
-              />
-
-              <div className="flex gap-2">
-                {store.playStore && (
-                  <a
-                    href={store.playStore}
-                    target="_blank"
-                    rel="noreferrer noopener"
-                    className={buttonVariants({
-                      variant: "secondary",
-                      size: "sm",
-                    })}
-                    aria-label={`Open ${title} on Google Play`}
-                  >
-                    Google Play
-                  </a>
-                )}
-                {store.appStore && (
-                  <a
-                    href={store.appStore}
-                    target="_blank"
-                    rel="noreferrer noopener"
-                    className={buttonVariants({ variant: "ghost", size: "sm" })}
-                    aria-label={`Open ${title} on App Store`}
-                  >
-                    App Store
-                  </a>
-                )}
-              </div>
+              <a
+                href={app.playStore}
+                target="_blank"
+                rel="noreferrer noopener"
+                className={buttonVariants({ variant: "default", size: "lg" })}
+                aria-label={`Get ${app.title} on Google Play`}
+              >
+                Get it on Google Play
+              </a>
             </CardFooter>
           </Card>
         ))}
-      </div>
-      <div className="aspect-video w-full max-w-4xl mx-auto rounded-lg overflow-hidden shadow-lg">
-        <iframe
-          src="https://www.youtube.com/embed/SSWVFh0kB5s"
-          title="ScanQR demo"
-          frameBorder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
-          className="w-full h-full"
-        />
       </div>
     </section>
   );
