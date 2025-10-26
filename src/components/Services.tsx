@@ -68,7 +68,7 @@ export const Services = () => {
             ))}
           </div>
 
-          <div className="mt-10 flex flex-col sm:flex-row gap-4">
+          {/* <div className="mt-10 flex flex-col sm:flex-row gap-4">
             <a
               href="https://play.google.com/store/apps/details?id=com.nexa.qr_code"
               target="_blank"
@@ -85,7 +85,7 @@ export const Services = () => {
             >
               See Easy Math Calculator
             </a>
-          </div>
+          </div> */}
         </div>
 
         <div className="w-full flex flex-col items-center justify-center gap-8">
