@@ -7,10 +7,7 @@ import {
   CardTitle,
   CardFooter,
 } from "@/components/ui/card";
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
-import { useState } from "react";
-import { Maximize2 } from "lucide-react";
 
 import scanqrHero from "../assets/looking-ahead.png";
 import calcHero from "../assets/reflecting.png";
@@ -23,6 +20,11 @@ import calc1 from "../assets/calc/1.png";
 import calc2 from "../assets/calc/2.png";
 import calc3 from "../assets/calc/3.png";
 import calc4 from "../assets/calc/4.png";
+import currencyCvt1 from "../assets/currency-converter/1.jpg";
+import currencyCvt2 from "../assets/currency-converter/2.jpg";
+import currencyCvt3 from "../assets/currency-converter/3.jpg";
+import currencyCvt4 from "../assets/currency-converter/4.jpg";
+import currencyCvt5 from "../assets/currency-converter/5.jpg";
 
 type AppItem = {
   id: string;
@@ -58,6 +60,29 @@ const apps: AppItem[] = [
     tags: ["Lightweight", "Elegant UI", "Free forever", "No sign-in"],
     youtubeDemo: undefined,
     screenshots: [calc1, calc2, calc3, calc4],
+  },
+  {
+    id: "currency-converter",
+    title: "Currency Converter",
+    description:
+      "Fun, fast currency converter with calculator, dark mode & offline power! 💸✨",
+    image: calcHero,
+    playStore:
+      "https://play.google.com/store/apps/details?id=com.currencyunitconverter",
+    tags: [
+      "Currency Converter",
+      "Exchange Rates",
+      "Finance Calculator",
+      "Money Exchange",
+    ],
+    youtubeDemo: undefined,
+    screenshots: [
+      currencyCvt1,
+      currencyCvt2,
+      currencyCvt3,
+      currencyCvt4,
+      currencyCvt5,
+    ],
   },
 ];
 

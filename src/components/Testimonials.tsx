@@ -18,58 +18,57 @@ type Testimonial = {
   rating?: number;
 };
 
-const APP_NAME = "ScanQR";
-const STORE_URL =
-  "https://play.google.com/store/apps/details?id=com.nexatech.scanqr";
-const DEMO_URL = "https://www.youtube.com/shorts/SSWVFh0kB5s";
+const APP_NAME = "Nexa";
+const DEMO_URL = "#demo";
+const CONTACT_URL = "#contact";
 
 const testimonials: Testimonial[] = [
   {
-    image: "https://i.pravatar.cc/150?img=12",
-    name: "Linh Nguyen",
-    userName: "@linh.codes",
+    image: "https://i.pravatar.cc/150?img=5",
+    name: "Jayden Tran",
+    userName: "@jayden.pm",
     comment:
-      "Blazing fast. I scan Wi-Fi and product QR codes daily—history is private and super handy.",
+      "We launched a lucky-draw campaign in hours, not weeks. QR check-in, prize tiers, and live winner feed were plug-and-play.",
     rating: 5,
   },
   {
-    image: "https://i.pravatar.cc/150?img=22",
-    name: "Aisha Rahman",
-    userName: "@aishar",
+    image: "https://i.pravatar.cc/150?img=16",
+    name: "Eunji Park",
+    userName: "@eunji.ops",
     comment:
-      "On-device scanning gives me peace of mind. No accounts, no noise—just works.",
+      "Multi-language flows and kiosk mode just worked. Staff only needed a short brief—UI is clean and obvious.",
     rating: 5,
   },
   {
-    image: "https://i.pravatar.cc/150?img=32",
+    image: "https://i.pravatar.cc/150?img=28",
     name: "Kenji Takahashi",
     userName: "@kenji.dev",
     comment:
-      "The gallery scan saves me constantly—pull a photo, detect instantly. Clean UI, green theme looks great.",
+      "The real-time analytics are gold—unique scans, winners, conversions. Exports go straight to our CRM.",
     rating: 5,
   },
   {
-    image: "https://i.pravatar.cc/150?img=42",
+    image: "https://i.pravatar.cc/150?img=37",
     name: "Sofia Martins",
     userName: "@sofia.m",
     comment:
-      "Lightweight and battery-friendly. Exactly what a QR app should be.",
+      "Offline-first at events was clutch. When the venue Wi-Fi dropped, Nexa kept scanning smoothly.",
     rating: 4.5,
   },
   {
-    image: "https://i.pravatar.cc/150?img=52",
+    image: "https://i.pravatar.cc/150?img=44",
     name: "Arjun Mehta",
     userName: "@arjunm",
     comment:
-      "No spam, no trackers. Offline after setup and supports multiple languages.",
+      "Flexible prize logic and audit-ready logs. Legal approved it in one pass thanks to clear history and controls.",
     rating: 5,
   },
   {
-    image: "https://i.pravatar.cc/150?img=62",
+    image: "https://i.pravatar.cc/150?img=53",
     name: "Mina Park",
-    userName: "@minapark",
+    userName: "@mina.p",
     comment:
-      "History controls are perfect—open, copy, or delete. Privacy-first done right.",
+      "From QR landing pages to winner modals, branding stayed consistent. Theme tokens made it painless.",
     rating: 5,
   },
 ];
@@ -132,12 +131,13 @@ export const Testimonials = () => {
       <div className="max-w-3xl space-y-3">
         <h2 className="text-3xl md:text-4xl font-bold">
           Why users{" "}
-          <span className="bg-gradient-to-b from-emerald-400 to-green-600 text-transparent bg-clip-text">
+          <span className="bg-gradient-to-b from-green-400 to-green-700 text-transparent bg-clip-text">
             love {APP_NAME}
           </span>
         </h2>
         <p className="text-xl text-muted-foreground">
-          Real feedback from people who value speed, simplicity, and privacy.
+          Real feedback from teams running QR campaigns, lucky draws, and
+          on-site activations.
         </p>
         <div className="flex items-center gap-3 pt-1">
           <Badge variant="secondary" className="text-sm">
@@ -154,7 +154,7 @@ export const Testimonials = () => {
         {testimonials.map(({ image, name, userName, comment, rating = 5 }) => (
           <Card
             key={userName}
-            className="bg-gradient-to-b from-white/70 to-green-50/40 dark:from-neutral-900/50 dark:to-emerald-900/20 border border-green-100 dark:border-emerald-800 backdrop-blur-sm"
+            className="bg-gradient-to-b from-white/70 to-green-50/40 dark:from-neutral-900/50 dark:to-green-900/20 border border-green-100 dark:border-green-800 backdrop-blur-sm"
           >
             <CardHeader className="flex flex-row items-start gap-4 pb-2">
               <Avatar className="ring-1 ring-green-500/20">
@@ -185,19 +185,16 @@ export const Testimonials = () => {
 
       <div className="mt-10 flex flex-col sm:flex-row items-center gap-3">
         <a
-          href={STORE_URL}
-          target="_blank"
-          rel="noreferrer noopener"
+          href={CONTACT_URL}
           className={buttonVariants({ variant: "default", size: "lg" })}
-          aria-label={`Get ${APP_NAME} on Google Play`}
+          aria-label={`Request a demo of ${APP_NAME}`}
         >
-          Get {APP_NAME} on Google Play
+          Request a Demo
         </a>
         <a
           href={DEMO_URL}
-          target="_blank"
-          rel="noreferrer noopener"
           className={buttonVariants({ variant: "outline", size: "lg" })}
+          aria-label={`Watch a quick demo of ${APP_NAME}`}
         >
           Watch 30s Demo
         </a>

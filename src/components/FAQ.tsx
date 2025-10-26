@@ -13,63 +13,63 @@ interface FAQProps {
 
 const FAQList: FAQProps[] = [
   {
-    question: "Is ScanQR free to use?",
+    question: "What is Nexa used for?",
     answer:
-      "Yes. ScanQR is free. Optional ads help keep the app lightweight and maintained. There are no accounts or paywalls to scan codes.",
+      "Nexa is an event engagement and activation platform that helps brands run QR-based campaigns, lucky draws, surveys, and on-site registrations with real-time analytics.",
     value: "item-1",
   },
   {
-    question: "Does ScanQR work offline?",
+    question: "Can Nexa work offline?",
     answer:
-      "Yes. After the first launch, scanning works offline. All detection runs on-device so you can scan without a network connection.",
+      "Yes. Nexa supports offline-first operation for event check-ins and lucky draws. Data automatically syncs once the connection is restored.",
     value: "item-2",
   },
   {
-    question: "What data do you collect?",
+    question: "Is Nexa customizable for different brands?",
     answer:
-      "None. We don’t collect personal data or upload images. Scans and history are stored locally on your device and can be cleared anytime.",
+      "Absolutely. You can fully customize the theme, logo, prize tiers, and flow to match your brand identity and event needs.",
     value: "item-3",
   },
   {
-    question: "Which permissions are required?",
+    question: "Does Nexa store participant data securely?",
     answer:
-      "Camera for real-time scanning and Photos/Media to scan from images you choose. Internet is used only to load ads (if enabled).",
+      "Yes. All participant data is encrypted in transit and at rest. Admins have full control over access and can export or delete data at any time.",
     value: "item-4",
   },
   {
-    question: "Can I scan from a photo in my gallery?",
+    question: "Can I use Nexa for lucky draws or instant prizes?",
     answer:
-      "Absolutely. Pick an image from your gallery and ScanQR will detect QR codes or barcodes on-device—nothing is uploaded.",
+      "Yes. Nexa supports multiple prize mechanisms—random draws, tiered rewards, instant win, and spin-the-wheel styles with configurable logic.",
     value: "item-5",
   },
   {
-    question: "What code types are supported?",
+    question: "Which analytics does Nexa provide?",
     answer:
-      "Common QR formats plus popular barcodes (EAN-13/8, UPC-A/E, Code 128, Code 39, ITF, PDF417, and more).",
+      "Nexa gives you live insights on scans, participants, winners, locations, and conversion rates. You can export detailed reports for each campaign.",
     value: "item-6",
   },
   {
-    question: "Is my scan history private?",
+    question: "Can Nexa integrate with our CRM or backend?",
     answer:
-      "Yes. History is saved only on your device. You can open, copy, share, or delete entries individually or clear all history.",
+      "Yes. Nexa offers REST and webhook integrations so you can connect participant data and prize results directly to your existing systems.",
     value: "item-7",
   },
   {
-    question: "Which languages are available?",
+    question: "Does Nexa support multiple languages?",
     answer:
-      "ScanQR supports multiple languages including English, Vietnamese, French, Spanish, Arabic, Korean, Japanese, Chinese, Thai, Indonesian, and others.",
+      "Yes. Nexa supports multilingual campaigns including English, Vietnamese, Korean, Japanese, Chinese, and more for seamless regional events.",
     value: "item-8",
   },
   {
-    question: "Why does a link not open or show correctly?",
+    question: "Do participants need to install an app?",
     answer:
-      "Some QR codes contain incomplete or custom data. Try copying the result and opening it in the appropriate app, or rescan with better lighting.",
+      "No. Nexa runs instantly through mobile browsers via QR scan. You can also embed it as a Zalo Mini App or on your own microsite.",
     value: "item-9",
   },
   {
-    question: "Where can I download ScanQR?",
+    question: "How can I try Nexa?",
     answer:
-      "You can get ScanQR on Google Play. If you’re on desktop, use the store button on this page or scan the QR download code when available.",
+      "You can request a demo to explore the dashboard, campaign builder, and live event tools. Contact us and our team will set it up for you.",
     value: "item-10",
   },
 ];
@@ -79,7 +79,7 @@ export const FAQ = () => {
     <section id="faq" className="container py-24 sm:py-32">
       <h2 className="text-3xl md:text-4xl font-bold mb-4">
         Frequently Asked{" "}
-        <span className="bg-gradient-to-b from-emerald-400 to-green-600 text-transparent bg-clip-text">
+        <span className="bg-gradient-to-b from-green-400 to-green-700 text-transparent bg-clip-text">
           Questions
         </span>
       </h2>
