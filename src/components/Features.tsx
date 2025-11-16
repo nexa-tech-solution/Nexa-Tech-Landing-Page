@@ -25,7 +25,10 @@ import currencyCvt2 from "../assets/currency-converter/2.jpg";
 import currencyCvt3 from "../assets/currency-converter/3.jpg";
 import currencyCvt4 from "../assets/currency-converter/4.jpg";
 import currencyCvt5 from "../assets/currency-converter/5.jpg";
-
+import doctruyenvui1 from "../assets/doc-truyen-vui/1.jpg";
+import doctruyenvui2 from "../assets/doc-truyen-vui/2.jpg";
+import doctruyenvui3 from "../assets/doc-truyen-vui/3.jpg";
+import doctruyenvui4 from "../assets/doc-truyen-vui/4.jpg";
 type AppItem = {
   id: string;
   title: string;
@@ -84,6 +87,17 @@ const apps: AppItem[] = [
       currencyCvt5,
     ],
   },
+  {
+    id: "doc-truyen-vui-moi-ngay",
+    title: "Đọc Truyện Vui",
+    description: "🚀 Trải Nghiệm Đọc Đơn Giản & Tối Ưu",
+    image: calcHero,
+    playStore:
+      "https://play.google.com/store/apps/details?id=com.nexa.doc_truyen_vui_moi_ngay",
+    tags: ["Truyện tranh", "Vui nhộn", "Mới mẻ", "Dễ nhìn"],
+    youtubeDemo: undefined,
+    screenshots: [doctruyenvui1, doctruyenvui2, doctruyenvui3, doctruyenvui4],
+  },
 ];
 
 function ScreenshotGrid({
@@ -95,7 +109,7 @@ function ScreenshotGrid({
 }) {
   return (
     <div className="w-full">
-      <div className="grid grid-cols-3 sm:grid-cols-4 gap-2">
+      <div className="grid grid-cols-3 sm:grid-cols-5 gap-2">
         {images.map((src, idx) => (
           <div className="group relative rounded-lg overflow-hidden border">
             <AspectRatio ratio={9 / 16} className="bg-white">
