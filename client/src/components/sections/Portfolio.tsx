@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion";
 import { ExternalLink, Github, Smartphone, Globe } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
@@ -47,21 +47,29 @@ const projects = {
 };
 
 export default function Portfolio() {
+  const { t } = useTranslation();
+
   return (
-    <section id="products" className="py-24">
+    <section id="products" className="py-24 bg-background">
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-5xl font-heading font-bold mb-4">Our <span className="text-primary">Products</span></h2>
+          <h2 className="text-3xl md:text-5xl font-heading font-bold mb-4 text-foreground">
+            {t("products.title_prefix")} <span className="text-primary">{t("products.title_highlight")}</span>
+          </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            From complex web applications to intuitive mobile experiences, we build software that solves real-world problems.
+            {t("products.description")}
           </p>
         </div>
 
         <Tabs defaultValue="web" className="w-full max-w-5xl mx-auto">
           <div className="flex justify-center mb-12">
-            <TabsList className="grid w-full max-w-md grid-cols-2 bg-white/5 border border-white/10">
-              <TabsTrigger value="web">Web Applications</TabsTrigger>
-              <TabsTrigger value="mobile">Mobile Apps</TabsTrigger>
+            <TabsList className="grid w-full max-w-md grid-cols-2 bg-secondary border border-border p-1">
+              <TabsTrigger value="web" className="data-[state=active]:bg-white data-[state=active]:text-primary data-[state=active]:shadow-sm transition-all duration-300">
+                {t("products.tabs.web")}
+              </TabsTrigger>
+              <TabsTrigger value="mobile" className="data-[state=active]:bg-white data-[state=active]:text-primary data-[state=active]:shadow-sm transition-all duration-300">
+                {t("products.tabs.mobile")}
+              </TabsTrigger>
             </TabsList>
           </div>
 
@@ -75,26 +83,26 @@ export default function Portfolio() {
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.1 }}
                 >
-                  <Card className="h-full bg-card/50 backdrop-blur-sm border-white/10 hover:border-primary/50 transition-all duration-300 flex flex-col">
+                  <Card className="h-full bg-card border-border hover:border-primary/50 hover:shadow-lg transition-all duration-300 flex flex-col group">
                     <CardHeader>
-                      <div className="w-12 h-12 rounded-lg bg-blue-500/10 flex items-center justify-center mb-4">
-                        <Globe className="text-blue-500 w-6 h-6" />
+                      <div className="w-12 h-12 rounded-lg bg-blue-500/10 flex items-center justify-center mb-4 group-hover:bg-blue-500/20 transition-colors">
+                        <Globe className="text-blue-600 w-6 h-6" />
                       </div>
-                      <CardTitle>{project.title}</CardTitle>
-                      <CardDescription>{project.desc}</CardDescription>
+                      <CardTitle className="text-foreground">{project.title}</CardTitle>
+                      <CardDescription className="text-muted-foreground">{project.desc}</CardDescription>
                     </CardHeader>
                     <CardContent className="flex-grow">
                       <div className="flex flex-wrap gap-2">
                         {project.tech.map(t => (
-                          <Badge key={t} variant="secondary" className="bg-white/5 hover:bg-white/10">{t}</Badge>
+                          <Badge key={t} variant="secondary" className="bg-secondary text-secondary-foreground hover:bg-secondary/80">{t}</Badge>
                         ))}
                       </div>
                     </CardContent>
                     <CardFooter className="flex gap-4">
-                      <Button variant="outline" size="sm" className="w-full gap-2 border-white/10 hover:bg-white/5">
-                        <ExternalLink className="w-4 h-4" /> Live Demo
+                      <Button variant="outline" size="sm" className="w-full gap-2 border-border hover:bg-secondary text-foreground">
+                        <ExternalLink className="w-4 h-4" /> {t("products.buttons.demo")}
                       </Button>
-                      <Button variant="ghost" size="icon" className="border border-white/10 hover:bg-white/5">
+                      <Button variant="ghost" size="icon" className="border border-border hover:bg-secondary text-foreground">
                         <Github className="w-4 h-4" />
                       </Button>
                     </CardFooter>
@@ -114,33 +122,33 @@ export default function Portfolio() {
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.1 }}
                 >
-                  <Card className="h-full bg-card/50 backdrop-blur-sm border-white/10 hover:border-primary/50 transition-all duration-300">
+                  <Card className="h-full bg-card border-border hover:border-primary/50 hover:shadow-lg transition-all duration-300 group">
                     <div className="flex flex-col md:flex-row h-full">
                       <div className="p-6 flex-1 flex flex-col">
-                        <div className="w-12 h-12 rounded-lg bg-green-500/10 flex items-center justify-center mb-4">
-                          <Smartphone className="text-green-500 w-6 h-6" />
+                        <div className="w-12 h-12 rounded-lg bg-green-500/10 flex items-center justify-center mb-4 group-hover:bg-green-500/20 transition-colors">
+                          <Smartphone className="text-green-600 w-6 h-6" />
                         </div>
-                        <CardTitle className="mb-2">{project.title}</CardTitle>
-                        <CardDescription className="mb-4">{project.desc}</CardDescription>
+                        <CardTitle className="mb-2 text-foreground">{project.title}</CardTitle>
+                        <CardDescription className="mb-4 text-muted-foreground">{project.desc}</CardDescription>
                         
                         <div className="flex flex-wrap gap-2 mb-6 mt-auto">
                           {project.tech.map(t => (
-                            <Badge key={t} variant="secondary" className="bg-white/5 hover:bg-white/10">{t}</Badge>
+                            <Badge key={t} variant="secondary" className="bg-secondary text-secondary-foreground hover:bg-secondary/80">{t}</Badge>
                           ))}
                         </div>
                         
-                        <div className="flex gap-4 mt-auto pt-4 border-t border-white/5">
-                          <Button variant="outline" size="sm" className="flex-1 gap-2 border-white/10 hover:bg-white/5">
-                            Play Store
+                        <div className="flex gap-4 mt-auto pt-4 border-t border-border">
+                          <Button variant="outline" size="sm" className="flex-1 gap-2 border-border hover:bg-secondary text-foreground">
+                            {t("products.buttons.play")}
                           </Button>
-                          <Button variant="outline" size="sm" className="flex-1 gap-2 border-white/10 hover:bg-white/5">
-                            App Store
+                          <Button variant="outline" size="sm" className="flex-1 gap-2 border-border hover:bg-secondary text-foreground">
+                            {t("products.buttons.store")}
                           </Button>
                         </div>
                       </div>
-                      <div className="bg-black/20 md:w-48 p-4 flex items-center justify-center border-l border-white/5">
+                      <div className="bg-secondary/30 md:w-48 p-4 flex items-center justify-center border-l border-border">
                         {/* Placeholder for App Screen */}
-                        <div className="w-32 h-56 bg-white/5 rounded-xl border border-white/10 flex items-center justify-center">
+                        <div className="w-32 h-56 bg-background rounded-xl border border-border flex items-center justify-center shadow-inner">
                           <span className="text-xs text-muted-foreground">App Screen</span>
                         </div>
                       </div>

@@ -42,39 +42,39 @@
 }
 
 :root {
-  /* Updated Theme: Dark Tech Green & Deep Black */
+  /* LIGHT MODE - Clean, Modern, Tech */
   
-  /* Deep Tech Black Background */
-  --background: 240 10% 4%; 
-  --foreground: 0 0% 98%;
+  /* Bright White/Slate Background */
+  --background: 0 0% 100%;
+  --foreground: 222 47% 11%; /* Dark Slate for text */
 
-  /* Darker Cards */
-  --card: 240 10% 6%;
-  --card-foreground: 0 0% 98%;
+  /* White Cards with subtle borders/shadows */
+  --card: 0 0% 100%;
+  --card-foreground: 222 47% 11%;
 
-  --popover: 240 10% 6%;
-  --popover-foreground: 0 0% 98%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 222 47% 11%;
 
-  /* Tech Green Primary - Vibrant and energetic to match the logo */
-  --primary: 142 70% 50%;
-  --primary-foreground: 240 10% 4%;
+  /* Tech Green Primary - Slightly darker for better contrast on white */
+  --primary: 142 76% 36%; /* Green 600 */
+  --primary-foreground: 0 0% 100%;
 
-  /* Secondary/Muted - Cool Grays */
-  --secondary: 240 5% 15%;
-  --secondary-foreground: 0 0% 98%;
+  /* Secondary - Light Gray */
+  --secondary: 210 40% 96.1%;
+  --secondary-foreground: 222 47% 11%;
 
-  --muted: 240 5% 15%;
-  --muted-foreground: 240 5% 65%;
+  --muted: 210 40% 96.1%;
+  --muted-foreground: 215 16% 47%;
 
-  --accent: 240 5% 15%;
-  --accent-foreground: 0 0% 98%;
+  --accent: 210 40% 96.1%;
+  --accent-foreground: 222 47% 11%;
 
-  --destructive: 0 62% 30%;
-  --destructive-foreground: 0 0% 98%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 210 40% 98%;
 
-  --border: 240 5% 15%;
-  --input: 240 5% 15%;
-  --ring: 142 70% 50%;
+  --border: 214.3 31.8% 91.4%;
+  --input: 214.3 31.8% 91.4%;
+  --ring: 142 76% 36%;
 
   --radius: 0.5rem;
 }
@@ -85,7 +85,7 @@
     @apply border-border;
   }
   body {
-    @apply font-sans antialiased bg-background text-foreground selection:bg-primary/20 selection:text-primary;
+    @apply font-sans antialiased bg-background text-foreground selection:bg-primary/10 selection:text-primary;
   }
   h1, h2, h3, h4, h5, h6 {
     @apply font-heading tracking-tight;
@@ -95,11 +95,12 @@
 /* Custom Utilities */
 @layer utilities {
   .text-gradient {
-    /* Updated gradient to use Green tones */
-    @apply bg-clip-text text-transparent bg-linear-to-r from-white via-green-200 to-green-500;
+    /* Gradient adapted for Light Mode */
+    @apply bg-clip-text text-transparent bg-linear-to-r from-green-600 via-green-500 to-teal-500;
   }
   
   .glass-card {
-    @apply bg-white/5 backdrop-blur-md border border-white/10;
+    /* Frosted glass for light mode */
+    @apply bg-white/70 backdrop-blur-md border border-black/5 shadow-sm;
   }
 }
