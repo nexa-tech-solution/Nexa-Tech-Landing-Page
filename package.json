@@ -5,9 +5,8 @@
   "license": "MIT",
   "scripts": {
     "dev": "vite dev --port 5000",
-    "build": "tsx script/build.ts",
-    "start": "NODE_ENV=production node dist/index.cjs",
-    "check": "tsc"
+    "build": "vite build",
+    "preview": "vite preview"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
