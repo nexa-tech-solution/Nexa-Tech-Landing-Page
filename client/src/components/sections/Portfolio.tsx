@@ -3,47 +3,97 @@ import { motion } from "framer-motion";
 import { ExternalLink, Github, Smartphone, Globe } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardFooter, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+} from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const projects = {
   web: [
     {
-      title: "NexaFlow Dashboard",
-      desc: "A real-time analytics dashboard for SaaS platforms with data visualization.",
-      tech: ["React", "D3.js", "Node.js"],
-      link: "#",
-      repo: "#"
+      title: "Mystic Tarot",
+      desc: "Discover yourself and listen to the messages from the universe.",
+      tech: ["React", "Tailwind", "Node.js"],
+      link: "https://tarrot-web-app.vercel.app/",
+      repo: "",
     },
     {
-      title: "DocuShare Pro",
-      desc: "Secure document sharing platform with end-to-end encryption.",
-      tech: ["Next.js", "PostgreSQL", "AWS S3"],
-      link: "#",
-      repo: "#"
+      title: "PetPal | Pet Simulator",
+      desc: "🐾 PetPal — Chat with your virtual pet!",
+      tech: ["Next.js", "Gemini", "Rive"],
+      link: "https://pet-simulator-sigma.vercel.app/",
+      repo: "",
     },
-    {
-      title: "E-Commerce Starter",
-      desc: "Headless e-commerce template optimized for high performance.",
-      tech: ["Remix", "Shopify API", "Tailwind"],
-      link: "#",
-      repo: "#"
-    }
   ],
   mobile: [
     {
-      title: "FitTrack Mate",
-      desc: "Personal workout and nutrition tracking app with social features.",
-      tech: ["React Native", "Firebase", "Redux"],
-      store: { android: "#", ios: "#" }
+      title: "Tarot Destiny: Daily Reading",
+      desc: "🔮 Tarot Destiny: Self-Discovery & AI Guidance",
+      tech: ["React Native", "React", "Redux"],
+      store: {
+        android:
+          "https://play.google.com/store/apps/details?id=com.nexa_tarrot_app",
+        ios: "#",
+      },
+      image:
+        "https://play-lh.googleusercontent.com/NUzONHzYucKIOICZcqbIMJ1q4VcW3UuNVMW-lSxELi43kUWRhoHFvsyHtFnl7NKumFwggHiE2Ni1n5g2IvGoPA=w2560-h1440",
     },
     {
-      title: "CryptoWallet X",
-      desc: "Secure mobile wallet for managing digital assets on the go.",
-      tech: ["Flutter", "Dart", "Blockchain"],
-      store: { android: "#", ios: "#" }
-    }
-  ]
+      title: "PetPal - Pet Simulator",
+      desc: "🐾 PetPal — Chat with your virtual pet!",
+      tech: ["React Native", "React", "Gemini"],
+      store: {
+        android:
+          "https://play.google.com/store/apps/details?id=com.pet_simulator",
+        ios: "#",
+      },
+      image:
+        "https://play-lh.googleusercontent.com/J8sVu-cCRE9QagGz1kX9gS9DRuMMZbz-6BIdIfcFEByOD6fHFdqXguVIVeK4R3gvbJ4aZrgdSAbr4OuYl27H6Wo=w5120-h2880-rw",
+    },
+    {
+      title: "ScanQR - QR Code & Barcode",
+      desc: "ScanQR is the all-in-one tool that meets all your scanning needs.",
+      tech: ["React Native", "Vision Camera", "QR Kit"],
+      store: {
+        android:
+          "https://play.google.com/store/apps/details?id=com.nexa.qr_code",
+        ios: "#",
+      },
+      image:
+        "https://play-lh.googleusercontent.com/NGCfEF4l4OrMPSTeD9d6gpmDmuvHEX9_ZvlVlVR3HDUS_xwQWPAkl_oarzgHyWhmSdhTMLDnIaUbi297K5hAoA=w5120-h2880-rw",
+    },
+    {
+      title: "Maths Calc - Learn & Solve",
+      desc: "Are you ready to stop struggling with math? Maths Calc - Learn & Solve is the complete, all-in-one tool that goes beyond simple answers",
+      tech: ["React Native", "Math", "Calculator"],
+      store: {
+        android:
+          "https://play.google.com/store/apps/details?id=com.nexa.easy_math_calculator",
+        ios: "#",
+      },
+      image:
+        "https://play-lh.googleusercontent.com/I-yROcJW3zglOVnvxhyruoGuggWjC7XvoRlOkvHnVbl2Nds1JIDrqimPk83UoW8AToFW9Og0hxfUui8cizcP=w5120-h2880-rw",
+    },
+    {
+      title: "Smart Currency Converter",
+      desc: `Tired of guessing foreign exchange rates? ☕💵
+Get acquainted with Smart Currency Converter, the ultimate currency app for fast and accurate currency conversion, exchange rate tracking, and offline currency calculations. 🌍
+`,
+      tech: ["React Native", "Currency", "Global"],
+      store: {
+        android:
+          "https://play.google.com/store/apps/details?id=com.currencyunitconverter",
+        ios: "#",
+      },
+      image:
+        "https://play-lh.googleusercontent.com/nd9FrLhC500ydiHFdYiSToaXHq0EifmQn-wJJ-K2CF7hcVLog96a5sd9asFzjlzeqoXoo_TJRia8e2Di8Zbuuw=w5120-h2880-rw",
+    },
+  ],
 };
 
 export default function Portfolio() {
@@ -54,7 +104,10 @@ export default function Portfolio() {
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-5xl font-heading font-bold mb-4 text-foreground">
-            {t("products.title_prefix")} <span className="text-primary">{t("products.title_highlight")}</span>
+            {t("products.title_prefix")}{" "}
+            <span className="text-primary">
+              {t("products.title_highlight")}
+            </span>
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
             {t("products.description")}
@@ -64,10 +117,16 @@ export default function Portfolio() {
         <Tabs defaultValue="web" className="w-full max-w-5xl mx-auto">
           <div className="flex justify-center mb-12">
             <TabsList className="grid w-full max-w-md grid-cols-2 bg-secondary border border-border p-1">
-              <TabsTrigger value="web" className="data-[state=active]:bg-white data-[state=active]:text-primary data-[state=active]:shadow-sm transition-all duration-300">
+              <TabsTrigger
+                value="web"
+                className="data-[state=active]:bg-white data-[state=active]:text-primary data-[state=active]:shadow-sm transition-all duration-300"
+              >
                 {t("products.tabs.web")}
               </TabsTrigger>
-              <TabsTrigger value="mobile" className="data-[state=active]:bg-white data-[state=active]:text-primary data-[state=active]:shadow-sm transition-all duration-300">
+              <TabsTrigger
+                value="mobile"
+                className="data-[state=active]:bg-white data-[state=active]:text-primary data-[state=active]:shadow-sm transition-all duration-300"
+              >
                 {t("products.tabs.mobile")}
               </TabsTrigger>
             </TabsList>
@@ -88,21 +147,43 @@ export default function Portfolio() {
                       <div className="w-12 h-12 rounded-lg bg-blue-500/10 flex items-center justify-center mb-4 group-hover:bg-blue-500/20 transition-colors">
                         <Globe className="text-blue-600 w-6 h-6" />
                       </div>
-                      <CardTitle className="text-foreground">{project.title}</CardTitle>
-                      <CardDescription className="text-muted-foreground">{project.desc}</CardDescription>
+                      <CardTitle className="text-foreground">
+                        {project.title}
+                      </CardTitle>
+                      <CardDescription className="text-muted-foreground">
+                        {project.desc}
+                      </CardDescription>
                     </CardHeader>
                     <CardContent className="flex-grow">
                       <div className="flex flex-wrap gap-2">
-                        {project.tech.map(t => (
-                          <Badge key={t} variant="secondary" className="bg-secondary text-secondary-foreground hover:bg-secondary/80">{t}</Badge>
+                        {project.tech.map((t) => (
+                          <Badge
+                            key={t}
+                            variant="secondary"
+                            className="bg-secondary text-secondary-foreground hover:bg-secondary/80"
+                          >
+                            {t}
+                          </Badge>
                         ))}
                       </div>
                     </CardContent>
                     <CardFooter className="flex gap-4">
-                      <Button variant="outline" size="sm" className="w-full gap-2 border-border hover:bg-secondary text-foreground">
-                        <ExternalLink className="w-4 h-4" /> {t("products.buttons.demo")}
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        className="w-full gap-2 border-border hover:bg-secondary text-foreground"
+                        onClick={() => window.open(project.link, "_blank")}
+                      >
+                        <ExternalLink className="w-4 h-4" />{" "}
+                        {t("products.buttons.demo")}
                       </Button>
-                      <Button variant="ghost" size="icon" className="border border-border hover:bg-secondary text-foreground">
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        className="border border-border hover:bg-secondary text-foreground"
+                        disabled={!project.repo}
+                        onClick={() => window.open(project.repo, "_blank")}
+                      >
                         <Github className="w-4 h-4" />
                       </Button>
                     </CardFooter>
@@ -125,32 +206,69 @@ export default function Portfolio() {
                   <Card className="h-full bg-card border-border hover:border-primary/50 hover:shadow-lg transition-all duration-300 group">
                     <div className="flex flex-col md:flex-row h-full">
                       <div className="p-6 flex-1 flex flex-col">
-                        <div className="w-12 h-12 rounded-lg bg-green-500/10 flex items-center justify-center mb-4 group-hover:bg-green-500/20 transition-colors">
-                          <Smartphone className="text-green-600 w-6 h-6" />
-                        </div>
-                        <CardTitle className="mb-2 text-foreground">{project.title}</CardTitle>
-                        <CardDescription className="mb-4 text-muted-foreground">{project.desc}</CardDescription>
-                        
+                        <a
+                          href={project.store.android}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <div className="w-12 h-12 rounded-lg bg-green-500/10 flex items-center justify-center mb-4 group-hover:bg-green-500/20 transition-colors">
+                            <Smartphone className="text-green-600 w-6 h-6" />
+                          </div>
+                        </a>
+                        <CardTitle className="mb-2 text-foreground">
+                          {project.title}
+                        </CardTitle>
+                        <CardDescription className="mb-4 text-muted-foreground">
+                          {project.desc}
+                        </CardDescription>
+
                         <div className="flex flex-wrap gap-2 mb-6 mt-auto">
-                          {project.tech.map(t => (
-                            <Badge key={t} variant="secondary" className="bg-secondary text-secondary-foreground hover:bg-secondary/80">{t}</Badge>
+                          {project.tech.map((t) => (
+                            <Badge
+                              key={t}
+                              variant="secondary"
+                              className="bg-secondary text-secondary-foreground hover:bg-secondary/80"
+                            >
+                              {t}
+                            </Badge>
                           ))}
                         </div>
-                        
+
                         <div className="flex gap-4 mt-auto pt-4 border-t border-border">
-                          <Button variant="outline" size="sm" className="flex-1 gap-2 border-border hover:bg-secondary text-foreground">
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            onClick={() =>
+                              window.open(project.store.android, "_blank")
+                            }
+                            className="flex-1 gap-2 border-border hover:bg-secondary text-foreground"
+                          >
                             {t("products.buttons.play")}
                           </Button>
-                          <Button variant="outline" size="sm" className="flex-1 gap-2 border-border hover:bg-secondary text-foreground">
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            disabled
+                            className="flex-1 gap-2 border-border hover:bg-secondary text-foreground"
+                          >
                             {t("products.buttons.store")}
                           </Button>
                         </div>
                       </div>
                       <div className="bg-secondary/30 md:w-48 p-4 flex items-center justify-center border-l border-border">
-                        {/* Placeholder for App Screen */}
-                        <div className="w-32 h-56 bg-background rounded-xl border border-border flex items-center justify-center shadow-inner">
-                          <span className="text-xs text-muted-foreground">App Screen</span>
-                        </div>
+                        {project.image ? (
+                          <img
+                            src={project.image}
+                            alt={project.title}
+                            className="w-32 h-auto rounded-xl border border-border shadow-md object-cover"
+                          />
+                        ) : (
+                          <div className="w-32 h-56 bg-background rounded-xl border border-border flex items-center justify-center shadow-inner">
+                            <span className="text-xs text-muted-foreground">
+                              App Screen
+                            </span>
+                          </div>
+                        )}
                       </div>
                     </div>
                   </Card>
