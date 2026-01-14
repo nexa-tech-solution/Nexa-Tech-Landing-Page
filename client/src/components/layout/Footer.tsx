@@ -1,4 +1,5 @@
-import { Terminal, Github, Linkedin, Twitter } from "lucide-react";
+import { Github, Linkedin, Twitter } from "lucide-react";
+import logoImg from "@assets/logo-CJsuXJSw_1768365608404.jpg";
 
 export default function Footer() {
   return (
@@ -7,10 +8,12 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
           <div className="col-span-1 md:col-span-2">
             <div className="flex items-center gap-2 mb-4">
-              <div className="w-8 h-8 bg-primary/20 rounded-lg flex items-center justify-center border border-primary/50">
-                <Terminal className="w-4 h-4 text-primary" />
-              </div>
-              <span className="text-xl font-heading font-bold">Nexa</span>
+              <img 
+                src={logoImg} 
+                alt="Nexa Tech" 
+                className="w-8 h-8 rounded-md object-cover"
+              />
+              <span className="text-xl font-heading font-bold">Nexa Tech</span>
             </div>
             <p className="text-muted-foreground max-w-sm">
               Building high-quality open-source software, scalable web
@@ -45,7 +48,7 @@ export default function Footer() {
         </div>
 
         <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-muted-foreground">
-          <p>&copy; {new Date().getFullYear()} Nexa. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} Nexa Tech. All rights reserved.</p>
           <div className="flex gap-6">
             <a href="#" className="hover:text-primary">Privacy Policy</a>
             <a href="#" className="hover:text-primary">Terms of Service</a>

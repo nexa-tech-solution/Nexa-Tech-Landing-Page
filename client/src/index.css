@@ -42,34 +42,39 @@
 }
 
 :root {
-  /* Default to Dark Mode aesthetics as primary */
-  --background: 222 47% 11%;
-  --foreground: 210 40% 98%;
+  /* Updated Theme: Dark Tech Green & Deep Black */
+  
+  /* Deep Tech Black Background */
+  --background: 240 10% 4%; 
+  --foreground: 0 0% 98%;
 
-  --card: 222 47% 11%;
-  --card-foreground: 210 40% 98%;
+  /* Darker Cards */
+  --card: 240 10% 6%;
+  --card-foreground: 0 0% 98%;
 
-  --popover: 222 47% 11%;
-  --popover-foreground: 210 40% 98%;
+  --popover: 240 10% 6%;
+  --popover-foreground: 0 0% 98%;
 
-  --primary: 217 91% 60%; /* Electric Blue */
-  --primary-foreground: 222 47% 11%;
+  /* Tech Green Primary - Vibrant and energetic to match the logo */
+  --primary: 142 70% 50%;
+  --primary-foreground: 240 10% 4%;
 
-  --secondary: 217 32% 17%;
-  --secondary-foreground: 210 40% 98%;
+  /* Secondary/Muted - Cool Grays */
+  --secondary: 240 5% 15%;
+  --secondary-foreground: 0 0% 98%;
 
-  --muted: 217 32% 17%;
-  --muted-foreground: 215 20% 65%;
+  --muted: 240 5% 15%;
+  --muted-foreground: 240 5% 65%;
 
-  --accent: 217 32% 17%;
-  --accent-foreground: 210 40% 98%;
+  --accent: 240 5% 15%;
+  --accent-foreground: 0 0% 98%;
 
   --destructive: 0 62% 30%;
-  --destructive-foreground: 210 40% 98%;
+  --destructive-foreground: 0 0% 98%;
 
-  --border: 217 32% 17%;
-  --input: 217 32% 17%;
-  --ring: 224 76% 48%;
+  --border: 240 5% 15%;
+  --input: 240 5% 15%;
+  --ring: 142 70% 50%;
 
   --radius: 0.5rem;
 }
@@ -90,7 +95,8 @@
 /* Custom Utilities */
 @layer utilities {
   .text-gradient {
-    @apply bg-clip-text text-transparent bg-linear-to-r from-white via-blue-100 to-blue-400;
+    /* Updated gradient to use Green tones */
+    @apply bg-clip-text text-transparent bg-linear-to-r from-white via-green-200 to-green-500;
   }
   
   .glass-card {

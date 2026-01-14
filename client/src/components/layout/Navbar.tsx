@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import { Link } from "wouter";
-import { Menu, X, Terminal } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
+import logoImg from "@assets/logo-CJsuXJSw_1768365608404.jpg";
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -42,11 +43,13 @@ export default function Navbar() {
     >
       <div className="container mx-auto px-6 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2 group cursor-pointer no-underline text-foreground">
-          <div className="w-10 h-10 bg-primary/20 rounded-lg flex items-center justify-center border border-primary/50 group-hover:bg-primary/30 transition-colors">
-            <Terminal className="w-6 h-6 text-primary" />
-          </div>
+          <img 
+            src={logoImg} 
+            alt="Nexa Tech" 
+            className="w-10 h-10 rounded-lg border border-primary/20 object-cover group-hover:border-primary/50 transition-colors"
+          />
           <span className="text-xl font-heading font-bold tracking-tight">
-            Nexa
+            Nexa Tech
           </span>
         </Link>
 
@@ -63,7 +66,7 @@ export default function Navbar() {
           ))}
           <Button
             onClick={() => scrollToSection("#contact")}
-            className="bg-primary hover:bg-primary/90 text-primary-foreground cursor-pointer"
+            className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold cursor-pointer"
           >
             Contact Us
           </Button>
@@ -99,7 +102,7 @@ export default function Navbar() {
               ))}
               <Button
                 onClick={() => scrollToSection("#contact")}
-                className="w-full mt-4 cursor-pointer"
+                className="w-full mt-4 bg-primary text-primary-foreground cursor-pointer"
               >
                 Contact Us
               </Button>
