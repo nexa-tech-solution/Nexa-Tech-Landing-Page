@@ -1,29 +1,16 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Github, Star, GitFork, Users } from "lucide-react";
+import { ExternalLink, Github, Star, GitFork, Users } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
 const repos = [
   {
-    name: "nexa-ui-kit",
-    description: "A comprehensive React UI kit for building dashboard interfaces quickly.",
-    stars: 1240,
-    forks: 340,
-    contributors: 45
-  },
-  {
-    name: "fast-logger-js",
-    description: "Zero-dependency, high-performance logging library for Node.js services.",
-    stars: 890,
-    forks: 120,
-    contributors: 23
-  },
-  {
-    name: "native-bridge-core",
-    description: "Core utilities for bridging React Native with native iOS/Android modules.",
-    stars: 560,
-    forks: 85,
-    contributors: 12
+    name: "react-native-simple-fs",
+    description: "A React Native filesystem repository focused on simple file access and storage workflows for mobile apps.",
+    stars: null,
+    forks: null,
+    contributors: null,
+    url: "https://github.com/tankhang1/react-native-simple-fs"
   }
 ];
 
@@ -42,9 +29,19 @@ export default function OpenSource() {
               {t("opensource.description")}
             </p>
           </div>
-          <Button variant="outline" className="gap-2 border-border bg-background hover:bg-secondary text-foreground">
-            <Github className="w-4 h-4" />
-            {t("opensource.cta")}
+          <Button
+            asChild
+            variant="outline"
+            className="gap-2 border-border bg-background hover:bg-secondary text-foreground"
+          >
+            <a
+              href="https://github.com/tankhang1/react-native-simple-fs"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Github className="w-4 h-4" />
+              {t("opensource.cta")}
+            </a>
           </Button>
         </div>
 
@@ -54,24 +51,43 @@ export default function OpenSource() {
               <CardHeader>
                 <div className="flex items-center justify-between mb-2">
                   <Github className="w-6 h-6 text-muted-foreground group-hover:text-primary transition-colors" />
-                  <div className="flex items-center gap-1 text-sm text-muted-foreground">
-                    <Users className="w-3 h-3" />
-                    <span>{repo.contributors}</span>
-                  </div>
+                  {repo.contributors ? (
+                    <div className="flex items-center gap-1 text-sm text-muted-foreground">
+                      <Users className="w-3 h-3" />
+                      <span>{repo.contributors}</span>
+                    </div>
+                  ) : null}
                 </div>
                 <CardTitle className="font-mono text-xl text-primary">{repo.name}</CardTitle>
                 <CardDescription className="line-clamp-2 h-10 text-muted-foreground">{repo.description}</CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="flex gap-4 text-sm text-muted-foreground">
-                  <div className="flex items-center gap-1">
-                    <Star className="w-4 h-4 text-yellow-500" />
-                    <span>{repo.stars}</span>
+                <div className="flex items-center justify-between gap-4 text-sm text-muted-foreground">
+                  <div className="flex gap-4">
+                    {repo.stars ? (
+                      <div className="flex items-center gap-1">
+                        <Star className="w-4 h-4 text-yellow-500" />
+                        <span>{repo.stars}</span>
+                      </div>
+                    ) : null}
+                    {repo.forks ? (
+                      <div className="flex items-center gap-1">
+                        <GitFork className="w-4 h-4" />
+                        <span>{repo.forks}</span>
+                      </div>
+                    ) : null}
                   </div>
-                  <div className="flex items-center gap-1">
-                    <GitFork className="w-4 h-4" />
-                    <span>{repo.forks}</span>
-                  </div>
+                  <Button
+                    asChild
+                    variant="ghost"
+                    size="sm"
+                    className="gap-2 px-0 text-primary hover:bg-transparent hover:text-primary/80"
+                  >
+                    <a href={repo.url} target="_blank" rel="noopener noreferrer">
+                      <span>View Repo</span>
+                      <ExternalLink className="w-4 h-4" />
+                    </a>
+                  </Button>
                 </div>
               </CardContent>
             </Card>

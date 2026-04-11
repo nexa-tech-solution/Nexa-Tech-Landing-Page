@@ -26,9 +26,9 @@ export default function Footer() {
           <div>
             <h4 className="font-heading font-bold mb-4 text-foreground">{t("footer.links")}</h4>
             <ul className="space-y-2">
-              <li><a href="#home" className="text-muted-foreground hover:text-primary transition-colors">{t("nav.products")}</a></li>
-              <li><a href="#products" className="text-muted-foreground hover:text-primary transition-colors">{t("nav.opensource")}</a></li>
-              <li><a href="#opensource" className="text-muted-foreground hover:text-primary transition-colors">{t("nav.team")}</a></li>
+              <li><a href="#products" className="text-muted-foreground hover:text-primary transition-colors">{t("nav.products")}</a></li>
+              <li><a href="#opensource" className="text-muted-foreground hover:text-primary transition-colors">{t("nav.opensource")}</a></li>
+              <li><a href="#team" className="text-muted-foreground hover:text-primary transition-colors">{t("nav.team")}</a></li>
             </ul>
           </div>
 

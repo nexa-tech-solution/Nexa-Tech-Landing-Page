@@ -16,6 +16,13 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 const projects = {
   web: [
     {
+      title: "The Home Versus",
+      desc: "Expert home-product comparison site with editorial-style reviews and side-by-side recommendations for real households.",
+      tech: ["React", "Next.js"],
+      link: "https://thehomeversus.com/",
+      repo: "https://github.com/nexa-tech-solution/the-home-versus",
+    },
+    {
       title: "Mystic Tarot",
       desc: "Discover yourself and listen to the messages from the universe.",
       tech: ["React", "Tailwind", "Node.js"],
@@ -169,23 +176,47 @@ export default function Portfolio() {
                     </CardContent>
                     <CardFooter className="flex gap-4">
                       <Button
+                        asChild
                         variant="outline"
                         size="sm"
                         className="w-full gap-2 border-border hover:bg-secondary text-foreground"
-                        onClick={() => window.open(project.link, "_blank")}
                       >
-                        <ExternalLink className="w-4 h-4" />{" "}
-                        {t("products.buttons.demo")}
+                        <a
+                          href={project.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <ExternalLink className="w-4 h-4" />{" "}
+                          {t("products.buttons.demo")}
+                        </a>
                       </Button>
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        className="border border-border hover:bg-secondary text-foreground"
-                        disabled={!project.repo}
-                        onClick={() => window.open(project.repo, "_blank")}
-                      >
-                        <Github className="w-4 h-4" />
-                      </Button>
+                      {project.repo ? (
+                        <Button
+                          asChild
+                          variant="ghost"
+                          size="icon"
+                          className="border border-border hover:bg-secondary text-foreground"
+                        >
+                          <a
+                            href={project.repo}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label={`${project.title} GitHub repository`}
+                          >
+                            <Github className="w-4 h-4" />
+                          </a>
+                        </Button>
+                      ) : (
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          className="border border-border hover:bg-secondary text-foreground"
+                          disabled
+                          aria-label={`${project.title} GitHub repository unavailable`}
+                        >
+                          <Github className="w-4 h-4" />
+                        </Button>
+                      )}
                     </CardFooter>
                   </Card>
                 </motion.div>
@@ -236,14 +267,18 @@ export default function Portfolio() {
 
                         <div className="flex gap-4 mt-auto pt-4 border-t border-border">
                           <Button
+                            asChild
                             variant="outline"
                             size="sm"
-                            onClick={() =>
-                              window.open(project.store.android, "_blank")
-                            }
                             className="flex-1 gap-2 border-border hover:bg-secondary text-foreground"
                           >
-                            {t("products.buttons.play")}
+                            <a
+                              href={project.store.android}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
+                              {t("products.buttons.play")}
+                            </a>
                           </Button>
                           <Button
                             variant="outline"
@@ -260,6 +295,8 @@ export default function Portfolio() {
                           <img
                             src={project.image}
                             alt={project.title}
+                            loading="lazy"
+                            decoding="async"
                             className="w-32 h-auto rounded-xl border border-border shadow-md object-cover"
                           />
                         ) : (
