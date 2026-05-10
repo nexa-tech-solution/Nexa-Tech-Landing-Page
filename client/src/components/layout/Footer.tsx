@@ -1,4 +1,4 @@
-import { Github, Linkedin, Twitter } from "lucide-react";
+import { Github, Linkedin } from "lucide-react";
 import logoImg from "@assets/logo-CJsuXJSw_1768365608404.jpg";
 import { useTranslation } from "react-i18next";
 
@@ -14,6 +14,8 @@ export default function Footer() {
               <img 
                 src={logoImg} 
                 alt="Nexa Tech" 
+                width="32"
+                height="32"
                 className="w-8 h-8 rounded-md object-cover shadow-sm"
               />
               <span className="text-xl font-heading font-bold text-foreground">Nexa Tech</span>
@@ -35,25 +37,30 @@ export default function Footer() {
           <div>
             <h4 className="font-heading font-bold mb-4 text-foreground">{t("footer.connect")}</h4>
             <div className="flex gap-4">
-              <a href="#" className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center hover:bg-primary hover:text-white transition-all">
+              <a
+                href="https://github.com/tankhang1"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Nexa Tech on GitHub"
+                className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center hover:bg-primary hover:text-white transition-all"
+              >
                 <Github className="w-5 h-5" />
               </a>
-              <a href="#" className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center hover:bg-primary hover:text-white transition-all">
+              <a
+                href="https://www.linkedin.com/in/khang-doan-373898264/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Nexa Tech on LinkedIn"
+                className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center hover:bg-primary hover:text-white transition-all"
+              >
                 <Linkedin className="w-5 h-5" />
-              </a>
-              <a href="#" className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center hover:bg-primary hover:text-white transition-all">
-                <Twitter className="w-5 h-5" />
               </a>
             </div>
           </div>
         </div>
 
-        <div className="border-t border-border pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-muted-foreground">
+        <div className="border-t border-border pt-8 flex justify-center text-sm text-muted-foreground md:justify-start">
           <p>&copy; {new Date().getFullYear()} Nexa Tech. {t("footer.rights")}</p>
-          <div className="flex gap-6">
-            <a href="#" className="hover:text-primary">{t("footer.privacy")}</a>
-            <a href="#" className="hover:text-primary">{t("footer.terms")}</a>
-          </div>
         </div>
       </div>
     </footer>

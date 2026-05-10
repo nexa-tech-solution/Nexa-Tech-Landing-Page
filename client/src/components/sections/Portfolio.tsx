@@ -36,6 +36,13 @@ const projects = {
       link: "https://pet-simulator-sigma.vercel.app/",
       repo: "",
     },
+    {
+      title: "Resize Image",
+      desc: "Free browser-based image tool for resizing, compressing, and converting images quickly.",
+      tech: ["Web Tool", "Image Processing"],
+      link: "https://resizeimage.tech/",
+      repo: "",
+    },
   ],
   mobile: [
     {
@@ -47,8 +54,7 @@ const projects = {
           "https://play.google.com/store/apps/details?id=com.nexa_tarrot_app",
         ios: "#",
       },
-      image:
-        "https://play-lh.googleusercontent.com/NUzONHzYucKIOICZcqbIMJ1q4VcW3UuNVMW-lSxELi43kUWRhoHFvsyHtFnl7NKumFwggHiE2Ni1n5g2IvGoPA=w2560-h1440",
+      image: "/product-images/tarot-destiny.png",
     },
     {
       title: "PetPal - Pet Simulator",
@@ -59,8 +65,7 @@ const projects = {
           "https://play.google.com/store/apps/details?id=com.pet_simulator",
         ios: "#",
       },
-      image:
-        "https://play-lh.googleusercontent.com/J8sVu-cCRE9QagGz1kX9gS9DRuMMZbz-6BIdIfcFEByOD6fHFdqXguVIVeK4R3gvbJ4aZrgdSAbr4OuYl27H6Wo=w5120-h2880-rw",
+      image: "/product-images/petpal.webp",
     },
     {
       title: "ScanQR - QR Code & Barcode",
@@ -71,8 +76,7 @@ const projects = {
           "https://play.google.com/store/apps/details?id=com.nexa.qr_code",
         ios: "#",
       },
-      image:
-        "https://play-lh.googleusercontent.com/NGCfEF4l4OrMPSTeD9d6gpmDmuvHEX9_ZvlVlVR3HDUS_xwQWPAkl_oarzgHyWhmSdhTMLDnIaUbi297K5hAoA=w5120-h2880-rw",
+      image: "/product-images/scanqr.webp",
     },
     {
       title: "Maths Calc - Learn & Solve",
@@ -83,8 +87,7 @@ const projects = {
           "https://play.google.com/store/apps/details?id=com.nexa.easy_math_calculator",
         ios: "#",
       },
-      image:
-        "https://play-lh.googleusercontent.com/I-yROcJW3zglOVnvxhyruoGuggWjC7XvoRlOkvHnVbl2Nds1JIDrqimPk83UoW8AToFW9Og0hxfUui8cizcP=w5120-h2880-rw",
+      image: "/product-images/maths-calc.webp",
     },
     {
       title: "Smart Currency Converter",
@@ -97,8 +100,18 @@ Get acquainted with Smart Currency Converter, the ultimate currency app for fast
           "https://play.google.com/store/apps/details?id=com.currencyunitconverter",
         ios: "#",
       },
-      image:
-        "https://play-lh.googleusercontent.com/nd9FrLhC500ydiHFdYiSToaXHq0EifmQn-wJJ-K2CF7hcVLog96a5sd9asFzjlzeqoXoo_TJRia8e2Di8Zbuuw=w5120-h2880-rw",
+      image: "/product-images/currency-converter.webp",
+    },
+    {
+      title: "Loan Estimator",
+      desc: "Loan calculation tool for estimating payments and exporting loan calculation reports.",
+      tech: ["React Native", "Finance", "Calculator"],
+      store: {
+        android:
+          "https://play.google.com/store/apps/details?id=com.nexa.loan.estimator",
+        ios: "#",
+      },
+      image: "/product-images/loan-estimator.webp",
     },
   ],
 };
@@ -295,6 +308,8 @@ export default function Portfolio() {
                           <img
                             src={project.image}
                             alt={project.title}
+                            width="128"
+                            height="228"
                             loading="lazy"
                             decoding="async"
                             className="w-32 h-auto rounded-xl border border-border shadow-md object-cover"

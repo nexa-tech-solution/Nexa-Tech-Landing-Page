@@ -2,7 +2,10 @@ import { useEffect } from "react";
 import {
   DEFAULT_DESCRIPTION,
   DEFAULT_OG_IMAGE,
+  DEFAULT_OG_IMAGE_ALT,
+  DEFAULT_OG_LOCALE,
   DEFAULT_TITLE,
+  SITE_NAME,
   getAbsoluteUrl,
   getHomeStructuredData,
 } from "@/lib/seo";
@@ -63,6 +66,18 @@ export default function Seo({
       name: "robots",
       content: noindex ? "noindex, nofollow" : "index, follow",
     });
+    setMeta('meta[property="og:type"]', {
+      property: "og:type",
+      content: "website",
+    });
+    setMeta('meta[property="og:locale"]', {
+      property: "og:locale",
+      content: DEFAULT_OG_LOCALE,
+    });
+    setMeta('meta[property="og:site_name"]', {
+      property: "og:site_name",
+      content: SITE_NAME,
+    });
     setMeta('meta[property="og:title"]', {
       property: "og:title",
       content: title,
@@ -78,6 +93,14 @@ export default function Seo({
     setMeta('meta[property="og:image"]', {
       property: "og:image",
       content: absoluteImage,
+    });
+    setMeta('meta[property="og:image:alt"]', {
+      property: "og:image:alt",
+      content: DEFAULT_OG_IMAGE_ALT,
+    });
+    setMeta('meta[name="twitter:card"]', {
+      name: "twitter:card",
+      content: "summary_large_image",
     });
     setMeta('meta[name="twitter:title"]', {
       name: "twitter:title",

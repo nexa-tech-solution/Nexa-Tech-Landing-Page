@@ -38,6 +38,9 @@ export function metaImagesPlugin(): Plugin {
       const imageUrl = baseUrl
         ? `${baseUrl}/opengraph.${imageExt}`
         : `/opengraph.${imageExt}`;
+      const logoUrl = baseUrl
+        ? `${baseUrl}/favicon.png`
+        : '/favicon.png';
 
       const canonicalUrl = baseUrl || '';
 
@@ -49,7 +52,8 @@ export function metaImagesPlugin(): Plugin {
 
       html = html
         .replaceAll('__SITE_URL__', canonicalUrl)
-        .replaceAll('__OG_IMAGE_URL__', imageUrl);
+        .replaceAll('__OG_IMAGE_URL__', imageUrl)
+        .replaceAll('__LOGO_URL__', logoUrl);
 
       return html;
     },
@@ -86,18 +90,6 @@ function getDeploymentUrl(): string | null {
     const normalized = normalizeBaseUrl(process.env.VITE_SITE_URL);
     log('[meta-images] using VITE_SITE_URL:', normalized);
     return normalized;
-  }
-
-  if (process.env.REPLIT_INTERNAL_APP_DOMAIN) {
-    const url = `https://${process.env.REPLIT_INTERNAL_APP_DOMAIN}`;
-    log('[meta-images] using internal app domain:', url);
-    return url;
-  }
-
-  if (process.env.REPLIT_DEV_DOMAIN) {
-    const url = `https://${process.env.REPLIT_DEV_DOMAIN}`;
-    log('[meta-images] using dev domain:', url);
-    return url;
   }
 
   return null;

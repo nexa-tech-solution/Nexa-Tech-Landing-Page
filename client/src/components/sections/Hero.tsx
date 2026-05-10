@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, Github } from "lucide-react";
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
-import heroBg from "@assets/generated_images/dark_digital_circuit_board_background_with_neon_green_glowing_lines.png";
+const heroBg = "/hero-circuit.webp";
 
 export default function Hero() {
   const { t } = useTranslation();
@@ -66,16 +66,20 @@ export default function Hero() {
             className="flex flex-col sm:flex-row items-center justify-center gap-4"
           >
             <motion.div whileHover={{ y: -2, scale: 1.01 }} whileTap={{ scale: 0.98 }}>
-              <Button size="lg" className="h-12 px-8 text-lg bg-primary text-primary-foreground font-bold hover:bg-primary/90 shadow-lg shadow-primary/20" onClick={() => document.getElementById('products')?.scrollIntoView({ behavior: 'smooth' })}>
-              {t("hero.cta_primary")}
-              <ArrowRight className="ml-2 w-5 h-5" />
-            </Button>
+              <Button asChild size="lg" className="h-12 px-8 text-lg bg-primary text-primary-foreground font-bold hover:bg-primary/90 shadow-lg shadow-primary/20">
+                <a href="#products">
+                  {t("hero.cta_primary")}
+                  <ArrowRight className="ml-2 w-5 h-5" />
+                </a>
+              </Button>
             </motion.div>
             <motion.div whileHover={{ y: -2, scale: 1.01 }} whileTap={{ scale: 0.98 }}>
-              <Button size="lg" variant="outline" className="h-12 px-8 text-lg border-border bg-white/50 backdrop-blur-sm hover:bg-white hover:text-primary hover:border-primary/50 shadow-sm" onClick={() => document.getElementById('opensource')?.scrollIntoView({ behavior: 'smooth' })}>
-              <Github className="mr-2 w-5 h-5" />
-              {t("hero.cta_secondary")}
-            </Button>
+              <Button asChild size="lg" variant="outline" className="h-12 px-8 text-lg border-border bg-white/50 backdrop-blur-sm hover:bg-white hover:text-primary hover:border-primary/50 shadow-sm">
+                <a href="#opensource">
+                  <Github className="mr-2 w-5 h-5" />
+                  {t("hero.cta_secondary")}
+                </a>
+              </Button>
             </motion.div>
           </motion.div>
 

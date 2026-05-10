@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { Link } from "wouter";
 import { Menu, X, Globe } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -27,17 +26,11 @@ export default function Navbar() {
     { name: t("nav.team"), href: "#team" },
   ];
 
-  const scrollToSection = (id: string) => {
-    const element = document.getElementById(id.replace("#", ""));
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-      setIsMobileMenuOpen(false);
-    }
-  };
-
   const changeLanguage = (lng: string) => {
     i18n.changeLanguage(lng);
   };
+
+  const closeMobileMenu = () => setIsMobileMenuOpen(false);
 
   return (
     <nav
@@ -49,32 +42,34 @@ export default function Navbar() {
       )}
     >
       <div className="container mx-auto px-6 flex items-center justify-between">
-        <Link href="/" className="flex items-center gap-2 group cursor-pointer no-underline text-foreground">
+        <a href="/" className="flex items-center gap-2 group cursor-pointer no-underline text-foreground">
           <img 
             src={logoImg} 
             alt="Nexa Tech" 
+            width="40"
+            height="40"
             className="w-10 h-10 rounded-lg border border-border object-cover group-hover:border-primary/50 transition-colors shadow-sm"
           />
           <span className="text-xl font-heading font-bold tracking-tight">
             Nexa Tech
           </span>
-        </Link>
+        </a>
 
         {/* Desktop Nav */}
         <div className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (
-            <button
+            <a
               key={link.name}
-              onClick={() => scrollToSection(link.href)}
+              href={link.href}
               className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors cursor-pointer"
             >
               {link.name}
-            </button>
+            </a>
           ))}
           
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-primary">
+              <Button variant="ghost" size="icon" aria-label="Change language" className="text-muted-foreground hover:text-primary">
                 <Globe className="h-5 w-5" />
               </Button>
             </DropdownMenuTrigger>
@@ -89,10 +84,10 @@ export default function Navbar() {
           </DropdownMenu>
 
           <Button
-            onClick={() => scrollToSection("#contact")}
+            asChild
             className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold cursor-pointer shadow-md"
           >
-            {t("nav.contact")}
+            <a href="#contact">{t("nav.contact")}</a>
           </Button>
         </div>
 
@@ -100,7 +95,7 @@ export default function Navbar() {
         <div className="flex items-center gap-4 md:hidden">
             <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-primary">
+              <Button variant="ghost" size="icon" aria-label="Change language" className="text-muted-foreground hover:text-primary">
                 <Globe className="h-5 w-5" />
               </Button>
             </DropdownMenuTrigger>
@@ -117,6 +112,8 @@ export default function Navbar() {
           <button
             className="p-2 text-foreground cursor-pointer"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-label="Toggle navigation menu"
+            aria-expanded={isMobileMenuOpen}
           >
             {isMobileMenuOpen ? <X /> : <Menu />}
           </button>
@@ -134,19 +131,20 @@ export default function Navbar() {
           >
             <div className="container mx-auto px-6 py-6 flex flex-col gap-4">
               {navLinks.map((link) => (
-                <button
+                <a
                   key={link.name}
-                  onClick={() => scrollToSection(link.href)}
+                  href={link.href}
+                  onClick={closeMobileMenu}
                   className="text-left text-lg font-medium text-muted-foreground hover:text-primary py-2 cursor-pointer"
                 >
                   {link.name}
-                </button>
+                </a>
               ))}
               <Button
-                onClick={() => scrollToSection("#contact")}
+                asChild
                 className="w-full mt-4 bg-primary text-primary-foreground cursor-pointer"
               >
-                {t("nav.contact")}
+                <a href="#contact" onClick={closeMobileMenu}>{t("nav.contact")}</a>
               </Button>
             </div>
           </motion.div>
