@@ -1,0 +1,12 @@
+{
+  "version": "1.0",
+  "sellers": [
+    {
+      "seller_id": "pub-3012411444875177",
+      "is_confidential": 0,
+      "seller_type": "PUBLISHER",
+      "name": "Nexa Tech Team",
+      "domain": "nexa-tech-team.vercel.app"
+    }
+  ]
+}
