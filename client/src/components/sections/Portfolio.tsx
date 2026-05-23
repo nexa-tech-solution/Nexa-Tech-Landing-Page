@@ -43,6 +43,12 @@ const projects = {
       link: "https://resizeimage.tech/",
       repo: "",
     },
+    {
+      title: "Time Converter",
+      desc: "Quickly convert time across zones and cities to schedule meetings, travel, and global work without confusion.",
+      tech: ["React", "Tool"],
+      link: "https://time-converter-woad-iota.vercel.app/",
+    },
   ],
   mobile: [
     {
@@ -112,6 +118,17 @@ Get acquainted with Smart Currency Converter, the ultimate currency app for fast
         ios: "#",
       },
       image: "/product-images/loan-estimator.webp",
+    },
+    {
+      title: "Time Converter",
+      desc: "Quickly convert time across zones and cities to schedule meetings, travel, and global work without confusion.",
+      tech: ["React", "Tool"],
+      store: {
+        android:
+          "https://play.google.com/store/apps/details?id=nexa.timeconverter.com",
+        ios: "#",
+      },
+      image: "/product-images/time-converter.png",
     },
   ],
 };
