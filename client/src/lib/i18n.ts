@@ -84,12 +84,14 @@ const resources = {
         description: "A collection of free products, experiments, and published apps built by our team for real users.",
         tabs: {
           web: "Web Applications",
-          mobile: "Mobile Apps"
+          mobile: "Mobile Apps",
+          chrome: "Chrome Extensions"
         },
         buttons: {
           demo: "Live Demo",
           store: "App Store",
-          play: "Play Store"
+          play: "Play Store",
+          chrome: "Chrome Web Store"
         }
       },
       editorial: {
@@ -247,12 +249,14 @@ const resources = {
         description: "Bộ sưu tập các sản phẩm miễn phí, thử nghiệm và ứng dụng đã phát hành do team chúng tôi xây dựng cho người dùng thật.",
         tabs: {
           web: "Ứng Dụng Web",
-          mobile: "Ứng Dụng Mobile"
+          mobile: "Ứng Dụng Mobile",
+          chrome: "Tiện Ích Chrome"
         },
         buttons: {
           demo: "Xem Demo",
           store: "App Store",
-          play: "Play Store"
+          play: "Play Store",
+          chrome: "Chrome Web Store"
         }
       },
       editorial: {

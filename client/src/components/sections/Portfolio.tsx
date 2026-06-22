@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion";
-import { ExternalLink, Github, Smartphone, Globe } from "lucide-react";
+import { ExternalLink, Github, Smartphone, Globe, Puzzle } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -104,7 +104,7 @@ Get acquainted with Smart Currency Converter, the ultimate currency app for fast
       store: {
         android:
           "https://play.google.com/store/apps/details?id=com.currencyunitconverter",
-        ios: "#",
+        ios: "https://apps.apple.com/us/app/currency-unit-converter/id6780219094",
       },
       image: "/product-images/currency-converter.webp",
     },
@@ -115,7 +115,7 @@ Get acquainted with Smart Currency Converter, the ultimate currency app for fast
       store: {
         android:
           "https://play.google.com/store/apps/details?id=com.nexa.loan.estimator",
-        ios: "#",
+        ios: "https://apps.apple.com/us/app/easy-loan-estimator/id6779272088",
       },
       image: "/product-images/loan-estimator.webp",
     },
@@ -126,9 +126,18 @@ Get acquainted with Smart Currency Converter, the ultimate currency app for fast
       store: {
         android:
           "https://play.google.com/store/apps/details?id=nexa.timeconverter.com",
-        ios: "#",
+        ios: "https://apps.apple.com/us/app/time-converter-world-clock/id6780116305",
       },
       image: "/product-images/time-converter.png",
+    },
+  ],
+  chrome: [
+    {
+      title: "Time Converter",
+      desc: "Chrome extension for checking and comparing time zones quickly while planning meetings across regions.",
+      tech: ["Chrome Extension", "Productivity", "Time Zones"],
+      link: "https://chromewebstore.google.com/detail/world-time-buddy/mmlplefhfbacmbebleofnfligokkaljh",
+      repo: "",
     },
   ],
 };
@@ -153,7 +162,7 @@ export default function Portfolio() {
 
         <Tabs defaultValue="web" className="w-full max-w-5xl mx-auto">
           <div className="flex justify-center mb-12">
-            <TabsList className="grid w-full max-w-md grid-cols-2 bg-secondary border border-border p-1">
+            <TabsList className="grid w-full max-w-lg grid-cols-3 bg-secondary border border-border p-1">
               <TabsTrigger
                 value="web"
                 className="data-[state=active]:bg-white data-[state=active]:text-primary data-[state=active]:shadow-sm transition-all duration-300"
@@ -165,6 +174,12 @@ export default function Portfolio() {
                 className="data-[state=active]:bg-white data-[state=active]:text-primary data-[state=active]:shadow-sm transition-all duration-300"
               >
                 {t("products.tabs.mobile")}
+              </TabsTrigger>
+              <TabsTrigger
+                value="chrome"
+                className="data-[state=active]:bg-white data-[state=active]:text-primary data-[state=active]:shadow-sm transition-all duration-300"
+              >
+                {t("products.tabs.chrome")}
               </TabsTrigger>
             </TabsList>
           </div>
@@ -313,10 +328,16 @@ export default function Portfolio() {
                           <Button
                             variant="outline"
                             size="sm"
-                            disabled
+                            disabled={project.store.ios?.includes("#")}
                             className="flex-1 gap-2 border-border hover:bg-secondary text-foreground"
                           >
-                            {t("products.buttons.store")}
+                            <a
+                              href={project.store.ios}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
+                              {t("products.buttons.store")}
+                            </a>
                           </Button>
                         </div>
                       </div>
@@ -340,6 +361,64 @@ export default function Portfolio() {
                         )}
                       </div>
                     </div>
+                  </Card>
+                </motion.div>
+              ))}
+            </div>
+          </TabsContent>
+
+          <TabsContent value="chrome" className="mt-0">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {projects.chrome.map((project, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.1 }}
+                >
+                  <Card className="h-full bg-card border-border hover:border-primary/50 hover:shadow-lg transition-all duration-300 flex flex-col group">
+                    <CardHeader>
+                      <div className="w-12 h-12 rounded-lg bg-amber-500/10 flex items-center justify-center mb-4 group-hover:bg-amber-500/20 transition-colors">
+                        <Puzzle className="text-amber-600 w-6 h-6" />
+                      </div>
+                      <CardTitle className="text-foreground">
+                        {project.title}
+                      </CardTitle>
+                      <CardDescription className="text-muted-foreground">
+                        {project.desc}
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent className="flex-grow">
+                      <div className="flex flex-wrap gap-2">
+                        {project.tech.map((t) => (
+                          <Badge
+                            key={t}
+                            variant="secondary"
+                            className="bg-secondary text-secondary-foreground hover:bg-secondary/80"
+                          >
+                            {t}
+                          </Badge>
+                        ))}
+                      </div>
+                    </CardContent>
+                    <CardFooter className="flex gap-4">
+                      <Button
+                        asChild
+                        variant="outline"
+                        size="sm"
+                        className="w-full gap-2 border-border hover:bg-secondary text-foreground"
+                      >
+                        <a
+                          href={project.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <ExternalLink className="w-4 h-4" />{" "}
+                          {t("products.buttons.chrome")}
+                        </a>
+                      </Button>
+                    </CardFooter>
                   </Card>
                 </motion.div>
               ))}
