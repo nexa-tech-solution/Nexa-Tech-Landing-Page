@@ -11,14 +11,16 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
           <div className="col-span-1 md:col-span-2">
             <div className="flex items-center gap-2 mb-4">
-              <img 
-                src={logoImg} 
-                alt="Nexa Tech" 
+              <img
+                src={logoImg}
+                alt="Nexa Tech"
                 width="32"
                 height="32"
                 className="w-8 h-8 rounded-md object-cover shadow-sm"
               />
-              <span className="text-xl font-heading font-bold text-foreground">Nexa Tech</span>
+              <span className="text-xl font-heading font-bold text-foreground">
+                Nexa Tech
+              </span>
             </div>
             <p className="text-muted-foreground max-w-sm">
               {t("footer.description")}
@@ -26,19 +28,44 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="font-heading font-bold mb-4 text-foreground">{t("footer.links")}</h4>
+            <h4 className="font-heading font-bold mb-4 text-foreground">
+              {t("footer.links")}
+            </h4>
             <ul className="space-y-2">
-              <li><a href="#products" className="text-muted-foreground hover:text-primary transition-colors">{t("nav.products")}</a></li>
-              <li><a href="#opensource" className="text-muted-foreground hover:text-primary transition-colors">{t("nav.opensource")}</a></li>
-              <li><a href="#team" className="text-muted-foreground hover:text-primary transition-colors">{t("nav.team")}</a></li>
+              <li>
+                <a
+                  href="#products"
+                  className="text-muted-foreground hover:text-primary transition-colors"
+                >
+                  {t("nav.products")}
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#opensource"
+                  className="text-muted-foreground hover:text-primary transition-colors"
+                >
+                  {t("nav.opensource")}
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#team"
+                  className="text-muted-foreground hover:text-primary transition-colors"
+                >
+                  {t("nav.team")}
+                </a>
+              </li>
             </ul>
           </div>
 
           <div>
-            <h4 className="font-heading font-bold mb-4 text-foreground">{t("footer.connect")}</h4>
+            <h4 className="font-heading font-bold mb-4 text-foreground">
+              {t("footer.connect")}
+            </h4>
             <div className="flex gap-4">
               <a
-                href="https://github.com/tankhang1"
+                href="https://github.com/nexa-tech-solution"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Nexa Tech on GitHub"
@@ -47,7 +74,7 @@ export default function Footer() {
                 <Github className="w-5 h-5" />
               </a>
               <a
-                href="https://www.linkedin.com/in/khang-doan-373898264/"
+                href="https://www.linkedin.com/in/tech-nexa-ba02a9387/"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Nexa Tech on LinkedIn"
@@ -60,7 +87,9 @@ export default function Footer() {
         </div>
 
         <div className="border-t border-border pt-8 flex justify-center text-sm text-muted-foreground md:justify-start">
-          <p>&copy; {new Date().getFullYear()} Nexa Tech. {t("footer.rights")}</p>
+          <p>
+            &copy; {new Date().getFullYear()} Nexa Tech. {t("footer.rights")}
+          </p>
         </div>
       </div>
     </footer>
