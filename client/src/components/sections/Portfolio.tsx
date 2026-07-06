@@ -80,7 +80,7 @@ const projects = {
       store: {
         android:
           "https://play.google.com/store/apps/details?id=com.nexa.qr_code",
-        ios: "#",
+        ios: "https://apps.apple.com/us/app/scanqr-qr-code-barcode/id6779862851",
       },
       image: "/product-images/scanqr.webp",
     },
@@ -129,6 +129,17 @@ Get acquainted with Smart Currency Converter, the ultimate currency app for fast
         ios: "https://apps.apple.com/us/app/time-converter-world-clock/id6780116305",
       },
       image: "/product-images/time-converter.png",
+    },
+    {
+      title: "Quick Image PDF Resizer",
+      desc: "Quick Image PDF Resizer is a fast, private, browser-based tool for resizing images, compressing files, converting formats, and handling common PDF tasks. It is designed for people who want simple results without complicated editing software.",
+      tech: ["React", "React Native", "PDF", "Tool"],
+      store: {
+        android:
+          "https://play.google.com/store/apps/details?id=com.nexa.pdfresizer",
+        ios: "https://apps.apple.com/us/app/quick-image-pdf-resizer/id6780742651",
+      },
+      image: "/product-images/quick-pdf-image-resizer.webp",
     },
   ],
   chrome: [
