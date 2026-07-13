@@ -10,6 +10,7 @@ import {
   Linkedin,
   Mail,
   MessageCircle,
+  Package,
   Smartphone,
 } from "lucide-react";
 import {
@@ -55,7 +56,7 @@ function NexaLogo({ compact = false }: { compact?: boolean }) {
       aria-label="Nexa Tech home"
     >
       <span
-        className={`${compact ? "h-9 w-9" : "h-11 w-11"} relative overflow-hidden rounded-lg bg-white ring-1 ring-white/15`}
+        className={`${compact ? "h-9 w-9" : "h-11 w-11"} relative overflow-hidden rounded-lg`}
       >
         <img
           src="/favicon.png"
@@ -107,6 +108,7 @@ const categoryIcons = {
   Web: Globe2,
   Mobile: Smartphone,
   Extension: Chrome,
+  Library: Package,
 };
 
 function ProjectCard({ project, index }: { project: Project; index: number }) {

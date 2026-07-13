@@ -1,7 +1,7 @@
 export type Project = {
   title: string;
   description: string;
-  category: "Web" | "Mobile" | "Extension";
+  category: "Web" | "Mobile" | "Extension" | "Library";
   tech: string[];
   image?: string;
   icon?: string;
@@ -12,6 +12,16 @@ export type Project = {
 };
 
 export const projects: Project[] = [
+  {
+    title: "react-native-simple-fs",
+    description:
+      "A lightweight React Native file-system library built as a showcase utility for storage, file access, and export flows.",
+    category: "Library",
+    tech: ["React Native", "TypeScript", "File System"],
+    image: "/generated-products/react-native-simple-fs.png",
+    primaryUrl: "https://www.npmjs.com/package/react-native-simple-fs",
+    primaryLabel: "npm package",
+  },
   {
     title: "The Home Versus",
     description:
