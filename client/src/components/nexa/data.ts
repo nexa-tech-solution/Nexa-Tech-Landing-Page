@@ -224,3 +224,31 @@ export const socials = {
   linkedin: "https://www.linkedin.com/in/tech-nexa-ba02a9387/",
   email: "cs.nexatech@gmail.com",
 };
+
+export type FaqItem = {
+  question: string;
+  answer: string;
+};
+
+export const faqItems: FaqItem[] = [
+  {
+    question: "What does Nexa Tech build?",
+    answer:
+      "Nexa Tech builds React Native apps, web products, open-source tools, and product showcases for real users.",
+  },
+  {
+    question: "What is react-native-simple-fs?",
+    answer:
+      "react-native-simple-fs is a lightweight file-system library for React Native that supports storage, file access, and export flows.",
+  },
+  {
+    question: "Do you ship both mobile and web products?",
+    answer:
+      "Yes. The portfolio includes mobile apps, web products, browser tools, and a React Native library showcase.",
+  },
+  {
+    question: "How can someone contact the team?",
+    answer:
+      "The fastest way is by email at cs.nexatech@gmail.com, or through the GitHub and LinkedIn links in the footer.",
+  },
+];

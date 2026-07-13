@@ -1,5 +1,11 @@
 import Seo from "@/components/seo/Seo";
-import { projects, socials, team, type Project } from "@/components/nexa/data";
+import {
+  faqItems,
+  projects,
+  socials,
+  team,
+  type Project,
+} from "@/components/nexa/data";
 import {
   ArrowRight,
   ArrowUpRight,
@@ -20,6 +26,7 @@ import {
   type FormEvent,
   type ReactNode,
 } from "react";
+import { motion, useReducedMotion } from "framer-motion";
 
 const videoUrl =
   "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260403_050628_c4e32401-fab4-4a27-b7a8-6e9291cd5959.mp4";
@@ -31,20 +38,62 @@ const navLinks = [
   ["Contact", "#contact"],
 ];
 
-type FadeInProps = { children: ReactNode; className?: string; delay: number };
+type FadeInProps = { children: ReactNode; className?: string; delay?: number };
 
-function FadeIn({ children, className = "", delay }: FadeInProps) {
-  const [visible, setVisible] = useState(false);
-  useEffect(() => {
-    const timer = window.setTimeout(() => setVisible(true), delay);
-    return () => window.clearTimeout(timer);
-  }, [delay]);
+const revealVariants = {
+  hidden: { opacity: 0, y: 28, filter: "blur(8px)" },
+  visible: (delay = 0) => ({
+    opacity: 1,
+    y: 0,
+    filter: "blur(0px)",
+    transition: {
+      delay,
+      duration: 0.85,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  }),
+};
+
+const staggerContainerVariants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.09,
+      delayChildren: 0.05,
+    },
+  },
+};
+
+const staggerItemVariants = {
+  hidden: { opacity: 0, y: 22, scale: 0.985 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      duration: 0.72,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  },
+};
+
+function Reveal({ children, className = "", delay = 0 }: FadeInProps) {
+  const reduceMotion = useReducedMotion();
+  if (reduceMotion) {
+    return <div className={className}>{children}</div>;
+  }
+
   return (
-    <div
-      className={`transition-all duration-1000 ${visible ? "translate-y-0 opacity-100" : "translate-y-5 opacity-0"} ${className}`}
+    <motion.div
+      className={className}
+      custom={delay / 1000}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.22 }}
+      variants={revealVariants}
     >
       {children}
-    </div>
+    </motion.div>
   );
 }
 
@@ -114,8 +163,11 @@ const categoryIcons = {
 function ProjectCard({ project, index }: { project: Project; index: number }) {
   const Icon = categoryIcons[project.category];
   return (
-    <article
+    <motion.article
       className={`project-card group ${index === 0 ? "md:col-span-2" : ""}`}
+      variants={staggerItemVariants}
+      whileHover={{ y: -6 }}
+      transition={{ duration: 0.25 }}
     >
       <div
         className={`relative overflow-hidden rounded-2xl bg-[#0d1310] ${index === 0 ? "aspect-[16/8]" : "aspect-[4/3]"}`}
@@ -196,7 +248,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
           )}
         </div>
       </div>
-    </article>
+    </motion.article>
   );
 }
 
@@ -268,8 +320,8 @@ export default function Home() {
       className="min-h-screen overflow-x-hidden bg-[#050705] text-white"
     >
       <Seo
-        title="Nexa Tech — Useful digital products"
-        description="A small team building free web products, mobile apps, and open-source tools for real users."
+        title="Nexa Tech | React Native, Web & Mobile Product Studio"
+        description="Nexa Tech builds React Native apps, web products, open-source tools, and showcase libraries like react-native-simple-fs."
       />
 
       <section className="relative isolate flex min-h-svh overflow-hidden bg-black">
@@ -312,14 +364,14 @@ export default function Home() {
             <div className="gap-12 lg:grid lg:grid-cols-[1.4fr_.6fr] lg:items-end">
               <div>
                 <AnimatedHeading />
-                <FadeIn delay={850}>
+                <Reveal delay={850}>
                   <p className="max-w-2xl text-base leading-relaxed text-white/65 md:text-lg">
-                    Nexa is a small builder team turning simple ideas into web
-                    apps, mobile products, and open-source tools people can use
-                    today.
+                    Nexa is a product studio turning simple ideas into React
+                    Native apps, web products, and open-source tools people can
+                    use today.
                   </p>
-                </FadeIn>
-                <FadeIn delay={1150} className="mt-7 flex flex-wrap gap-3">
+                </Reveal>
+                <Reveal delay={1150} className="mt-7 flex flex-wrap gap-3">
                   <a
                     href="#work"
                     className="rounded-lg bg-white px-7 py-3 font-medium text-black transition hover:bg-[#70ff9b]"
@@ -334,13 +386,13 @@ export default function Home() {
                   >
                     GitHub ↗
                   </a>
-                </FadeIn>
+                </Reveal>
               </div>
-              <FadeIn delay={1400} className="mt-8 flex lg:mt-0 lg:justify-end">
+              <Reveal delay={1400} className="mt-8 flex lg:mt-0 lg:justify-end">
                 <div className="liquid-glass liquid-glass--bordered rounded-xl px-5 py-3 text-lg font-light md:text-xl">
                   Web. Mobile. Open source.
                 </div>
-              </FadeIn>
+              </Reveal>
             </div>
           </div>
         </div>
@@ -355,7 +407,14 @@ export default function Home() {
               ["3", "Product platforms"],
               ["Free", "User-first tools"],
             ].map(([value, label]) => (
-              <div key={label}>
+              <motion.div
+                key={label}
+                variants={staggerItemVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ delay: 0.05 }}
+              >
                 <p className="text-3xl tracking-[-0.05em] md:text-4xl">
                   {value.endsWith("+") ? (
                     <>
@@ -367,7 +426,7 @@ export default function Home() {
                   )}
                 </p>
                 <p className="mt-1 text-sm text-white/45">{label}</p>
-              </div>
+              </motion.div>
             ))}
           </div>
         </section>
@@ -378,15 +437,15 @@ export default function Home() {
         >
           <div className="mx-auto max-w-[1440px]">
             <div className="flex flex-col gap-8 border-b border-white/10 pb-9 md:flex-row md:items-end md:justify-between">
-              <div>
+              <Reveal>
                 <p className="section-kicker">Selected work / 2024—2026</p>
                 <h2 className="section-title mt-3">
                   Products made for
                   <br />
                   real everyday use.
                 </h2>
-              </div>
-              <div className="flex flex-wrap gap-2">
+              </Reveal>
+              <Reveal delay={120} className="flex flex-wrap gap-2">
                 {(
                   Object.keys(categoryIcons) as (keyof typeof categoryIcons)[]
                 ).map((item) => {
@@ -402,9 +461,15 @@ export default function Home() {
                     </button>
                   );
                 })}
-              </div>
+              </Reveal>
             </div>
-            <div className="mt-10 grid gap-x-6 gap-y-12 md:grid-cols-2 lg:grid-cols-3">
+            <motion.div
+              className="mt-10 grid gap-x-6 gap-y-12 md:grid-cols-2 lg:grid-cols-3"
+              variants={staggerContainerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.18 }}
+            >
               {filteredProjects.map((project, index) => (
                 <ProjectCard
                   key={project.title}
@@ -412,7 +477,7 @@ export default function Home() {
                   index={index}
                 />
               ))}
-            </div>
+            </motion.div>
           </div>
         </section>
 
@@ -420,54 +485,90 @@ export default function Home() {
           id="about"
           className="border-y border-white/10 bg-[#090c09] px-6 py-24 md:px-12 lg:px-16 lg:py-32"
         >
-          <div className="mx-auto grid max-w-[1440px] gap-14 lg:grid-cols-2">
-            <div>
-              <p className="section-kicker">About Nexa</p>
-              <h2 className="section-title mt-3">
-                Small team.
-                <br />
-                <span className="text-white/35">Real products.</span>
-              </h2>
-            </div>
-            <div className="max-w-2xl text-lg leading-8 text-white/60 md:text-xl md:leading-9">
-              <p>
-                We are builders who enjoy turning focused ideas into products
-                people can try immediately—not concepts, pitch decks, or
-                placeholders.
+          <div className="mx-auto grid max-w-[1440px] gap-14 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
+            <Reveal>
+              <div className="max-w-xl">
+                <p className="section-kicker">About Nexa</p>
+                <h2 className="section-title mt-4">
+                  Small team.
+                  <br />
+                  <span className="text-white/35">Sharp execution.</span>
+                </h2>
+                <p className="mt-6 max-w-lg text-lg leading-8 text-white/60 md:text-xl md:leading-9">
+                  We turn focused ideas into products people can try today, with
+                  a bias toward clarity, speed, and shipping work that actually
+                  feels finished.
+                </p>
+                <div className="mt-8 inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/[0.03] px-4 py-2 text-xs text-white/60">
+                  <span className="h-2.5 w-2.5 rounded-full bg-[#70ff9b]" />
+                  Web, mobile, library, and open-source builds
+                </div>
+              </div>
+            </Reveal>
+            <Reveal
+              delay={100}
+              className="rounded-[2rem] border border-white/10 bg-white/[0.03] p-5 md:p-7"
+            >
+              <p className="text-sm font-medium uppercase tracking-[0.18em] text-[#70ff9b]">
+                What we focus on
               </p>
-              <p className="mt-6">
-                Our work spans useful websites, published mobile apps, and
-                open-source experiments. We care about clarity, speed, and
-                solving one problem well.
-              </p>
-              <div className="mt-10 grid gap-4 sm:grid-cols-3">
-                {["Build in public", "Ship with care", "Share what helps"].map(
-                  (value, index) => (
-                    <div
-                      key={value}
-                      className="rounded-2xl border border-white/10 p-4"
-                    >
-                      <span className="text-xs text-[#70ff9b]">
+              <div className="mt-6 grid gap-4">
+                {[
+                  [
+                    "Real product outcomes",
+                    "Useful apps, tools, and libraries built for people who need them.",
+                  ],
+                  [
+                    "Clean delivery",
+                    "Simple interfaces, fast performance, and a presentation that feels intentional.",
+                  ],
+                  [
+                    "Build once, reuse smartly",
+                    "One codebase, many ship-ready outcomes across web, mobile, and package work.",
+                  ],
+                ].map(([title, description], index) => (
+                  <div
+                    key={title}
+                    className="rounded-2xl border border-white/10 bg-black/20 p-4"
+                  >
+                    <div className="flex items-start gap-4">
+                      <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-white/10 text-xs text-white/55">
                         0{index + 1}
                       </span>
-                      <p className="mt-7 text-sm text-white">{value}</p>
+                      <div>
+                        <h3 className="text-base font-medium text-white">
+                          {title}
+                        </h3>
+                        <p className="mt-2 text-sm leading-6 text-white/50">
+                          {description}
+                        </p>
+                      </div>
                     </div>
-                  ),
-                )}
+                  </div>
+                ))}
               </div>
-            </div>
+            </Reveal>
           </div>
         </section>
 
         <section id="team" className="px-6 py-24 md:px-12 lg:px-16 lg:py-32">
           <div className="mx-auto max-w-[1440px]">
-            <p className="section-kicker">The people behind Nexa</p>
-            <h2 className="section-title mt-3">Meet the team.</h2>
-            <div className="mt-12 grid max-w-5xl gap-6 md:grid-cols-2">
+            <Reveal>
+              <p className="section-kicker">The people behind Nexa</p>
+              <h2 className="section-title mt-3">Meet the team.</h2>
+            </Reveal>
+            <motion.div
+              className="mt-12 grid max-w-5xl gap-6 md:grid-cols-2"
+              variants={staggerContainerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.2 }}
+            >
               {team.map((member) => (
-                <article
+                <motion.article
                   key={member.name}
                   className="group rounded-3xl border border-white/10 bg-white/[0.03] p-5 transition hover:border-[#70ff9b]/50 md:p-7"
+                  variants={staggerItemVariants}
                 >
                   <img
                     src={member.avatar}
@@ -507,18 +608,51 @@ export default function Home() {
                       </a>
                     </div>
                   </div>
-                </article>
+                </motion.article>
               ))}
-            </div>
+            </motion.div>
           </div>
         </section>
 
         <section
-          id="contact"
-          className="border-t border-white/10 px-6 py-24 md:px-12 lg:px-16 lg:py-32"
+          id="faq"
+          className="border-y border-white/10 bg-[#070a07] px-6 py-24 md:px-12 lg:px-16 lg:py-32"
         >
+          <div className="mx-auto max-w-[1440px]">
+            <Reveal>
+              <p className="section-kicker">FAQ / Search-friendly answers</p>
+              <h2 className="section-title mt-3">
+                Common questions, answered clearly.
+              </h2>
+            </Reveal>
+            <motion.div
+              className="mt-12 grid gap-4 md:grid-cols-2"
+              variants={staggerContainerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.18 }}
+            >
+              {faqItems.map((item) => (
+                <motion.article
+                  key={item.question}
+                  className="rounded-3xl border border-white/10 bg-white/[0.03] p-5 md:p-6"
+                  variants={staggerItemVariants}
+                >
+                  <h3 className="text-lg font-medium tracking-[-0.03em] text-white">
+                    {item.question}
+                  </h3>
+                  <p className="mt-4 max-w-2xl text-sm leading-6 text-white/55">
+                    {item.answer}
+                  </p>
+                </motion.article>
+              ))}
+            </motion.div>
+          </div>
+        </section>
+
+        <section id="contact" className="px-6 py-24 md:px-12 lg:px-16 lg:py-32">
           <div className="mx-auto grid max-w-[1440px] gap-14 lg:grid-cols-[.8fr_1.2fr]">
-            <div>
+            <Reveal>
               <p className="section-kicker">Start a conversation</p>
               <h2 className="section-title mt-3">
                 Have an idea?
@@ -536,8 +670,10 @@ export default function Home() {
                 <Mail className="h-5 w-5" />
                 {socials.email}
               </a>
-            </div>
-            <ContactForm />
+            </Reveal>
+            <Reveal delay={180}>
+              <ContactForm />
+            </Reveal>
           </div>
         </section>
       </main>
