@@ -1,15 +1,14 @@
 export const SITE_NAME = "Nexa Tech";
-export const DEFAULT_TITLE =
-  "Nexa Tech | Open-Source, Web & Mobile Product Development";
+export const DEFAULT_TITLE = "Nexa Tech — Useful digital products";
 export const DEFAULT_DESCRIPTION =
-  "Nexa Tech builds high-quality open-source software, scalable web platforms, and production-ready mobile apps for startups and businesses.";
-export const DEFAULT_OG_IMAGE = "/opengraph.jpg";
-export const DEFAULT_LOGO_IMAGE = "/favicon.png";
-export const DEFAULT_OG_IMAGE_ALT = "Nexa Tech website preview";
+  "A small team building free web products, mobile apps, and open-source tools for real users.";
+export const DEFAULT_OG_IMAGE = "/brand/nexa-mark-v2.webp";
+export const DEFAULT_LOGO_IMAGE = "/brand/nexa-mark-v2.webp";
+export const DEFAULT_OG_IMAGE_ALT = "Nexa Tech products and team";
 export const DEFAULT_OG_LOCALE = "en_US";
 export const SOCIAL_LINKS = [
-  "https://github.com/tankhang1",
-  "https://www.linkedin.com/in/khang-doan-373898264/",
+  "https://github.com/nexa-tech-solution",
+  "https://www.linkedin.com/in/tech-nexa-ba02a9387/",
 ];
 
 export function getSiteUrl() {
@@ -53,7 +52,7 @@ export function getHomeStructuredData() {
         name: SITE_NAME,
         url: absoluteHomeUrl,
         description: DEFAULT_DESCRIPTION,
-        inLanguage: ["en", "vi"],
+        inLanguage: "en",
         publisher: {
           "@type": "Organization",
           name: SITE_NAME,
