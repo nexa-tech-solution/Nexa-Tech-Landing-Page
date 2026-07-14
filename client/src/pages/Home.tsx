@@ -464,6 +464,7 @@ export default function Home() {
               </Reveal>
             </div>
             <motion.div
+              key={category}
               className="mt-10 grid gap-x-6 gap-y-12 md:grid-cols-2 lg:grid-cols-3"
               variants={staggerContainerVariants}
               initial="hidden"
