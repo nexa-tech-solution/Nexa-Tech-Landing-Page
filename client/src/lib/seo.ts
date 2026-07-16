@@ -1,10 +1,15 @@
-import { faqItems, projects } from "@/components/nexa/data";
+import {
+  faqItems,
+  getProjectPath,
+  projects,
+  type Project,
+} from "@/components/nexa/data";
 
 export const SITE_NAME = "Nexa Tech";
 export const DEFAULT_TITLE =
   "Nexa Tech | React Native, Web & Mobile Product Studio";
 export const DEFAULT_DESCRIPTION =
-  "Nexa Tech builds React Native apps, web products, open-source tools, and showcase libraries like react-native-simple-fs.";
+  "Nexa Tech builds shipping-ready React Native apps, web products, browser tools, and open-source libraries for real users.";
 export const DEFAULT_OG_IMAGE = "/opengraph.jpg";
 export const DEFAULT_LOGO_IMAGE = "/favicon.png";
 export const DEFAULT_OG_IMAGE_ALT =
@@ -50,10 +55,11 @@ export function getHomeStructuredData() {
           : "SoftwareApplication",
       name: project.title,
       description: project.description,
-      url: project.primaryUrl,
+      url: getAbsoluteUrl(getProjectPath(project)),
       image: getAbsoluteUrl(project.image ?? DEFAULT_OG_IMAGE),
       applicationCategory: getApplicationCategory(project.category),
       operatingSystem: getOperatingSystem(project.category),
+      keywords: project.marketing?.seo.keywords.join(", "),
     },
   }));
 
@@ -127,6 +133,65 @@ export function getHomeStructuredData() {
           numberOfItems: featuredProjects.length,
           itemListElement: featuredProjects,
         },
+      },
+      ...(faqStructuredData ? [faqStructuredData] : []),
+    ],
+  };
+}
+
+export function getProjectStructuredData(project: Project) {
+  const absoluteUrl = getAbsoluteUrl(getProjectPath(project));
+  const productType =
+    project.category === "Library"
+      ? "SoftwareSourceCode"
+      : "SoftwareApplication";
+
+  const faqStructuredData = project.marketing?.faq?.length
+    ? {
+        "@type": "FAQPage",
+        mainEntity: project.marketing.faq.map((item) => ({
+          "@type": "Question",
+          name: item.question,
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: item.answer,
+          },
+        })),
+      }
+    : null;
+
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebPage",
+        name: project.marketing?.seo.title ?? project.title,
+        url: absoluteUrl,
+        description: project.marketing?.seo.description ?? project.description,
+        inLanguage: "en",
+        primaryImageOfPage: {
+          "@type": "ImageObject",
+          url: getAbsoluteUrl(project.image ?? DEFAULT_OG_IMAGE),
+        },
+        about: {
+          "@type": productType,
+          name: project.title,
+          description: project.description,
+          url: absoluteUrl,
+          applicationCategory: getApplicationCategory(project.category),
+          operatingSystem: getOperatingSystem(project.category),
+          keywords: project.marketing?.seo.keywords.join(", "),
+        },
+      },
+      {
+        "@type": productType,
+        name: project.title,
+        description: project.marketing?.geo.summary ?? project.description,
+        url: absoluteUrl,
+        image: getAbsoluteUrl(project.image ?? DEFAULT_OG_IMAGE),
+        applicationCategory: getApplicationCategory(project.category),
+        operatingSystem: getOperatingSystem(project.category),
+        keywords: project.marketing?.seo.keywords.join(", "),
       },
       ...(faqStructuredData ? [faqStructuredData] : []),
     ],

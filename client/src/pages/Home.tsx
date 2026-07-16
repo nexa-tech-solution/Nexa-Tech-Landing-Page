@@ -1,6 +1,7 @@
 import Seo from "@/components/seo/Seo";
 import {
   faqItems,
+  getProjectPath,
   projects,
   socials,
   team,
@@ -162,6 +163,7 @@ const categoryIcons = {
 
 function ProjectCard({ project, index }: { project: Project; index: number }) {
   const Icon = categoryIcons[project.category];
+  const detailPath = getProjectPath(project);
   return (
     <motion.article
       className={`project-card group ${index === 0 ? "md:col-span-2" : ""}`}
@@ -203,6 +205,11 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
             <h3 className="text-xl font-medium tracking-[-0.03em] md:text-2xl">
               {project.title}
             </h3>
+            {project.marketing?.aso.subtitle ? (
+              <p className="mt-2 text-[11px] uppercase tracking-[0.18em] text-[#70ff9b]">
+                {project.marketing.aso.subtitle}
+              </p>
+            ) : null}
             <p className="mt-2 max-w-xl text-sm leading-6 text-white/55">
               {project.description}
             </p>
@@ -228,6 +235,12 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
           ))}
         </div>
         <div className="mt-4 flex flex-wrap gap-x-5 gap-y-2 border-t border-white/8 pt-4 text-xs">
+          <a
+            href={detailPath}
+            className="text-white/55 transition hover:text-white"
+          >
+            Product details ↗
+          </a>
           <a
             href={project.primaryUrl}
             target="_blank"
