@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Privacy Policy - AI Lecture Recorder</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --bg: #f6f7fb;
+        --card: #ffffff;
+        --text: #172033;
+        --muted: #5f6b85;
+        --line: #e5e8f0;
+        --accent: #f97316;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+        background: linear-gradient(180deg, #eef2ff 0%, var(--bg) 240px);
+        color: var(--text);
+        line-height: 1.6;
+      }
+
+      main {
+        max-width: 860px;
+        margin: 0 auto;
+        padding: 40px 20px 64px;
+      }
+
+      .card {
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: 20px;
+        box-shadow: 0 18px 50px rgba(15, 23, 42, 0.08);
+        padding: 32px;
+      }
+
+      h1 {
+        font-size: clamp(2rem, 3vw, 2.7rem);
+        line-height: 1.1;
+        margin: 0 0 8px;
+        letter-spacing: -0.03em;
+      }
+
+      .subtitle {
+        color: var(--muted);
+        margin: 0 0 28px;
+      }
+
+      h2 {
+        margin: 28px 0 10px;
+        font-size: 1.15rem;
+        line-height: 1.25;
+      }
+
+      p,
+      li {
+        color: var(--text);
+        font-size: 0.98rem;
+      }
+
+      ul {
+        margin: 10px 0 0 22px;
+        padding: 0;
+      }
+
+      .meta {
+        display: grid;
+        gap: 8px;
+        background: #fff7ed;
+        border: 1px solid #fed7aa;
+        color: #9a3412;
+        border-radius: 14px;
+        padding: 14px 16px;
+        margin: 20px 0 10px;
+      }
+
+      .meta strong {
+        color: #7c2d12;
+      }
+
+      .contact {
+        display: inline-block;
+        padding: 2px 8px;
+        border-radius: 999px;
+        background: rgba(249, 115, 22, 0.1);
+        color: var(--accent);
+        text-decoration: none;
+        word-break: break-word;
+      }
+
+      a {
+        color: var(--accent);
+      }
+
+      code {
+        background: #f1f5f9;
+        padding: 0.15rem 0.35rem;
+        border-radius: 6px;
+      }
+
+      hr {
+        border: 0;
+        border-top: 1px solid var(--line);
+        margin: 28px 0;
+      }
+
+      @media (max-width: 640px) {
+        main {
+          padding: 16px;
+        }
+
+        .card {
+          padding: 22px;
+          border-radius: 16px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <article class="card">
+        <h1>Privacy Policy</h1>
+        <p class="subtitle"><strong>AI Lecture Recorder</strong></p>
+
+        <div class="meta">
+          <div><strong>Effective date:</strong> <span>{{EFFECTIVE_DATE}}</span></div>
+          <div>
+            <strong>Contact:</strong>
+            <a class="contact" href="mailto:{{CONTACT_EMAIL}}">{{CONTACT_EMAIL}}</a>
+          </div>
+        </div>
+
+        <p>
+          This Privacy Policy explains how AI Lecture Recorder ("we", "our", or "us") handles information when
+          you use the AI Lecture Recorder mobile app ("App").
+        </p>
+        <p>If you have any questions, contact us at <a href="mailto:{{CONTACT_EMAIL}}">{{CONTACT_EMAIL}}</a>.</p>
+
+        <h2>1. Information We Collect</h2>
+        <p>We designed the App to be local-first. In normal use, the App stores your recordings and related content on your device.</p>
+        <p>The App may handle the following information:</p>
+        <ul>
+          <li>Voice recordings you create in the App</li>
+          <li>Bookmarks, labels, notes, and transcription text associated with your recordings</li>
+          <li>App preferences, such as language selection</li>
+          <li>Your Groq API key, if you choose to enable AI transcription</li>
+        </ul>
+
+        <h2>2. How We Use Information</h2>
+        <p>We use the information in the App to:</p>
+        <ul>
+          <li>Record and play audio</li>
+          <li>Save recordings, bookmarks, notes, and transcriptions on your device</li>
+          <li>Display your library and recording details</li>
+          <li>Provide optional AI transcription</li>
+          <li>Remember your app preferences, such as language</li>
+        </ul>
+
+        <h2>3. Local Storage</h2>
+        <p>
+          Recordings, bookmarks, notes, transcription text, and app preferences are stored locally on your device using the app's storage features.
+        </p>
+        <p>We do not create user accounts, and we do not intentionally store your recordings on our servers.</p>
+
+        <h2>4. Optional AI Transcription</h2>
+        <p>If you enable AI transcription, the App sends the selected audio file to Groq's transcription service using the Groq API key that you provide.</p>
+        <p>In that case:</p>
+        <ul>
+          <li>The audio file is sent directly from your device to Groq</li>
+          <li>Groq returns the transcription text</li>
+          <li>The transcription text is then stored on your device in the App</li>
+        </ul>
+        <p>We do not receive or store your Groq API key on our servers.</p>
+        <p>Groq may process data according to its own terms and privacy practices. Please review Groq's privacy policy for more information.</p>
+
+        <h2>5. Permissions</h2>
+        <p>The App may request the following permissions:</p>
+        <ul>
+          <li>Microphone access, so you can record audio</li>
+          <li>Notifications, if enabled by your device or app settings</li>
+        </ul>
+        <p>You can deny permissions, but some features may not work properly without them.</p>
+
+        <h2>6. Information We Do Not Collect</h2>
+        <p>We do not use the App to knowingly collect:</p>
+        <ul>
+          <li>Advertising identifiers</li>
+          <li>Analytics data</li>
+          <li>Location data</li>
+          <li>Contact lists</li>
+          <li>Photos or camera data</li>
+          <li>Payment information</li>
+        </ul>
+        <p>We also do not sell your personal information.</p>
+
+        <h2>7. Third-Party Services</h2>
+        <p>The App may use the following third-party services:</p>
+        <ul>
+          <li>Groq, for optional transcription</li>
+          <li>Platform services provided by Apple, Google, and Expo-related tooling needed to run the App</li>
+        </ul>
+        <p>These services may have their own privacy policies and terms.</p>
+
+        <h2>8. Data Retention and Deletion</h2>
+        <p>
+          Because your content is stored on your device, you can remove it by:
+        </p>
+        <ul>
+          <li>Deleting recordings or notes inside the App</li>
+          <li>Clearing the App's local storage</li>
+          <li>Uninstalling the App</li>
+        </ul>
+        <p>If you delete the App, the locally stored content on that device may be removed.</p>
+
+        <h2>9. Children’s Privacy</h2>
+        <p>The App is not intended for children under 13, and we do not knowingly collect personal information from children under 13.</p>
+
+        <h2>10. Security</h2>
+        <p>We use reasonable technical and organizational measures designed to protect information handled by the App. However, no method of storage or transmission is 100% secure.</p>
+
+        <h2>11. Changes to This Policy</h2>
+        <p>We may update this Privacy Policy from time to time. If we make material changes, we will update the effective date above.</p>
+
+        <h2>12. Contact Us</h2>
+        <p>If you have questions about this Privacy Policy, contact us at:</p>
+        <p><a href="mailto:{{CONTACT_EMAIL}}">{{CONTACT_EMAIL}}</a></p>
+      </article>
+    </main>
+  </body>
+</html>
