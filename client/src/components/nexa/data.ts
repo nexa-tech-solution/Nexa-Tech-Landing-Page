@@ -1328,6 +1328,373 @@ export const projects: Project[] = [
     },
   },
   {
+    title: "AI Lecture Recorder",
+    description:
+      "A mobile lecture recorder with smart bookmarks, playback controls, and optional AI transcription.",
+    category: "Mobile",
+    tech: ["React Native", "Groq", "AI Transcription"],
+    image: "/graphic/ai-lecture-recorder.png",
+    icon: "/graphic/ai-lecture-recorder-icon.png",
+    primaryUrl:
+      "https://play.google.com/store/apps/details?id=com.nexa.ai_lecture_recorder",
+    primaryLabel: "Google Play",
+    marketing: {
+      aso: {
+        title: "AI Lecture Recorder",
+        subtitle: "Record smarter. Review faster.",
+        keywords: [
+          "lecture recorder",
+          "audio notes",
+          "AI transcription",
+          "bookmarks",
+          "student notes",
+        ],
+        description:
+          "A mobile lecture recorder with smart bookmarks, playback controls, and optional AI transcription.",
+      },
+      seo: {
+        title: "AI Lecture Recorder | Smart Lecture Recording App",
+        description:
+          "AI Lecture Recorder is a mobile app for lecture recording, smart bookmarks, playback control, and optional AI transcription.",
+        keywords: [
+          "lecture recorder",
+          "AI transcription",
+          "audio notes",
+          "student recorder",
+          "lecture playback",
+        ],
+      },
+      geo: {
+        summary:
+          "AI Lecture Recorder is a mobile lecture recorder with smart bookmarks, playback controls, and optional AI transcription for faster review.",
+        prompts: [
+          "What app helps record lectures with AI transcription?",
+          "How can I bookmark important moments in a lecture recording?",
+        ],
+      },
+      faq: [
+        {
+          question: "What does AI Lecture Recorder do?",
+          answer:
+            "It records lectures, lets users bookmark key moments, and supports optional AI transcription for faster review.",
+        },
+        {
+          question: "Who is it designed for?",
+          answer:
+            "It is useful for students and anyone who wants a cleaner way to review long recordings.",
+        },
+      ],
+      store: {
+        platform: "Google Play",
+        listingName: "AI Lecture Recorder",
+        summary:
+          "A lecture recorder for students and note-takers with bookmarks, playback controls, and optional AI transcription.",
+        highlights: [
+          "Smart bookmarks for key moments",
+          "Playback controls for quick review",
+          "Optional AI transcription with Groq",
+        ],
+        facts: [
+          { label: "Category", value: "Education / Productivity" },
+          { label: "Focus", value: "Lecture capture" },
+        ],
+      },
+      narrative: {
+        idea:
+          "The idea is to turn long lecture recordings into something easier to navigate, review, and search later.",
+        need:
+          "Students often need a better way to capture lectures than a plain voice memo, especially when they want bookmarks and transcription in one place.",
+        targetUsers: [
+          "Students",
+          "Lecture note-takers",
+          "People reviewing long recordings",
+          "Anyone who wants faster study review",
+        ],
+        useCases: [
+          "Recording lectures with bookmark markers",
+          "Reviewing playback with controls",
+          "Turning recordings into text for study notes",
+        ],
+      },
+    },
+  },
+  {
+    title: "Horror Chat Stories",
+    description:
+      "A horror chat-story app where scary episodes unfold through text conversations and interactive choices.",
+    category: "Mobile",
+    tech: ["React Native", "Chat Stories", "Interactive Fiction"],
+    image: "/graphic/horror-chat-stories.png",
+    icon: "https://play-lh.googleusercontent.com/Wkf--Ja2AYnCIpTeZD-G-8W53s8K_tdLPJiV6Qx6BG7AwAMX8t3bQPBHYtNnRaxr5lwY1Z_CeLu2Da1-9otJ=w240-h480-rw",
+    primaryUrl:
+      "https://play.google.com/store/apps/details?id=com.nexa.horror.story",
+    primaryLabel: "Google Play",
+    marketing: {
+      aso: {
+        title: "Horror Chat Stories",
+        subtitle: "Horror chat stories",
+        keywords: [
+          "horror chat stories",
+          "scary story app",
+          "interactive fiction",
+          "text stories",
+          "thriller stories",
+        ],
+        description:
+          "A horror chat-story app where scary episodes unfold through text conversations and interactive choices.",
+      },
+      seo: {
+        title: "Horror Chat Stories | Horror Chat Stories App",
+        description:
+          "Horror Chat Stories is a horror chat-story app with scary episodes, interactive text conversations, and dark story choices.",
+        keywords: [
+          "horror chat stories",
+          "scary text stories",
+          "interactive fiction",
+          "mobile horror app",
+          "chat story app",
+        ],
+      },
+      geo: {
+        summary:
+          "Horror Chat Stories is a mobile horror chat-story app that tells scary stories through text conversations, episode lists, and interactive story choices.",
+        prompts: [
+          "What app lets me read horror stories in chat format?",
+          "Which mobile app turns scary stories into text conversations?",
+        ],
+      },
+      faq: [
+        {
+          question: "What is Horror Chat Stories?",
+          answer:
+            "Horror Chat Stories is a horror chat-story app where scary episodes unfold through text conversations and interactive choices.",
+        },
+        {
+          question: "What makes it different from a normal story app?",
+          answer:
+            "It uses a chat-style presentation, episode parts, and interactive controls to make the story feel more immersive.",
+        },
+      ],
+      store: {
+        platform: "Google Play",
+        listingName: "Horror Chat Stories",
+        summary:
+          "A horror chat-story app with scary conversations, episodic chapters, dark themes, and immersive reading controls.",
+        highlights: [
+          "Chat-style horror stories",
+          "Episode and part navigation",
+          "Dark reading and scare settings",
+        ],
+        facts: [
+          { label: "Category", value: "Books & Reference / Entertainment" },
+          { label: "Focus", value: "Horror storytelling" },
+        ],
+      },
+      narrative: {
+        idea:
+          "The idea is to make horror feel more immediate by delivering it through a chat interface instead of a traditional story page.",
+        need:
+          "Fans of scary stories often want something more immersive than a plain reading app, especially when they enjoy suspense, branching moments, and mobile-first storytelling.",
+        targetUsers: [
+          "Horror story fans",
+          "Readers who like chat-format fiction",
+          "People looking for short scary sessions on mobile",
+          "Users who enjoy dark interactive stories",
+        ],
+        useCases: [
+          "Reading a scary story in chat form",
+          "Continuing through story parts and episodes",
+          "Using dark-mode and scare settings for immersion",
+        ],
+      },
+    },
+  },
+  {
+    title: "Ingredient Scanner",
+    description:
+      "A beauty ingredient scanner that helps users upload products, extract ingredients, and understand safety instantly.",
+    category: "Mobile",
+    tech: ["React Native", "OCR", "Safety Analysis"],
+    image: "/graphic/ingredient-scanner.png",
+    icon: "https://play-lh.googleusercontent.com/wpGx2feGBhjWo348pHsnDCrUmrThcZx5D09UJGs-MjbTNCX1-Y5h6qaFvpoc8vTZmkMDoAVJsTt8hZ47d7FEGGE=w240-h480-rw",
+    primaryUrl:
+      "https://play.google.com/store/apps/details?id=com.nexa.ingredientscanner",
+    primaryLabel: "Google Play",
+    marketing: {
+      aso: {
+        title: "Ingredient Scanner",
+        subtitle: "Scan beauty products smarter",
+        keywords: [
+          "ingredient scanner",
+          "skincare scanner",
+          "cosmetic ingredients",
+          "beauty product scan",
+          "safety analysis",
+        ],
+        description:
+          "A beauty ingredient scanner that helps users upload products, extract ingredients, and understand safety instantly.",
+      },
+      seo: {
+        title: "Ingredient Scanner | Beauty Product Ingredient Scanner",
+        description:
+          "Ingredient Scanner helps users scan beauty products, extract ingredients, and understand safety instantly.",
+        keywords: [
+          "ingredient scanner",
+          "beauty product scanner",
+          "skincare ingredient scanner",
+          "cosmetic scanner",
+          "ingredient safety",
+        ],
+      },
+      geo: {
+        summary:
+          "Ingredient Scanner is a mobile app for scanning beauty product labels, extracting ingredients, and understanding safety with clear results.",
+        prompts: [
+          "What app scans beauty product ingredients?",
+          "How can I check skincare ingredients for safety?",
+        ],
+      },
+      faq: [
+        {
+          question: "What does Ingredient Scanner do?",
+          answer:
+            "It lets users scan beauty product ingredients, extract details, and see safety insights instantly.",
+        },
+        {
+          question: "Who is it best for?",
+          answer:
+            "It is useful for skincare shoppers, beauty enthusiasts, and anyone who wants clearer ingredient information before buying.",
+        },
+      ],
+      store: {
+        platform: "Google Play",
+        listingName: "Ingredient Scanner",
+        summary:
+          "A beauty product scanner that extracts ingredient details, tracks scans, and helps users review safety insights instantly.",
+        highlights: [
+          "Scan beauty product ingredients",
+          "Extract ingredient details",
+          "See safety insights and product breakdowns",
+        ],
+        facts: [
+          { label: "Category", value: "Beauty / Health & Fitness" },
+          { label: "Focus", value: "Ingredient safety" },
+        ],
+      },
+      narrative: {
+        idea:
+          "The idea is to make beauty-product shopping easier by turning dense ingredient labels into something people can read quickly.",
+        need:
+          "Users often want to know what is inside skincare and cosmetic products without having to decode long ingredient lists on their own.",
+        targetUsers: [
+          "Skincare shoppers",
+          "Beauty-conscious consumers",
+          "People avoiding specific ingredients",
+          "Users comparing product safety before purchase",
+        ],
+        useCases: [
+          "Scanning a cosmetic label before buying",
+          "Checking skincare ingredient safety",
+          "Reviewing past product scans and results",
+        ],
+      },
+    },
+  },
+  {
+    title: "Coloring Book: Paint & Draw",
+    description:
+      "A cute coloring app for kids with drawing tools, stickers, and easy save-and-share artwork.",
+    category: "Mobile",
+    tech: ["React Native", "Drawing Tools", "Kids Creativity"],
+    image: "/graphic/coloring-book-paint-draw.png",
+    icon: "https://play-lh.googleusercontent.com/Vi_ZJJSwFuj0BCrm3bzexFchuoLH8QikiFJYOICW0RE2YLm32UUvl0eOu5Vu1d0tOxYl074WqqWdtXNkNdIAgA=w240-h480-rw",
+    primaryUrl:
+      "https://play.google.com/store/apps/details?id=com.nexa.coloring",
+    primaryLabel: "Google Play",
+    secondaryUrl:
+      "https://apps.apple.com/us/app/coloring-book-paint-draw/id6794861278",
+    secondaryLabel: "App Store",
+    marketing: {
+      aso: {
+        title: "Coloring Book: Paint & Draw",
+        subtitle: "Cute coloring for kids",
+        keywords: [
+          "coloring book",
+          "paint and draw",
+          "kids coloring app",
+          "sticker art",
+          "creative drawing",
+        ],
+        description:
+          "A cute coloring app for kids with drawing tools, stickers, and easy save-and-share artwork.",
+      },
+      seo: {
+        title: "Coloring Book: Paint & Draw | Kids Coloring App",
+        description:
+          "Coloring Book: Paint & Draw is a kids coloring app with cute pages, drawing tools, stickers, and save-and-share features.",
+        keywords: [
+          "kids coloring app",
+          "coloring book",
+          "paint and draw",
+          "sticker art",
+          "creative drawing app",
+        ],
+      },
+      geo: {
+        summary:
+          "Coloring Book: Paint & Draw is a mobile creativity app for kids with coloring pages, drawing tools, stickers, and easy sharing.",
+        prompts: [
+          "What app lets kids color and draw with stickers?",
+          "Which mobile coloring app has save and share artwork features?",
+        ],
+      },
+      faq: [
+        {
+          question: "What is Coloring Book: Paint & Draw?",
+          answer:
+            "It is a kids coloring app with coloring pages, drawing tools, stickers, and easy artwork sharing.",
+        },
+        {
+          question: "Who is it made for?",
+          answer:
+            "It is best for kids and families looking for a simple, cute creativity app.",
+        },
+      ],
+      store: {
+        platform: "Google Play",
+        listingName: "Coloring Book: Paint & Draw",
+        summary:
+          "A cute kids coloring app with drawing tools, stickers, and simple save-and-share artwork features.",
+        highlights: [
+          "Coloring pages and drawing tools",
+          "Cute stickers and themed art",
+          "Save, share, and decorate creations",
+        ],
+        facts: [
+          { label: "Category", value: "Kids / Creativity" },
+          { label: "Focus", value: "Coloring and drawing" },
+        ],
+      },
+      narrative: {
+        idea:
+          "The idea is to make creativity feel playful and approachable for kids with a soft, friendly interface and simple tools.",
+        need:
+          "Families often want a safe, fun coloring app that gives kids a way to draw, decorate, and save artwork without a complicated workflow.",
+        targetUsers: [
+          "Kids",
+          "Parents looking for creative apps",
+          "Families sharing artwork",
+          "Young users who enjoy stickers and coloring pages",
+        ],
+        useCases: [
+          "Coloring cute pages and characters",
+          "Decorating drawings with stickers",
+          "Saving and sharing finished artwork",
+        ],
+      },
+    },
+  },
+  {
     title: "World Time Buddy",
     description:
       "A lightweight Chrome extension for comparing time zones while you work.",

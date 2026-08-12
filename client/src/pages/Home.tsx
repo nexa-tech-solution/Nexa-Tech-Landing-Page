@@ -153,6 +153,36 @@ function AnimatedHeading() {
   );
 }
 
+function ProjectIcon({ project }: { project: Project }) {
+  const [failed, setFailed] = useState(false);
+
+  const fallback = (
+    <div className="absolute bottom-4 left-4 grid h-16 w-16 place-items-center rounded-[18px] border border-white/15 bg-black/55 text-[11px] font-semibold uppercase tracking-[0.18em] text-white/70 shadow-2xl ring-1 ring-white/10 md:h-[72px] md:w-[72px]">
+      {project.title
+        .split(/[^a-zA-Z0-9]+/)
+        .filter(Boolean)
+        .slice(0, 2)
+        .map((word) => word[0])
+        .join("")}
+    </div>
+  );
+
+  if (!project.icon || failed) {
+    return fallback;
+  }
+
+  return (
+    <img
+      src={project.icon}
+      alt=""
+      aria-hidden="true"
+      className="absolute bottom-4 left-4 h-16 w-16 rounded-[18px] object-cover shadow-2xl ring-1 ring-white/25 md:h-[72px] md:w-[72px]"
+      loading="lazy"
+      onError={() => setFailed(true)}
+    />
+  );
+}
+
 const categoryIcons = {
   All: Code2,
   Web: Globe2,
@@ -190,14 +220,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
         <div className="absolute left-4 top-4 flex items-center gap-2 rounded-full bg-black/60 px-3 py-1.5 text-xs backdrop-blur-md">
           <Icon className="h-3.5 w-3.5 text-[#70ff9b]" /> {project.category}
         </div>
-        {project.icon && (
-          <img
-            src={project.icon}
-            alt={`${project.title} app icon from Google Play`}
-            className="absolute bottom-4 left-4 h-16 w-16 rounded-[18px] object-cover shadow-2xl ring-1 ring-white/25 md:h-[72px] md:w-[72px]"
-            loading="lazy"
-          />
-        )}
+        <ProjectIcon project={project} />
       </div>
       <div className="px-1 pb-3 pt-5">
         <div className="flex items-start justify-between gap-5">
@@ -415,8 +438,8 @@ export default function Home() {
         <section className="border-b border-white/10 px-6 py-10 md:px-12 lg:px-16">
           <div className="mx-auto grid max-w-[1440px] grid-cols-2 gap-6 md:grid-cols-4">
             {[
-              ["14+", "Products shipped"],
-              ["8", "Mobile apps"],
+              ["21+", "Products shipped"],
+              ["12", "Mobile apps"],
               ["3", "Product platforms"],
               ["Free", "User-first tools"],
             ].map(([value, label]) => (
