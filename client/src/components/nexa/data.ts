@@ -1429,6 +1429,9 @@ export const projects: Project[] = [
     primaryUrl:
       "https://play.google.com/store/apps/details?id=com.nexa.horror.story",
     primaryLabel: "Google Play",
+    secondaryUrl:
+      "https://apps.apple.com/us/app/horror-chat-stories/id6794671992",
+    secondaryLabel: "App Store",
     marketing: {
       aso: {
         title: "Horror Chat Stories",
