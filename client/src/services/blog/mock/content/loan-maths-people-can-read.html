@@ -1,0 +1,68 @@
+<p class="lead">Loan calculators tend to look like spreadsheets: enter four numbers, get a table with hundreds of rows. Everything is there, and almost nobody can tell at a glance whether they can afford the loan. This post walks through one worked example to show how Loan Estimator presents the same maths as an answer.</p>
+
+<h2>The example</h2>
+<dl class="anatomy">
+  <dt>Amount borrowed</dt><dd>200,000</dd>
+  <dt>Interest rate</dt><dd>6% a year, fixed</dd>
+  <dt>Term</dt><dd>30 years, paid monthly (360 payments)</dd>
+</dl>
+
+<h2>The maths behind it</h2>
+<p>Monthly payment for a fixed-rate loan comes from the standard amortization formula, where <code>P</code> is the amount, <code>r</code> the monthly rate and <code>n</code> the number of payments.</p>
+<div class="formula">M = P × r(1 + r)ⁿ ÷ ((1 + r)ⁿ − 1)</div>
+<p>With <code>r = 0.06 ÷ 12 = 0.005</code> and <code>n = 360</code>, that gives a monthly payment of about <strong>1,199.10</strong>.</p>
+
+<h2>Answer first</h2>
+<p>The result screen leads with three numbers, in this order, before any table:</p>
+<div class="stats">
+  <div><b>1,199.10</b><span>Monthly payment</span></div>
+  <div><b>231,676</b><span>Total interest over 30 years</span></div>
+  <div><b>431,676</b><span>Total you pay back</span></div>
+</div>
+<p>Seeing that the interest is larger than the loan itself is the moment most people actually understand what they are signing up for. A table of 360 rows hides that; three numbers make it obvious.</p>
+
+<h2>Detail second</h2>
+<p>The full schedule is one tap away. Its first rows show why early payments barely reduce the balance:</p>
+<div class="table-wrap">
+  <table>
+    <thead><tr><th>Month</th><th class="num">Interest</th><th class="num">Principal</th><th class="num">Balance</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td class="num">1,000.00</td><td class="num">199.10</td><td class="num">199,800.90</td></tr>
+      <tr><td>2</td><td class="num">999.00</td><td class="num">200.10</td><td class="num">199,600.80</td></tr>
+      <tr><td>3</td><td class="num">998.00</td><td class="num">201.10</td><td class="num">199,399.71</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<h2>Comparing scenarios</h2>
+<p>Most people are deciding between two versions of a loan, not whether to take one. Saved scenarios sit side by side with the differences written out.</p>
+<figure class="diagram">
+  <div class="compare">
+    <div class="before">
+      <h4>30 years</h4>
+      <ol>
+        <li>1,199.10 a month</li>
+        <li>231,676 total interest</li>
+        <li>431,676 paid back</li>
+      </ol>
+    </div>
+    <div class="after">
+      <h4>15 years</h4>
+      <ol>
+        <li>1,687.71 a month (+488.61)</li>
+        <li>103,788 total interest</li>
+        <li>303,788 paid back (−127,888)</li>
+      </ol>
+    </div>
+  </div>
+  <figcaption>Same loan, two terms. The trade-off is spelled out instead of left for the user to subtract.</figcaption>
+</figure>
+<blockquote>Comparison is where the decision happens, so it should not need a calculator of its own.</blockquote>
+
+<h2>Reports for the conversation that follows</h2>
+<p>A loan decision rarely happens alone. The export creates a PDF with the inputs, the three headline numbers and the full schedule, so a partner or adviser starts from the same page.</p>
+
+<aside class="callout" data-tone="warn">
+  <strong>Estimates, not offers</strong>
+  <p>Real loans include fees, insurance and rate changes. Every result is labelled as an estimate so nobody mistakes it for a quote.</p>
+</aside>

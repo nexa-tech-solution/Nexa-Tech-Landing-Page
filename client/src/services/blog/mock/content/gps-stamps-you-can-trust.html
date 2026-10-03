@@ -1,0 +1,100 @@
+<p class="lead">FieldStamp GPS Camera exists for people who need to prove where and when a photo was taken. Site managers tracking progress, inspectors documenting damage, anyone filing a compliance report. A photo without that context is a picture. With it, it becomes a record, and a record that is wrong is worse than no record at all.</p>
+
+<div class="tldr">
+  <strong>TL;DR</strong>
+  <ul>
+    <li>The stamp is drawn into the pixels, because metadata gets stripped when photos are shared.</li>
+    <li>Location accuracy is shown, not hidden. A weak fix is labelled as weak.</li>
+    <li>Photos are grouped by project and exported as a plain PDF people can forward or print.</li>
+  </ul>
+</div>
+
+<h2>Why metadata is not enough</h2>
+<p>Every phone already writes location into a photo's EXIF data. The problem is what happens next. Many messaging apps, email clients and upload forms strip that data without telling anyone, usually for privacy reasons that make sense. By the time a site photo reaches the client or the insurer, the proof it was meant to carry is often gone.</p>
+<p>So FieldStamp draws the information into the image itself. Whatever happens to the file later, the context travels with it, visible to anyone who opens it.</p>
+
+<figure class="diagram">
+  <ol class="flow">
+    <li><strong>Capture</strong><span>Photo from the in-app camera</span></li>
+    <li class="accent"><strong>Read location</strong><span>Coordinates, accuracy and time</span></li>
+    <li><strong>Draw the stamp</strong><span>Burned into the pixels</span></li>
+    <li><strong>Add to report</strong><span>Grouped by project, exported as PDF</span></li>
+  </ol>
+  <figcaption>From shutter to report. The stamp becomes part of the image so it survives sharing.</figcaption>
+</figure>
+
+<h2>Anatomy of a stamp</h2>
+<p>The stamp sits in a band along the bottom edge of the photo. Each line answers a question someone reviewing the photo will ask, in the order they usually ask it.</p>
+<dl class="anatomy">
+  <dt>Project and note</dt>
+  <dd>What this photo is about, written by the person who took it. "Level 3, east stair, before pour."</dd>
+  <dt>Date and time</dt>
+  <dd>Local time with the time zone, so a photo taken late at night is not misread as the next morning elsewhere.</dd>
+  <dt>Address</dt>
+  <dd>A readable street address when one can be resolved. People recognise addresses faster than coordinates.</dd>
+  <dt>Coordinates</dt>
+  <dd>Latitude and longitude for anyone who needs to put the photo on a map precisely.</dd>
+  <dt>Accuracy</dt>
+  <dd>How far off the location might be. This is the line most apps leave out, and the one that matters most when something is disputed.</dd>
+</dl>
+
+<h2>When the phone is not sure where it is</h2>
+<p>Inside a concrete stairwell or a basement car park, a phone's location can drift a long way. The tempting thing is to stamp whatever comes back and move on. We decided the stamp should never look more certain than the data behind it.</p>
+
+<div class="table-wrap">
+  <table>
+    <thead>
+      <tr><th>Fix quality</th><th>What the camera shows</th><th>What the stamp says</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><span class="dot" data-tone="good"></span>Good</td><td>Shutter ready, accuracy in green</td><td>Coordinates and accuracy as normal</td></tr>
+      <tr><td><span class="dot" data-tone="warn"></span>Fair</td><td>A short wait while the fix improves</td><td>Coordinates with the wider accuracy shown</td></tr>
+      <tr><td><span class="dot" data-tone="bad"></span>Poor</td><td>A hint to step closer to open sky</td><td>Clearly marked as low accuracy</td></tr>
+      <tr><td><span class="dot"></span>None</td><td>Photo can still be taken</td><td>"Location unavailable", never an old position</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<aside class="callout" data-tone="warn">
+  <strong>The one rule we do not bend</strong>
+  <p>A previous location is never reused silently. If the phone does not know where it is now, the stamp says so. A confidently wrong stamp can end up in a dispute; an honest one rarely does.</p>
+</aside>
+
+<h2>Drawing the stamp</h2>
+<p>The drawing step is simple in principle: measure the text, draw a dark band, write the lines. The details are what make it readable on every photo, from a bright facade to a dark basement.</p>
+
+<pre data-label="Simplified for this post"><code>function drawStamp(photo, info) {
+  const lines = [info.note, info.time, info.address, info.coords, info.accuracy]
+    .filter(Boolean);
+  const scale = photo.width / 1080;          // same look on any resolution
+  const band = lineHeight * scale * lines.length + padding * 2;
+
+  fillRect(0, photo.height - band, photo.width, band, "rgba(0,0,0,0.55)");
+  lines.forEach((text, i) =&gt; drawText(text, padding, baseline(i), scale));
+}</code></pre>
+
+<p>Two details mattered more than we expected. Text scales with the photo width, so a stamp looks the same on a 12 megapixel shot and a cropped one. And the band is semi-transparent rather than solid, so it never hides the bottom of the photo completely, which is often where the floor, the crack or the damage is.</p>
+
+<h2>Reports people actually send</h2>
+<p>Most users do not want a folder of photos. They want something they can attach to an email at the end of the day.</p>
+<ol class="steps">
+  <li><h4>Pick a project</h4><p>Photos are already grouped by the project chosen when they were taken.</p></li>
+  <li><h4>Review and reorder</h4><p>Drop the blurry ones, put the important ones first.</p></li>
+  <li><h4>Export the PDF</h4><p>Each page shows the photo, its stamp and the note underneath. Plain on purpose, because it often ends up printed or forwarded to someone who has never heard of the app.</p></li>
+</ol>
+
+<blockquote>A stamp that admits it is unsure is more useful than one that is confidently wrong.</blockquote>
+
+<h2>Questions we get</h2>
+<details>
+  <summary>Can the stamp be edited after the photo is taken?</summary>
+  <p>The note can be corrected before export, but time and location are written at capture. That is the point of the stamp.</p>
+</details>
+<details>
+  <summary>Does it work without mobile data?</summary>
+  <p>Yes. GPS does not need data. The street address may be missing until there is a connection, but coordinates and accuracy are always recorded.</p>
+</details>
+<details>
+  <summary>Why not just use the phone's built-in camera?</summary>
+  <p>The built-in camera stores location in metadata, which is easy to lose. FieldStamp makes the information visible and keeps photos organised by project for reporting.</p>
+</details>

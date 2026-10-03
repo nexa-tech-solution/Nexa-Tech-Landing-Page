@@ -1,0 +1,65 @@
+<p class="lead">Our first version of Ingredient Scanner looked like most camera apps: close top left, flash top right, shutter at the bottom. It tested fine at a desk. In a supermarket, with a basket in the other hand, people struggled to reach anything above the middle of the screen. This is a field report on what we saw and what we changed.</p>
+
+<h2>The study</h2>
+<dl class="anatomy">
+  <dt>Where</dt>
+  <dd>Ordinary supermarket aisles, at normal shopping times. No lab, no desk.</dd>
+  <dt>Who</dt>
+  <dd>Us first, then friends who had never seen the app, given no instructions.</dd>
+  <dt>Task</dt>
+  <dd>Walk an aisle, pick up a product, scan the label, decide whether to keep it.</dd>
+  <dt>What we watched</dt>
+  <dd>Grip, thumb movement, and every moment someone paused or shifted the phone.</dd>
+</dl>
+
+<h2>What we saw</h2>
+<div class="cards">
+  <div class="card"><span class="kicker-num">01</span><h4>Phones held low</h4><p>Close to the body, one hand on a basket or trolley the whole time.</p></div>
+  <div class="card"><span class="kicker-num">02</span><h4>Top corners unreachable</h4><p>People stretched for close and flash, gave up, and changed grip.</p></div>
+  <div class="card"><span class="kicker-num">03</span><h4>Nobody complained</h4><p>They just slowed down. Friction showed up as hesitation, not feedback.</p></div>
+  <div class="card"><span class="kicker-num">04</span><h4>Results screen broke the rhythm</h4><p>A new screen meant reaching up for back before every next product.</p></div>
+</div>
+
+<blockquote>Test where the app will be used, not where it was built.</blockquote>
+
+<h2>Everything moves down</h2>
+<p>We moved every control into the bottom third of the screen, inside the area a thumb reaches comfortably. Close became a swipe down that works anywhere on screen. Flash moved next to the shutter.</p>
+
+<figure class="diagram">
+  <div class="phones">
+    <div class="phone" data-title="First version">
+      <span class="ctl" data-at="tl">Close</span>
+      <span class="ctl" data-at="tr">Flash</span>
+      <span class="ctl round" data-at="bc">Shutter</span>
+    </div>
+    <div class="phone" data-title="Now">
+      <span class="ctl hint" data-at="tc">Swipe ↓ to close</span>
+      <span class="ctl" data-at="bl">Flash</span>
+      <span class="ctl" data-at="br">Manual</span>
+      <span class="ctl round" data-at="bc">Shutter</span>
+    </div>
+  </div>
+  <figcaption>Same screen, controls moved into the shaded area a thumb reaches while the other hand holds a basket.</figcaption>
+</figure>
+
+<h2>Results without leaving the camera</h2>
+<p>A successful scan used to open a new results screen with a back button in the corner. Now the result slides up over the camera view. Swipe it down and the next scan is ready.</p>
+<figure class="diagram">
+  <ol class="flow">
+    <li><strong>Scan label</strong><span>Shutter at the bottom</span></li>
+    <li class="accent"><strong>Result slides up</strong><span>Over the camera, no new screen</span></li>
+    <li><strong>Swipe down</strong><span>Dismiss from anywhere</span></li>
+    <li><strong>Next product</strong><span>Camera is already open</span></li>
+  </ol>
+  <figcaption>The scan loop. The thumb stays in the bottom third the whole time.</figcaption>
+</figure>
+
+<h2>Fewer words on the result</h2>
+<p>The first result card listed every ingredient on the label. It was complete, and almost nobody read it in the shop. Now the card leads with a short verdict, shows the two or three ingredients that matter for the user's own preferences, and keeps the full list one tap away for later.</p>
+
+<h2>Design principles we kept</h2>
+<ol class="steps">
+  <li><h4>Reach before looks</h4><p>If a control is out of thumb reach, it does not matter how it looks.</p></li>
+  <li><h4>Stay in the loop</h4><p>Every action should leave the user ready for the next scan.</p></li>
+  <li><h4>Admit bad photos</h4><p>When a label is blurry, ask for another shot instead of returning a confident answer built on a bad image.</p></li>
+</ol>

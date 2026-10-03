@@ -13,7 +13,7 @@
     />
     <meta name="robots" content="index, follow" />
     <meta name="author" content="Nexa Tech" />
-    <meta name="theme-color" content="#000000" />
+    <meta name="theme-color" content="#ffffff" />
     <link rel="canonical" href="__SITE_URL__/" />
 
     <meta
@@ -80,6 +80,8 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Mona+Sans:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
+    <!-- Paint white before the CSS bundle loads so navigations never flash dark. -->
+    <style>html, body { background: #fff; }</style>
   </head>
   <body>
     <div id="root"></div>

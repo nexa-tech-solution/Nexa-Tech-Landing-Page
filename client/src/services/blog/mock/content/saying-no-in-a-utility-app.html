@@ -1,0 +1,67 @@
+<p class="lead">Utility apps grow by default. Someone who resizes images also wants to crop them, then add text, then apply filters, and soon the app is a worse version of a full editor. For Quick Image PDF Resizer we kept a written decision log instead. This post shares it, lightly edited.</p>
+
+<h2>The one-sentence purpose</h2>
+<aside class="callout">
+  <strong>Quick Image PDF Resizer</strong>
+  <p>Make files the right size and format for wherever they need to go, quickly, on the device.</p>
+</aside>
+<p>Every request gets checked against that sentence. If it helps the job, it is a candidate. If it changes the job, it needs a real discussion.</p>
+
+<h2>The decision log</h2>
+<div class="table-wrap">
+  <table>
+    <thead><tr><th>Request</th><th>Decision</th><th>Reason</th></tr></thead>
+    <tbody>
+      <tr><td>Resize to an exact file size</td><td><span class="dot" data-tone="good"></span>Yes</td><td>The core job: upload limits are usually in kilobytes</td></tr>
+      <tr><td>Convert HEIC to JPG</td><td><span class="dot" data-tone="good"></span>Yes</td><td>Format compatibility is part of "the right format"</td></tr>
+      <tr><td>Merge and split PDFs</td><td><span class="dot" data-tone="good"></span>Yes</td><td>Forms often need pages combined or removed</td></tr>
+      <tr><td>Simple crop</td><td><span class="dot" data-tone="warn"></span>Later</td><td>Helps the job, but only once resize is polished</td></tr>
+      <tr><td>Filters and colour tweaks</td><td><span class="dot" data-tone="bad"></span>No</td><td>Editing, not preparing a file</td></tr>
+      <tr><td>Text and stickers</td><td><span class="dot" data-tone="bad"></span>No</td><td>A different app entirely</td></tr>
+      <tr><td>Cloud folders and accounts</td><td><span class="dot" data-tone="bad"></span>No</td><td>Breaks "on the device"</td></tr>
+      <tr><td>Edit text inside PDFs</td><td><span class="dot" data-tone="bad"></span>No</td><td>Hard to do well; heavier tools exist</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<figure class="diagram">
+  <div class="compare">
+    <div class="before">
+      <h4>Requests we heard</h4>
+      <ol>
+        <li>Filters and colour adjustments</li>
+        <li>Text and stickers</li>
+        <li>Cloud folders and accounts</li>
+        <li>Editing text inside PDFs</li>
+      </ol>
+    </div>
+    <div class="after">
+      <h4>What shipped</h4>
+      <ol>
+        <li>Resize and compress</li>
+        <li>Convert formats</li>
+        <li>Merge, split and extract PDF pages</li>
+        <li>Everything processed on the device</li>
+      </ol>
+    </div>
+  </div>
+  <figcaption>The log is what kept the right-hand column short.</figcaption>
+</figure>
+
+<h2>How a request moves through the log</h2>
+<figure class="diagram">
+  <ol class="flow">
+    <li><strong>Request arrives</strong><span>Review, email or our own wish</span></li>
+    <li class="accent"><strong>Check the sentence</strong><span>Helps the job, or changes it?</span></li>
+    <li><strong>Log a decision</strong><span>Yes, later or no, with one reason</span></li>
+    <li><strong>Revisit rarely</strong><span>Only with new evidence</span></li>
+  </ol>
+  <figcaption>The decision is written down once, so the same debate does not happen twice.</figcaption>
+</figure>
+
+<h2>Why write it down at all</h2>
+<p>Saying no is easy when you are tired and hard when a request is reasonable. A written log takes the decision away from whoever happens to be in the conversation, and the one-line reasons stop the same debate recurring every few weeks.</p>
+<blockquote>A short app is easy to explain in one sentence. That sentence is also the store listing.</blockquote>
+
+<h2>The log is not permanent</h2>
+<p>A few items have moved from "later" to "yes" when enough people needed them for the core job. Each move was a decision, not a drift, and the app still does what its name says.</p>

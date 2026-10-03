@@ -7,17 +7,18 @@ import {
   Linkedin,
   Mail,
   Menu,
-  MessageCircle,
   X,
 } from "lucide-react";
 import { useState } from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import { useReveal } from "@/components/nexa/use-reveal";
+import { ChatLauncher } from "@/components/nexa/chat-launcher";
 
 export const navLinks = [
   ["Explore", "/#work"],
   ["About", "/#about"],
   ["Team", "/#team"],
   ["FAQ", "/#faq"],
+  ["Blog", "/blog"],
   ["Contact", "/#contact"],
 ];
 
@@ -85,18 +86,16 @@ export function ShotCard({
   project: Project;
   index: number;
 }) {
-  const reduceMotion = useReducedMotion();
+  const reveal = useReveal<HTMLLIElement>((index % 4) * 50);
   const { likes, views } = shotStats(project.title);
   const [liked, setLiked] = useState(false);
   const path = getProjectPath(project);
 
   return (
-    <motion.li
-      className="min-w-0"
-      initial={reduceMotion ? false : { opacity: 0, y: 16 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.15 }}
-      transition={{ duration: 0.4, delay: (index % 4) * 0.05 }}
+    <li
+      ref={reveal.ref}
+      className={`min-w-0 ${reveal.className}`}
+      style={reveal.style}
     >
       <div className="group relative aspect-[4/3] overflow-hidden rounded-lg bg-[#f3f3f4]">
         <a href={path} aria-label={project.title}>
@@ -168,7 +167,7 @@ export function ShotCard({
           </span>
         </div>
       </div>
-    </motion.li>
+    </li>
   );
 }
 
@@ -284,14 +283,7 @@ export function SiteFooter() {
         </div>
       </footer>
 
-      <a
-        href={`mailto:${socials.email}`}
-        className="fixed bottom-5 right-5 z-50 flex items-center gap-2 rounded-full bg-[#ea4c89] px-4 py-3 text-sm font-semibold text-white shadow-xl transition hover:bg-[#f082ac]"
-        aria-label="Chat with Nexa"
-      >
-        <MessageCircle className="h-5 w-5" />
-        <span className="hidden sm:inline">Chat with us</span>
-      </a>
+      <ChatLauncher />
     </>
   );
 }

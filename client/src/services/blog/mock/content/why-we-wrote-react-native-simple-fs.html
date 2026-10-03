@@ -1,0 +1,108 @@
+<p class="lead">Every utility app we ship eventually touches the disk. A scanner saves an image, a recorder writes audio, a calculator exports a PDF. For years each project carried its own helper file for this, copied from the last project and patched along the way. This is the story of replacing those copies with one small library, written as a walkthrough you can follow in your own codebase.</p>
+
+<div class="tldr">
+  <strong>What you will learn</strong>
+  <ul>
+    <li>How to audit what your file helpers are actually used for</li>
+    <li>The four calls that covered almost everything in our apps</li>
+    <li>What we deliberately left out, and why</li>
+  </ul>
+</div>
+
+<h2>The problem: copies that drift</h2>
+<p>Copy-paste helpers work until they don't. A bug fixed in one app stayed broken in two others. One helper trimmed trailing slashes, another did not. One wrote to the cache folder by default, another to documents. The code looked the same at a glance, which made the differences harder to spot.</p>
+
+<figure class="diagram">
+  <div class="compare">
+    <div class="before">
+      <h4>Before: a copy per app</h4>
+      <ol>
+        <li>Scanner app with its own helper, first version</li>
+        <li>Recorder app with its own helper, patched</li>
+        <li>Calculator app with its own helper, forked</li>
+      </ol>
+    </div>
+    <div class="after">
+      <h4>After: one shared library</h4>
+      <ol>
+        <li>Scanner app uses react-native-simple-fs</li>
+        <li>Recorder app uses react-native-simple-fs</li>
+        <li>Calculator app uses react-native-simple-fs</li>
+      </ol>
+    </div>
+  </div>
+  <figcaption>The same job, done three slightly different ways, became one dependency.</figcaption>
+</figure>
+
+<h2>Step by step</h2>
+<ol class="steps">
+  <li>
+    <h4>List every call site</h4>
+    <p>Search each app for its file helper and write down what every call does in plain words. Not what the helper <em>can</em> do, only what the app <em>uses</em> it for.</p>
+  </li>
+  <li>
+    <h4>Group by intent</h4>
+    <p>Our list collapsed into five intents: write a file, read it back, list a folder, delete something, and know where documents live versus cache.</p>
+  </li>
+  <li>
+    <h4>Design the smallest API that covers the list</h4>
+    <p>One function per intent, plain string paths, directory constants exposed up front.</p>
+  </li>
+  <li>
+    <h4>Migrate one app at a time</h4>
+    <p>Each migration was mostly deletion: the old helper went away and a handful of imports changed.</p>
+  </li>
+</ol>
+
+<h2>The API in practice</h2>
+<pre data-label="notes.ts"><code>import SimpleFS from "react-native-simple-fs";
+
+const path = `${SimpleFS.DocumentDir}/notes.txt`;
+
+await SimpleFS.writeFile(path, "Hello, world!");
+const content = await SimpleFS.readFile(path, "utf8");
+const files = await SimpleFS.listFiles(SimpleFS.DocumentDir);</code></pre>
+
+<div class="table-wrap">
+  <table>
+    <thead><tr><th>Call</th><th>What it is for</th></tr></thead>
+    <tbody>
+      <tr><td><code>DocumentDir</code></td><td>Where files the user cares about should live. Survives app updates.</td></tr>
+      <tr><td><code>writeFile</code></td><td>Write a string to a path. Paths are plain strings, easy to log.</td></tr>
+      <tr><td><code>readFile</code></td><td>Read it back with an explicit encoding, so nothing is guessed.</td></tr>
+      <tr><td><code>listFiles</code></td><td>See what is in a folder, for history screens and cleanup.</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<figure class="diagram">
+  <ol class="layers">
+    <li><div><strong>App screens</strong><span>Scanning, recording and export flows</span></div><span class="chips"><code>Scan</code><code>Record</code><code>Export</code></span></li>
+    <li class="accent"><div><strong>react-native-simple-fs</strong><span>One typed API with the same defaults in every app</span></div><span class="chips"><code>writeFile</code><code>readFile</code><code>listFiles</code></span></li>
+    <li><div><strong>Platform file APIs</strong><span>iOS and Android, reached through the native layer</span></div><span class="chips"><code>iOS</code><code>Android</code></span></li>
+    <li><div><strong>Device storage</strong><span>Sandboxed per app</span></div><span class="chips"><code>Documents</code><code>Cache</code></span></li>
+  </ol>
+  <figcaption>Where the library sits. App code never calls platform file APIs directly.</figcaption>
+</figure>
+
+<h2>What we left out</h2>
+<p>Streaming large files, watching folders and zip support all came up in the first week. They are useful, but they are also where file libraries become hard to reason about. Our rule: a feature gets in only if at least two of our own apps need it today.</p>
+
+<aside class="callout" data-tone="tip">
+  <strong>If you need more</strong>
+  <p>Nothing stops a heavier file-system package from living alongside this one. Use the small API for everyday reads and writes, and reach for the big one only where it earns its weight.</p>
+</aside>
+
+<h2>Testing on real phones</h2>
+<p>Simulators lie about file systems more than about almost anything else. Before each release we run a short manual pass on an older Android phone and a recent iPhone.</p>
+<ul class="checklist">
+  <li>Write and read back a file with non-ASCII characters<small>Encodings are where helpers usually break first.</small></li>
+  <li>Write into a folder that does not exist yet</li>
+  <li>List an empty folder and one with many files</li>
+  <li>Delete a file that is already gone<small>Should be a no-op, not a crash.</small></li>
+  <li>Kill the app mid-write and check nothing is left half written</li>
+</ul>
+
+<blockquote>If a helper needs a README longer than its source, it is probably doing too much.</blockquote>
+
+<p>The library is on npm and the source is public. If you find a gap, the issues page is the best place to tell us. If the honest answer is that your use case needs a larger library, we will say so.</p>

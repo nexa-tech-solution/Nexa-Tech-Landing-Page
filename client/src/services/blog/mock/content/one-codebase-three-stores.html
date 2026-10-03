@@ -1,0 +1,74 @@
+<p class="lead">Shipping one React Native app to two stores and a web build sounds efficient, and mostly it is. The code is shared. The release is not. Below is the checklist we run before every release, with the story behind each line one tap away.</p>
+
+<figure class="diagram">
+  <ol class="layers">
+    <li class="accent"><div><strong>Shared React Native code</strong><span>Screens, state and business logic</span></div></li>
+    <li><div><strong>Platform builds</strong><span>Native projects plus web fallbacks for native modules</span></div><span class="chips"><code>iOS</code><code>Android</code><code>Web</code></span></li>
+    <li><div><strong>Where it ships</strong><span>Three reviews, three sets of rules</span></div><span class="chips"><code>App Store</code><code>Google Play</code><code>Web hosting</code></span></li>
+  </ol>
+  <figcaption>One codebase fans out into three builds, each with its own review and its own way to fail.</figcaption>
+</figure>
+
+<h2>Before building</h2>
+<ul class="checklist">
+  <li>Bump version and build number in both native projects</li>
+  <li>Changelog covers every user-visible change since last release</li>
+  <li>Environment config points at production, not staging</li>
+  <li>Feature flags for unfinished work are off</li>
+</ul>
+<details>
+  <summary>Why the version bump is on the list</summary>
+  <p>It sounds trivial, and it is the item we have missed most often. One store rejects a duplicate build number outright; the other can accept it in ways that make the next upload confusing. Checking both projects every time is cheaper than finding out during review.</p>
+</details>
+<details>
+  <summary>Why feature flags get their own line</summary>
+  <p>Half-finished screens hidden behind a flag are harmless until the flag defaults the wrong way in a release build. A five-second check prevents a very public mistake.</p>
+</details>
+
+<h2>Before submitting</h2>
+<ul class="checklist">
+  <li>Install the release build on a real, older Android phone<small>Catches more problems than anything else on this list.</small></li>
+  <li>Install the release build on an iPhone, from a clean state</li>
+  <li>Run the main flow end to end without the debugger attached</li>
+  <li>Privacy labels and data safety forms still match what the app collects</li>
+  <li>Store screenshots regenerated if any visible screen changed</li>
+</ul>
+<details>
+  <summary>Why an older Android phone, specifically</summary>
+  <p>Animations that are smooth on a new phone stutter, memory runs out sooner, and slow storage reveals loading states you never saw during development. If the app feels good on a cheap phone, it feels good everywhere.</p>
+</details>
+<details>
+  <summary>Why "without the debugger"</summary>
+  <p>Debug builds are slower in some places and more forgiving in others. Release builds are what users get, so release builds are what we test.</p>
+</details>
+
+<blockquote>The simulator tells you the code works. A cheap phone tells you the app works.</blockquote>
+
+<h2>The web build</h2>
+<p>The web version shares most screens with the mobile app, but not the environment. Native modules have web fallbacks, and those fallbacks are easy to forget about until they break.</p>
+<ul class="checklist">
+  <li>Run the web build against production keys</li>
+  <li>Anything stored on device has a working web equivalent</li>
+  <li>Check a narrow mobile viewport as well as desktop</li>
+</ul>
+
+<h2>The whole release, in order</h2>
+<figure class="diagram">
+  <ol class="timeline">
+    <li><div><strong>Prepare</strong><span>Version, changelog, config, feature flags</span></div></li>
+    <li><div><strong>Build</strong><span>Scripted for both native platforms</span></div></li>
+    <li class="accent"><div><strong>Real-device pass</strong><span>An older Android phone and a clean iPhone install</span></div></li>
+    <li><div><strong>Submit</strong><span>App Store and Google Play review</span></div></li>
+    <li><div><strong>Web build</strong><span>Private window, narrow and wide viewports</span></div></li>
+    <li><div><strong>Watch</strong><span>Crash reports and reviews for the first days</span></div></li>
+  </ol>
+  <figcaption>The real-device pass is the step that catches the most.</figcaption>
+</figure>
+
+<h2>Why a list and not a script</h2>
+<p>Version bumps and builds run from scripts now. But half the list is judgement: does this screenshot still represent the app, does this changelog make sense to someone outside the team, does this animation feel slow on a cheap phone. A checklist keeps a person looking at those things.</p>
+
+<aside class="callout">
+  <strong>How the list grows</strong>
+  <p>It lives in the repository next to the code. When a release goes wrong, the fix is not finished until the list has a new line explaining how to catch it next time.</p>
+</aside>

@@ -1,0 +1,52 @@
+<p class="lead">People open a currency converter at the worst moments for connectivity: landing with roaming off, standing in a market with one bar of signal, splitting a bill in a basement restaurant. Smart Currency Converter was designed around that. This post is organised as the questions we asked ourselves while building it.</p>
+
+<h2>What happens when there is no network?</h2>
+<p>Everything still works. That was the starting assumption, not a fallback. The network is a bonus that keeps rates fresh; it is never required to show a number.</p>
+<figure class="diagram">
+  <ol class="layers">
+    <li><div><strong>Converter and bill-split screens</strong><span>What the traveller sees</span></div><span class="chips"><code>Convert</code><code>Split</code><code>History</code></span></li>
+    <li class="accent"><div><strong>Local conversion maths</strong><span>Runs on the device, no request needed</span></div><span class="chips"><code>convert</code><code>split</code><code>round</code></span></li>
+    <li><div><strong>Stored rates</strong><span>Saved together with the time they were fetched</span></div><span class="chips"><code>rates</code><code>updatedAt</code></span></li>
+    <li><div><strong>Network refresh</strong><span>Only when a connection is available</span></div></li>
+  </ol>
+  <figcaption>Conversion only ever reads local data. The network just keeps that data fresh.</figcaption>
+</figure>
+
+<h2>How do people know if a rate is too old?</h2>
+<p>Offline rates are only useful if you know their age. A rate from this morning is fine for a coffee; a rate from three weeks ago may not be fine for rent. The app always shows when rates were last updated, in plain words, next to the result.</p>
+<div class="table-wrap">
+  <table>
+    <thead><tr><th>Situation</th><th>What the app shows</th></tr></thead>
+    <tbody>
+      <tr><td><span class="dot" data-tone="good"></span>Online</td><td>Converts with fresh rates, quietly updates the stored copy</td></tr>
+      <tr><td><span class="dot" data-tone="warn"></span>Offline, recent rates</td><td>Converts normally, with "Updated this morning" style label</td></tr>
+      <tr><td><span class="dot" data-tone="bad"></span>Offline, old rates</td><td>Still converts, with the age made more prominent</td></tr>
+    </tbody>
+  </table>
+</div>
+<blockquote>The number matters, but so does how much you should trust it.</blockquote>
+
+<h2>Why does it feel instant even online?</h2>
+<p>Because conversion never waits on a request. Reading local rates and doing the maths on the device is faster than any round trip, so the online and offline experience feel the same.</p>
+
+<h2>How does splitting a bill work across currencies?</h2>
+<p>One person pays in the local currency; everyone else wants to know what they owe in theirs. The split screen takes a total, a number of people and a target currency.</p>
+<ol class="steps">
+  <li><h4>Enter the bill</h4><p>In the currency it was paid in.</p></li>
+  <li><h4>Choose people and target currency</h4><p>Defaults to your home currency.</p></li>
+  <li><h4>Read each share</h4><p>Rounded to amounts people can actually pay, with the total shown in both currencies so nobody has to trust the maths blindly.</p></li>
+</ol>
+
+<h2>What else did we decide?</h2>
+<details>
+  <summary>Why support so many currencies offline?</summary>
+  <p>Travellers rarely know in advance which currencies they will need. Refreshing all supported rates whenever there is a connection means the one you need is already there when there is not.</p>
+</details>
+<details>
+  <summary>Why keep history?</summary>
+  <p>Settling up after a trip happens days later. A short history of conversions and splits saves everyone reconstructing the numbers.</p>
+</details>
+<details>
+  <summary>What did we learn?</summary>
+  <p>None of this needed clever engineering. It needed us to design for a bad connection first and treat a good one as the exception.</p>
+</details>

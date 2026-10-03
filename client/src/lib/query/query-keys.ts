@@ -11,6 +11,11 @@ export const queryKeys = {
     lists: () => [...queryKeys.expenses.all, "list"] as const,
     list: (params: ExpenseListParams) => [...queryKeys.expenses.lists(), params] as const,
   },
+  blog: {
+    all: ["blog"] as const,
+    list: () => [...queryKeys.blog.all, "list"] as const,
+    detail: (slug: string) => [...queryKeys.blog.all, "detail", slug] as const,
+  },
   integrations: {
     all: ["integrations"] as const,
     list: () => [...queryKeys.integrations.all, "list"] as const,

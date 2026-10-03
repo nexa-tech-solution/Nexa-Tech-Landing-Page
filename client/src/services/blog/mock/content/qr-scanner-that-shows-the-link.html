@@ -1,0 +1,50 @@
+<p class="lead">Many scanners open a link the instant they read a QR code. It feels fast. It also means visiting a website without ever seeing its address, which is exactly what a fake sticker on a parking meter is counting on. ScanQR adds one step: a preview. This post explains what that preview shows and why.</p>
+
+<h2>Anatomy of a suspicious link</h2>
+<p>Here is a made-up address of the kind found on fake parking stickers. The only part that decides where you actually go is the highlighted one.</p>
+<div class="url-anatomy">
+  <span data-label="scheme">https://</span><span data-label="subdomain" data-above>pay.</span><span data-key data-label="real domain">citypark-0nline.com</span><span data-label="path">/meter/4471</span><span data-label="query">?ref=sticker</span>
+</div>
+<p>"pay" and "meter" make it look official, but the real domain is not the city's, and the zero in "0nline" is a classic lookalike trick. Shown full size, it is easy to spot. Hidden behind an instant redirect, nobody sees it at all.</p>
+
+<h2>Every scan passes through a preview</h2>
+<figure class="diagram">
+  <ol class="flow">
+    <li><strong>Scan</strong><span>QR code or barcode</span></li>
+    <li><strong>Classify</strong><span>Link, Wi-Fi, contact or text</span></li>
+    <li class="accent"><strong>Preview</strong><span>Real domain shown large</span></li>
+    <li><strong>Act</strong><span>Open, copy, connect or save</span></li>
+  </ol>
+  <figcaption>Nothing opens until the user decides.</figcaption>
+</figure>
+
+<h2>What the preview shows for each type</h2>
+<div class="table-wrap">
+  <table>
+    <thead><tr><th>Content</th><th>Preview shows</th><th>Main action</th></tr></thead>
+    <tbody>
+      <tr><td>Web link</td><td>Real domain, large, separate from the rest</td><td>Open in browser</td></tr>
+      <tr><td>Wi-Fi</td><td>Network name and security type</td><td>Connect</td></tr>
+      <tr><td>Contact</td><td>Name, phone, email</td><td>Save to contacts</td></tr>
+      <tr><td>Plain text</td><td>The text itself</td><td>Copy</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<h2>Signals we point out</h2>
+<ul class="checklist">
+  <li>Shortened links<small>They hide where they really go.</small></li>
+  <li>Plain http without encryption</li>
+  <li>Domains that look like a well-known name but are spelled differently</li>
+  <li>Very long addresses where the real domain is pushed out of view</li>
+</ul>
+
+<aside class="callout" data-tone="warn">
+  <strong>A preview is not a guarantee</strong>
+  <p>None of this proves a link is safe. It gives people the information to make their own decision, which is more than an instant redirect does.</p>
+</aside>
+
+<blockquote>Half a second of friction is a fair price for knowing where you are going.</blockquote>
+
+<h2>Beyond scanning</h2>
+<p>Scans are saved to a searchable history on the device, so the menu from lunch or the event link from a poster is still there tomorrow. The same app generates codes for Wi-Fi networks and contact cards, which turned out to be popular with small shops and cafes.</p>

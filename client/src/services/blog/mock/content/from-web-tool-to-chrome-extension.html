@@ -1,0 +1,67 @@
+<p class="lead">People kept telling us they had the Time Converter site pinned in a tab all day. That is usually a sign a tool wants to live closer to where the work happens. So one weekend we tried packaging it as a Chrome extension. This post is the build log, roughly as it happened.</p>
+
+<h2>The weekend, as a timeline</h2>
+<figure class="diagram">
+  <ol class="timeline">
+    <li><div><time>Saturday, morning</time><strong>Decide what the popup is for</strong><span>Look at saved zones, check one meeting time. Nothing else.</span></div></li>
+    <li><div><time>Saturday, afternoon</time><strong>Move the core into its own module</strong><span>The time-zone maths already had no DOM access. It moved with a few import changes.</span></div></li>
+    <li class="accent"><div><time>Saturday, evening</time><strong>Swap localStorage for extension storage</strong><span>The only genuinely new code in the whole project.</span></div></li>
+    <li><div><time>Sunday, morning</time><strong>Cut the UI down to popup size</strong><span>Search behind one input, saved zones first, timeline second.</span></div></li>
+    <li><div><time>Sunday, afternoon</time><strong>Store listing and screenshots</strong><span>The part that took longest, and the part we should have done first.</span></div></li>
+  </ol>
+  <figcaption>The build, in order. The highlighted step is the only code that had to be written from scratch.</figcaption>
+</figure>
+
+<h2>A popup is not a page</h2>
+<p>The web version has room for a city search, a timeline across the day, saved zones and settings. A popup has roughly the width of a phone held sideways, and it closes the moment you click elsewhere. That changes the job completely.</p>
+<div class="table-wrap">
+  <table>
+    <thead><tr><th>Feature</th><th>Website</th><th>Extension popup</th></tr></thead>
+    <tbody>
+      <tr><td>Saved zones</td><td>Sidebar list</td><td>First thing you see</td></tr>
+      <tr><td>Day timeline</td><td>Full width</td><td>Compact, below the zones</td></tr>
+      <tr><td>City search</td><td>Dedicated panel</td><td>One input at the top</td></tr>
+      <tr><td>Settings page</td><td>Yes</td><td>Removed, only a 12/24h toggle</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<h2>One core, two shells</h2>
+<figure class="diagram">
+  <ol class="layers">
+    <li><div><strong>Two shells</strong><span>Different UI and storage, same behaviour</span></div><span class="chips"><code>Website · localStorage</code><code>Popup · storage.sync</code></span></li>
+    <li class="accent"><div><strong>Time-zone core</strong><span>Plain TypeScript, imported by both</span></div><span class="chips"><code>conversion</code><code>timeline</code><code>formatting</code></span></li>
+    <li><div><strong>Browser time-zone data</strong><span>Comes from the platform, not bundled</span></div><span class="chips"><code>Intl</code></span></li>
+  </ol>
+  <figcaption>A fix in the core ships to both products.</figcaption>
+</figure>
+
+<h2>Storage that follows you</h2>
+<p>The website keeps saved zones in localStorage, which belongs to one browser profile on one machine. The extension uses sync storage instead, so zones follow the user to every computer where they are signed in. Listening for changes means an open popup updates without a reload.</p>
+<pre data-label="popup.ts"><code>const saved = await chrome.storage.sync.get("zones");
+render(saved.zones ?? DEFAULT_ZONES);
+
+chrome.storage.onChanged.addListener((changes) =&gt; {
+  if (changes.zones) render(changes.zones.newValue);
+});</code></pre>
+
+<figure class="diagram">
+  <ol class="flow">
+    <li><strong>Add a city</strong><span>On your laptop</span></li>
+    <li class="accent"><strong>storage.sync</strong><span>Chrome syncs the change</span></li>
+    <li><strong>onChanged fires</strong><span>On your other machine</span></li>
+    <li><strong>Popup re-renders</strong><span>No reload needed</span></li>
+  </ol>
+  <figcaption>How a saved zone travels between machines.</figcaption>
+</figure>
+
+<h2>Permissions we did not ask for</h2>
+<p>We requested storage and nothing else. The extension does not read the pages you visit or inject anything into them. Fewer permissions mean a shorter install prompt, an easier review and fewer reasons to hesitate.</p>
+<blockquote>Every permission is a question the user has to answer. Ask as few as you can.</blockquote>
+
+<h2>What we would do differently</h2>
+<ul class="checklist">
+  <li>Write the store listing before writing code<small>It forces the question of what the product is for.</small></li>
+  <li>Take screenshots at the required sizes from day one</li>
+  <li>Draft the privacy statement alongside the permission list</li>
+</ul>

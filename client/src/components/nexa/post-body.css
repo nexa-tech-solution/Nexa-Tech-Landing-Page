@@ -1,0 +1,733 @@
+/*
+ * Styles for CMS-authored post HTML. Everything is scoped to `.post-body`.
+ * Editors can use plain tags (h2, h3, p, ul, ol, blockquote, pre, table,
+ * details, hr, figure/img) plus the component classes documented below.
+ */
+
+.post-body {
+  --ink: #0d0c22;
+  --text: #3d3d4e;
+  --muted: #6e6d7a;
+  --faint: #9e9ea7;
+  --line: #ececee;
+  --line-strong: #dbdbde;
+  --cream: #f8f7f4;
+  --gray: #f3f3f4;
+  --pink: #ea4c89;
+  --pink-soft: #f082ac;
+  --pink-tint: #fde2ee;
+
+  counter-reset: fig;
+  color: var(--text);
+  font-size: 17px;
+  line-height: 1.8;
+}
+
+.post-body > * + * { margin-top: 1.5rem; }
+
+/* ---------- Typography ---------- */
+
+.post-body h2,
+.post-body h3,
+.post-body h4 {
+  color: var(--ink);
+  font-family: "Mona Sans", "Inter", sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+.post-body h2 {
+  margin-top: 3.5rem;
+  font-size: 1.65rem;
+  line-height: 1.2;
+  scroll-margin-top: 96px;
+}
+.post-body h3 { margin-top: 2.25rem; font-size: 1.2rem; line-height: 1.3; }
+.post-body h4 { font-size: 1rem; line-height: 1.4; }
+
+.post-body p.lead {
+  color: var(--ink);
+  font-size: 1.25rem;
+  line-height: 1.7;
+}
+
+.post-body a {
+  color: var(--ink);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: var(--pink-soft);
+  text-underline-offset: 3px;
+}
+
+.post-body strong { color: var(--ink); font-weight: 600; }
+
+.post-body ul:not([class]),
+.post-body ol:not([class]) {
+  display: grid;
+  gap: 0.6rem;
+  padding-left: 1.25rem;
+}
+.post-body ul:not([class]) { list-style: disc; }
+.post-body ol:not([class]) { list-style: decimal; }
+.post-body ul:not([class]) li::marker,
+.post-body ol:not([class]) li::marker { color: var(--pink); }
+
+.post-body blockquote {
+  margin-block: 2.5rem;
+  border-left: 3px solid var(--pink);
+  padding-left: 1.5rem;
+  color: var(--ink);
+  font-family: "Mona Sans", "Inter", sans-serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.35;
+}
+
+.post-body hr {
+  margin-block: 3rem;
+  border: 0;
+  border-top: 1px solid var(--line);
+}
+
+.post-body code {
+  border-radius: 6px;
+  background: var(--gray);
+  padding: 0.1em 0.35em;
+  color: var(--ink);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.85em;
+}
+.post-body pre {
+  overflow-x: auto;
+  border-radius: 14px;
+  background: var(--ink);
+  padding: 1.25rem;
+  color: #e7e7e9;
+  font-size: 13.5px;
+  line-height: 1.6;
+}
+.post-body pre code { background: none; padding: 0; color: inherit; font-size: inherit; }
+.post-body pre[data-label]::before {
+  content: attr(data-label);
+  display: block;
+  margin-bottom: 0.75rem;
+  color: var(--pink-soft);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 11px;
+}
+
+/* ---------- Tables ---------- */
+
+.post-body .table-wrap { overflow-x: auto; }
+.post-body table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 15px;
+  line-height: 1.5;
+}
+.post-body th {
+  border-bottom: 1px solid var(--line-strong);
+  padding: 0.6rem 0.75rem 0.6rem 0;
+  color: var(--faint);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-align: left;
+  text-transform: uppercase;
+}
+.post-body td {
+  border-bottom: 1px solid var(--line);
+  padding: 0.75rem 0.75rem 0.75rem 0;
+  vertical-align: top;
+}
+.post-body td:first-child { color: var(--ink); font-weight: 600; }
+.post-body td.num, .post-body th.num { text-align: right; font-variant-numeric: tabular-nums; }
+
+/* Status dots for tables: <span class="dot" data-tone="good|warn|bad"></span> */
+.post-body .dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin-right: 0.5rem;
+  border-radius: 9999px;
+  background: var(--faint);
+  vertical-align: middle;
+}
+.post-body .dot[data-tone="good"] { background: #22a06b; }
+.post-body .dot[data-tone="warn"] { background: #e2a03f; }
+.post-body .dot[data-tone="bad"] { background: var(--pink); }
+
+/* ---------- Boxes ---------- */
+
+/* <div class="tldr"><strong>TL;DR</strong><p>…</p></div> */
+.post-body .tldr {
+  border-radius: 16px;
+  background: var(--cream);
+  padding: 1.25rem 1.5rem;
+  font-size: 16px;
+}
+.post-body .tldr > strong:first-child {
+  display: block;
+  margin-bottom: 0.25rem;
+  color: var(--pink);
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.post-body .tldr ul { margin-top: 0.5rem; }
+
+/* <aside class="callout" data-tone="tip|warn"><strong>Title</strong><p>…</p></aside>
+   A margin note, magazine style: ink rule on top, hairline below, the label
+   ("Note" / "Tip" / "Heads up") set in a narrow column on the left. */
+.post-body .callout {
+  display: grid;
+  column-gap: 1.5rem;
+  border-top: 1px solid var(--ink);
+  border-bottom: 1px solid var(--line);
+  padding: 0.9rem 0 1.1rem;
+  font-size: 15.5px;
+  line-height: 1.7;
+}
+.post-body .callout::before {
+  content: "Note";
+  margin-bottom: 0.35rem;
+  color: var(--muted);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  line-height: 1.9;
+  text-transform: uppercase;
+}
+.post-body .callout[data-tone="tip"]::before { content: "Tip"; color: #1b7f55; }
+.post-body .callout[data-tone="warn"]::before { content: "Heads up"; color: var(--pink); }
+@media (min-width: 640px) {
+  .post-body .callout { grid-template-columns: 7rem minmax(0, 1fr); }
+  .post-body .callout::before { grid-row: 1 / span 9; margin-bottom: 0; }
+  .post-body .callout > * { grid-column: 2; }
+}
+.post-body .callout > strong:first-child {
+  display: block;
+  color: var(--ink);
+  font-family: "Mona Sans", "Inter", sans-serif;
+  font-size: 1.05rem;
+  letter-spacing: -0.01em;
+}
+.post-body .callout > p { margin-top: 0.2rem; }
+
+/* <div class="cards"><div class="card"><h4>…</h4><p>…</p></div></div> */
+.post-body .cards { display: grid; gap: 0.75rem; }
+@media (min-width: 640px) { .post-body .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.post-body .cards[data-cols="3"] { grid-template-columns: 1fr; }
+@media (min-width: 768px) { .post-body .cards[data-cols="3"] { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.post-body .card {
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 1.1rem 1.2rem;
+  font-size: 15px;
+  line-height: 1.6;
+}
+.post-body .card h4 { margin-bottom: 0.35rem; }
+.post-body .card .kicker-num {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--pink);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 12px;
+}
+
+/* <div class="do-dont"><div class="do"><h4>Do</h4><ul>…</ul></div><div class="dont">…</div></div> */
+.post-body .do-dont { display: grid; gap: 0.75rem; }
+@media (min-width: 640px) { .post-body .do-dont { grid-template-columns: 1fr 1fr; } }
+.post-body .do-dont > div { border-radius: 14px; padding: 1.1rem 1.25rem; font-size: 15px; line-height: 1.6; }
+.post-body .do-dont .do { background: #effaf4; }
+.post-body .do-dont .dont { background: #fff3f7; }
+.post-body .do-dont h4 { margin-bottom: 0.5rem; }
+.post-body .do-dont .do h4 { color: #1b7f55; }
+.post-body .do-dont .dont h4 { color: #c2386f; }
+.post-body .do-dont ul { display: grid; gap: 0.35rem; padding-left: 1.1rem; list-style: disc; }
+
+/* <dl class="anatomy"><dt>Label</dt><dd>Explanation</dd>…</dl> */
+.post-body .anatomy {
+  display: grid;
+  grid-template-columns: 1fr;
+  border-top: 1px solid var(--line);
+  font-size: 15px;
+  line-height: 1.6;
+}
+@media (min-width: 640px) { .post-body .anatomy { grid-template-columns: 180px 1fr; } }
+.post-body .anatomy dt {
+  padding-top: 0.9rem;
+  color: var(--ink);
+  font-weight: 600;
+}
+.post-body .anatomy dd {
+  border-bottom: 1px solid var(--line);
+  padding: 0.25rem 0 0.9rem;
+}
+@media (min-width: 640px) {
+  .post-body .anatomy dt { border-bottom: 1px solid var(--line); padding-bottom: 0.9rem; }
+  .post-body .anatomy dd { padding-top: 0.9rem; }
+}
+
+/* <ol class="steps"><li><h4>…</h4><p>…</p></li></ol> */
+.post-body .steps { counter-reset: step; display: grid; gap: 1.5rem; }
+.post-body .steps > li {
+  counter-increment: step;
+  position: relative;
+  padding-left: 3rem;
+}
+.post-body .steps > li::before {
+  content: counter(step);
+  position: absolute;
+  top: 0.1rem;
+  left: 0;
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 9999px;
+  background: var(--ink);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+}
+.post-body .steps > li > * + * { margin-top: 0.5rem; }
+
+/* <ul class="checklist"><li>…</li></ul> */
+.post-body .checklist { display: grid; gap: 0.5rem; }
+.post-body .checklist > li {
+  position: relative;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 0.7rem 1rem 0.7rem 2.75rem;
+  font-size: 15px;
+  line-height: 1.55;
+}
+.post-body .checklist > li::before {
+  content: "";
+  position: absolute;
+  top: 0.85rem;
+  left: 1rem;
+  width: 1rem;
+  height: 1rem;
+  border: 1.5px solid var(--line-strong);
+  border-radius: 5px;
+}
+.post-body .checklist > li small { display: block; color: var(--muted); font-size: 13px; }
+
+/* <details><summary>Question</summary><p>Answer</p></details> */
+.post-body details {
+  border-bottom: 1px solid var(--line);
+  padding-block: 0.9rem;
+}
+.post-body details + details { margin-top: 0; }
+.post-body summary {
+  display: flex;
+  cursor: pointer;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  color: var(--ink);
+  font-weight: 600;
+  list-style: none;
+}
+.post-body summary::-webkit-details-marker { display: none; }
+.post-body summary::after {
+  content: "+";
+  color: var(--muted);
+  font-size: 1.25rem;
+  font-weight: 400;
+  transition: transform 180ms ease;
+}
+.post-body details[open] summary::after { transform: rotate(45deg); }
+.post-body details > :not(summary) { margin-top: 0.5rem; font-size: 16px; }
+
+/* Worked maths: <div class="formula">M = P · r(1+r)ⁿ / ((1+r)ⁿ − 1)</div> */
+.post-body .formula {
+  overflow-x: auto;
+  border: 1px dashed var(--line-strong);
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
+  color: var(--ink);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 15px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* Big numbers: <div class="stats"><div><b>…</b><span>…</span></div></div> */
+.post-body .stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.75rem; }
+@media (min-width: 640px) { .post-body .stats { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.post-body .stats > div { border-radius: 14px; background: var(--cream); padding: 1rem 1.1rem; }
+.post-body .stats b {
+  display: block;
+  color: var(--ink);
+  font-family: "Mona Sans", "Inter", sans-serif;
+  font-size: 1.6rem;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+}
+.post-body .stats span { color: var(--muted); font-size: 13px; line-height: 1.4; }
+
+/* ---------- Chat transcript ---------- */
+/* <div class="chat"><p class="chat-meta">…</p><p class="msg them">…</p><p class="msg me">…</p><p class="msg typing"></p></div> */
+.post-body .chat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-inline: auto;
+  max-width: 380px;
+  border: 3px solid var(--ink);
+  border-radius: 32px;
+  background: #121124;
+  padding: 1.5rem 1rem;
+  font-size: 15px;
+  line-height: 1.45;
+}
+.post-body .chat > * + * { margin-top: 0; }
+.post-body .chat .chat-meta {
+  align-self: center;
+  margin-block: 0.4rem;
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.post-body .msg { max-width: 78%; border-radius: 18px; padding: 0.55rem 0.85rem; }
+.post-body .msg.them { align-self: flex-start; border-bottom-left-radius: 6px; background: #2a2940; color: #f3f3f4; }
+.post-body .msg.me { align-self: flex-end; border-bottom-right-radius: 6px; background: var(--pink); color: #fff; }
+.post-body .msg.typing { align-self: flex-start; background: #2a2940; color: rgba(255, 255, 255, 0.6); }
+.post-body .msg.typing::after { content: "•••"; letter-spacing: 0.2em; }
+.post-body .msg[data-delay]::before {
+  content: attr(data-delay);
+  display: block;
+  margin-bottom: 0.15rem;
+  color: rgba(255, 255, 255, 0.45);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 10px;
+}
+
+/* ---------- URL anatomy ---------- */
+/* <div class="url-anatomy"><span data-label="scheme">https://</span>…</div>
+   data-key highlights the part that matters; data-above moves a label above the line. */
+.post-body .url-anatomy {
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 2.25rem;
+  overflow-x: auto;
+  border-radius: 14px;
+  background: var(--cream);
+  padding: 2.5rem 1.25rem 2.5rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 15px;
+}
+.post-body .url-anatomy span {
+  position: relative;
+  border-bottom: 2px solid var(--line-strong);
+  padding-bottom: 0.2rem;
+  color: var(--muted);
+}
+.post-body .url-anatomy span[data-key] { border-bottom-color: var(--pink); color: var(--ink); font-weight: 600; }
+.post-body .url-anatomy span::after {
+  content: attr(data-label);
+  position: absolute;
+  top: calc(100% + 0.35rem);
+  left: 0;
+  color: var(--faint);
+  font-family: "Inter", sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+.post-body .url-anatomy span[data-key]::after { color: var(--pink); }
+/* Short parts can put their label above to avoid colliding with a neighbour. */
+.post-body .url-anatomy span[data-above]::after { top: auto; bottom: calc(100% + 0.35rem); }
+
+/* ---------- Diagrams ---------- */
+/* <figure class="diagram">…one of the blocks below…<figcaption>…</figcaption></figure> */
+
+.post-body figure.diagram { margin-block: 3rem; }
+@media (min-width: 768px) { .post-body figure.diagram { margin-inline: -4rem; } }
+.post-body figure.diagram > :not(figcaption) {
+  border-radius: 18px;
+  background: var(--cream);
+  padding: 1.25rem;
+}
+@media (min-width: 640px) { .post-body figure.diagram > :not(figcaption) { padding: 2rem; } }
+.post-body figure.diagram figcaption,
+.post-body figure.photo figcaption {
+  margin-top: 0.75rem;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.6;
+}
+@media (min-width: 768px) { .post-body figure.diagram figcaption { padding-inline: 4rem; } }
+.post-body figure.diagram figcaption::before {
+  counter-increment: fig;
+  content: "Fig. " counter(fig);
+  margin-right: 0.6rem;
+  color: var(--ink);
+  font-weight: 600;
+}
+
+/* Shared node look for flow, layers, timeline, storyboard. */
+.post-body .flow > li,
+.post-body .layers > li,
+.post-body .timeline > li > div {
+  border: 1px solid #e7e7e9;
+  border-radius: 12px;
+  background: #fff;
+  padding: 0.9rem 1rem;
+}
+.post-body .flow > li.accent,
+.post-body .layers > li.accent,
+.post-body .timeline > li.accent > div {
+  border-color: var(--ink);
+  background: var(--ink);
+  color: rgba(255, 255, 255, 0.65);
+}
+.post-body .flow strong,
+.post-body .layers strong,
+.post-body .timeline strong {
+  display: block;
+  font-size: 15px;
+  line-height: 1.35;
+}
+.post-body .accent strong { color: #fff; }
+.post-body .flow span,
+.post-body .layers > li > span:not(.chips),
+.post-body .timeline span {
+  display: block;
+  margin-top: 0.2rem;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.45;
+}
+.post-body .accent span { color: rgba(255, 255, 255, 0.6) !important; }
+
+/* Flow: <ol class="flow"><li class="accent?"><strong/><span/></li></ol> */
+.post-body .flow { counter-reset: flow; display: grid; gap: 1.5rem; }
+.post-body .flow > li { counter-increment: flow; position: relative; }
+.post-body .flow > li::before {
+  content: "0" counter(flow);
+  display: block;
+  margin-bottom: 0.2rem;
+  color: var(--pink);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 11px;
+}
+.post-body .flow > li.accent::before { color: var(--pink-soft); }
+.post-body .flow > li + li::after {
+  content: "↓";
+  position: absolute;
+  top: -1.4rem;
+  left: 50%;
+  color: #c4c4c8;
+  transform: translateX(-50%);
+}
+@media (min-width: 768px) {
+  .post-body .flow { grid-auto-columns: minmax(0, 1fr); grid-auto-flow: column; }
+  .post-body .flow > li + li::after { content: "→"; top: 50%; left: -1.1rem; transform: translateY(-50%); }
+}
+
+/* Layers: <ol class="layers"><li><div><strong/><span/></div><span class="chips"><code/>…</span></li></ol> */
+.post-body .layers { display: grid; gap: 1.5rem; }
+.post-body .layers > li { position: relative; }
+.post-body .layers > li + li::before {
+  content: "↓";
+  position: absolute;
+  top: -1.45rem;
+  left: 50%;
+  color: #c4c4c8;
+  transform: translateX(-50%);
+}
+@media (min-width: 640px) {
+  .post-body .layers > li { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; }
+}
+.post-body .chips { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.6rem; }
+@media (min-width: 640px) { .post-body .chips { flex-shrink: 0; justify-content: flex-end; margin-top: 0; } }
+.post-body .chips code { background: var(--gray); font-size: 12px; }
+.post-body .accent .chips code { background: rgba(255, 255, 255, 0.1); color: rgba(255, 255, 255, 0.9); }
+
+/* Compare: <div class="compare"><div class="before"><h4/><ol/></div><div class="after">…</div></div> */
+.post-body figure .compare { display: grid; gap: 0.75rem; }
+@media (min-width: 640px) { .post-body figure .compare { grid-template-columns: 1fr 1fr; } }
+.post-body .compare > div { border-radius: 12px; padding: 1rem; }
+.post-body .compare .before { border: 1px dashed var(--line-strong); }
+.post-body .compare .after { border: 1px solid rgba(234, 76, 137, 0.4); background: #fff; }
+.post-body .compare h4 {
+  color: var(--faint);
+  font-family: "Inter", sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.post-body .compare .after h4 { color: var(--pink); }
+.post-body .compare ol { counter-reset: row; display: grid; gap: 0.35rem; margin-top: 0.75rem; }
+.post-body .compare li {
+  counter-increment: row;
+  display: flex;
+  gap: 0.6rem;
+  border-radius: 8px;
+  padding: 0.45rem 0.7rem;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.45;
+}
+.post-body .compare li::before {
+  content: counter(row);
+  color: var(--faint);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 11px;
+  line-height: 1.9;
+}
+.post-body .compare .after li { background: var(--cream); color: var(--ink); }
+
+/* Timeline: <ol class="timeline"><li class="accent?"><div><strong/><span/></div></li></ol> */
+.post-body .timeline { counter-reset: tl; position: relative; display: grid; gap: 0.75rem; padding-left: 2.5rem; }
+.post-body .timeline::before {
+  content: "";
+  position: absolute;
+  top: 1rem;
+  bottom: 1rem;
+  left: 0.85rem;
+  width: 1px;
+  background: var(--line-strong);
+}
+.post-body .timeline > li { counter-increment: tl; position: relative; }
+.post-body .timeline > li::before {
+  content: counter(tl);
+  position: absolute;
+  top: 0.8rem;
+  left: -2.5rem;
+  display: grid;
+  place-items: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  border: 1px solid var(--line-strong);
+  border-radius: 9999px;
+  background: #fff;
+  color: var(--muted);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 11px;
+}
+.post-body .timeline > li.accent::before { border-color: var(--pink); background: var(--pink); color: #fff; }
+.post-body .timeline time {
+  display: block;
+  margin-bottom: 0.15rem;
+  color: var(--pink);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 11px;
+}
+
+/* Storyboard: <ol class="storyboard"><li class="accent?"><strong/><span/></li></ol> */
+.post-body .storyboard {
+  counter-reset: frame;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(108px, 1fr));
+  gap: 0.75rem;
+  overflow-x: auto;
+}
+.post-body .storyboard > li { counter-increment: frame; }
+.post-body .storyboard > li strong {
+  display: flex;
+  aspect-ratio: 9 / 16;
+  flex-direction: column;
+  justify-content: space-between;
+  border: 1px solid #e7e7e9;
+  border-radius: 10px;
+  background:
+    linear-gradient(var(--line-strong), var(--line-strong)) center 30% / 70% 6px no-repeat,
+    linear-gradient(var(--line), var(--line)) center 36% / 45% 6px no-repeat,
+    #fff;
+  padding: 0.6rem;
+  color: var(--ink);
+  font-size: 13px;
+  line-height: 1.2;
+}
+.post-body .storyboard > li strong::before {
+  content: "0" counter(frame);
+  color: var(--pink);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 11px;
+  font-weight: 400;
+}
+.post-body .storyboard > li.accent strong {
+  border-color: var(--ink);
+  background:
+    linear-gradient(rgba(255,255,255,.7), rgba(255,255,255,.7)) center 30% / 70% 6px no-repeat,
+    linear-gradient(var(--pink), var(--pink)) center 62% / 40% 34% no-repeat,
+    var(--ink);
+  color: #fff;
+}
+.post-body .storyboard > li.accent strong::before { color: var(--pink-soft); }
+.post-body .storyboard > li span { display: block; margin-top: 0.5rem; color: var(--muted); font-size: 12px; line-height: 1.35; }
+
+/* Phones: <div class="phones"><div class="phone" data-title="…"><span class="ctl" data-at="tl|tc|tr|bl|bc|br">…</span></div></div> */
+.post-body figure .phones { display: flex; flex-wrap: wrap; justify-content: center; gap: 2.5rem; }
+.post-body .phone {
+  position: relative;
+  width: 160px;
+  aspect-ratio: 9 / 19;
+  margin-top: 1.75rem;
+  border: 3px solid var(--ink);
+  border-radius: 26px;
+  background:
+    linear-gradient(to top, rgba(234, 76, 137, 0.2) 40%, transparent 40%),
+    #3d3d4e;
+}
+.post-body .phone::before {
+  content: attr(data-title);
+  position: absolute;
+  top: -1.75rem;
+  left: 50%;
+  color: var(--faint);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  transform: translateX(-50%);
+}
+.post-body .phone::after {
+  content: "Thumb reach";
+  position: absolute;
+  right: 0.5rem;
+  bottom: calc(40% - 1.1rem);
+  border-top: 1px dashed var(--pink-soft);
+  color: var(--pink-soft);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.post-body .ctl {
+  position: absolute;
+  border-radius: 9999px;
+  background: #fff;
+  padding: 0.2rem 0.5rem;
+  color: var(--ink);
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1.4;
+  white-space: nowrap;
+}
+.post-body .ctl[data-at="tl"] { top: 2.2rem; left: 0.6rem; }
+.post-body .ctl[data-at="tr"] { top: 2.2rem; right: 0.6rem; }
+.post-body .ctl[data-at="tc"] { top: 2.2rem; left: 50%; transform: translateX(-50%); }
+.post-body .ctl[data-at="bl"] { bottom: 4.5rem; left: 0.6rem; }
+.post-body .ctl[data-at="br"] { bottom: 4.5rem; right: 0.6rem; }
+.post-body .ctl[data-at="bc"] { bottom: 1rem; left: 50%; transform: translateX(-50%); }
+.post-body .ctl.round {
+  width: 2.6rem;
+  height: 2.6rem;
+  border: 3px solid #fff;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 0;
+  font-size: 0;
+}
+.post-body .ctl.hint { background: none; color: rgba(255, 255, 255, 0.7); font-weight: 500; }
+
+/* Plain image with caption: <figure class="photo"><img/><figcaption/></figure> */
+.post-body figure.photo img { width: 100%; border-radius: 16px; }
