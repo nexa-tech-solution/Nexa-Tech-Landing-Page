@@ -1,5 +1,5 @@
 import { useState, type FormEvent } from "react";
-import { Loader2, Lock } from "lucide-react";
+import { Eye, EyeOff, Loader2, Lock } from "lucide-react";
 import { API_ERROR_CODES, type ApiError } from "@/lib/http";
 import { useLogin } from "@/services/auth";
 
@@ -26,6 +26,7 @@ function loginErrorMessage(error: ApiError) {
 export function LoginScreen() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const login = useLogin();
 
   const submit = (e: FormEvent) => {
@@ -48,7 +49,26 @@ export function LoginScreen() {
         <label className="mb-1 block text-xs font-medium text-gray-500">Email</label>
         <input type="email" autoComplete="username" value={email} onChange={(e) => setEmail(e.target.value)} className={inputClass} disabled={login.isPending} required />
         <label className="mb-1 block text-xs font-medium text-gray-500">Mật khẩu</label>
-        <input type="password" autoComplete="current-password" value={password} onChange={(e) => setPassword(e.target.value)} className={inputClass} disabled={login.isPending} required />
+        <div className="relative">
+          <input
+            type={showPassword ? "text" : "password"}
+            autoComplete="current-password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className={`${inputClass} pr-10`}
+            disabled={login.isPending}
+            required
+          />
+          <button
+            type="button"
+            onClick={() => setShowPassword((v) => !v)}
+            aria-label={showPassword ? "Ẩn mật khẩu" : "Hiện mật khẩu"}
+            aria-pressed={showPassword}
+            className="absolute right-1.5 top-[5px] grid h-8 w-8 place-items-center rounded-md text-gray-400 transition hover:bg-gray-100 hover:text-gray-600"
+          >
+            {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
+          </button>
+        </div>
         {login.error && (
           <p role="alert" className="mb-4 text-sm text-red-600">
             {loginErrorMessage(login.error)}
