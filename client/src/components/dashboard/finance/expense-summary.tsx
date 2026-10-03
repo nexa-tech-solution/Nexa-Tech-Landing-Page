@@ -1,8 +1,8 @@
 import { useMemo } from "react";
-import { EXPENSE_CATEGORIES, STORE_FEE, costsByCategory, expandExpenses, type Expense, type ExpenseCategory } from "./expenses";
-import { percent, usd } from "./format";
-import { MiniStat, Panel } from "./ui";
-import type { DateRange } from "./types";
+import { EXPENSE_CATEGORIES, STORE_FEE, costsByCategory, expandExpenses, type Expense, type ExpenseCategory } from "@/components/dashboard/finance/expenses";
+import { percent, usd } from "@/components/dashboard/lib/format";
+import { MiniStat, Panel } from "@/components/dashboard/ui";
+import type { DateRange } from "@/components/dashboard/lib/types";
 
 type Props = {
   range: DateRange;

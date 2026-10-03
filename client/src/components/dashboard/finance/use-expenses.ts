@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { SEED_EXPENSES, type Expense } from "./expenses";
+import { SEED_EXPENSES, type Expense } from "@/components/dashboard/finance/expenses";
 
 // TODO: Persist on a backend once real auth exists; localStorage is per-browser only.
 const STORAGE_KEY = "nexa-dashboard-expenses";

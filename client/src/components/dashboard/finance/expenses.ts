@@ -1,5 +1,5 @@
-import { addMonths, minISO } from "./dates";
-import type { DateRange } from "./types";
+import { addMonths, minISO } from "@/components/dashboard/lib/dates";
+import type { DateRange } from "@/components/dashboard/lib/types";
 
 export type ExpenseCategory = "marketing" | "server" | "tools" | "account" | "salary" | "other";
 export type Recurrence = "once" | "monthly" | "yearly";

@@ -1,8 +1,8 @@
 import { Apple, CalendarDays, Globe2, Play } from "lucide-react";
-import { COUNTRIES } from "./constants";
-import { PRESETS, presetRange, toISO, type PresetKey } from "./dates";
-import { Segmented } from "./ui";
-import type { Filters } from "./types";
+import { COUNTRIES } from "@/components/dashboard/lib/constants";
+import { PRESETS, presetRange, toISO, type PresetKey } from "@/components/dashboard/lib/dates";
+import { Segmented } from "@/components/dashboard/ui";
+import type { Filters } from "@/components/dashboard/lib/types";
 
 type Props = {
   filters: Filters;

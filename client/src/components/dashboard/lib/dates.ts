@@ -1,4 +1,4 @@
-import type { DateRange } from "./types";
+import type { DateRange } from "@/components/dashboard/lib/types";
 
 const DAY = 86_400_000;
 const pad = (n: number) => String(n).padStart(2, "0");

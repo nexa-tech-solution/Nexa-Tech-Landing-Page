@@ -1,9 +1,9 @@
 import { useMemo } from "react";
 import { projects } from "@/components/nexa/data";
-import { toISO } from "./dates";
-import { EXPENSE_CATEGORIES, STORE_FEE, costsByCategory, expandExpenses, type Expense, type ExpenseCategory } from "./expenses";
-import { getSeries } from "./mock-data";
-import type { DateRange } from "./types";
+import { toISO } from "@/components/dashboard/lib/dates";
+import { EXPENSE_CATEGORIES, STORE_FEE, costsByCategory, expandExpenses, type Expense, type ExpenseCategory } from "@/components/dashboard/finance/expenses";
+import { getSeries } from "@/components/dashboard/data/mock-data";
+import type { DateRange } from "@/components/dashboard/lib/types";
 
 export type Granularity = "month" | "quarter" | "year";
 

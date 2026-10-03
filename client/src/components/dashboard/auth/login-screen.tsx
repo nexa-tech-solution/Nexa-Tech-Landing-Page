@@ -1,6 +1,6 @@
 import { useState, type FormEvent } from "react";
 import { Lock } from "lucide-react";
-import { login } from "./auth";
+import { login } from "@/components/dashboard/auth/auth";
 
 const inputClass =
   "mb-4 w-full rounded-lg border border-gray-200 bg-white px-3 py-2.5 text-sm outline-none focus:border-[#16a34a]/60";

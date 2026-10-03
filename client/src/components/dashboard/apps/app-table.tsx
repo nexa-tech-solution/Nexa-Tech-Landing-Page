@@ -1,9 +1,9 @@
 import { useMemo, useState } from "react";
 import { Apple, ArrowDown, ArrowUp, ChevronsUpDown, Play, Search } from "lucide-react";
 import { ProjectAvatar } from "@/components/nexa/layout";
-import { num, percent, usd } from "./format";
-import { Delta, Panel, Segmented } from "./ui";
-import type { AppStats } from "./types";
+import { num, percent, usd } from "@/components/dashboard/lib/format";
+import { Delta, Panel, Segmented } from "@/components/dashboard/ui";
+import type { AppStats } from "@/components/dashboard/lib/types";
 
 type SortKey = "name" | "installs" | "growth" | "activeUsers" | "adRevenue" | "subRevenue" | "revenue" | "rating" | "crashFree";
 type TrendFilter = "all" | "up" | "down";

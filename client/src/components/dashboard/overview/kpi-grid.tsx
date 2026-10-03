@@ -1,10 +1,10 @@
 import type { ReactNode } from "react";
 import { Coins, Crown, Download, Megaphone, Users, Wallet } from "lucide-react";
-import { COLORS } from "./constants";
-import { shortLabel } from "./dates";
-import { num, pct, usd } from "./format";
-import { Delta, Sparkline } from "./ui";
-import type { DailyRow, DashboardData } from "./use-dashboard-data";
+import { COLORS } from "@/components/dashboard/lib/constants";
+import { shortLabel } from "@/components/dashboard/lib/dates";
+import { num, pct, usd } from "@/components/dashboard/lib/format";
+import { Delta, Sparkline } from "@/components/dashboard/ui";
+import type { DailyRow, DashboardData } from "@/components/dashboard/data/use-dashboard-data";
 
 type Card = {
   icon: ReactNode;

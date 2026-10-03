@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { ProjectAvatar } from "@/components/nexa/layout";
-import { COLORS } from "./constants";
-import { shortLabel } from "./dates";
-import { num } from "./format";
-import { Delta, EmptyState, Panel, Segmented, Sparkline } from "./ui";
-import type { AppStats } from "./types";
+import { COLORS } from "@/components/dashboard/lib/constants";
+import { shortLabel } from "@/components/dashboard/lib/dates";
+import { num } from "@/components/dashboard/lib/format";
+import { Delta, EmptyState, Panel, Segmented, Sparkline } from "@/components/dashboard/ui";
+import type { AppStats } from "@/components/dashboard/lib/types";
 
 type Mode = "up" | "down";
 

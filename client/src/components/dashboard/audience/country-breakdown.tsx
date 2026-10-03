@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
-import { num, percent, usd } from "./format";
-import { EmptyState, Panel, Segmented, chartTooltip } from "./ui";
-import type { CountryStat } from "./types";
+import { num, percent, usd } from "@/components/dashboard/lib/format";
+import { EmptyState, Panel, Segmented, chartTooltip } from "@/components/dashboard/ui";
+import type { CountryStat } from "@/components/dashboard/lib/types";
 
 type Mode = "installs" | "revenue";
 const PIE_COLORS = ["#0d0c22", "#3b82f6", "#16a34a", "#f59e0b", "#f2545b", "#d1d5db"];

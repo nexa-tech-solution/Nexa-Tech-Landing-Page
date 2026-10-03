@@ -1,10 +1,10 @@
 import { Bar, BarChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { ProjectAvatar } from "@/components/nexa/layout";
-import { COLORS } from "./constants";
-import { longLabel, shortLabel } from "./dates";
-import { num, pct, percent, usd } from "./format";
-import { Delta, MiniStat, Panel, axisTick, chartTooltip } from "./ui";
-import type { DashboardData } from "./use-dashboard-data";
+import { COLORS } from "@/components/dashboard/lib/constants";
+import { longLabel, shortLabel } from "@/components/dashboard/lib/dates";
+import { num, pct, percent, usd } from "@/components/dashboard/lib/format";
+import { Delta, MiniStat, Panel, axisTick, chartTooltip } from "@/components/dashboard/ui";
+import type { DashboardData } from "@/components/dashboard/data/use-dashboard-data";
 
 export function RevenueCatPanel({ totals, daily, apps }: Pick<DashboardData, "totals" | "daily" | "apps">) {
   const subApps = apps.filter((a) => a.subRevenue > 0).sort((a, b) => b.subRevenue - a.subRevenue);

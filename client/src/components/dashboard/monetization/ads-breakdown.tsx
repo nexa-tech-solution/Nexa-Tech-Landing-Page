@@ -1,7 +1,7 @@
-import { COLORS } from "./constants";
-import { compact, pct, usd } from "./format";
-import { Delta, MiniStat, Panel } from "./ui";
-import type { DashboardData } from "./use-dashboard-data";
+import { COLORS } from "@/components/dashboard/lib/constants";
+import { compact, pct, usd } from "@/components/dashboard/lib/format";
+import { Delta, MiniStat, Panel } from "@/components/dashboard/ui";
+import type { DashboardData } from "@/components/dashboard/data/use-dashboard-data";
 
 export function AdsBreakdown({ totals, adFormats }: Pick<DashboardData, "totals" | "adFormats">) {
   const sorted = [...adFormats].sort((a, b) => b.revenue - a.revenue);

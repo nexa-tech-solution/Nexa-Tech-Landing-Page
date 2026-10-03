@@ -1,4 +1,4 @@
-import type { DayPoint, SummableMetric } from "./types";
+import type { DayPoint, SummableMetric } from "@/components/dashboard/lib/types";
 
 const numberFmt = new Intl.NumberFormat("vi-VN");
 const compactFmt = new Intl.NumberFormat("vi-VN", { notation: "compact", maximumFractionDigits: 1 });

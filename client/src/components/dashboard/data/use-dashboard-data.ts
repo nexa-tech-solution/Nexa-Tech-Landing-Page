@@ -1,10 +1,10 @@
 import { useMemo } from "react";
 import { projects } from "@/components/nexa/data";
-import { AD_FORMATS, COUNTRIES } from "./constants";
-import { previousRange } from "./dates";
-import { pct, sum } from "./format";
-import { getProfile, getSeries } from "./mock-data";
-import type { AdFormatStat, AppStats, CountryStat, DayPoint, Filters, SummableMetric } from "./types";
+import { AD_FORMATS, COUNTRIES } from "@/components/dashboard/lib/constants";
+import { previousRange } from "@/components/dashboard/lib/dates";
+import { pct, sum } from "@/components/dashboard/lib/format";
+import { getProfile, getSeries } from "@/components/dashboard/data/mock-data";
+import type { AdFormatStat, AppStats, CountryStat, DayPoint, Filters, SummableMetric } from "@/components/dashboard/lib/types";
 
 const USER_METRICS: SummableMetric[] = ["installs", "activeUsers", "impressions", "trials", "newSubs", "churned"];
 const REVENUE_METRICS: SummableMetric[] = ["adRevenue", "subRevenue"];

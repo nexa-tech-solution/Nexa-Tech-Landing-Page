@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { Download } from "lucide-react";
 import { Bar, CartesianGrid, ComposedChart, Legend, Line, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
-import { EXPENSE_CATEGORIES, STORE_FEE, type Expense, type ExpenseCategory } from "./expenses";
-import { percent, usd, usdCompact } from "./format";
-import { EmptyState, MiniStat, Panel, Segmented, axisTick, chartTooltip } from "./ui";
-import { usePnlReport, type Granularity, type PnlRow } from "./use-pnl-report";
+import { EXPENSE_CATEGORIES, STORE_FEE, type Expense, type ExpenseCategory } from "@/components/dashboard/finance/expenses";
+import { percent, usd, usdCompact } from "@/components/dashboard/lib/format";
+import { EmptyState, MiniStat, Panel, Segmented, axisTick, chartTooltip } from "@/components/dashboard/ui";
+import { usePnlReport, type Granularity, type PnlRow } from "@/components/dashboard/finance/use-pnl-report";
 
 const CATEGORY_KEYS = Object.keys(EXPENSE_CATEGORIES) as ExpenseCategory[];
 

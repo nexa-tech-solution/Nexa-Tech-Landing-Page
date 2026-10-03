@@ -1,7 +1,7 @@
 import type { Project } from "@/components/nexa/data";
-import { AD_FORMATS, COUNTRIES } from "./constants";
-import { dayIndex, isWeekend, listDays, toISO } from "./dates";
-import type { DateRange, DayPoint } from "./types";
+import { AD_FORMATS, COUNTRIES } from "@/components/dashboard/lib/constants";
+import { dayIndex, isWeekend, listDays, toISO } from "@/components/dashboard/lib/dates";
+import type { DateRange, DayPoint } from "@/components/dashboard/lib/types";
 
 // Deterministic pseudo-random so mock numbers stay stable between renders.
 function seeded(seed: string) {

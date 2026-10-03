@@ -1,9 +1,9 @@
 import { useState, type FormEvent } from "react";
 import { Plus, RotateCcw, Trash2 } from "lucide-react";
-import { toISO, longLabel } from "./dates";
-import { EXPENSE_CATEGORIES, RECURRENCE_LABEL, type Expense, type ExpenseCategory, type Recurrence } from "./expenses";
-import { usd } from "./format";
-import { Panel, Segmented } from "./ui";
+import { toISO, longLabel } from "@/components/dashboard/lib/dates";
+import { EXPENSE_CATEGORIES, RECURRENCE_LABEL, type Expense, type ExpenseCategory, type Recurrence } from "@/components/dashboard/finance/expenses";
+import { usd } from "@/components/dashboard/lib/format";
+import { Panel, Segmented } from "@/components/dashboard/ui";
 
 type Props = {
   expenses: Expense[];

@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { Area, AreaChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
-import { COLORS } from "./constants";
-import { shortLabel, longLabel } from "./dates";
-import { compact, num, usd, usdCompact } from "./format";
-import { Panel, Segmented, axisTick, chartTooltip } from "./ui";
-import type { DailyRow } from "./use-dashboard-data";
+import { COLORS } from "@/components/dashboard/lib/constants";
+import { shortLabel, longLabel } from "@/components/dashboard/lib/dates";
+import { compact, num, usd, usdCompact } from "@/components/dashboard/lib/format";
+import { Panel, Segmented, axisTick, chartTooltip } from "@/components/dashboard/ui";
+import type { DailyRow } from "@/components/dashboard/data/use-dashboard-data";
 
 type Mode = "revenue" | "installs" | "activeUsers";
 
