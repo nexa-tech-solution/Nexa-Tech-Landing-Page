@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 
-export function MiniStat({ label, value, hint, className = "" }: { label: string; value: string; hint?: ReactNode; className?: string }) {
+export function MiniStat({ label, value, hint, className = "" }: { label: string; value: ReactNode; hint?: ReactNode; className?: string }) {
   return (
     <div className={`min-w-0 rounded-xl bg-gray-50 p-3 ${className}`}>
       <div className="text-[11px] font-medium text-gray-500">{label}</div>

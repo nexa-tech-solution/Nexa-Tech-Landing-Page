@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { EXPENSE_CATEGORIES, STORE_FEE, costsByCategory, expandExpenses, type Expense, type ExpenseCategory } from "@/components/dashboard/finance/expenses";
 import { percent, usd } from "@/components/dashboard/lib/format";
-import { MiniStat, Panel } from "@/components/dashboard/ui";
+import { AnimatedNumber, MiniStat, Panel } from "@/components/dashboard/ui";
 import type { DateRange } from "@/components/dashboard/lib/types";
 
 type Props = {
@@ -29,13 +29,14 @@ export function ExpenseSummary({ range, expenses, revenue, subRevenue }: Props) 
   return (
     <Panel title="Chi phí & lợi nhuận" subtitle="Trong khoảng thời gian đã chọn">
       <div className="mb-5 grid grid-cols-2 gap-2">
-        <MiniStat label="Tổng thu" value={usd(revenue)} />
-        <MiniStat label="Tổng chi" value={usd(totalCost)} />
+        <MiniStat label="Tổng thu" value={<AnimatedNumber value={revenue} format={usd} />} />
+        <MiniStat label="Tổng chi" value={<AnimatedNumber value={totalCost} format={usd} />} />
         <div className={`col-span-2 rounded-xl p-3 ${profit >= 0 ? "bg-green-50" : "bg-red-50"}`}>
           <div className="text-[11px] font-medium text-gray-500">Lợi nhuận ròng</div>
-          <div className={`mt-1 text-2xl font-bold tabular-nums ${profit >= 0 ? "text-green-700" : "text-red-600"}`}>{usd(profit)}</div>
+          <div className={`mt-1 text-2xl font-bold tabular-nums ${profit >= 0 ? "text-green-700" : "text-red-600"}`}><AnimatedNumber value={profit} format={usd} /></div>
           <div className="mt-0.5 text-[11px] text-gray-500">
-            Biên lợi nhuận {percent(revenue ? (profit / revenue) * 100 : 0)} · ROI {percent(roi)}
+            Biên lợi nhuận <AnimatedNumber value={revenue ? (profit / revenue) * 100 : 0} format={(v) => percent(v)} /> · ROI{" "}
+            <AnimatedNumber value={roi} format={(v) => percent(v)} />
           </div>
         </div>
       </div>
@@ -53,7 +54,7 @@ export function ExpenseSummary({ range, expenses, revenue, subRevenue }: Props) 
           <li key={i.key} className="flex items-center gap-2">
             <span className="h-2.5 w-2.5 shrink-0 rounded-full" style={{ background: i.color }} />
             <span className="min-w-0 flex-1 truncate text-gray-600">{i.label}</span>
-            <span className="tabular-nums">{usd(i.value)}</span>
+            <AnimatedNumber value={i.value} format={usd} />
           </li>
         ))}
         {items.length === 0 && <li className="text-gray-400">Chưa có khoản chi nào trong khoảng này</li>}

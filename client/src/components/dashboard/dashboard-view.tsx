@@ -1,11 +1,11 @@
 import { useState } from "react";
+import { useExpenses, type Expense } from "@/services/expenses";
 import { AppTable } from "@/components/dashboard/apps/app-table";
 import { CountryBreakdown } from "@/components/dashboard/audience/country-breakdown";
 import { useDashboardData } from "@/components/dashboard/data/use-dashboard-data";
 import { ExpenseManager } from "@/components/dashboard/finance/expense-manager";
 import { ExpenseSummary } from "@/components/dashboard/finance/expense-summary";
 import { PnlReport } from "@/components/dashboard/finance/pnl-report";
-import { useExpenses } from "@/components/dashboard/finance/use-expenses";
 import { DashboardHeader } from "@/components/dashboard/layout/dashboard-header";
 import { FilterBar } from "@/components/dashboard/layout/filter-bar";
 import { presetRange, type PresetKey } from "@/components/dashboard/lib/dates";
@@ -16,11 +16,14 @@ import { GrowthLeaderboard } from "@/components/dashboard/overview/growth-leader
 import { KpiGrid } from "@/components/dashboard/overview/kpi-grid";
 import { OverviewChart } from "@/components/dashboard/overview/overview-chart";
 
+const NO_EXPENSES: Expense[] = [];
+
 export function DashboardView({ onLogout }: { onLogout: () => void }) {
   const [filters, setFilters] = useState<Filters>({ store: "all", range: presetRange("30"), country: "all" });
   const [preset, setPreset] = useState<PresetKey | "custom">("30");
   const data = useDashboardData(filters);
-  const { expenses, add, remove, reset } = useExpenses();
+  const expensesQuery = useExpenses();
+  const expenses = expensesQuery.data?.items ?? NO_EXPENSES;
 
   return (
     <div className="min-h-screen bg-[#f7f8fa] text-[#0d0c22]">
@@ -51,7 +54,7 @@ export function DashboardView({ onLogout }: { onLogout: () => void }) {
 
         <div className="grid gap-5 lg:grid-cols-3">
           <ExpenseSummary range={filters.range} expenses={expenses} revenue={data.totals.revenue} subRevenue={data.totals.subRevenue} />
-          <ExpenseManager expenses={expenses} onAdd={add} onRemove={remove} onReset={reset} />
+          <ExpenseManager expenses={expenses} isLoading={expensesQuery.isPending} error={expensesQuery.error} onRetry={() => expensesQuery.refetch()} />
         </div>
 
         <PnlReport expenses={expenses} />

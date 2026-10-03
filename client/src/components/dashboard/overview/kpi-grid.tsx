@@ -3,13 +3,13 @@ import { Coins, Crown, Download, Megaphone, Users, Wallet } from "lucide-react";
 import { COLORS } from "@/components/dashboard/lib/constants";
 import { shortLabel } from "@/components/dashboard/lib/dates";
 import { num, pct, usd } from "@/components/dashboard/lib/format";
-import { Delta, Sparkline } from "@/components/dashboard/ui";
+import { AnimatedNumber, Delta, Sparkline } from "@/components/dashboard/ui";
 import type { DailyRow, DashboardData } from "@/components/dashboard/data/use-dashboard-data";
 
 type Card = {
   icon: ReactNode;
   label: string;
-  value: string;
+  value: number;
   delta: number;
   color: string;
   spark: number[];
@@ -21,12 +21,12 @@ export function KpiGrid({ totals, daily }: Pick<DashboardData, "totals" | "daily
   const series = (key: keyof Omit<DailyRow, "date">) => daily.map((d) => d[key]);
   const labels = daily.map((d) => shortLabel(d.date));
   const cards: Card[] = [
-    { icon: <Wallet size={16} />, label: "Tổng doanh thu", value: usd(totals.revenue), delta: pct(totals.revenue, totals.revenuePrev), color: COLORS.revenue, spark: series("revenue"), format: usd, featured: true },
-    { icon: <Megaphone size={16} />, label: "Doanh thu quảng cáo (AdMob)", value: usd(totals.adRevenue), delta: pct(totals.adRevenue, totals.adRevenuePrev), color: COLORS.ads, spark: series("adRevenue"), format: usd },
-    { icon: <Coins size={16} />, label: "Doanh thu gói (RevenueCat)", value: usd(totals.subRevenue), delta: pct(totals.subRevenue, totals.subRevenuePrev), color: COLORS.revenueCat, spark: series("subRevenue"), format: usd },
-    { icon: <Download size={16} />, label: "Lượt cài đặt", value: num(totals.installs), delta: pct(totals.installs, totals.installsPrev), color: COLORS.installs, spark: series("installs"), format: num },
-    { icon: <Users size={16} />, label: "Người dùng hoạt động / ngày", value: num(totals.activeUsers), delta: pct(totals.activeUsers, totals.activeUsersPrev), color: COLORS.users, spark: series("activeUsers"), format: num },
-    { icon: <Crown size={16} />, label: "Thuê bao đang hoạt động", value: num(totals.activeSubs), delta: pct(totals.activeSubs, totals.activeSubsPrev), color: COLORS.trials, spark: series("newSubs"), format: num },
+    { icon: <Wallet size={16} />, label: "Tổng doanh thu", value: totals.revenue, delta: pct(totals.revenue, totals.revenuePrev), color: COLORS.revenue, spark: series("revenue"), format: usd, featured: true },
+    { icon: <Megaphone size={16} />, label: "Doanh thu quảng cáo (AdMob)", value: totals.adRevenue, delta: pct(totals.adRevenue, totals.adRevenuePrev), color: COLORS.ads, spark: series("adRevenue"), format: usd },
+    { icon: <Coins size={16} />, label: "Doanh thu gói (RevenueCat)", value: totals.subRevenue, delta: pct(totals.subRevenue, totals.subRevenuePrev), color: COLORS.revenueCat, spark: series("subRevenue"), format: usd },
+    { icon: <Download size={16} />, label: "Lượt cài đặt", value: totals.installs, delta: pct(totals.installs, totals.installsPrev), color: COLORS.installs, spark: series("installs"), format: num },
+    { icon: <Users size={16} />, label: "Người dùng hoạt động / ngày", value: totals.activeUsers, delta: pct(totals.activeUsers, totals.activeUsersPrev), color: COLORS.users, spark: series("activeUsers"), format: num },
+    { icon: <Crown size={16} />, label: "Thuê bao đang hoạt động", value: totals.activeSubs, delta: pct(totals.activeSubs, totals.activeSubsPrev), color: COLORS.trials, spark: series("newSubs"), format: num },
   ];
 
   return (
@@ -47,7 +47,7 @@ export function KpiGrid({ totals, daily }: Pick<DashboardData, "totals" | "daily
             </span>
             <span className="leading-tight">{c.label}</span>
           </div>
-          <div className="mt-3 text-2xl font-bold tabular-nums">{c.value}</div>
+          <div className="mt-3 text-2xl font-bold tabular-nums"><AnimatedNumber value={c.value} format={c.format} /></div>
           <div className={`mt-1 flex items-center gap-1.5 text-[11px] ${c.featured ? "text-white/60" : "text-gray-400"}`}>
             <Delta value={c.delta} /> so với kỳ trước
           </div>

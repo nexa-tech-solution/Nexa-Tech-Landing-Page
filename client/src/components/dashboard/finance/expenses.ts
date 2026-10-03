@@ -1,17 +1,9 @@
 import { addMonths, minISO } from "@/components/dashboard/lib/dates";
 import type { DateRange } from "@/components/dashboard/lib/types";
 
-export type ExpenseCategory = "marketing" | "server" | "tools" | "account" | "salary" | "other";
-export type Recurrence = "once" | "monthly" | "yearly";
+import type { Expense, ExpenseCategory, ExpenseRecurrence } from "@/services/expenses";
 
-export type Expense = {
-  id: string;
-  name: string;
-  category: ExpenseCategory;
-  amount: number; // USD
-  date: string; // first occurrence, yyyy-mm-dd
-  recurring: Recurrence;
-};
+export type { Expense, ExpenseCategory, ExpenseRecurrence };
 
 export const EXPENSE_CATEGORIES: Record<ExpenseCategory, { label: string; color: string }> = {
   marketing: { label: "Quảng cáo & marketing", color: "#f97316" },
@@ -25,26 +17,19 @@ export const EXPENSE_CATEGORIES: Record<ExpenseCategory, { label: string; color:
 // Apple / Google keep a cut of in-app purchases; RevenueCat reports gross revenue.
 export const STORE_FEE = { label: "Phí nền tảng Apple/Google (15%)", color: "#94a3b8", rate: 0.15 };
 
-export const RECURRENCE_LABEL: Record<Recurrence, string> = {
+export const RECURRENCE_LABEL: Record<ExpenseRecurrence, string> = {
   once: "Một lần",
   monthly: "Hàng tháng",
   yearly: "Hàng năm",
 };
 
-export const SEED_EXPENSES: Expense[] = [
-  { id: "seed-1", name: "Google Play Console", category: "account", amount: 25, date: "2025-01-05", recurring: "once" },
-  { id: "seed-2", name: "Apple Developer Program", category: "account", amount: 99, date: "2025-01-10", recurring: "yearly" },
-  { id: "seed-3", name: "Máy chủ VPS + Firebase", category: "server", amount: 45, date: "2025-01-15", recurring: "monthly" },
-  { id: "seed-4", name: "Figma + GitHub + công cụ AI", category: "tools", amount: 60, date: "2025-02-01", recurring: "monthly" },
-  { id: "seed-5", name: "Quảng cáo Google Ads (UAC)", category: "marketing", amount: 350, date: "2025-06-01", recurring: "monthly" },
-  { id: "seed-6", name: "Quảng cáo Apple Search Ads", category: "marketing", amount: 150, date: "2025-09-01", recurring: "monthly" },
-  { id: "seed-7", name: "Thiết kế bộ ảnh cửa hàng", category: "other", amount: 400, date: "2026-03-12", recurring: "once" },
-];
-
 export type ExpenseEntry = { date: string; amount: number; category: ExpenseCategory; name: string };
 
 // Expand recurring expenses into individual payments that fall inside the range.
-export function expandExpenses(expenses: Expense[], range: DateRange): ExpenseEntry[] {
+export function expandExpenses(
+  expenses: Array<Pick<Expense, "name" | "category" | "amount" | "date" | "recurring">>,
+  range: DateRange,
+): ExpenseEntry[] {
   const out: ExpenseEntry[] = [];
   for (const e of expenses) {
     const step = e.recurring === "monthly" ? 1 : e.recurring === "yearly" ? 12 : 0;

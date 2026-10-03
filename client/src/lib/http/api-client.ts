@@ -3,7 +3,7 @@ import { env, LOGIN_PATH } from "@/config/env";
 import { useAuthStore } from "@/stores/auth-store";
 import type { AuthTokens } from "@/services/auth/auth.types";
 import { API_ERROR_CODES, toApiError } from "./api-error";
-import type { ApiResponse } from "./types";
+import type { ApiResponse, Paginated, PaginatedResponse } from "./types";
 
 type RetriableConfig = InternalAxiosRequestConfig & { _retried?: boolean };
 
@@ -76,3 +76,13 @@ apiClient.interceptors.response.use(
 
 // Strip the envelope so API functions return the payload directly.
 export const unwrap = <T>(response: AxiosResponse<ApiResponse<T>>): T => response.data.data;
+
+export const unwrapPage = <T>({ data }: AxiosResponse<PaginatedResponse<T>>): Paginated<T> => ({
+  items: data.data,
+  page: data.page,
+  size: data.size,
+  totalItems: data.totalItems,
+  totalPages: data.totalPages,
+  hasNext: data.hasNext,
+  hasPrevious: data.hasPrevious,
+});
