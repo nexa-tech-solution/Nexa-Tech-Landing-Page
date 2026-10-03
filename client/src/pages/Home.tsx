@@ -6,6 +6,8 @@ import {
   team,
 } from "@/components/nexa/data";
 import { ShotCard, SiteFooter, SiteHeader } from "@/components/nexa/layout";
+import { Roadmap } from "@/components/nexa/roadmap";
+import { CountUp } from "@/components/nexa/count-up";
 import {
   ArrowRight,
   ChevronDown,
@@ -213,66 +215,41 @@ export default function Home() {
         </section>
 
         <section id="about" className="bg-[#f8f7f4] px-5 py-24 md:px-10">
-          <div className="mx-auto grid max-w-[1200px] gap-12 lg:grid-cols-2 lg:items-center">
-            <div>
-              <p className="kicker">About Nexa</p>
-              <h2 className="section-title mt-3">
-                Small team.
-                <br />
-                Sharp execution.
-              </h2>
-              <p className="mt-6 max-w-lg text-lg leading-8 text-[#3d3d4e]">
-                We turn focused ideas into products people can try today, with a
-                bias toward clarity, speed, and shipping work that actually feels
-                finished.
-              </p>
-              <div className="mt-10 grid max-w-md grid-cols-2 gap-6">
+          <div className="mx-auto max-w-[1200px]">
+            <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
+              <div>
+                <p className="kicker">About Nexa · Since 2024</p>
+                <h2 className="section-title mt-3">
+                  Small team.
+                  <br />
+                  Sharp execution.
+                </h2>
+                <p className="mt-6 max-w-lg text-lg leading-8 text-[#3d3d4e]">
+                  We turn focused ideas into products people can try today. Here
+                  is how that has played out so far, and where we are heading.
+                </p>
+              </div>
+              <dl className="grid grid-cols-2 gap-x-10 gap-y-6 sm:grid-cols-4 lg:pb-2">
                 {[
-                  ["21+", "Products shipped"],
-                  ["12", "Mobile apps"],
-                  ["3", "Platforms"],
-                  ["Free", "User-first tools"],
-                ].map(([value, label]) => (
+                  { to: 2024, from: 2015, label: "Founded" },
+                  { to: 21, suffix: "+", label: "Products shipped" },
+                  { to: 12, label: "Mobile apps" },
+                  { to: 3, label: "Platforms" },
+                ].map(({ label, ...count }, index) => (
                   <div key={label}>
-                    <p className="font-display text-4xl font-bold tracking-[-0.04em]">
-                      {value}
-                    </p>
-                    <p className="mt-1 text-sm text-[#6e6d7a]">{label}</p>
+                    <dt className="sr-only">{label}</dt>
+                    <dd className="font-display text-4xl font-bold tracking-[-0.04em]">
+                      <CountUp {...count} delay={index * 120} />
+                    </dd>
+                    <dd aria-hidden="true" className="mt-1 text-sm text-[#6e6d7a]">
+                      {label}
+                    </dd>
                   </div>
                 ))}
-              </div>
+              </dl>
             </div>
-            <div className="grid gap-4">
-              {[
-                [
-                  "Real product outcomes",
-                  "Useful apps, tools, and libraries built for people who need them.",
-                ],
-                [
-                  "Clean delivery",
-                  "Simple interfaces, fast performance, and a presentation that feels intentional.",
-                ],
-                [
-                  "Build once, reuse smartly",
-                  "One codebase, many ship-ready outcomes across web, mobile, and package work.",
-                ],
-              ].map(([title, description], index) => (
-                <div
-                  key={title}
-                  className="flex gap-5 rounded-2xl bg-white p-6 shadow-[0_1px_2px_rgba(13,12,34,0.04)]"
-                >
-                  <span className="font-display text-2xl font-bold text-[#ea4c89]">
-                    0{index + 1}
-                  </span>
-                  <div>
-                    <h3 className="text-lg font-semibold">{title}</h3>
-                    <p className="mt-1.5 text-[15px] leading-6 text-[#6e6d7a]">
-                      {description}
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
+
+            <Roadmap />
           </div>
         </section>
 

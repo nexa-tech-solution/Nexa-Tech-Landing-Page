@@ -1864,3 +1864,81 @@ export function getRelatedProjects(project: Project, limit = 3) {
     .filter((item) => item.category === project.category)
     .slice(0, limit);
 }
+
+export type RoadmapPhase = {
+  period: string; // "2024", or "Next" for the planned phase
+  status: "done" | "now" | "planned";
+  title: string;
+  summary: string;
+  projects?: string[]; // project titles from `projects`, rendered as links
+  plans?: string[]; // used instead of projects for the planned phase
+  result: string;
+};
+
+// Company timeline for the About section. Founded in 2024; edit periods and
+// results here as the real numbers come in.
+export const roadmap: RoadmapPhase[] = [
+  {
+    period: "2024",
+    status: "done",
+    title: "Founded, web first",
+    summary:
+      "Ethan and Tina start Nexa with small web tools that solve one problem each and can ship in weeks.",
+    projects: [
+      "Time Converter",
+      "Resize Image",
+      "Mystic Tarot",
+      "PetPal",
+      "The Home Versus",
+    ],
+    result: "Five web products live and a shared React codebase to build on.",
+  },
+  {
+    period: "2025",
+    status: "done",
+    title: "From web to mobile",
+    summary:
+      "The tools people kept coming back to become React Native apps, and the shared file layer is open-sourced.",
+    projects: [
+      "Tarot Destiny",
+      "PetPal — Pet Simulator",
+      "Time Converter — World Clock",
+      "Quick Image PDF Resizer",
+      "ScanQR",
+      "Smart Currency Converter",
+      "Loan Estimator",
+      "react-native-simple-fs",
+    ],
+    result:
+      "Seven apps on the App Store and Google Play, plus our first npm package.",
+  },
+  {
+    period: "2026",
+    status: "now",
+    title: "Focused tools and AI",
+    summary:
+      "Apps built for specific jobs, from site reports to study sessions, with AI only where it clearly helps.",
+    projects: [
+      "FieldStamp GPS Camera",
+      "AI Lecture Recorder",
+      "Ingredient Scanner",
+      "Horror Chat Stories",
+      "Coloring Book: Paint & Draw",
+      "World Time Buddy",
+    ],
+    result: "21+ products across web, mobile and the browser, 12 of them mobile apps.",
+  },
+  {
+    period: "Next",
+    status: "planned",
+    title: "Building with partners",
+    summary:
+      "Taking what we learned shipping our own products into work for clients, while keeping our apps growing.",
+    plans: [
+      "Client and partner product builds",
+      "More open-source packages from our shared code",
+      "On-device and offline features in existing apps",
+    ],
+    result: "A studio that ships for others with the same care it ships for itself.",
+  },
+];
