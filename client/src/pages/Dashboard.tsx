@@ -1,17 +1,14 @@
-import { useState } from "react";
-import { DashboardView, LoginScreen, isAuthenticated, logout } from "@/components/dashboard";
+import { DashboardView, LoginScreen } from "@/components/dashboard";
+import { useLogout, useMe } from "@/services/auth";
+import { selectIsAuthenticated, useAuthStore } from "@/stores/auth-store";
 
 export default function Dashboard() {
-  const [authed, setAuthed] = useState(isAuthenticated);
+  const isAuthenticated = useAuthStore(selectIsAuthenticated);
+  // Validates the stored session on load; an unrecoverable 401 clears the store and shows the login screen.
+  useMe();
+  const logout = useLogout();
 
-  if (!authed) return <LoginScreen onSuccess={() => setAuthed(true)} />;
+  if (!isAuthenticated) return <LoginScreen />;
 
-  return (
-    <DashboardView
-      onLogout={() => {
-        logout();
-        setAuthed(false);
-      }}
-    />
-  );
+  return <DashboardView onLogout={() => logout.mutate()} />;
 }

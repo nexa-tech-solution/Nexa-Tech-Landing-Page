@@ -1,19 +1,36 @@
 import { useState, type FormEvent } from "react";
-import { Lock } from "lucide-react";
-import { login } from "@/components/dashboard/auth/auth";
+import { Loader2, Lock } from "lucide-react";
+import { API_ERROR_CODES, type ApiError } from "@/lib/http";
+import { useLogin } from "@/services/auth";
 
 const inputClass =
-  "mb-4 w-full rounded-lg border border-gray-200 bg-white px-3 py-2.5 text-sm outline-none focus:border-[#16a34a]/60";
+  "mb-4 w-full rounded-lg border border-gray-200 bg-white px-3 py-2.5 text-sm outline-none focus:border-[#16a34a]/60 disabled:bg-gray-50";
 
-export function LoginScreen({ onSuccess }: { onSuccess: () => void }) {
+function loginErrorMessage(error: ApiError) {
+  switch (error.errorCode) {
+    case API_ERROR_CODES.INVALID_CREDENTIALS:
+      return "Email hoặc mật khẩu không đúng";
+    case API_ERROR_CODES.VALIDATION:
+      return "Thông tin đăng nhập không hợp lệ";
+    case API_ERROR_CODES.FORBIDDEN:
+    case API_ERROR_CODES.FORBIDDEN_ROLE:
+      return "Tài khoản không có quyền truy cập";
+    case API_ERROR_CODES.NETWORK:
+      return "Không kết nối được máy chủ, vui lòng thử lại";
+    default:
+      return "Đăng nhập thất bại, vui lòng thử lại";
+  }
+}
+
+// Session state lives in the auth store; the page re-renders once login succeeds.
+export function LoginScreen() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const login = useLogin();
 
   const submit = (e: FormEvent) => {
     e.preventDefault();
-    if (login(email, password)) onSuccess();
-    else setError("Email hoặc mật khẩu không đúng");
+    login.mutate({ email: email.trim(), password });
   };
 
   return (
@@ -29,12 +46,21 @@ export function LoginScreen({ onSuccess }: { onSuccess: () => void }) {
           </div>
         </div>
         <label className="mb-1 block text-xs font-medium text-gray-500">Email</label>
-        <input type="email" autoComplete="username" value={email} onChange={(e) => setEmail(e.target.value)} className={inputClass} required />
+        <input type="email" autoComplete="username" value={email} onChange={(e) => setEmail(e.target.value)} className={inputClass} disabled={login.isPending} required />
         <label className="mb-1 block text-xs font-medium text-gray-500">Mật khẩu</label>
-        <input type="password" autoComplete="current-password" value={password} onChange={(e) => setPassword(e.target.value)} className={inputClass} required />
-        {error && <p className="mb-4 text-sm text-red-600">{error}</p>}
-        <button type="submit" className="w-full rounded-lg bg-[#0d0c22] py-2.5 text-sm font-semibold text-white transition hover:brightness-110">
-          Đăng nhập
+        <input type="password" autoComplete="current-password" value={password} onChange={(e) => setPassword(e.target.value)} className={inputClass} disabled={login.isPending} required />
+        {login.error && (
+          <p role="alert" className="mb-4 text-sm text-red-600">
+            {loginErrorMessage(login.error)}
+          </p>
+        )}
+        <button
+          type="submit"
+          disabled={login.isPending}
+          className="flex w-full items-center justify-center gap-2 rounded-lg bg-[#0d0c22] py-2.5 text-sm font-semibold text-white transition hover:brightness-110 disabled:opacity-70"
+        >
+          {login.isPending && <Loader2 size={16} className="animate-spin" />}
+          {login.isPending ? "Đang đăng nhập..." : "Đăng nhập"}
         </button>
       </form>
     </main>
