@@ -3,7 +3,7 @@ import { Loader2, Plus, RotateCcw, Trash2 } from "lucide-react";
 import { EXPENSE_CATEGORIES, RECURRENCE_LABEL, type Expense, type ExpenseCategory, type ExpenseRecurrence } from "@/components/dashboard/finance/expenses";
 import { longLabel, toISO } from "@/components/dashboard/lib/dates";
 import { usd } from "@/components/dashboard/lib/format";
-import { Panel, Segmented } from "@/components/dashboard/ui";
+import { ConfirmDialog, Panel, Segmented } from "@/components/dashboard/ui";
 import { API_ERROR_CODES, type ApiError } from "@/lib/http";
 import { useCreateExpense, useDeleteExpense, useResetExpenses } from "@/services/expenses";
 
@@ -47,8 +47,10 @@ export function ExpenseManager({ expenses, isLoading, error, onRetry }: Props) {
   const create = useCreateExpense();
   const remove = useDeleteExpense();
   const reset = useResetExpenses();
+  const [pendingDelete, setPendingDelete] = useState<Expense | null>(null);
+  const [confirmingReset, setConfirmingReset] = useState(false);
 
-  const mutationError = create.error ?? remove.error ?? reset.error;
+  const mutationError = create.error;
 
   const submit = (e: FormEvent) => {
     e.preventDefault();
@@ -58,7 +60,8 @@ export function ExpenseManager({ expenses, isLoading, error, onRetry }: Props) {
   };
 
   const handleReset = () => {
-    if (confirm("Khôi phục danh sách chi phí mẫu? Các khoản bạn đã nhập sẽ bị xoá.")) reset.mutate();
+    reset.reset();
+    setConfirmingReset(true);
   };
 
   const list = expenses
@@ -150,7 +153,10 @@ export function ExpenseManager({ expenses, isLoading, error, onRetry }: Props) {
                   type="button"
                   aria-label="Xoá khoản chi"
                   disabled={deleting}
-                  onClick={() => confirm(`Xoá khoản chi "${e.name}"?`) && remove.mutate(e.id)}
+                  onClick={() => {
+                    remove.reset();
+                    setPendingDelete(e);
+                  }}
                   className="shrink-0 rounded-md p-1.5 text-gray-400 hover:bg-red-50 hover:text-red-600"
                 >
                   {deleting ? <Loader2 size={14} className="animate-spin" /> : <Trash2 size={14} />}
@@ -161,6 +167,35 @@ export function ExpenseManager({ expenses, isLoading, error, onRetry }: Props) {
           {list.length === 0 && <li className="py-8 text-center text-sm text-gray-400">Chưa có khoản chi nào</li>}
         </ul>
       )}
+
+      <ConfirmDialog
+        open={pendingDelete !== null}
+        onOpenChange={(open) => !open && setPendingDelete(null)}
+        danger
+        title="Xoá khoản chi?"
+        description={
+          pendingDelete && (
+            <>
+              Khoản <b className="text-[#0d0c22]">{pendingDelete.name}</b> ({usd(pendingDelete.amount)}) sẽ bị xoá khỏi danh sách và các báo cáo thu – chi.
+            </>
+          )
+        }
+        confirmLabel="Xoá"
+        pending={remove.isPending}
+        error={remove.error ? errorMessage(remove.error) : null}
+        onConfirm={() => pendingDelete && remove.mutate(pendingDelete.id, { onSuccess: () => setPendingDelete(null) })}
+      />
+      <ConfirmDialog
+        open={confirmingReset}
+        onOpenChange={setConfirmingReset}
+        danger
+        title="Khôi phục danh sách chi phí mẫu?"
+        description="Tất cả khoản chi bạn đã nhập sẽ bị xoá và thay bằng bộ chi phí mẫu. Thao tác này không thể hoàn tác."
+        confirmLabel="Khôi phục mẫu"
+        pending={reset.isPending}
+        error={reset.error ? errorMessage(reset.error) : null}
+        onConfirm={() => reset.mutate(undefined, { onSuccess: () => setConfirmingReset(false) })}
+      />
     </Panel>
   );
 }

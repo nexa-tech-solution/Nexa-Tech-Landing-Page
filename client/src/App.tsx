@@ -8,6 +8,7 @@ function Router() {
   return (
     <Switch>
       <Route path="/dashboard" component={Dashboard} />
+      <Route path="/dashboard/settings" component={Dashboard} />
       <Route path="/work/:slug" component={Product} />
       <Route path="/" component={Home} />
       <Route component={NotFound} />
