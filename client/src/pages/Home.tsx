@@ -9,13 +9,22 @@ import { ShotCard, SiteFooter, SiteHeader } from "@/components/nexa/layout";
 import { Roadmap } from "@/components/nexa/roadmap";
 import { CountUp } from "@/components/nexa/count-up";
 import {
+  EMPTY_FILTERS,
+  FilterPanel,
+  FiltersButton,
+  SortMenu,
+  applyWorkFilters,
+  filterOptions,
+  type SortKey,
+  type WorkFilters,
+} from "@/components/nexa/work-filters";
+import {
   ArrowRight,
   ChevronDown,
   Github,
   Linkedin,
   Mail,
   Search,
-  SlidersHorizontal,
 } from "lucide-react";
 import { useMemo, useState, type FormEvent } from "react";
 
@@ -73,10 +82,15 @@ function ContactForm() {
 export default function Home() {
   const [category, setCategory] = useState<Category>("All");
   const [query, setQuery] = useState("");
+  const [sort, setSort] = useState<SortKey>("popular");
+  const [filters, setFilters] = useState<WorkFilters>(EMPTY_FILTERS);
+  const [filtersOpen, setFiltersOpen] = useState(false);
+  const options = useMemo(() => filterOptions(projects), []);
+  const activeFilters = filters.platforms.length + filters.techs.length;
 
   const filteredProjects = useMemo(() => {
     const needle = query.trim().toLowerCase();
-    return projects.filter((project) => {
+    const matching = projects.filter((project) => {
       if (category !== "All" && project.category !== category) return false;
       if (!needle) return true;
       return [project.title, project.description, ...project.tech]
@@ -84,7 +98,14 @@ export default function Home() {
         .toLowerCase()
         .includes(needle);
     });
-  }, [category, query]);
+    return applyWorkFilters(matching, filters, sort);
+  }, [category, query, filters, sort]);
+
+  const resetAll = () => {
+    setQuery("");
+    setCategory("All");
+    setFilters(EMPTY_FILTERS);
+  };
 
   const searchFor = (value: string) => {
     setQuery(value);
@@ -161,12 +182,9 @@ export default function Home() {
         <section id="work" className="scroll-mt-20 px-5 pb-24 md:px-10">
           <div className="mx-auto max-w-[1600px]">
             <div className="flex flex-col gap-4 py-6 lg:flex-row lg:items-center lg:justify-between">
-              <button
-                type="button"
-                className="hidden items-center gap-2 rounded-lg border border-[#e7e7e9] px-4 py-2.5 text-sm font-medium lg:flex"
-              >
-                Popular <ChevronDown className="h-4 w-4" />
-              </button>
+              <div className="hidden lg:block">
+                <SortMenu value={sort} onChange={setSort} />
+              </div>
               <div className="-mx-5 flex gap-1 overflow-x-auto px-5 lg:mx-0 lg:px-0">
                 {categories.map((item) => (
                   <button
@@ -183,18 +201,25 @@ export default function Home() {
                   </button>
                 ))}
               </div>
-              <button
-                type="button"
-                onClick={() => {
-                  setQuery("");
-                  setCategory("All");
-                }}
-                className="hidden items-center gap-2 rounded-full border border-[#e7e7e9] px-4 py-2.5 text-sm font-medium lg:flex"
-              >
-                <SlidersHorizontal className="h-4 w-4" />
-                {query || category !== "All" ? "Clear filters" : "Filters"}
-              </button>
+              {/* On small screens sort + filters share one row under the categories. */}
+              <div className="flex items-center justify-between gap-3 lg:contents">
+                <div className="lg:hidden">
+                  <SortMenu value={sort} onChange={setSort} />
+                </div>
+                <FiltersButton
+                  open={filtersOpen}
+                  count={activeFilters}
+                  onClick={() => setFiltersOpen((o) => !o)}
+                />
+              </div>
             </div>
+
+            <FilterPanel
+              open={filtersOpen}
+              filters={filters}
+              options={options}
+              onChange={setFilters}
+            />
 
             {filteredProjects.length ? (
               <ul className="grid gap-x-9 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
@@ -207,9 +232,20 @@ export default function Home() {
                 ))}
               </ul>
             ) : (
-              <p className="py-20 text-center text-[#6e6d7a]">
-                No products match “{query}”.
-              </p>
+              <div className="py-20 text-center text-[#6e6d7a]">
+                <p>
+                  {query
+                    ? `No products match “${query}”.`
+                    : "No products match these filters."}
+                </p>
+                <button
+                  type="button"
+                  onClick={resetAll}
+                  className="mt-4 rounded-full border border-[#e7e7e9] px-4 py-2 text-sm font-medium text-[#0d0c22] transition hover:bg-[#f3f3f4]"
+                >
+                  Clear search &amp; filters
+                </button>
+              </div>
             )}
           </div>
         </section>

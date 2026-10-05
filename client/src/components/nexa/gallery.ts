@@ -8,6 +8,15 @@ export type GalleryImage = {
 };
 
 export const galleries: Record<string, GalleryImage[]> = {
+  "cleanmaster": [
+    { src: "/products/cleanmaster/01.jpg", width: 1794, height: 876, tone: "#1c51a6" },
+    { src: "/products/cleanmaster/02.jpg", width: 841, height: 1870, tone: "#91b1ef" },
+    { src: "/products/cleanmaster/03.jpg", width: 841, height: 1870, tone: "#e1dec2" },
+    { src: "/products/cleanmaster/04.jpg", width: 841, height: 1870, tone: "#e1d2e7" },
+    { src: "/products/cleanmaster/05.jpg", width: 841, height: 1870, tone: "#d9ebd6" },
+    { src: "/products/cleanmaster/06.jpg", width: 841, height: 1870, tone: "#e8e0d7" },
+    { src: "/products/cleanmaster/07.jpg", width: 841, height: 1870, tone: "#c3c4f4" },
+  ],
   "react-native-simple-fs": [
     { src: "/products/react-native-simple-fs/desktop-1.jpg", width: 1440, height: 900, tone: "#f7f4f4" },
     { src: "/products/react-native-simple-fs/desktop-2.jpg", width: 1440, height: 900, tone: "#f8f8f8" },

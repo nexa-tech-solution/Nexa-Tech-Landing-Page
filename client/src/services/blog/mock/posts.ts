@@ -65,7 +65,7 @@ const meta: PostMeta[] = [
     tag: "Product",
     publishedAt: "2026-08-27",
     author: "Tina",
-    cover: "/graphic/the-home-versus.png",
+    cover: "/graphic/the-home-versus.webp",
     relatedProject: "the-home-versus",
   },
   {
@@ -76,7 +76,7 @@ const meta: PostMeta[] = [
     tag: "Engineering",
     publishedAt: "2026-08-05",
     author: "Ethan",
-    cover: "/graphic/time-converter-extension.png",
+    cover: "/graphic/time-converter-extension.webp",
     relatedProject: "world-time-buddy",
   },
   {
@@ -87,7 +87,7 @@ const meta: PostMeta[] = [
     tag: "Design",
     publishedAt: "2026-07-14",
     author: "Tina",
-    cover: "/graphic/ingredient-scanner.png",
+    cover: "/graphic/ingredient-scanner.webp",
     relatedProject: "ingredient-scanner",
   },
   {
@@ -98,7 +98,7 @@ const meta: PostMeta[] = [
     tag: "Process",
     publishedAt: "2026-06-22",
     author: "Ethan",
-    cover: "/graphic/petpal.png",
+    cover: "/graphic/petpal.webp",
     relatedProject: "petpal",
   },
   {
@@ -120,7 +120,7 @@ const meta: PostMeta[] = [
     tag: "Engineering",
     publishedAt: "2026-05-12",
     author: "Ethan",
-    cover: "/graphic/fieldstamp-camera.png",
+    cover: "/graphic/fieldstamp-camera.webp",
     relatedProject: "fieldstamp-gps-camera",
   },
   {
@@ -131,7 +131,7 @@ const meta: PostMeta[] = [
     tag: "Engineering",
     publishedAt: "2026-04-24",
     author: "Tina",
-    cover: "/graphic/currency-converter.png",
+    cover: "/graphic/currency-converter.webp",
     relatedProject: "smart-currency-converter",
   },
   {
@@ -142,7 +142,7 @@ const meta: PostMeta[] = [
     tag: "Product",
     publishedAt: "2026-04-06",
     author: "Tina",
-    cover: "/graphic/ai-lecture-recorder.png",
+    cover: "/graphic/ai-lecture-recorder.webp",
     relatedProject: "ai-lecture-recorder",
   },
   {
@@ -164,7 +164,7 @@ const meta: PostMeta[] = [
     tag: "Product",
     publishedAt: "2026-03-02",
     author: "Tina",
-    cover: "/graphic/horror-chat-stories.png",
+    cover: "/graphic/horror-chat-stories.webp",
     relatedProject: "horror-chat-stories",
   },
   {
@@ -175,7 +175,7 @@ const meta: PostMeta[] = [
     tag: "Engineering",
     publishedAt: "2026-02-12",
     author: "Ethan",
-    cover: "/graphic/scanqr.png",
+    cover: "/graphic/scanqr.webp",
     relatedProject: "scanqr",
   },
   {
@@ -186,7 +186,7 @@ const meta: PostMeta[] = [
     tag: "Design",
     publishedAt: "2026-01-26",
     author: "Tina",
-    cover: "/graphic/coloring-book-paint-draw.png",
+    cover: "/graphic/coloring-book-paint-draw.webp",
     relatedProject: "coloring-book-paint-and-draw",
   },
   {
@@ -197,7 +197,7 @@ const meta: PostMeta[] = [
     tag: "Process",
     publishedAt: "2026-01-08",
     author: "Ethan",
-    cover: "/graphic/resize-image.png",
+    cover: "/graphic/resize-image.webp",
     relatedProject: "quick-image-pdf-resizer",
   },
 ];

@@ -22,6 +22,7 @@ import {
   Bookmark,
   Check,
   ChevronDown,
+  Clock,
   ChevronLeft,
   ChevronRight,
   Eye,
@@ -147,7 +148,6 @@ function PhoneFrame({ children }: { children: ReactNode }) {
     </div>
   );
 }
-
 
 type Screen = { image: GalleryImage; title?: string; body?: string };
 
@@ -359,13 +359,7 @@ function Screens({
   );
 }
 
-function Chapter({
-  label,
-  children,
-}: {
-  label: string;
-  children: ReactNode;
-}) {
+function Chapter({ label, children }: { label: string; children: ReactNode }) {
   return (
     <section className="grid grid-cols-1 gap-6 border-t border-[#ececee] pt-10 lg:grid-cols-[240px_minmax(0,1fr)] lg:gap-16">
       <p className="font-display text-sm font-bold uppercase tracking-[0.14em] text-[#9e9ea7]">
@@ -377,7 +371,10 @@ function Chapter({
 }
 
 const normalize = (text: string) =>
-  text.toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
+  text
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, " ")
+    .trim();
 
 export default function Product() {
   const [, params] = useRoute("/work/:slug");
@@ -473,7 +470,10 @@ export default function Product() {
               href="/#work"
               className="inline-flex items-center gap-2.5 rounded-full border border-[#ececee] py-1 pl-1 pr-4 text-sm font-medium text-[#3d3d4e] transition hover:border-[#dbdbde]"
             >
-              <ProjectAvatar project={avatarProject} className="h-7 w-7 text-[10px]" />
+              <ProjectAvatar
+                project={avatarProject}
+                className="h-7 w-7 text-[10px]"
+              />
               Case study · {project.category}
             </a>
             <h1 className="mt-6 max-w-4xl font-display text-5xl font-bold leading-[0.98] tracking-[-0.045em] md:text-7xl lg:text-[5.5rem]">
@@ -484,26 +484,44 @@ export default function Product() {
               {lead}
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-3">
-              <a
-                href={project.primaryUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex h-12 items-center gap-2 rounded-full bg-[#ea4c89] px-6 text-sm font-semibold text-white transition hover:bg-[#f082ac]"
-              >
-                {project.primaryLabel}
-                <ArrowUpRight className="h-4 w-4" />
-              </a>
-              {project.secondaryUrl ? (
-                <a
-                  href={project.secondaryUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex h-12 items-center gap-2 rounded-full border border-[#e7e7e9] px-6 text-sm font-semibold transition hover:border-[#dbdbde]"
-                >
-                  {project.secondaryLabel}
-                  <ArrowUpRight className="h-4 w-4" />
-                </a>
-              ) : null}
+              {project.comingSoon ? (
+                <ComingSoonBadge text={project.comingSoon} />
+              ) : (
+                <>
+                  <a
+                    href={project.primaryUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex h-12 items-center gap-2 rounded-full bg-[#ea4c89] px-6 text-sm font-semibold text-white transition hover:bg-[#f082ac]"
+                  >
+                    {project.primaryLabel}
+                    <ArrowUpRight className="h-4 w-4" />
+                  </a>
+                  {project.secondaryUrl ? (
+                    <a
+                      href={project.secondaryUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex h-12 items-center gap-2 rounded-full border border-[#e7e7e9] px-6 text-sm font-semibold transition hover:border-[#dbdbde]"
+                    >
+                      {project.secondaryLabel}
+                      <ArrowUpRight className="h-4 w-4" />
+                    </a>
+                  ) : null}
+                  {project.extraLinks?.map((link) => (
+                    <a
+                      key={link.url}
+                      href={link.url}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex h-12 items-center gap-2 rounded-full border border-[#e7e7e9] px-6 text-sm font-semibold transition hover:border-[#dbdbde]"
+                    >
+                      {link.label}
+                      <ArrowUpRight className="h-4 w-4" />
+                    </a>
+                  ))}
+                </>
+              )}
               <button
                 type="button"
                 onClick={() => setLiked((value) => !value)}
@@ -693,26 +711,44 @@ export default function Product() {
               {aso?.subtitle ?? project.description}
             </p>
             <div className="mt-8 flex flex-wrap justify-center gap-3">
-              <a
-                href={project.primaryUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex h-12 items-center gap-2 rounded-full bg-[#ea4c89] px-6 text-sm font-semibold transition hover:bg-[#f082ac]"
-              >
-                {project.primaryLabel}
-                <ArrowUpRight className="h-4 w-4" />
-              </a>
-              {project.secondaryUrl ? (
-                <a
-                  href={project.secondaryUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex h-12 items-center gap-2 rounded-full bg-white px-6 text-sm font-semibold text-[#0d0c22] transition hover:bg-white/85"
-                >
-                  {project.secondaryLabel}
-                  <ArrowUpRight className="h-4 w-4" />
-                </a>
-              ) : null}
+              {project.comingSoon ? (
+                <ComingSoonBadge text={project.comingSoon} dark />
+              ) : (
+                <>
+                  <a
+                    href={project.primaryUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex h-12 items-center gap-2 rounded-full bg-[#ea4c89] px-6 text-sm font-semibold transition hover:bg-[#f082ac]"
+                  >
+                    {project.primaryLabel}
+                    <ArrowUpRight className="h-4 w-4" />
+                  </a>
+                  {project.secondaryUrl ? (
+                    <a
+                      href={project.secondaryUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex h-12 items-center gap-2 rounded-full bg-white px-6 text-sm font-semibold text-[#0d0c22] transition hover:bg-white/85"
+                    >
+                      {project.secondaryLabel}
+                      <ArrowUpRight className="h-4 w-4" />
+                    </a>
+                  ) : null}
+                  {project.extraLinks?.map((link) => (
+                    <a
+                      key={link.url}
+                      href={link.url}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex h-12 items-center gap-2 rounded-full bg-white px-6 text-sm font-semibold text-[#0d0c22] transition hover:bg-white/85"
+                    >
+                      {link.label}
+                      <ArrowUpRight className="h-4 w-4" />
+                    </a>
+                  ))}
+                </>
+              )}
               <button
                 type="button"
                 onClick={share}
@@ -765,5 +801,25 @@ export default function Product() {
         />
       ) : null}
     </div>
+  );
+}
+
+// Shown instead of store buttons while listings are pending review.
+function ComingSoonBadge({
+  text,
+  dark = false,
+}: {
+  text: string;
+  dark?: boolean;
+}) {
+  return (
+    <span
+      className={`inline-flex h-12 items-center gap-2 rounded-full px-6 text-sm font-semibold ${
+        dark ? "bg-white/10 text-white" : "bg-[#fdf2f7] text-[#c2386f]"
+      }`}
+    >
+      <Clock className="h-4 w-4" />
+      Coming soon · {text}
+    </span>
   );
 }

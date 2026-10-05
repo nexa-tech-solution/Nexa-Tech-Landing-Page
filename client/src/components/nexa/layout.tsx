@@ -121,9 +121,8 @@ export function ShotCard({
             </a>
             <div className="flex shrink-0 gap-2">
               <a
-                href={project.primaryUrl}
-                target="_blank"
-                rel="noreferrer"
+                href={project.comingSoon ? path : project.primaryUrl}
+                {...(project.comingSoon ? {} : { target: "_blank", rel: "noreferrer" })}
                 aria-label={`Open ${project.title}`}
                 className="grid h-9 w-9 place-items-center rounded-full bg-white text-[#0d0c22] transition hover:text-[#6e6d7a]"
               >

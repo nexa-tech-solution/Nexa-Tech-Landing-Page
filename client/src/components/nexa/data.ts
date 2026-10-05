@@ -9,6 +9,10 @@ export type Project = {
   primaryLabel: string;
   secondaryUrl?: string;
   secondaryLabel?: string;
+  // More places to get the product, e.g. the mobile apps of a web tool.
+  extraLinks?: Array<{ label: string; url: string }>;
+  // Set while store listings are pending (e.g. in review): CTAs show this instead of store links.
+  comingSoon?: string;
   marketing?: ProjectMarketing;
 };
 
@@ -142,7 +146,7 @@ export const projects: Project[] = [
       "Editorial product comparisons and practical recommendations for real households.",
     category: "Web",
     tech: ["React", "Next.js"],
-    image: "/graphic/the-home-versus.png",
+    image: "/graphic/the-home-versus.webp",
     primaryUrl: "https://thehomeversus.com/",
     primaryLabel: "Visit website",
     secondaryUrl: "https://github.com/nexa-tech-solution/the-home-versus",
@@ -320,7 +324,7 @@ export const projects: Project[] = [
       "An expressive virtual pet companion powered by conversational AI.",
     category: "Web",
     tech: ["Next.js", "Gemini", "Rive"],
-    image: "/graphic/petpal.png",
+    image: "/graphic/petpal.webp",
     primaryUrl: "https://pet-simulator-sigma.vercel.app/",
     primaryLabel: "Live demo",
     marketing: {
@@ -408,9 +412,18 @@ export const projects: Project[] = [
       "A private browser tool for fast image resizing, compression, and conversion.",
     category: "Web",
     tech: ["Web Tool", "Image Processing"],
-    image: "/graphic/resize-image.png",
+    image: "/graphic/resize-image.webp",
     primaryUrl: "https://resizeimage.tech/",
     primaryLabel: "Use tool",
+    secondaryUrl:
+      "https://play.google.com/store/apps/details?id=com.nexa.pdfresizer",
+    secondaryLabel: "Google Play",
+    extraLinks: [
+      {
+        label: "App Store",
+        url: "https://apps.apple.com/us/app/quick-image-pdf-resizer/id6780742651",
+      },
+    ],
     marketing: {
       aso: {
         title: "Resize Image",
@@ -470,6 +483,7 @@ export const projects: Project[] = [
         facts: [
           { label: "Category", value: "Browser tool" },
           { label: "Focus", value: "Privacy-friendly utility" },
+          { label: "Also on", value: "Android & iOS" },
         ],
       },
       narrative: {
@@ -497,7 +511,7 @@ export const projects: Project[] = [
       "Compare cities and time zones without the friction of manual calculations.",
     category: "Web",
     tech: ["React", "Productivity"],
-    image: "/graphic/time-converter.png",
+    image: "/graphic/time-converter.webp",
     primaryUrl: "https://time-converter-woad-iota.vercel.app/",
     primaryLabel: "Live demo",
     marketing: {
@@ -676,11 +690,13 @@ export const projects: Project[] = [
       "A playful virtual pet with chat, personality, and everyday interactions.",
     category: "Mobile",
     tech: ["React Native", "Gemini", "Rive"],
-    image: "/graphic/petpal.png",
+    image: "/graphic/petpal.webp",
     icon: "https://play-lh.googleusercontent.com/pIIQUTIv-UHpOuZ77_VbGz34Y3WsNTzM928j5KQUwg2-zcslt6CbKn-bEZXsqFCI3bQNWbEqQaD1EXdDyzrlSA=s512-rw",
     primaryUrl:
       "https://play.google.com/store/apps/details?id=com.pet_simulator",
     primaryLabel: "Google Play",
+    secondaryUrl: "https://apps.apple.com/vn/app/petpal-pet-simulator/id6797196347",
+    secondaryLabel: "App Store",
     marketing: {
       aso: {
         title: "PetPal",
@@ -740,6 +756,7 @@ export const projects: Project[] = [
         facts: [
           { label: "Category", value: "Mobile app" },
           { label: "Focus", value: "Pet simulation" },
+          { label: "Available on", value: "Android & iOS" },
         ],
       },
       narrative: {
@@ -765,7 +782,7 @@ export const projects: Project[] = [
     description: "A focused QR code and barcode scanner for Android and iOS.",
     category: "Mobile",
     tech: ["React Native", "Vision Camera", "QR Kit"],
-    image: "/graphic/scanqr.png",
+    image: "/graphic/scanqr.webp",
     icon: "https://play-lh.googleusercontent.com/d1AgNfOeL3vqVejG8bawDP8-oV3kNEpcSjJfBb_DfMu-yW8XyxyA_kZVrOB7WqgKKSdMvRX53CjmHpie6GlmbQ=s512-rw",
     primaryUrl:
       "https://play.google.com/store/apps/details?id=com.nexa.qr_code",
@@ -859,7 +876,7 @@ export const projects: Project[] = [
       "Capture photos with GPS stamps, project notes, and exportable location details.",
     category: "Mobile",
     tech: ["React Native", "GPS", "Camera", "PDF"],
-    image: "/graphic/fieldstamp-camera.png",
+    image: "/graphic/fieldstamp-camera.webp",
     icon: "https://play-lh.googleusercontent.com/rcjxgvm0yq0v2sX5dtysxLmIlA54sryED14MNtuMtJKuyzpv_mfp7wUThMWmoMjqT1j3cq-5gE9VF3_3ncV14g=w480-h960-rw",
     primaryUrl:
       "https://play.google.com/store/apps/details?id=com.fieldstamp.free",
@@ -954,7 +971,7 @@ export const projects: Project[] = [
       "Fast exchange-rate conversion with useful offline calculations.",
     category: "Mobile",
     tech: ["React Native", "Currency", "Offline"],
-    image: "/graphic/currency-converter.png",
+    image: "/graphic/currency-converter.webp",
     icon: "https://play-lh.googleusercontent.com/6ozMZAiEX_Jh0K-7hia9_HT8AASk1k-GRTAXdv7HGxra1YplyvBJnDVDkkllYp0OG8UJ173IPwcO8FrTjLGtiQ=s512-rw",
     primaryUrl:
       "https://play.google.com/store/apps/details?id=com.currencyunitconverter",
@@ -1143,7 +1160,7 @@ export const projects: Project[] = [
       "Plan meetings and travel across global time zones from your phone.",
     category: "Mobile",
     tech: ["React Native", "Time Zones", "Productivity"],
-    image: "/graphic/time-converter.png",
+    image: "/graphic/time-converter.webp",
     icon: "https://play-lh.googleusercontent.com/QdmzxZ2aJk2Z0kf4iwcgllNiprRjlg5niRDdVNGRZNSscq_SURIMbRsijIM7IMfE1mKaU48E-ndA84eWmXkd1A=s512-rw",
     primaryUrl:
       "https://play.google.com/store/apps/details?id=nexa.timeconverter.com",
@@ -1238,7 +1255,7 @@ export const projects: Project[] = [
       "Resize images, compress files, convert formats, and handle common PDF tasks.",
     category: "Mobile",
     tech: ["React Native", "PDF", "Image Tools"],
-    image: "/graphic/resize-image.png",
+    image: "/graphic/resize-image.webp",
     icon: "https://play-lh.googleusercontent.com/bT-I_LW96dpNyK9z69tAz4StNGneXqKACXqjXNgdOBILI43yfS8ny6DGZshmUNL-DvaQwtItdRBUaCTAC08Tqw=s512-rw",
     primaryUrl:
       "https://play.google.com/store/apps/details?id=com.nexa.pdfresizer",
@@ -1333,8 +1350,8 @@ export const projects: Project[] = [
       "A mobile lecture recorder with smart bookmarks, playback controls, and optional AI transcription.",
     category: "Mobile",
     tech: ["React Native", "Groq", "AI Transcription"],
-    image: "/graphic/ai-lecture-recorder.png",
-    icon: "/graphic/ai-lecture-recorder-icon.png",
+    image: "/graphic/ai-lecture-recorder.webp",
+    icon: "/graphic/ai-lecture-recorder-icon.webp",
     primaryUrl:
       "https://play.google.com/store/apps/details?id=com.nexa.ai_lecture_recorder",
     primaryLabel: "Google Play",
@@ -1424,7 +1441,7 @@ export const projects: Project[] = [
       "A horror chat-story app where scary episodes unfold through text conversations and interactive choices.",
     category: "Mobile",
     tech: ["React Native", "Chat Stories", "Interactive Fiction"],
-    image: "/graphic/horror-chat-stories.png",
+    image: "/graphic/horror-chat-stories.webp",
     icon: "https://play-lh.googleusercontent.com/Wkf--Ja2AYnCIpTeZD-G-8W53s8K_tdLPJiV6Qx6BG7AwAMX8t3bQPBHYtNnRaxr5lwY1Z_CeLu2Da1-9otJ=w240-h480-rw",
     primaryUrl:
       "https://play.google.com/store/apps/details?id=com.nexa.horror.story",
@@ -1518,7 +1535,7 @@ export const projects: Project[] = [
       "A beauty ingredient scanner that helps users upload products, extract ingredients, and understand safety instantly.",
     category: "Mobile",
     tech: ["React Native", "OCR", "Safety Analysis"],
-    image: "/graphic/ingredient-scanner.png",
+    image: "/graphic/ingredient-scanner.webp",
     icon: "https://play-lh.googleusercontent.com/wpGx2feGBhjWo348pHsnDCrUmrThcZx5D09UJGs-MjbTNCX1-Y5h6qaFvpoc8vTZmkMDoAVJsTt8hZ47d7FEGGE=w240-h480-rw",
     primaryUrl:
       "https://play.google.com/store/apps/details?id=com.nexa.ingredientscanner",
@@ -1604,12 +1621,118 @@ export const projects: Project[] = [
     },
   },
   {
+    title: "CleanMaster",
+    description:
+      "Free up phone storage with a guided smart cleaner, a file manager, and a private vault.",
+    category: "Mobile",
+    tech: ["React Native", "Storage Cleaner", "Privacy"],
+    image: "/graphic/cleanmaster.webp",
+    icon: "/graphic/cleanmaster-icon.webp",
+    // No public listing yet; points back to the case study until the stores approve it.
+    primaryUrl: "/work/cleanmaster",
+    primaryLabel: "Coming soon",
+    comingSoon: "In review on the App Store & Google Play",
+    marketing: {
+      aso: {
+        title: "CleanMaster: Free Up Space",
+        subtitle: "More space. Less clutter",
+        keywords: [
+          "phone cleaner",
+          "free up space",
+          "storage cleaner",
+          "duplicate photos",
+          "file manager",
+          "private vault",
+        ],
+        description:
+          "Clean up similar photos, screenshots, big videos and duplicate contacts, manage files, and lock personal files in a private vault.",
+      },
+      seo: {
+        title: "CleanMaster | Free Up Phone Storage, Files & Private Vault",
+        description:
+          "CleanMaster frees up phone storage with a review-first smart cleaner, a simple file manager, and a PIN-locked private vault for personal files.",
+        keywords: [
+          "phone storage cleaner",
+          "free up space app",
+          "similar photos cleaner",
+          "file manager app",
+          "private photo vault",
+        ],
+      },
+      geo: {
+        summary:
+          "CleanMaster is a mobile storage app that finds similar photos, screenshots, big videos and duplicate contacts to clear, lets users browse and manage files, and keeps personal files in a locked private vault. Nothing is deleted without confirmation.",
+        prompts: [
+          "Which app helps free up phone storage safely?",
+          "How do I find similar photos and big videos to delete on my phone?",
+          "What app can hide personal photos and documents behind a PIN?",
+        ],
+      },
+      faq: [
+        {
+          question: "What does CleanMaster clean?",
+          answer:
+            "It suggests similar photos, screenshots, big videos and duplicate contacts you can clear to free up space.",
+        },
+        {
+          question: "Will it delete files without asking?",
+          answer:
+            "No. You pick what to clear and confirm before anything is deleted.",
+        },
+        {
+          question: "What is the private vault?",
+          answer:
+            "A locked space for IDs, cards, photos, videos, notes and documents, with auto-lock, unlock history and an optional intruder photo.",
+        },
+        {
+          question: "When will it be available?",
+          answer:
+            "CleanMaster is currently in review on the App Store and Google Play.",
+        },
+      ],
+      store: {
+        platform: "App Store",
+        listingName: "CleanMaster",
+        summary:
+          "A friendly storage companion, Nova, that shows your phone storage at a glance, suggests what to clean, organises files and protects private ones in a vault.",
+        highlights: [
+          "Review-first smart cleanup",
+          "File manager for documents, media and audio",
+          "Private vault with auto-lock",
+        ],
+        facts: [
+          { label: "Category", value: "Utilities / Productivity" },
+          { label: "Focus", value: "Storage cleanup and privacy" },
+          { label: "Status", value: "In review" },
+          { label: "Platforms", value: "Android & iOS" },
+        ],
+      },
+      narrative: {
+        idea:
+          "The idea is a calm storage companion: show where space goes, suggest easy wins, and never delete anything the user has not reviewed.",
+        need:
+          "Phones fill up with similar shots, screenshots and long videos, and many cleaner apps feel aggressive or opaque about what they remove.",
+        targetUsers: [
+          "People who keep running out of phone storage",
+          "Users with large photo and video libraries",
+          "Anyone who wants personal files behind a lock",
+        ],
+        useCases: [
+          "Clearing similar photos, screenshots and big videos",
+          "Merging duplicate contacts",
+          "Finding, renaming, sharing and organising files",
+          "Keeping IDs, cards and private photos in a vault",
+        ],
+      },
+    },
+  },
+  {
     title: "Coloring Book: Paint & Draw",
     description:
       "A cute coloring app for kids with drawing tools, stickers, and easy save-and-share artwork.",
     category: "Mobile",
     tech: ["React Native", "Drawing Tools", "Kids Creativity"],
-    image: "/graphic/coloring-book-paint-draw.png",
+    image: "/graphic/coloring-book-paint-draw.webp",
     icon: "https://play-lh.googleusercontent.com/Vi_ZJJSwFuj0BCrm3bzexFchuoLH8QikiFJYOICW0RE2YLm32UUvl0eOu5Vu1d0tOxYl074WqqWdtXNkNdIAgA=w240-h480-rw",
     primaryUrl:
       "https://play.google.com/store/apps/details?id=com.nexa.coloring",
@@ -1703,7 +1826,7 @@ export const projects: Project[] = [
       "A lightweight Chrome extension for comparing time zones while you work.",
     category: "Extension",
     tech: ["Chrome Extension", "Time Zones", "Productivity"],
-    image: "/graphic/time-converter-extension.png",
+    image: "/graphic/time-converter-extension.webp",
     primaryUrl:
       "https://chromewebstore.google.com/detail/world-time-buddy/mmlplefhfbacmbebleofnfligokkaljh",
     primaryLabel: "Chrome Web Store",
