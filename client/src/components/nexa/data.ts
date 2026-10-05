@@ -59,6 +59,7 @@ export const projects: Project[] = [
     category: "Library",
     tech: ["React Native", "TypeScript", "File System"],
     image: "/generated-products/react-native-simple-fs.png",
+    icon: "/favicon.png",
     primaryUrl: "https://www.npmjs.com/package/react-native-simple-fs",
     primaryLabel: "npm package",
     marketing: {
@@ -147,6 +148,7 @@ export const projects: Project[] = [
     category: "Web",
     tech: ["React", "Next.js"],
     image: "/graphic/the-home-versus.webp",
+    icon: "/graphic/icons/the-home-versus.png",
     primaryUrl: "https://thehomeversus.com/",
     primaryLabel: "Visit website",
     secondaryUrl: "https://github.com/nexa-tech-solution/the-home-versus",
@@ -601,7 +603,7 @@ export const projects: Project[] = [
     category: "Mobile",
     tech: ["React Native", "Redux", "AI"],
     image: "/graphic/tarot-destiny.webp",
-    icon: "https://play-lh.googleusercontent.com/T7ggFDyRA1egiQtJNYeAtG911bTUNhtvni3wbD1QJSITKmcVtvf8xT4sp1GXsQAzG0_MlVe3IfLxxOdG_orEVg=s512-rw",
+    icon: "/graphic/icons/tarot-destiny.webp",
     primaryUrl:
       "https://play.google.com/store/apps/details?id=com.nexa_tarrot_app",
     primaryLabel: "Google Play",
@@ -691,7 +693,7 @@ export const projects: Project[] = [
     category: "Mobile",
     tech: ["React Native", "Gemini", "Rive"],
     image: "/graphic/petpal.webp",
-    icon: "https://play-lh.googleusercontent.com/pIIQUTIv-UHpOuZ77_VbGz34Y3WsNTzM928j5KQUwg2-zcslt6CbKn-bEZXsqFCI3bQNWbEqQaD1EXdDyzrlSA=s512-rw",
+    icon: "/graphic/icons/petpal-pet-simulator.webp",
     primaryUrl:
       "https://play.google.com/store/apps/details?id=com.pet_simulator",
     primaryLabel: "Google Play",
@@ -783,7 +785,7 @@ export const projects: Project[] = [
     category: "Mobile",
     tech: ["React Native", "Vision Camera", "QR Kit"],
     image: "/graphic/scanqr.webp",
-    icon: "https://play-lh.googleusercontent.com/d1AgNfOeL3vqVejG8bawDP8-oV3kNEpcSjJfBb_DfMu-yW8XyxyA_kZVrOB7WqgKKSdMvRX53CjmHpie6GlmbQ=s512-rw",
+    icon: "/graphic/icons/scanqr.webp",
     primaryUrl:
       "https://play.google.com/store/apps/details?id=com.nexa.qr_code",
     primaryLabel: "Google Play",
@@ -877,7 +879,7 @@ export const projects: Project[] = [
     category: "Mobile",
     tech: ["React Native", "GPS", "Camera", "PDF"],
     image: "/graphic/fieldstamp-camera.webp",
-    icon: "https://play-lh.googleusercontent.com/rcjxgvm0yq0v2sX5dtysxLmIlA54sryED14MNtuMtJKuyzpv_mfp7wUThMWmoMjqT1j3cq-5gE9VF3_3ncV14g=w480-h960-rw",
+    icon: "/graphic/icons/fieldstamp-gps-camera.webp",
     primaryUrl:
       "https://play.google.com/store/apps/details?id=com.fieldstamp.free",
     primaryLabel: "Google Play",
@@ -972,7 +974,7 @@ export const projects: Project[] = [
     category: "Mobile",
     tech: ["React Native", "Currency", "Offline"],
     image: "/graphic/currency-converter.webp",
-    icon: "https://play-lh.googleusercontent.com/6ozMZAiEX_Jh0K-7hia9_HT8AASk1k-GRTAXdv7HGxra1YplyvBJnDVDkkllYp0OG8UJ173IPwcO8FrTjLGtiQ=s512-rw",
+    icon: "/graphic/icons/smart-currency-converter.webp",
     primaryUrl:
       "https://play.google.com/store/apps/details?id=com.currencyunitconverter",
     primaryLabel: "Google Play",
@@ -1067,7 +1069,7 @@ export const projects: Project[] = [
     category: "Mobile",
     tech: ["React Native", "Finance", "PDF"],
     image: "/graphic/easy-loan-calculator.webp",
-    icon: "https://play-lh.googleusercontent.com/c1AnZ1m1ZmxKL7ddoShW3nmHEU2-uhjY7w0xndohbvOAxkwXTdIOu7tSYlQNRkAubkZcpmz7e0_2XXMiGS7KCg=s512-rw",
+    icon: "/graphic/icons/loan-estimator.webp",
     primaryUrl:
       "https://play.google.com/store/apps/details?id=com.nexa.loan.estimator",
     primaryLabel: "Google Play",
@@ -1161,7 +1163,7 @@ export const projects: Project[] = [
     category: "Mobile",
     tech: ["React Native", "Time Zones", "Productivity"],
     image: "/graphic/time-converter.webp",
-    icon: "https://play-lh.googleusercontent.com/QdmzxZ2aJk2Z0kf4iwcgllNiprRjlg5niRDdVNGRZNSscq_SURIMbRsijIM7IMfE1mKaU48E-ndA84eWmXkd1A=s512-rw",
+    icon: "/graphic/icons/time-converter-world-clock.webp",
     primaryUrl:
       "https://play.google.com/store/apps/details?id=nexa.timeconverter.com",
     primaryLabel: "Google Play",
@@ -1256,7 +1258,7 @@ export const projects: Project[] = [
     category: "Mobile",
     tech: ["React Native", "PDF", "Image Tools"],
     image: "/graphic/resize-image.webp",
-    icon: "https://play-lh.googleusercontent.com/bT-I_LW96dpNyK9z69tAz4StNGneXqKACXqjXNgdOBILI43yfS8ny6DGZshmUNL-DvaQwtItdRBUaCTAC08Tqw=s512-rw",
+    icon: "/graphic/icons/quick-image-pdf-resizer.webp",
     primaryUrl:
       "https://play.google.com/store/apps/details?id=com.nexa.pdfresizer",
     primaryLabel: "Google Play",
@@ -1442,7 +1444,7 @@ export const projects: Project[] = [
     category: "Mobile",
     tech: ["React Native", "Chat Stories", "Interactive Fiction"],
     image: "/graphic/horror-chat-stories.webp",
-    icon: "https://play-lh.googleusercontent.com/Wkf--Ja2AYnCIpTeZD-G-8W53s8K_tdLPJiV6Qx6BG7AwAMX8t3bQPBHYtNnRaxr5lwY1Z_CeLu2Da1-9otJ=w240-h480-rw",
+    icon: "/graphic/icons/horror-chat-stories.webp",
     primaryUrl:
       "https://play.google.com/store/apps/details?id=com.nexa.horror.story",
     primaryLabel: "Google Play",
@@ -1536,7 +1538,7 @@ export const projects: Project[] = [
     category: "Mobile",
     tech: ["React Native", "OCR", "Safety Analysis"],
     image: "/graphic/ingredient-scanner.webp",
-    icon: "https://play-lh.googleusercontent.com/wpGx2feGBhjWo348pHsnDCrUmrThcZx5D09UJGs-MjbTNCX1-Y5h6qaFvpoc8vTZmkMDoAVJsTt8hZ47d7FEGGE=w240-h480-rw",
+    icon: "/graphic/icons/ingredient-scanner.webp",
     primaryUrl:
       "https://play.google.com/store/apps/details?id=com.nexa.ingredientscanner",
     primaryLabel: "Google Play",
@@ -1733,7 +1735,7 @@ export const projects: Project[] = [
     category: "Mobile",
     tech: ["React Native", "Drawing Tools", "Kids Creativity"],
     image: "/graphic/coloring-book-paint-draw.webp",
-    icon: "https://play-lh.googleusercontent.com/Vi_ZJJSwFuj0BCrm3bzexFchuoLH8QikiFJYOICW0RE2YLm32UUvl0eOu5Vu1d0tOxYl074WqqWdtXNkNdIAgA=w240-h480-rw",
+    icon: "/graphic/icons/coloring-book-paint-and-draw.webp",
     primaryUrl:
       "https://play.google.com/store/apps/details?id=com.nexa.coloring",
     primaryLabel: "Google Play",
@@ -1827,6 +1829,7 @@ export const projects: Project[] = [
     category: "Extension",
     tech: ["Chrome Extension", "Time Zones", "Productivity"],
     image: "/graphic/time-converter-extension.webp",
+    icon: "/graphic/icons/world-time-buddy.png",
     primaryUrl:
       "https://chromewebstore.google.com/detail/world-time-buddy/mmlplefhfbacmbebleofnfligokkaljh",
     primaryLabel: "Chrome Web Store",
