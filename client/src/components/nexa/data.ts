@@ -1947,24 +1947,34 @@ export type FaqItem = {
 
 export const faqItems: FaqItem[] = [
   {
-    question: "What does Nexa Tech build?",
+    question: "What is Nexa Tech?",
     answer:
-      "Nexa Tech builds React Native apps, web products, open-source tools, and product showcases for real users.",
+      "Nexa Tech is a small, independent product team. We design, build, and maintain our own mobile apps, web products, and open-source tools, and we care about software that is simple, fast, and genuinely useful.",
   },
   {
-    question: "What is react-native-simple-fs?",
+    question: "What kind of products do you build?",
     answer:
-      "react-native-simple-fs is a lightweight file-system library for React Native that supports storage, file access, and export flows.",
+      "We focus on practical everyday tools across mobile and web, plus developer libraries we use ourselves. Every product starts from a real problem and ships only when it solves it cleanly.",
   },
   {
-    question: "Do you ship both mobile and web products?",
+    question: "How do you approach privacy and user data?",
     answer:
-      "Yes. The portfolio includes mobile apps, web products, browser tools, and a React Native library showcase.",
+      "We collect as little as possible. Where we can, data stays on your device, and each product has its own clear privacy policy and terms of use that explain exactly what is handled and why.",
   },
   {
-    question: "How can someone contact the team?",
+    question: "Are your products actively maintained?",
     answer:
-      "The fastest way is by email at cs.nexatech@gmail.com, or through the GitHub and LinkedIn links in the footer.",
+      "Yes. We keep shipping updates, fixing issues, and improving performance based on real user feedback. Our roadmap shows what we are working on next.",
+  },
+  {
+    question: "Can I share feedback or report a problem?",
+    answer:
+      "Absolutely. Feedback shapes what we build. Email us at cs.nexatech@gmail.com and the team will get back to you as soon as possible.",
+  },
+  {
+    question: "Are you open to partnerships or collaboration?",
+    answer:
+      "We are always happy to talk with people who share our focus on well-crafted software. Reach out by email or through the GitHub and LinkedIn links in the footer.",
   },
 ];
 

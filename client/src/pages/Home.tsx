@@ -343,7 +343,8 @@ export default function Home() {
           <div className="mx-auto max-w-[900px]">
             <div className="text-center">
               <p className="kicker">FAQ</p>
-              <h2 className="section-title mt-3">Common questions</h2>
+              <h2 className="section-title mt-3">Questions before we build?</h2>
+              <p className="mx-auto mt-4 max-w-[560px] text-muted-foreground">Who we are, how we build, and how to reach the team behind Nexa.</p>
             </div>
             <div className="mt-12 grid gap-3">
               {faqItems.map((item) => (
