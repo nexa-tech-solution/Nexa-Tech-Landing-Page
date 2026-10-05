@@ -10,7 +10,7 @@ export const DEFAULT_TITLE =
   "Nexa Tech | React Native, Web & Mobile Product Studio";
 export const DEFAULT_DESCRIPTION =
   "Nexa Tech builds shipping-ready React Native apps, web products, browser tools, and open-source libraries for real users.";
-export const DEFAULT_OG_IMAGE = "/opengraph.jpg";
+export const DEFAULT_OG_IMAGE = "/opengraph.jpg?v=2";
 export const DEFAULT_LOGO_IMAGE = "/favicon.png";
 export const DEFAULT_OG_IMAGE_ALT =
   "Nexa Tech showcase featuring apps, tools, and team";

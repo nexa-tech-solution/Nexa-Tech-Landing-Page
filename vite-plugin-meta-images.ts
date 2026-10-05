@@ -36,8 +36,8 @@ export function metaImagesPlugin(): Plugin {
       }
 
       const imageUrl = baseUrl
-        ? `${baseUrl}/opengraph.${imageExt}`
-        : `/opengraph.${imageExt}`;
+        ? `${baseUrl}/opengraph.${imageExt}?v=2`
+        : `/opengraph.${imageExt}?v=2`;
       const logoUrl = baseUrl
         ? `${baseUrl}/favicon.png`
         : '/favicon.png';
