@@ -446,8 +446,14 @@
 /* ---------- Diagrams ---------- */
 /* <figure class="diagram">…one of the blocks below…<figcaption>…</figcaption></figure> */
 
-.post-body figure.diagram { margin-block: 3rem; }
-@media (min-width: 768px) { .post-body figure.diagram { margin-inline: -4rem; } }
+/* Diagrams bleed past the text column by --bleed, but only into space that exists:
+   on tablets that is whatever margin the 680px column leaves (minus a gutter), and
+   next to the table of contents (lg+) it must stay inside the 3rem grid gap. */
+.post-body figure.diagram { --bleed: 0px; margin-block: 3rem; margin-inline: calc(-1 * var(--bleed)); }
+@media (min-width: 768px) {
+  .post-body figure.diagram { --bleed: clamp(0px, (100vw - 680px) / 2 - 1.5rem, 4rem); }
+}
+@media (min-width: 1024px) { .post-body figure.diagram { --bleed: 2rem; } }
 .post-body figure.diagram > :not(figcaption) {
   border-radius: 18px;
   background: var(--cream);
@@ -461,7 +467,8 @@
   font-size: 14px;
   line-height: 1.6;
 }
-@media (min-width: 768px) { .post-body figure.diagram figcaption { padding-inline: 4rem; } }
+/* Caption lines up with the text column, not the bled-out figure. */
+.post-body figure.diagram figcaption { padding-inline: var(--bleed); }
 .post-body figure.diagram figcaption::before {
   counter-increment: fig;
   content: "Fig. " counter(fig);

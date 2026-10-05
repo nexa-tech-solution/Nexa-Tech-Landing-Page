@@ -161,7 +161,7 @@ export default function BlogPost() {
 
             <CoverFigure key={post.cover} src={post.cover} />
 
-            <div className="mt-12 md:mt-16 lg:grid lg:grid-cols-[minmax(0,1fr)_680px_minmax(0,1fr)] lg:gap-12">
+            <div className="mt-12 md:mt-16 lg:grid lg:grid-cols-[200px_minmax(0,680px)] lg:justify-center lg:gap-12 xl:grid-cols-[minmax(0,1fr)_680px_minmax(0,1fr)]">
               <aside className="hidden lg:block">
                 <div className="sticky top-28">
                   <TableOfContents items={toc} />
