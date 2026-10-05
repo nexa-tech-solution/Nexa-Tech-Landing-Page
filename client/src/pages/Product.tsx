@@ -6,6 +6,7 @@ import {
   getRelatedProjects,
   projects,
 } from "@/components/nexa/data";
+import { CtaBackdrop } from "@/components/nexa/cta-backgrounds";
 import { galleries, type GalleryImage } from "@/components/nexa/gallery";
 import {
   ProjectAvatar,
@@ -187,7 +188,7 @@ function Shot({
   }
   return (
     <div
-      className={`overflow-hidden ring-1 ring-black/5 ${isTall(image) ? "rounded-[1.75rem] shadow-[0_20px_60px_rgba(13,12,34,0.15)]" : "rounded-2xl"}`}
+      className={`overflow-hidden ring-1 ring-black/[0.06] ${isTall(image) ? "rounded-[1.6rem] shadow-[0_24px_48px_-20px_rgba(13,12,34,0.35)]" : "rounded-2xl shadow-[0_24px_48px_-24px_rgba(13,12,34,0.3)]"}`}
     >
       {img}
     </div>
@@ -314,19 +315,40 @@ function Screens({
             key={screen.image.src}
             className="grid grid-cols-1 items-center gap-10 md:grid-cols-2 md:gap-16"
           >
-            <Stage
-              dark={dark}
-              glow={glow}
-              className={`grid place-items-center px-6 py-12 ${flip ? "md:order-2" : ""}`}
-            >
-              <div className="w-full max-w-[280px]">
-                <Shot
-                  screen={screen}
-                  url={url}
-                  onOpen={() => onOpen(screen.image)}
+            {isCapture(screen.image) ? (
+              <Stage
+                dark={dark}
+                glow={glow}
+                className={`grid place-items-center px-6 py-12 ${flip ? "md:order-2" : ""}`}
+              >
+                <div className="w-full max-w-[280px]">
+                  <Shot
+                    screen={screen}
+                    url={url}
+                    onOpen={() => onOpen(screen.image)}
+                  />
+                </div>
+              </Stage>
+            ) : (
+              // Store shots already carry their own background; a second card around
+              // them clashes. Float them on the page with a soft glow of their own colour.
+              <div
+                className={`relative grid place-items-center py-4 ${flip ? "md:order-2" : ""}`}
+              >
+                <div
+                  aria-hidden
+                  className="absolute left-1/2 top-1/2 h-[70%] w-[70%] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-60 blur-3xl"
+                  style={{ background: screen.image.tone }}
                 />
+                <div className="relative w-full max-w-[300px]">
+                  <Shot
+                    screen={screen}
+                    url={url}
+                    onOpen={() => onOpen(screen.image)}
+                  />
+                </div>
               </div>
-            </Stage>
+            )}
             <Caption index={index} screen={screen} />
           </div>
         );
@@ -337,12 +359,14 @@ function Screens({
           <p className="font-display text-2xl font-bold tracking-[-0.03em]">
             More screens
           </p>
-          <div className="-mx-5 mt-6 overflow-x-auto px-5 pb-3 md:mx-0 md:px-0">
-            <div className="flex snap-x gap-5">
+          {/* Mobile: swipeable row, padded so shadows aren't clipped by the scroller.
+              md+: a grid, which needs no scroller at all. */}
+          <div className="-mx-5 overflow-x-auto px-5 pb-10 pt-6 md:mx-0 md:overflow-visible md:px-0 md:pb-0 md:pt-8">
+            <div className="flex snap-x snap-mandatory gap-4 md:grid md:grid-cols-[repeat(auto-fill,minmax(190px,1fr))] md:gap-6">
               {rest.map((screen) => (
                 <div
                   key={screen.image.src}
-                  className={`shrink-0 snap-start ${isTall(screen.image) ? "w-[220px]" : "w-[480px]"}`}
+                  className={`shrink-0 snap-start ${isTall(screen.image) ? "w-[200px] md:w-auto" : "w-[420px] md:col-span-2 md:w-auto"}`}
                 >
                   <Shot
                     screen={screen}
@@ -399,6 +423,9 @@ export default function Product() {
   const relatedProjects = getRelatedProjects(project, 4);
   const image = project.image ?? DEFAULT_OG_IMAGE;
   const gallery = galleries[getProjectSlug(project)] ?? [];
+  // Each product gets its own CTA backdrop, tinted with its screenshots' colour.
+  const ctaIndex = projects.indexOf(project);
+  const ctaAccent = gallery.length ? glowOf(gallery) : "234, 76, 137";
   const { likes, views } = shotStats(project.title);
   // Web builds often share artwork with their app twin; borrow its icon.
   const avatarProject = project.icon
@@ -687,19 +714,12 @@ export default function Product() {
             ) : null}
           </div>
 
-          <section className="relative isolate mt-24 overflow-hidden rounded-3xl bg-[#0d0c22] bg-[url('/videos/cta-particles.jpg')] bg-cover bg-center px-6 py-14 text-center text-white md:mt-32 md:py-24">
-            <video
-              className="absolute inset-0 -z-10 h-full w-full object-cover motion-reduce:hidden"
-              src="/videos/cta-particles.mp4"
-              poster="/videos/cta-particles.jpg"
-              autoPlay
-              loop
-              muted
-              playsInline
-              preload="none"
-              aria-hidden="true"
+          <section className="relative isolate mt-24 overflow-hidden rounded-3xl bg-[#0d0c22] px-6 py-14 text-center text-white md:mt-32 md:py-24">
+            <CtaBackdrop
+              index={ctaIndex}
+              accent={ctaAccent}
+              seed={getProjectSlug(project)}
             />
-            <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_center,rgba(13,12,34,0.6),rgba(13,12,34,0.85))]" />
             <ProjectAvatar
               project={avatarProject}
               className="mx-auto h-16 w-16 text-lg"

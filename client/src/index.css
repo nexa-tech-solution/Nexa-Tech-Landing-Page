@@ -284,3 +284,25 @@
     animation: none;
   }
 }
+
+/* "Try {product}" CTA backdrops (components/nexa/cta-backgrounds.tsx) */
+@keyframes cta-drift {
+  0% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(8%, 10%, 0) scale(1.15); }
+  100% { transform: translate3d(-6%, -4%, 0) scale(0.95); }
+}
+@keyframes cta-wave {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+@keyframes cta-grid {
+  from { background-position: 0 0; }
+  to { background-position: 0 48px; }
+}
+@keyframes cta-float {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(12px, -28px, 0); }
+}
+@keyframes cta-spin {
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
