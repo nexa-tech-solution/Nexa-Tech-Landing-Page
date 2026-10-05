@@ -7,6 +7,7 @@ import {
 } from "@/components/nexa/data";
 import { ShotCard, SiteFooter, SiteHeader } from "@/components/nexa/layout";
 import { Roadmap } from "@/components/nexa/roadmap";
+import { TechMarquee } from "@/components/nexa/tech-marquee";
 import { CountUp } from "@/components/nexa/count-up";
 import {
   EMPTY_FILTERS,
@@ -287,6 +288,18 @@ export default function Home() {
 
             <Roadmap />
           </div>
+        </section>
+
+        <section id="stack" className="py-24">
+          <div className="mx-auto max-w-[1200px] px-5 text-center md:px-10">
+            <p className="kicker">Our stack</p>
+            <h2 className="section-title mt-3">Tools we build with</h2>
+            <p className="mx-auto mt-4 max-w-[560px] text-lg leading-8 text-[#3d3d4e]">
+              One shared TypeScript codebase across mobile and web, so every
+              product ships faster and stays easy to maintain.
+            </p>
+          </div>
+          <TechMarquee />
         </section>
 
         <section id="team" className="px-5 py-24 md:px-10">

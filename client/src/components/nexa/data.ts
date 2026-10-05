@@ -2067,9 +2067,10 @@ export const roadmap: RoadmapPhase[] = [
   {
     period: "Next",
     status: "planned",
-    title: "Building with partners",
+    title: "Launching next, building with partners",
     summary:
-      "Taking what we learned shipping our own products into work for clients, while keeping our apps growing.",
+      "CleanMaster is in store review now. After that, we take what we learned shipping our own products into work for clients, while keeping our apps growing.",
+    projects: ["CleanMaster"],
     plans: [
       "Client and partner product builds",
       "More open-source packages from our shared code",

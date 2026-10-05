@@ -35,6 +35,11 @@ function ProjectChip({ title }: { title: string }) {
         className="h-5 w-5 text-[8px]"
       />
       {shortName(project.title)}
+      {project.comingSoon ? (
+        <span className="rounded-full bg-[#fde2ee] px-1.5 text-[10px] font-semibold text-[#ea4c89]">
+          Soon
+        </span>
+      ) : null}
     </a>
   );
 }

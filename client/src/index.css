@@ -306,3 +306,32 @@
 @keyframes cta-spin {
   to { transform: translate(-50%, -50%) rotate(360deg); }
 }
+
+/* Tech stack marquee: infinite horizontal scroll, faded edges, pause on hover. */
+@keyframes tech-scroll {
+  to {
+    transform: translateX(calc(-50% - 0.5rem));
+  }
+}
+
+.tech-marquee-row {
+  mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent);
+}
+
+.tech-marquee-track {
+  animation: tech-scroll 40s linear infinite;
+}
+
+.tech-marquee-reverse {
+  animation-direction: reverse;
+}
+
+.tech-marquee:hover .tech-marquee-track {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tech-marquee-track {
+    animation: none;
+  }
+}
