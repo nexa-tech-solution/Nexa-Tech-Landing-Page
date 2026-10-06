@@ -4,6 +4,7 @@ import Home from "@/pages/Home";
 import Product from "@/pages/Product";
 import Dashboard from "@/pages/Dashboard";
 import Blog from "@/pages/Blog";
+import Services from "@/pages/Services";
 import BlogPost from "@/pages/BlogPost";
 import NotFound from "@/pages/not-found";
 
@@ -96,6 +97,7 @@ function Router() {
         <Route path="/dashboard" component={Dashboard} />
         <Route path="/dashboard/settings" component={Dashboard} />
         <Route path="/work/:slug" component={Product} />
+        <Route path="/services" component={Services} />
         <Route path="/blog" component={Blog} />
         <Route path="/blog/:slug" component={BlogPost} />
         <Route path="/" component={Home} />

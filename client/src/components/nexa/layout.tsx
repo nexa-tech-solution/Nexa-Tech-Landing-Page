@@ -15,6 +15,7 @@ import { ChatLauncher } from "@/components/nexa/chat-launcher";
 
 export const navLinks = [
   ["Explore", "/#work"],
+  ["Services", "/services"],
   ["About", "/#about"],
   ["Team", "/#team"],
   ["FAQ", "/#faq"],

@@ -335,3 +335,39 @@
     animation: none;
   }
 }
+
+/* Services page: animated dashed connectors between flow nodes */
+.flow-line {
+  background-image: linear-gradient(to bottom, #ea4c89 50%, transparent 50%);
+  background-size: 2px 10px;
+  animation: flow-v 0.8s linear infinite;
+}
+@media (min-width: 768px) {
+  .flow-line {
+    background-image: linear-gradient(to right, #ea4c89 50%, transparent 50%);
+    background-size: 10px 2px;
+    animation-name: flow-h;
+  }
+}
+@keyframes flow-v { to { background-position: 0 10px; } }
+@keyframes flow-h { to { background-position: 10px 0; } }
+@keyframes flow-travel { from { left: 0; } to { left: 100%; } }
+@media (prefers-reduced-motion: reduce) {
+  .flow-line { animation: none; }
+}
+@keyframes tab-progress { from { width: 0; } to { width: 100%; } }
+
+/* Service workflow scenes */
+@keyframes scene-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+@keyframes scene-grow { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+@keyframes scene-fill { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes scene-click { 0%, 60% { opacity: 0; transform: scale(1.6); } 75% { opacity: 1; transform: scale(0.9); } 100% { opacity: 1; transform: scale(1); } }
+.scene-in { animation: scene-in 520ms cubic-bezier(0.22, 1, 0.36, 1) both; }
+.scene-grow { animation: scene-grow 700ms cubic-bezier(0.22, 1, 0.36, 1) both; }
+.scene-fill { animation: scene-fill 1100ms cubic-bezier(0.22, 1, 0.36, 1) both; }
+.scene-click { animation: scene-click 1200ms cubic-bezier(0.22, 1, 0.36, 1) both; }
+@media (prefers-reduced-motion: reduce) {
+  .scene-in, .scene-grow, .scene-fill, .scene-click { animation: none; }
+}
+@keyframes scene-draw { from { stroke-dasharray: 400; stroke-dashoffset: 400; } to { stroke-dasharray: 400; stroke-dashoffset: 0; } }
+.scene-draw { animation: scene-draw 1400ms cubic-bezier(0.22, 1, 0.36, 1) both; }
