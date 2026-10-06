@@ -47,6 +47,16 @@ type PostMeta = {
 // Newest first, as the list endpoint would return them.
 const meta: PostMeta[] = [
   {
+    slug: "ai-features-without-a-surprise-bill",
+    title: "Adding AI to an app without a surprise bill",
+    excerpt:
+      "Most of the cost of an AI feature is decided before the first request. Model routing, caching, context size and hard limits, in order of impact.",
+    tag: "Engineering",
+    publishedAt: "2026-10-07",
+    author: "Ethan",
+    cover: "/blog/ai-features-without-a-surprise-bill/cover.webp",
+  },
+  {
     slug: "why-we-wrote-react-native-simple-fs",
     title: "Why we wrote our own file-system wrapper for React Native",
     excerpt:

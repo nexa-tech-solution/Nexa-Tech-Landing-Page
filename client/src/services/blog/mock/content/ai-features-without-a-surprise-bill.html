@@ -1,0 +1,173 @@
+<p class="lead">Adding an AI feature to an app takes an afternoon. Keeping it fast, correct and affordable once real users arrive takes a design. Most of the cost is decided before the first request is sent: what you send, which model answers, and what you do when the answer is already known. This is the checklist we use when a client asks for "a chatbot" or "AI search", written so you can apply it to your own product.</p>
+
+<div class="tldr">
+  <strong>TL;DR</strong>
+  <ul>
+    <li>You pay per token, in and out. The prompt you send is usually the bigger half of the bill.</li>
+    <li>Route each request to the smallest model that can handle it. Escalate only when needed.</li>
+    <li>Cache what repeats: system prompts, shared documents, identical questions.</li>
+    <li>Put hard limits in code: per user, per day, per request. Budgets in a spreadsheet do not stop a loop.</li>
+    <li>Measure cost per successful answer, not cost per request.</li>
+  </ul>
+</div>
+
+<figure class="photo">
+  <img src="/blog/ai-features-without-a-surprise-bill/request-anatomy.webp" alt="Stacked bars showing one AI request: a locked system prompt bar, a wide documents bar, a chat history bar, a thin pink question bar, and an answer bar below an arrow" loading="lazy" />
+  <figcaption>One request, top to bottom: system prompt (cached), retrieved documents, chat history, the user's question in pink, and the answer below the arrow. The question is the thinnest layer.</figcaption>
+</figure>
+
+<h2>Where the money goes</h2>
+<p>Language models are billed by the token, roughly three quarters of an English word. Every request is charged twice: once for everything you send (input) and once for everything the model writes back (output). Output tokens cost more per token, but input is usually where the volume is.</p>
+<p>A typical support assistant request looks like this:</p>
+
+<div class="table-wrap">
+  <table>
+    <thead>
+      <tr><th>Part of the request</th><th class="num">Tokens</th><th>Changes per request?</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>System prompt and rules</td><td class="num">~1,500</td><td><span class="dot" data-tone="good"></span>No, identical every time</td></tr>
+      <tr><td>Retrieved help articles</td><td class="num">~3,000</td><td><span class="dot" data-tone="warn"></span>Sometimes</td></tr>
+      <tr><td>Chat history</td><td class="num">~1,000</td><td><span class="dot" data-tone="bad"></span>Grows every turn</td></tr>
+      <tr><td>User's question</td><td class="num">~50</td><td><span class="dot" data-tone="bad"></span>Yes</td></tr>
+      <tr><td>Model's answer (output)</td><td class="num">~300</td><td><span class="dot" data-tone="bad"></span>Yes</td></tr>
+    </tbody>
+  </table>
+</div>
+<p>The question is about 1% of the input. That is the key insight behind every technique below: <strong>shrink, reuse or skip the parts that do not change</strong>.</p>
+
+<div class="callout" data-tone="tip">
+  <strong>Work out the cost before you build</strong>
+  <p>Multiply expected requests per day by tokens per request, using your provider's current price sheet. If the number makes you uncomfortable on paper, it will be worse in production, because real users ask follow-up questions.</p>
+</div>
+
+<h2>The request pipeline</h2>
+<p>We put every AI call behind one server-side function. The app never talks to the model provider directly. That single choke point is what makes the rest possible: caching, routing, limits and logging all live in one place.</p>
+
+<figure class="diagram">
+  <ol class="flow">
+    <li><strong>Check limits</strong><span>User quota and daily budget</span></li>
+    <li><strong>Check cache</strong><span>Seen this exact question?</span></li>
+    <li class="accent"><strong>Route</strong><span>Pick the smallest capable model</span></li>
+    <li><strong>Call + stream</strong><span>With a token cap on the answer</span></li>
+    <li><strong>Log</strong><span>Tokens, cost, latency, outcome</span></li>
+  </ol>
+  <figcaption>Every request passes the same five steps. Most savings happen before the model is called.</figcaption>
+</figure>
+
+<pre data-label="ai-gateway.ts"><code>export async function ask(userId: string, question: string) {
+  await assertWithinQuota(userId);           // 1. hard limits first
+
+  const cached = await answerCache.get(question);
+  if (cached) return cached;                 // 2. free answer
+
+  const model = pickModel(question);         // 3. small by default
+  const answer = await llm.complete({
+    model,
+    system: SYSTEM_PROMPT,                   // cached by the provider
+    messages: await buildContext(userId, question),
+    maxTokens: 500,                          // 4. cap the output
+  });
+
+  await usageLog.record(userId, model, answer.usage); // 5. measure
+  await answerCache.set(question, answer.text);
+  return answer.text;
+}</code></pre>
+
+<h2>Five techniques, in order of impact</h2>
+<ol class="steps">
+  <li>
+    <h4>Route to the smallest model that works</h4>
+    <p>Providers sell several sizes of model. The small ones are many times cheaper and faster, and they handle classification, extraction, short rewrites and simple FAQ answers well. Send everything to a small model first; escalate to a large one only for long reasoning, code, or when the small model reports low confidence.</p>
+    <p>A simple router is often a few rules (question length, detected intent, whether documents were retrieved). You do not need a model to choose the model.</p>
+  </li>
+  <li>
+    <h4>Use prompt caching for the parts that repeat</h4>
+    <p>Major providers can cache a fixed prefix of your prompt, such as system instructions and shared reference documents, and bill cached reads at a fraction of the normal input price. The rule is simple: <strong>put stable content first and variable content last</strong>, so the prefix stays identical between requests.</p>
+  </li>
+  <li>
+    <h4>Send less context</h4>
+    <p>Retrieval (RAG) should return the three most relevant passages, not the whole manual. Summarise old chat turns instead of resending them in full. Strip HTML, boilerplate and duplicate text before it reaches the prompt. Every token removed here is saved on every single request.</p>
+  </li>
+  <li>
+    <h4>Cache whole answers</h4>
+    <p>Many apps receive the same handful of questions over and over: opening hours, pricing, how to reset a password. Store the answer keyed by a normalised version of the question and return it instantly. It costs nothing, and it is faster than any model.</p>
+  </li>
+  <li>
+    <h4>Cap the output</h4>
+    <p>Set a maximum answer length and ask for concise answers in the system prompt. Long answers are expensive and, on a phone screen, usually worse anyway.</p>
+  </li>
+</ol>
+
+<figure class="photo">
+  <img src="/blog/ai-features-without-a-surprise-bill/model-routing.webp" alt="Many requests flowing into a router connected to a cache; a thick pink path leads to a fast model marked with a lightning bolt, a thin gray path to a larger model" loading="lazy" />
+  <figcaption>Routing in practice: the router checks the cache first, sends most traffic to the small, fast model, and passes only the hard cases to the large one.</figcaption>
+</figure>
+
+<h2>Limits that actually stop spending</h2>
+<p>A monthly budget alert tells you about a problem after it has happened. Limits enforced in code prevent it. We set three layers:</p>
+<div class="cards" data-cols="3">
+  <div class="card"><span class="kicker-num">01</span><h4>Per request</h4><p>Maximum input and output tokens. Stops one huge document or a runaway answer.</p></div>
+  <div class="card"><span class="kicker-num">02</span><h4>Per user</h4><p>Requests per minute and per day. Stops abuse, scripts and accidental loops in the client.</p></div>
+  <div class="card"><span class="kicker-num">03</span><h4>Per app</h4><p>A daily spending ceiling. When reached, degrade gracefully instead of failing silently.</p></div>
+</div>
+
+<div class="callout" data-tone="warn">
+  <strong>Never call the model from the client</strong>
+  <p>An API key shipped inside a mobile app or a web bundle can be extracted in minutes. Keep keys on the server, behind your own authenticated endpoint, so every limit above can be enforced.</p>
+</div>
+
+<h2>Degrade, do not break</h2>
+<p>When a limit is reached or the provider is slow, the feature should still be useful. Good fallbacks, from best to worst:</p>
+<ul>
+  <li>Serve a cached or pre-written answer for common questions.</li>
+  <li>Fall back to the smaller model with a shorter answer.</li>
+  <li>Show search results from your own help content without generation.</li>
+  <li>Explain clearly that the assistant is busy and offer a contact option.</li>
+</ul>
+
+<div class="do-dont">
+  <div class="do">
+    <h4>Do</h4>
+    <ul>
+      <li>Stream answers so users see progress immediately</li>
+      <li>Log tokens and cost for every request from day one</li>
+      <li>Version your prompts like code</li>
+    </ul>
+  </div>
+  <div class="dont">
+    <h4>Don't</h4>
+    <ul>
+      <li>Resend the full chat history on every turn</li>
+      <li>Use the largest model "to be safe"</li>
+      <li>Rely only on the provider's billing dashboard</li>
+    </ul>
+  </div>
+</div>
+
+<h2>Measure the right number</h2>
+<p>Cost per request is easy to track and slightly misleading. A cheap answer that is wrong leads to a follow-up question, a support ticket, or a user who leaves. The metric we report to clients is <strong>cost per successful answer</strong>: total AI spend divided by the answers users rated helpful or did not need to rephrase.</p>
+
+<figure class="photo">
+  <img src="/blog/ai-features-without-a-surprise-bill/usage-dashboard.webp" alt="A dashboard with four KPI tiles, a daily spend line staying under a dashed budget line, and a chart of helpful versus unhelpful answers" loading="lazy" />
+  <figcaption>The numbers worth watching: volume, cache hit rate, spend against the budget line, and helpful (green) versus unhelpful (pink) answers.</figcaption>
+</figure>
+
+<p>Add a thumbs up and down to every answer. It costs one button, and it turns "the AI feels okay" into data you can improve against: which questions fail, which prompts need work, and which requests never needed the large model.</p>
+
+<h2>The checklist</h2>
+<ul class="checklist">
+  <li>All model calls go through one server-side function</li>
+  <li>Small model by default, large model on escalation</li>
+  <li>Stable prompt content first, so provider caching works</li>
+  <li>Retrieval returns a few passages, not whole documents</li>
+  <li>Common questions answered from a cache</li>
+  <li>Output length capped</li>
+  <li>Limits per request, per user and per app, enforced in code</li>
+  <li>A fallback for when limits or the provider fail</li>
+  <li>Tokens, cost and user feedback logged for every request<small>You cannot reduce what you do not measure.</small></li>
+</ul>
+
+<blockquote>The cheapest model call is the one you never make. The second cheapest is the one that sends only what the model needs.</blockquote>
+
+<p>If you are planning an AI feature and want a second opinion on the architecture or the expected cost, <a href="/services#services">talk to us</a>. We are happy to review a design before any code is written.</p>
