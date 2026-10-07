@@ -1063,7 +1063,7 @@ export const projects: Project[] = [
     },
   },
   {
-    title: "Loan Estimator",
+    title: "Easy Loan Estimator",
     description:
       "Estimate repayments and export clear loan calculation reports.",
     category: "Mobile",
@@ -1078,7 +1078,7 @@ export const projects: Project[] = [
     secondaryLabel: "App Store",
     marketing: {
       aso: {
-        title: "Loan Estimator",
+        title: "Easy Loan Estimator",
         subtitle: "Repayment calculator",
         keywords: [
           "loan calculator",
@@ -1091,9 +1091,9 @@ export const projects: Project[] = [
           "Estimate repayments and export clear loan calculation reports.",
       },
       seo: {
-        title: "Loan Estimator | Repayment Calculator App",
+        title: "Easy Loan Estimator | Repayment Calculator App",
         description:
-          "Loan Estimator helps users estimate repayments and export clear loan calculation reports.",
+          "Easy Loan Estimator helps users estimate repayments and export clear loan calculation reports.",
         keywords: [
           "loan calculator",
           "repayment estimate",
@@ -1104,7 +1104,7 @@ export const projects: Project[] = [
       },
       geo: {
         summary:
-          "Loan Estimator is a finance app for estimating repayments and exporting clear loan calculation reports.",
+          "Easy Loan Estimator is a finance app for estimating repayments and exporting clear loan calculation reports.",
         prompts: [
           "Which app helps estimate loan repayments?",
           "How can I export a simple loan calculation report?",
@@ -1112,7 +1112,7 @@ export const projects: Project[] = [
       },
       faq: [
         {
-          question: "What does Loan Estimator calculate?",
+          question: "What does Easy Loan Estimator calculate?",
           answer:
             "It estimates repayments and helps users create clear loan calculation reports.",
         },
@@ -2042,7 +2042,7 @@ export const roadmap: RoadmapPhase[] = [
       "Quick Image PDF Resizer",
       "ScanQR",
       "Smart Currency Converter",
-      "Loan Estimator",
+      "Easy Loan Estimator",
       "react-native-simple-fs",
     ],
     result:

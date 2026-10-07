@@ -159,12 +159,12 @@ const meta: PostMeta[] = [
     slug: "loan-maths-people-can-read",
     title: "Making loan maths people can actually read",
     excerpt:
-      "Loan Estimator shows the monthly payment first and the full schedule second. Here is how we turned a wall of numbers into an answer.",
+      "Easy Loan Estimator shows the monthly payment first and the full schedule second. Here is how we turned a wall of numbers into an answer.",
     tag: "Design",
     publishedAt: "2026-03-19",
     author: "Ethan",
     cover: "/graphic/easy-loan-calculator.webp",
-    relatedProject: "loan-estimator",
+    relatedProject: "easy-loan-estimator",
   },
   {
     slug: "writing-horror-for-a-chat-bubble",
