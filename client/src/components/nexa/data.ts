@@ -58,8 +58,8 @@ export const projects: Project[] = [
       "A lightweight React Native file-system library built as a showcase utility for storage, file access, and export flows.",
     category: "Library",
     tech: ["React Native", "TypeScript", "File System"],
-    image: "/generated-products/react-native-simple-fs.png",
-    icon: "/favicon.png",
+    image: "/generated-products/react-native-simple-fs.webp",
+    icon: "/favicon.webp",
     primaryUrl: "https://www.npmjs.com/package/react-native-simple-fs",
     primaryLabel: "npm package",
     marketing: {
@@ -148,7 +148,7 @@ export const projects: Project[] = [
     category: "Web",
     tech: ["React", "Next.js"],
     image: "/graphic/the-home-versus.webp",
-    icon: "/graphic/icons/the-home-versus.png",
+    icon: "/graphic/icons/the-home-versus.webp",
     primaryUrl: "https://thehomeversus.com/",
     primaryLabel: "Visit website",
     secondaryUrl: "https://github.com/nexa-tech-solution/the-home-versus",
@@ -1630,10 +1630,11 @@ export const projects: Project[] = [
     tech: ["React Native", "Storage Cleaner", "Privacy"],
     image: "/graphic/cleanmaster.webp",
     icon: "/graphic/cleanmaster-icon.webp",
-    // No public listing yet; points back to the case study until the stores approve it.
-    primaryUrl: "/work/cleanmaster",
-    primaryLabel: "Coming soon",
-    comingSoon: "In review on the App Store & Google Play",
+    primaryUrl:
+      "https://play.google.com/store/apps/details?id=com.nexa.free_up_your_space",
+    primaryLabel: "Google Play",
+    secondaryUrl: "https://apps.apple.com/us/app/clean-free-up-your-space/id6818406418",
+    secondaryLabel: "App Store",
     marketing: {
       aso: {
         title: "CleanMaster: Free Up Space",
@@ -1687,9 +1688,9 @@ export const projects: Project[] = [
             "A locked space for IDs, cards, photos, videos, notes and documents, with auto-lock, unlock history and an optional intruder photo.",
         },
         {
-          question: "When will it be available?",
+          question: "Where can I download it?",
           answer:
-            "CleanMaster is currently in review on the App Store and Google Play.",
+            "CleanMaster is available on the App Store and Google Play.",
         },
       ],
       store: {
@@ -1705,7 +1706,7 @@ export const projects: Project[] = [
         facts: [
           { label: "Category", value: "Utilities / Productivity" },
           { label: "Focus", value: "Storage cleanup and privacy" },
-          { label: "Status", value: "In review" },
+          { label: "Status", value: "Live" },
           { label: "Platforms", value: "Android & iOS" },
         ],
       },
@@ -1829,7 +1830,7 @@ export const projects: Project[] = [
     category: "Extension",
     tech: ["Chrome Extension", "Time Zones", "Productivity"],
     image: "/graphic/time-converter-extension.webp",
-    icon: "/graphic/icons/world-time-buddy.png",
+    icon: "/graphic/icons/world-time-buddy.webp",
     primaryUrl:
       "https://chromewebstore.google.com/detail/world-time-buddy/mmlplefhfbacmbebleofnfligokkaljh",
     primaryLabel: "Chrome Web Store",

@@ -35,7 +35,7 @@ import { useRoute } from "wouter";
 
 // Live-site captures get a device frame; store screenshots already ship designed.
 const isCapture = (image: GalleryImage) =>
-  /\/(desktop|mobile)-\d+\.jpg$/.test(image.src);
+  /\/(desktop|mobile)-\d+\.webp$/.test(image.src);
 const isTall = (image: GalleryImage) => image.width < image.height;
 
 function Lightbox({

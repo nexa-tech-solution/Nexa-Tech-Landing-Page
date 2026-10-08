@@ -64,7 +64,7 @@ const meta: PostMeta[] = [
     tag: "Engineering",
     publishedAt: "2026-09-18",
     author: "Ethan",
-    cover: "/generated-products/react-native-simple-fs.png",
+    cover: "/generated-products/react-native-simple-fs.webp",
     relatedProject: "react-native-simple-fs",
   },
   {

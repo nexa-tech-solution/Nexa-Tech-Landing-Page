@@ -36,7 +36,7 @@ export function shotStats(title: string) {
 export function NexaLogo() {
   return (
     <a href="/" className="flex items-center gap-2" aria-label="Nexa Tech home">
-      <img src="/favicon.png" alt="" className="h-8 w-8 rounded-md" />
+      <img src="/favicon.webp" alt="" className="h-8 w-8 rounded-md" />
       <span className="font-display text-[1.6rem] font-bold italic tracking-[-0.04em] text-[#0d0c22]">
         nexa
       </span>
