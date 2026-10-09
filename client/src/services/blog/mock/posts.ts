@@ -47,6 +47,16 @@ type PostMeta = {
 // Newest first, as the list endpoint would return them.
 const meta: PostMeta[] = [
   {
+    slug: "ai-trong-phat-trien-phan-mem",
+    title: "AI in software development: turn change into an advantage",
+    excerpt:
+      "AI does not replace technical thinking. With the right process, it frees teams to focus on the decisions that make products better.",
+    tag: "Engineering",
+    publishedAt: "2026-10-09",
+    author: "Ethan",
+    cover: "/blog/ai-trong-phat-trien-phan-mem/cover.webp",
+  },
+  {
     slug: "ai-features-without-a-surprise-bill",
     title: "Adding AI to an app without a surprise bill",
     excerpt:
