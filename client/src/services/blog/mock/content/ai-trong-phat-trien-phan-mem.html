@@ -1,64 +1,71 @@
-<p class="lead">AI is changing how software gets made—but its greatest value is not simply writing code faster. It gives teams more room to understand the problem, validate decisions, and create products people genuinely want to use. The question is no longer “Will AI replace developers?” but “How will we redesign the way we work?”</p>
+<p class="lead">“Will AI replace developers?” is the wrong question. The better one is: <strong>how should we change the way we work?</strong> AI’s biggest gift is not faster typing. It gives teams more room to understand the problem, test their decisions, and build products people actually want to use.</p>
 
 <div class="tldr">
   <strong>TL;DR</strong>
   <ul>
-    <li>Use AI to extend human capability, not to skip technical thinking.</li>
-    <li>Start with repetitive work that has clear criteria for checking the result.</li>
-    <li>Build testing, security, and review into the workflow—AI output needs review too.</li>
-    <li>Measure output quality and feedback time, not just lines of code.</li>
+    <li>AI should extend what your team can do, not let anyone skip the thinking.</li>
+    <li>Start with repetitive work where the result is easy to check.</li>
+    <li>Put guardrails in place before you speed up: testing, security, and review apply to AI output too.</li>
+    <li>Measure product outcomes, not lines of code.</li>
   </ul>
 </div>
 
-<h2>What is AI changing in software work?</h2>
-<p>Today, an engineer can use AI to sketch a feature, explain an unfamiliar codebase, write test cases, create API documentation, summarise a production incident, or suggest a fix. Work that once broke a developer’s flow can now take minutes.</p>
-<p>That does not make the engineering role smaller. It brings its most important work forward: choosing the right problem, setting the right constraints, evaluating trade-offs, and owning the final experience.</p>
+<h2>The work hasn’t shrunk. It has moved.</h2>
+<p>An engineer can now ask AI to sketch a feature, explain an unfamiliar codebase, write test cases, draft API docs, or summarise a production incident. Tasks that used to break a whole afternoon of focus now take minutes.</p>
+<p>That doesn’t make the engineer’s job smaller. It moves the most important work to the front:</p>
+<ul>
+  <li>choosing the right problem</li>
+  <li>setting the right constraints</li>
+  <li>weighing the trade-offs</li>
+  <li>owning the experience users end up with</li>
+</ul>
 
-<blockquote>AI can generate options. People still have to choose the option worth building.</blockquote>
+<blockquote>AI can generate options. People still have to choose the one worth building.</blockquote>
 
-<h2>Do not chase speed at any cost</h2>
-<p>AI-generated code can look convincing while relying on a bad assumption, missing an edge case, or using an API that no longer fits. If a team measures only how much faster a feature ships, it can easily trade technical debt for a short-lived feeling of productivity.</p>
+<h2>The trap: speed that turns out to be debt</h2>
+<p>AI-generated code can look completely convincing while resting on a bad assumption, missing an edge case, or calling an API that no longer fits. A team that only tracks how much faster it ships is easy to fool. What feels like productivity can be technical debt that shows up later.</p>
 
 <div class="do-dont">
   <div class="do">
-    <h4>Make AI a lever</h4>
+    <h4>Use AI as a lever</h4>
     <ul>
-      <li>Ask AI to state its assumptions and risks before proposing a solution</li>
-      <li>Review the diff, tests, and user-facing behaviour like any other change</li>
-      <li>Keep useful prompts, decisions, and outcomes so the whole team can learn</li>
+      <li>Ask it to state its assumptions and risks before it proposes a solution</li>
+      <li>Review the diff, the tests, and the user-facing behaviour like any other change</li>
+      <li>Save the prompts, decisions, and results that worked so the whole team learns from them</li>
     </ul>
   </div>
   <div class="dont">
-    <h4>Do not make AI a shortcut</h4>
+    <h4>Don’t use AI as a shortcut</h4>
     <ul>
-      <li>Ship generated code without understanding what it does</li>
-      <li>Put customer data or secrets into tools that have not been approved</li>
-      <li>Let code-generation speed replace discovery and product thinking</li>
+      <li>Shipping generated code you don’t understand</li>
+      <li>Pasting customer data or secrets into tools that haven’t been approved</li>
+      <li>Letting fast code generation replace discovery and product thinking</li>
     </ul>
   </div>
 </div>
 
-<h2>A practical path to adapting</h2>
+<h2>How we adopt AI at Nexa Tech</h2>
 <ol class="steps">
-  <li><h4>Choose a small, repetitive workflow</h4><p>Start with unit tests for pure functions, pull-request summaries, fixtures, or turning an issue into a checklist. These are places where AI can create value with relatively low risk.</p></li>
-  <li><h4>Set guardrails before you accelerate</h4><p>Decide which data must never leave your systems, who reviews the output, what the minimum test coverage is, and when to roll back. A clear process makes teams more confident using AI.</p></li>
-  <li><h4>Standardise context, not only prompts</h4><p>AI works better when it understands a project’s conventions, architecture, and definition of done. Keep your README, decision records, strong examples, and test suite current.</p></li>
-  <li><h4>Measure outcomes at the product level</h4><p>Track lead time, post-release defects, review time, and user satisfaction. If a tool only increases lines of code without improving these metrics, it has not created a real advantage.</p></li>
+  <li><h4>Start small</h4><p>Pick repetitive work that’s easy to verify: unit tests for pure functions, pull-request summaries, fixtures, or turning an issue into a checklist. The value is real and the risk is low.</p></li>
+  <li><h4>Set guardrails first</h4><p>Decide which data never leaves your systems, who reviews AI output, what the minimum test coverage is, and when you roll back. Clear rules are what let a team use AI with confidence.</p></li>
+  <li><h4>Give AI context, not just prompts</h4><p>AI does better work when it knows your conventions, your architecture, and your definition of done. Keep the README, decision records, good examples, and test suite up to date. They help new teammates and AI alike.</p></li>
+  <li><h4>Measure outcomes</h4><p>Track lead time, post-release defects, review time, and user satisfaction. If a tool adds lines of code but none of these numbers improve, it hasn’t given you a real advantage.</p></li>
 </ol>
 
-<h2>The skills that become more valuable</h2>
+<h2>The skills that are worth more now</h2>
 <div class="cards" data-cols="3">
-  <div class="card"><span class="kicker-num">01</span><h4>Asking better questions</h4><p>Breaking an ambiguous problem into constraints, success criteria, and verifiable steps.</p></div>
-  <div class="card"><span class="kicker-num">02</span><h4>Technical judgement</h4><p>Recognising an answer that is nearly right but does not fit your system, data, or users.</p></div>
-  <div class="card"><span class="kicker-num">03</span><h4>Systems thinking</h4><p>Connecting product, operations, security, and experience into a sustainable decision.</p></div>
+  <div class="card"><span class="kicker-num">01</span><h4>Asking better questions</h4><p>Breaking a vague problem into constraints, success criteria, and steps you can verify.</p></div>
+  <div class="card"><span class="kicker-num">02</span><h4>Technical judgement</h4><p>Spotting the answer that is <em>almost</em> right but doesn’t fit your system, your data, or your users.</p></div>
+  <div class="card"><span class="kicker-num">03</span><h4>Systems thinking</h4><p>Weighing product, operations, security, and experience together so the decision holds up over time.</p></div>
 </div>
 
-<h2>Make AI a team advantage</h2>
-<p>A strong team is not the team using the most AI tools. It is the team that turns internal knowledge into a shared system: prompt patterns for familiar work, review checklists, component libraries, reliable tests, and regular conversations about both good and bad outcomes.</p>
+<h2>Make AI a team advantage, not a personal trick</h2>
+<p>The strongest team isn’t the one with the most AI tools. It’s the one that turns what each person knows into something the whole team can use: prompt patterns for familiar tasks, review checklists, component libraries, reliable tests, and regular, honest talks about what worked and what didn’t.</p>
 
-<aside class="callout" data-tone="tip"><strong>Start with pairing, not full automation</strong><p>For the first few weeks, let AI suggest and let people direct. Record where it saves time, where it creates noise, and why. Once you have evidence, you will know which parts are safe to automate.</p></aside>
+<aside class="callout" data-tone="tip"><strong>Pair before you automate</strong><p>For the first few weeks, let AI suggest and let people decide. Note where it saves time, where it adds noise, and why. Once you have that evidence, you’ll know what is safe to automate.</p></aside>
 
-<h2>One question for every use of AI</h2>
-<p>Before accepting an output, ask: <strong>“If AI were not here, how would I verify this decision?”</strong> If you can still read the code, run the tests, inspect the data, and explain the choice to a teammate, AI is a strength. If you cannot, it is hiding a gap.</p>
+<h2>One question to ask every time</h2>
+<p>Before accepting any AI output, ask: <strong>“If AI weren’t here, how would I check this?”</strong></p>
+<p>If you can still read the code, run the tests, inspect the data, and explain the choice to a teammate, AI is making you stronger. If you can’t, it is hiding a gap.</p>
 
-<p>AI is not the opponent of software craft. It is an invitation to raise the standard: to judge less by typing speed, and more by the ability to turn complex problems into trustworthy products.</p>
+<p>AI isn’t the enemy of good engineering. It raises the bar. Good engineers will be judged less by how fast they type and more by how well they turn complex problems into products people can trust.</p>
