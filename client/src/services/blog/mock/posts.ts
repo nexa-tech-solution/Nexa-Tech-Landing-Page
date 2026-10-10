@@ -47,6 +47,17 @@ type PostMeta = {
 // Newest first, as the list endpoint would return them.
 const meta: PostMeta[] = [
   {
+    slug: "ai-in-app-design",
+    title: "AI can design an app now. Are designers redundant?",
+    excerpt:
+      "AI makes the first draft of a screen cheap. That shifts design work to what matters most: understanding users and choosing what is right for them.",
+    tag: "Design",
+    publishedAt: "2026-10-10",
+    author: "Tina",
+    cover: "/blog/ai-in-app-design/choosing-the-right-design.webp",
+    relatedProject: "ingredient-scanner",
+  },
+  {
     slug: "ai-trong-phat-trien-phan-mem",
     title: "AI in software development: turn change into an advantage",
     excerpt:

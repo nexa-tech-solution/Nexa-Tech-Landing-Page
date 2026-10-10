@@ -1,0 +1,105 @@
+<p class="lead">AI can now draft a screen, write the button labels, and turn a sketch into a clickable prototype in minutes. So here is the question every designer has quietly asked at 2 a.m.: <strong>are designers now redundant?</strong> To answer it honestly, we have to separate two things people often mix up: <em>producing design artefacts</em> and <em>doing design</em>.</p>
+
+<div class="tldr">
+  <strong>TL;DR</strong>
+  <ul>
+    <li>AI automates the output of design (screens, copy, prototypes), not the decisions behind it.</li>
+    <li>When producing a draft becomes cheap, the bottleneck moves to judgement, context and validation.</li>
+    <li>Tasks inside the designer’s job will disappear. The job itself will move up a level.</li>
+    <li>The designers at real risk are the ones whose work stops at the artefact.</li>
+  </ul>
+</div>
+
+<figure class="photo">
+  <img src="/blog/ai-in-app-design/choosing-the-right-design.webp" alt="A hand choosing one mobile app design from a group of AI-generated concept screens" loading="lazy" />
+  <figcaption>AI can make the options quickly. Design is deciding which one is right for the people who will use it.</figcaption>
+</figure>
+
+<h2>Step 1: What design actually is</h2>
+<p>From the outside, design looks like making screens. In practice, a screen is the last and smallest part of the work. A typical app feature passes through five layers:</p>
+<ol class="steps">
+  <li><h4>Problem</h4><p>Who is the user, what are they trying to do, and what gets in their way?</p></li>
+  <li><h4>Priority</h4><p>Of everything we could build, what matters first, and what do we leave out?</p></li>
+  <li><h4>Flow</h4><p>In what order do things happen, and what happens when something goes wrong?</p></li>
+  <li><h4>Interface</h4><p>Layout, components, hierarchy, copy, visual style.</p></li>
+  <li><h4>Validation</h4><p>Does it work for real people, in real conditions? What do we change?</p></li>
+</ol>
+<p>Each layer depends on the one before it. A beautiful interface built on the wrong problem is still a failure, just a better-looking one.</p>
+
+<h2>Step 2: What AI is actually good at</h2>
+<p>Map today’s AI tools onto those layers and a clear pattern appears:</p>
+<div class="cards" data-cols="3">
+  <div class="card"><span class="kicker-num">Strong</span><h4>Interface</h4><p>Drafting layouts, generating variations, writing microcopy, applying a design system, building quick prototypes.</p></div>
+  <div class="card"><span class="kicker-num">Helpful</span><h4>Problem &amp; validation</h4><p>Summarising reviews and interviews, grouping feedback, spotting patterns in large amounts of text.</p></div>
+  <div class="card"><span class="kicker-num">Weak</span><h4>Priority &amp; flow</h4><p>Choosing trade-offs, deciding what to cut, knowing which edge case will actually hurt your users.</p></div>
+</div>
+<p>In other words, AI is strongest at the layer that is easiest to see and weakest at the layers that decide whether the product succeeds. That is why it can look like it replaces designers, while in practice it replaces only part of what they do.</p>
+
+<h2>Step 3: Four reasons designers aren’t redundant</h2>
+
+<h3>1. Cheap drafts make choosing more important</h3>
+<p>When one screen took a day, a team might compare two options. When AI produces twenty in a minute, someone has to decide which one is right, and why. Abundance doesn’t remove the need for judgement; it multiplies it. The scarce skill is no longer making options, it is choosing well between them.</p>
+
+<h3>2. AI doesn’t know your user’s context</h3>
+<p>A model learns from patterns across millions of apps. It has never stood in a supermarket aisle holding a basket in one hand and a phone in the other, which is exactly the situation our Ingredient Scanner has to be designed for. Context like that changes where buttons go, how big text is, and what appears first. It comes from observing users, not from training data.</p>
+
+<figure class="photo">
+  <img src="/blog/ai-in-app-design/real-user-context.webp" alt="A shopper using a phone to scan a grocery item while holding a basket in a supermarket aisle" loading="lazy" />
+  <figcaption>A real use case has constraints that a generic prompt cannot see: one hand is busy, the aisle is distracting, and the answer needs to be immediate.</figcaption>
+</figure>
+
+<h3>3. AI drifts toward the average</h3>
+<p>Generative models produce the most likely answer. In design, the most likely answer is the most common one. That is useful for standard patterns like login screens or settings, but it is the opposite of what makes a product memorable. Differentiation is a deliberate choice to <em>not</em> do the average thing, and someone has to make it.</p>
+
+<h3>4. Someone has to own the result</h3>
+<p>If a flow confuses older users, if a screen fails accessibility, if a dark pattern slips into checkout, the question is not “which tool generated this?” but “who approved it?” Responsibility for the user’s experience can’t be delegated to a model. It needs a person who notices, cares, and can explain the decision.</p>
+
+<blockquote>AI is great at making options. Design is the job of choosing.</blockquote>
+
+<figure class="photo">
+  <img src="/blog/ai-in-app-design/design-judgement.webp" alt="A designer reviewing interface concepts alongside user research and an accessibility checklist" loading="lazy" />
+  <figcaption>Good review connects interface choices to evidence: what users said, what they can access, and what the product needs to achieve.</figcaption>
+</figure>
+
+<h2>Step 4: The strongest counter-argument</h2>
+<p>To be fair, the case for “designers are redundant” is not silly. It goes like this: <em>most apps don’t need original design. They need a decent, standard interface, fast. AI already does that well enough.</em></p>
+<p>This is partly true. For internal tools, simple prototypes or early MVPs, a developer with a good design system and an AI tool can ship something perfectly usable without a dedicated designer. Some design work, especially production work like resizing assets, making variants, or writing first-draft copy, will shrink for real.</p>
+<p>But this argument proves something narrower than it claims. It shows that <strong>certain design tasks</strong> are being automated, not that <strong>the design role</strong> is. As soon as a product competes on experience, serves a specific audience, or carries real risk, the upper layers (problem, priority, flow, validation) come back, and those are human work.</p>
+
+<h2>Step 5: What actually changes for designers</h2>
+<div class="do-dont">
+  <div class="do">
+    <h4>Becomes more valuable</h4>
+    <ul>
+      <li>User research and observing real behaviour</li>
+      <li>Framing problems and setting constraints</li>
+      <li>Building and maintaining a strong design system that AI can follow</li>
+      <li>Critiquing and editing, not just creating</li>
+      <li>Accessibility, ethics, and edge cases</li>
+    </ul>
+  </div>
+  <div class="dont">
+    <h4>Becomes less valuable</h4>
+    <ul>
+      <li>Producing screens from a clear spec</li>
+      <li>Making many variants by hand</li>
+      <li>Pixel-perfect mockups that are never tested</li>
+      <li>Design work that stops at the hand-off</li>
+    </ul>
+  </div>
+</div>
+
+<h2>How we work with AI at Nexa Tech</h2>
+<p>Our rule is simple: AI speeds up the parts we can easily check, and people own the parts that need judgement.</p>
+<ul>
+  <li><strong>Research:</strong> AI groups app store reviews and feedback into themes; a designer reads the raw quotes before drawing conclusions.</li>
+  <li><strong>Exploration:</strong> AI generates many layout options; the team picks a direction based on the user’s context, not on what looks best in isolation.</li>
+  <li><strong>Production:</strong> AI drafts screens from our own components and tokens; a designer fixes hierarchy, spacing and states.</li>
+  <li><strong>Validation:</strong> real users test the prototype. AI can predict behaviour, but only people can show it.</li>
+</ul>
+
+<aside class="callout" data-tone="tip"><strong>Start with your design system</strong><p>AI follows whatever rules you give it. A clear, documented design system turns its output from “generic app” into “close to ours”, and makes every review faster.</p></aside>
+
+<h2>So, is the designer redundant?</h2>
+<p>No. But the designer who only pushes pixels might be.</p>
+<p>AI has made the visible part of design cheap. That forces the invisible part, understanding people and choosing what to build for them, into the spotlight. Designers who move up to that level won’t be replaced by AI. They will be the ones deciding how to use it.</p>
