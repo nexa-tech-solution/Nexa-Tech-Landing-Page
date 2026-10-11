@@ -2,3 +2,4 @@
 export { LoginScreen } from "./auth/login-screen";
 export { DashboardView } from "./dashboard-view";
 export { SettingsView } from "./settings/settings-view";
+export { ContactsView } from "./contacts/contacts-view";

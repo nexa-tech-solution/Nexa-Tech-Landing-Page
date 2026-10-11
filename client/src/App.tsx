@@ -166,6 +166,7 @@ function Router() {
         <Switch>
           <Route path="/dashboard" component={Dashboard} />
           <Route path="/dashboard/settings" component={Dashboard} />
+          <Route path="/dashboard/contacts" component={Dashboard} />
           <Route path="/work/:slug" component={Product} />
           <Route path="/services" component={Services} />
           <Route path="/blog" component={Blog} />

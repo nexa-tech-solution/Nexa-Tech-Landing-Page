@@ -1,15 +1,18 @@
-import { LayoutDashboard, LogOut, Settings2 } from "lucide-react";
+import { LayoutDashboard, LogOut, MessageSquare, Settings2 } from "lucide-react";
+import { useContactUnreadCount } from "@/services/contact";
 import { Link, useLocation } from "wouter";
 import { selectUser, useAuthStore } from "@/stores/auth-store";
 
 const NAV = [
   { href: "/dashboard", label: "Tổng quan", icon: LayoutDashboard },
+  { href: "/dashboard/contacts", label: "Liên hệ", icon: MessageSquare },
   { href: "/dashboard/settings", label: "Cấu hình", icon: Settings2 },
 ];
 
 export function DashboardHeader({ onLogout }: { onLogout: () => void }) {
   const user = useAuthStore(selectUser);
   const [location] = useLocation();
+  const unread = useContactUnreadCount().data ?? 0;
   return (
     <header className="border-b border-gray-200 bg-white">
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-3 sm:px-6">
@@ -32,6 +35,11 @@ export function DashboardHeader({ onLogout }: { onLogout: () => void }) {
                 >
                   <Icon size={14} />
                   <span className="hidden sm:inline">{label}</span>
+                  {href === "/dashboard/contacts" && unread > 0 && (
+                    <span className="min-w-[18px] rounded-full bg-[#ea4c89] px-1.5 text-center text-[10px] font-semibold leading-[18px] text-white">
+                      {unread > 99 ? "99+" : unread}
+                    </span>
+                  )}
                 </Link>
               );
             })}

@@ -1,5 +1,5 @@
 import { useRoute } from "wouter";
-import { DashboardView, LoginScreen, SettingsView } from "@/components/dashboard";
+import { ContactsView, DashboardView, LoginScreen, SettingsView } from "@/components/dashboard";
 import { useLogout, useMe } from "@/services/auth";
 import { selectIsAuthenticated, useAuthStore } from "@/stores/auth-store";
 
@@ -9,9 +9,12 @@ export default function Dashboard() {
   useMe();
   const logout = useLogout();
   const [isSettings] = useRoute("/dashboard/settings");
+  const [isContacts] = useRoute("/dashboard/contacts");
 
   if (!isAuthenticated) return <LoginScreen />;
 
   const onLogout = () => logout.mutate();
-  return isSettings ? <SettingsView onLogout={onLogout} /> : <DashboardView onLogout={onLogout} />;
+  if (isSettings) return <SettingsView onLogout={onLogout} />;
+  if (isContacts) return <ContactsView onLogout={onLogout} />;
+  return <DashboardView onLogout={onLogout} />;
 }

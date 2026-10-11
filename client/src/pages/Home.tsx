@@ -1,10 +1,5 @@
 import Seo from "@/components/seo/Seo";
-import {
-  faqItems,
-  projects,
-  socials,
-  team,
-} from "@/components/nexa/data";
+import { faqItems, projects, socials, team } from "@/components/nexa/data";
 import { ShotCard, SiteFooter, SiteHeader } from "@/components/nexa/layout";
 import { Roadmap } from "@/components/nexa/roadmap";
 import { TechMarquee } from "@/components/nexa/tech-marquee";
@@ -28,31 +23,77 @@ import {
   Search,
 } from "lucide-react";
 import { useMemo, useState, type FormEvent } from "react";
+import { API_ERROR_CODES } from "@/lib/http";
+import { useSubmitContact } from "@/services/contact";
 
 const categories = ["All", "Web", "Mobile", "Extension", "Library"] as const;
 type Category = (typeof categories)[number];
 
-const trendingTags = ["React Native", "Next.js", "Chrome extension", "TypeScript"];
+const trendingTags = [
+  "React Native",
+  "Next.js",
+  "Chrome extension",
+  "TypeScript",
+];
 
 function ContactForm() {
+  const submit = useSubmitContact();
+  const [sentTo, setSentTo] = useState<string | null>(null);
+
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    const name = data.get("name")?.toString() ?? "";
-    const email = data.get("email")?.toString() ?? "";
-    const message = data.get("message")?.toString() ?? "";
-    const subject = encodeURIComponent(`Project enquiry from ${name}`);
-    const body = encodeURIComponent(
-      `Name: ${name}\nEmail: ${email}\n\n${message}`,
+    const form = event.currentTarget;
+    const data = new FormData(form);
+    const email = data.get("email")?.toString().trim() ?? "";
+    submit.mutate(
+      {
+        name: data.get("name")?.toString().trim() ?? "",
+        email,
+        message: data.get("message")?.toString().trim() ?? "",
+        page: window.location.pathname,
+        website: data.get("website")?.toString() ?? "",
+      },
+      {
+        onSuccess: () => {
+          form.reset();
+          setSentTo(email);
+        },
+      },
     );
-    window.location.href = `mailto:${socials.email}?subject=${subject}&body=${body}`;
   };
+
+  if (sentTo) {
+    return (
+      <div className="contact-form grid content-start gap-3" role="status">
+        <p className="text-lg font-semibold">
+          Thanks, your message is on its way to us.
+        </p>
+        <p className="text-[#3d3d4e]">
+          We usually reply within 1–2 business days at <b>{sentTo}</b>.
+        </p>
+        <button
+          type="button"
+          className="btn-dark mt-1 justify-self-start"
+          onClick={() => setSentTo(null)}
+        >
+          Send another message
+        </button>
+      </div>
+    );
+  }
+
+  const error = submit.error
+    ? submit.error.errorCode === API_ERROR_CODES.CONTACT_RATE_LIMITED
+      ? "You've sent several messages already — please try again in a few minutes."
+      : "We couldn't send your message right now."
+    : null;
+
   return (
     <form onSubmit={handleSubmit} className="contact-form grid gap-5">
       <div className="grid gap-5 sm:grid-cols-2">
         <label>
           <span>Name</span>
-          <input required name="name" placeholder="Your name" />
+          <input required name="name" maxLength={100} placeholder="Your name" />
         </label>
         <label>
           <span>Email</span>
@@ -60,6 +101,7 @@ function ContactForm() {
             required
             name="email"
             type="email"
+            maxLength={254}
             placeholder="you@company.com"
           />
         </label>
@@ -70,11 +112,35 @@ function ContactForm() {
           required
           name="message"
           rows={5}
+          maxLength={5000}
           placeholder="What are you hoping to build?"
         />
       </label>
-      <button className="btn-dark mt-1 justify-self-start" type="submit">
-        Send message <ArrowRight className="h-4 w-4" />
+      {/* Honeypot: hidden from people, filled in by bots; the server drops those messages. */}
+      <input
+        type="text"
+        name="website"
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+        className="absolute -left-[9999px] h-px w-px opacity-0"
+      />
+      {error && (
+        <p role="alert" className="text-sm text-red-600">
+          {error} You can also email us at{" "}
+          <a className="underline" href={`mailto:${socials.email}`}>
+            {socials.email}
+          </a>
+          .
+        </p>
+      )}
+      <button
+        className="btn-dark mt-1 justify-self-start"
+        type="submit"
+        disabled={submit.isPending}
+      >
+        {submit.isPending ? "Sending…" : "Send message"}{" "}
+        <ArrowRight className="h-4 w-4" />
       </button>
     </form>
   );
@@ -278,7 +344,10 @@ export default function Home() {
                     <dd className="font-display text-4xl font-bold tracking-[-0.04em]">
                       <CountUp {...count} delay={index * 120} />
                     </dd>
-                    <dd aria-hidden="true" className="mt-1 text-sm text-[#6e6d7a]">
+                    <dd
+                      aria-hidden="true"
+                      className="mt-1 text-sm text-[#6e6d7a]"
+                    >
                       {label}
                     </dd>
                   </div>
@@ -357,7 +426,9 @@ export default function Home() {
             <div className="text-center">
               <p className="kicker">FAQ</p>
               <h2 className="section-title mt-3">Questions before we build?</h2>
-              <p className="mx-auto mt-4 max-w-[560px] text-muted-foreground">Who we are, how we build, and how to reach the team behind Nexa.</p>
+              <p className="mx-auto mt-4 max-w-[560px] text-muted-foreground">
+                Who we are, how we build, and how to reach the team behind Nexa.
+              </p>
             </div>
             <div className="mt-12 grid gap-3">
               {faqItems.map((item) => (
