@@ -10,14 +10,22 @@ const slugify = (text: string) =>
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-+|-+$/g, "");
 
+// The pre-renderer has no DOM; it hands us a jsdom window (see entry-server.tsx).
+let serverWindow: (Window & typeof globalThis) | null = null;
+export function setServerWindow(win: Window & typeof globalThis) {
+  serverWindow = win;
+}
+
 // CMS HTML is sanitized before it touches the DOM, then every h2 gets a stable
 // id so the table of contents and shared #links can point at it.
 export function preparePostHtml(raw: string): { html: string; toc: TocItem[] } {
-  const clean = DOMPurify.sanitize(raw, {
+  const purify = serverWindow ? DOMPurify(serverWindow) : DOMPurify;
+  const Parser = serverWindow?.DOMParser ?? DOMParser;
+  const clean = purify.sanitize(raw, {
     ADD_ATTR: ["target"],
     FORBID_TAGS: ["style", "form", "input", "button"],
   });
-  const doc = new DOMParser().parseFromString(clean, "text/html");
+  const doc = new Parser().parseFromString(clean, "text/html");
   const used = new Set<string>();
   const toc: TocItem[] = [];
 

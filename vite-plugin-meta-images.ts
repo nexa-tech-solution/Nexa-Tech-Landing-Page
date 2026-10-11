@@ -3,84 +3,27 @@ import fs from 'fs';
 import path from 'path';
 
 /**
- * Vite plugin that updates SEO tags with the correct deployment URL
- * and emits robots.txt + sitemap.xml for production builds.
+ * Vite plugin that fills the SEO placeholders in index.html with the deployment URL.
+ * robots.txt and sitemaps are emitted by scripts/prerender.mjs.
  */
 export function metaImagesPlugin(): Plugin {
-  let outDir = '';
-
   return {
     name: 'vite-plugin-meta-images',
-    configResolved(config) {
-      outDir = path.resolve(config.root, config.build.outDir);
-    },
     transformIndexHtml(html) {
-      const baseUrl = getDeploymentUrl();
+      const baseUrl = getDeploymentUrl() ?? '';
       const publicDir = path.resolve(process.cwd(), 'client', 'public');
-      const opengraphPngPath = path.join(publicDir, 'opengraph.png');
-      const opengraphJpgPath = path.join(publicDir, 'opengraph.jpg');
-      const opengraphJpegPath = path.join(publicDir, 'opengraph.jpeg');
-
-      let imageExt: string | null = null;
-      if (fs.existsSync(opengraphPngPath)) {
-        imageExt = 'png';
-      } else if (fs.existsSync(opengraphJpgPath)) {
-        imageExt = 'jpg';
-      } else if (fs.existsSync(opengraphJpegPath)) {
-        imageExt = 'jpeg';
-      }
-
-      if (!imageExt) {
-        log('[meta-images] OpenGraph image not found, skipping meta tag updates');
-        return html;
-      }
-
-      const imageUrl = baseUrl
-        ? `${baseUrl}/opengraph.${imageExt}?v=2`
-        : `/opengraph.${imageExt}?v=2`;
-      const logoUrl = baseUrl
-        ? `${baseUrl}/favicon.png`
-        : '/favicon.png';
-
-      const canonicalUrl = baseUrl || '';
-
-      if (!baseUrl) {
-        log('[meta-images] no deployment domain found, using relative asset URLs');
-      }
-
-      log('[meta-images] updating SEO tags');
-
-      html = html
-        .replaceAll('__SITE_URL__', canonicalUrl)
-        .replaceAll('__OG_IMAGE_URL__', imageUrl)
-        .replaceAll('__LOGO_URL__', logoUrl);
-
-      return html;
-    },
-    closeBundle() {
-      const baseUrl = getDeploymentUrl();
-      if (!outDir) {
-        return;
-      }
-
-      fs.mkdirSync(outDir, { recursive: true });
-      fs.writeFileSync(
-        path.join(outDir, 'robots.txt'),
-        baseUrl
-          ? `User-agent: *\nAllow: /\n\nSitemap: ${baseUrl}/sitemap.xml\n`
-          : `User-agent: *\nAllow: /\n`
+      const imageExt = ['webp', 'png', 'jpg', 'jpeg'].find((ext) =>
+        fs.existsSync(path.join(publicDir, `opengraph.${ext}`))
       );
 
       if (!baseUrl) {
-        log('[meta-images] generated robots.txt only; set VITE_SITE_URL to emit sitemap.xml');
-        return;
+        log('[meta-images] no VITE_SITE_URL, using relative URLs');
       }
 
-      fs.writeFileSync(
-        path.join(outDir, 'sitemap.xml'),
-        `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n  <url>\n    <loc>${baseUrl}/</loc>\n    <changefreq>weekly</changefreq>\n    <priority>1.0</priority>\n  </url>\n</urlset>\n`
-      );
-      log('[meta-images] generated robots.txt and sitemap.xml');
+      return html
+        .replaceAll('__SITE_URL__', baseUrl)
+        .replaceAll('__OG_IMAGE_URL__', imageExt ? `${baseUrl}/opengraph.${imageExt}?v=2` : '')
+        .replaceAll('__LOGO_URL__', `${baseUrl}/favicon.webp`);
     },
   };
 }

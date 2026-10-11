@@ -14,6 +14,7 @@ export type PostSummary = {
   excerpt: string;
   tag: PostTag;
   publishedAt: string; // ISO date, yyyy-mm-dd
+  updatedAt?: string; // ISO date; set when a post is meaningfully revised
   readingMinutes: number;
   cover: string;
   author: PostAuthor;

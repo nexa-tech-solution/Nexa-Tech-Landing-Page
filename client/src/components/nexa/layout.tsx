@@ -103,7 +103,7 @@ export function ShotCard({
           {project.image ? (
             <img
               src={project.image}
-              alt=""
+              alt={`${project.title} preview`}
               className="h-full w-full object-cover"
               loading="lazy"
             />

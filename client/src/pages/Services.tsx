@@ -1,4 +1,6 @@
 import Seo from "@/components/seo/Seo";
+import { getServicesStructuredData } from "@/lib/seo";
+import type { FaqItem } from "@/components/nexa/data";
 import { socials } from "@/components/nexa/data";
 import { SiteFooter, SiteHeader } from "@/components/nexa/layout";
 import { FlowScene, type SceneId } from "@/components/nexa/flow-scenes";
@@ -6,6 +8,7 @@ import { TechMarquee } from "@/components/nexa/tech-marquee";
 import { useReveal } from "@/components/nexa/use-reveal";
 import { Fragment, useCallback, useEffect, useRef, useState } from "react";
 import {
+  ChevronDown,
   Activity,
   AppWindow,
   ArrowRight,
@@ -82,9 +85,9 @@ type Service = {
   price?: string;
 };
 
-const HOURLY_RATE = 10;
+export const HOURLY_RATE = 10;
 
-const services: Service[] = [
+export const services: Service[] = [
   {
     icon: LayoutTemplate,
     title: "Landing page",
@@ -210,6 +213,28 @@ const services: Service[] = [
       { icon: FileText, label: "Monthly report", scene: "report", note: "You get a clear monthly summary", details: ["Uptime, fixes, upgrades", "Next month's plan"] },
     ],
     deliverables: ["Bug fixes", "OS + lib upgrades", "Support plan"],
+  },
+];
+
+// Shown on the page and mirrored in FAQPage structured data; keep them in sync.
+export const serviceFaq: FaqItem[] = [
+  {
+    question: "How much does it cost to hire a Nexa Tech developer?",
+    answer: `Developers are billed at $${HOURLY_RATE} per hour per developer. Use the calculator on this page to estimate a budget from team size, hours per week and number of weeks.`,
+  },
+  {
+    question: "What services does Nexa Tech offer?",
+    answer: `Fixed-scope packages for: ${services.map((s) => s.title.toLowerCase()).join(", ")}. You can also hire developers hourly for flexible scope.`,
+  },
+  {
+    question: "Should I hire hourly or buy a package?",
+    answer:
+      "Hire hourly when the scope is still changing or you need extra hands on an existing product. Buy a package when you know what you want built: you get a clear scope and a fixed quote before work starts.",
+  },
+  {
+    question: "How do I start a project?",
+    answer:
+      "Email us with what you want to build, or how many developer hours you need, or use the contact form on the home page. We reply to every message by email.",
   },
 ];
 
@@ -802,6 +827,7 @@ export default function Services() {
         title="Services | Nexa Tech"
         description="Hire Nexa Tech developers from $10/hour, or order a service: landing page, SNS integration, admin dashboard, mail service, mobile and web apps."
         path="/services"
+        structuredData={getServicesStructuredData(services, HOURLY_RATE, serviceFaq)}
       />
 
       <SiteHeader />
@@ -876,7 +902,30 @@ export default function Services() {
           <TechMarquee />
         </section>
 
-        <section id="contact" className="px-5 pb-24 md:px-10">
+        <section id="faq" className="bg-[#f8f7f4] px-5 py-24 md:px-10">
+          <div className="mx-auto max-w-[900px]">
+            <div className="text-center">
+              <p className="kicker">FAQ</p>
+              <h2 className="section-title mt-3">Pricing and process</h2>
+            </div>
+            <div className="mt-12 grid gap-3">
+              {serviceFaq.map((item) => (
+                <details
+                  key={item.question}
+                  className="group rounded-2xl bg-white p-6 open:shadow-[0_10px_40px_rgba(13,12,34,0.06)]"
+                >
+                  <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-lg font-semibold">
+                    {item.question}
+                    <ChevronDown className="h-5 w-5 shrink-0 text-[#6e6d7a] transition group-open:rotate-180" />
+                  </summary>
+                  <p className="mt-3 text-[15px] leading-7 text-[#6e6d7a]">{item.answer}</p>
+                </details>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section id="contact" className="px-5 py-24 md:px-10">
           <div className="mx-auto max-w-[1200px] rounded-3xl bg-[#fff1f6] px-7 py-14 text-center md:py-20">
             <h2 className="section-title">Have a project in mind?</h2>
             <p className="mx-auto mt-5 max-w-xl text-lg leading-8 text-[#6e6d7a]">

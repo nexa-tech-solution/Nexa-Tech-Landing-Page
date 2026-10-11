@@ -16,7 +16,7 @@ import {
   TableOfContents,
   usePreparedPost,
 } from "@/components/nexa/post-content";
-import { getAbsoluteUrl } from "@/lib/seo";
+import { getPostStructuredData } from "@/lib/seo";
 import NotFound from "@/pages/not-found";
 import { usePost, usePosts } from "@/services/blog";
 import { ArrowLeft, ArrowUpRight, Check, Link2 } from "lucide-react";
@@ -97,17 +97,7 @@ export default function BlogPost() {
           description={post.excerpt}
           path={getPostPath(post)}
           image={post.cover}
-          structuredData={{
-            "@context": "https://schema.org",
-            "@type": "BlogPosting",
-            headline: post.title,
-            description: post.excerpt,
-            datePublished: post.publishedAt,
-            image: getAbsoluteUrl(post.cover),
-            url: getAbsoluteUrl(getPostPath(post)),
-            author: { "@type": "Person", name: post.author.name, url: post.author.url },
-            publisher: { "@type": "Organization", name: "Nexa Tech" },
-          }}
+          structuredData={getPostStructuredData(post, project)}
         />
       ) : null}
 
@@ -142,6 +132,13 @@ export default function BlogPost() {
                   <time dateTime={post.publishedAt}>
                     {formatPostDate(post.publishedAt)}
                   </time>
+                  {/* Must match dateModified in getPostStructuredData. */}
+                  {post.updatedAt && post.updatedAt !== post.publishedAt ? (
+                    <span>
+                      Updated{" "}
+                      <time dateTime={post.updatedAt}>{formatPostDate(post.updatedAt)}</time>
+                    </span>
+                  ) : null}
                   <span>{post.readingMinutes} min read</span>
                   <button
                     type="button"
@@ -189,6 +186,24 @@ export default function BlogPost() {
                     </span>
                   </a>
                 ) : null}
+
+                <a
+                  href="/services"
+                  className="group mt-4 flex items-center gap-4 rounded-2xl bg-[#fff1f6] p-4 transition hover:shadow-[0_10px_40px_rgba(13,12,34,0.08)]"
+                >
+                  <div className="min-w-0 flex-1">
+                    <p className="text-xs font-semibold uppercase tracking-[0.12em] text-[#ea4c89]">
+                      Work with us
+                    </p>
+                    <p className="mt-1 font-semibold">
+                      Need {project ? `an app like ${project.title}` : "something like this"} built?
+                    </p>
+                  </div>
+                  <span className="hidden shrink-0 items-center gap-1 text-sm font-semibold sm:flex">
+                    Our services
+                    <ArrowUpRight className="h-4 w-4 transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                  </span>
+                </a>
               </div>
             </div>
           </article>

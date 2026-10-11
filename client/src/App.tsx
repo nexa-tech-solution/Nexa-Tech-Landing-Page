@@ -1,21 +1,84 @@
 import { Switch, Route, useLocation } from "wouter";
-import { useEffect } from "react";
-import Home from "@/pages/Home";
-import Product from "@/pages/Product";
-import Dashboard from "@/pages/Dashboard";
-import Blog from "@/pages/Blog";
-import Services from "@/pages/Services";
-import BlogPost from "@/pages/BlogPost";
-import NotFound from "@/pages/not-found";
+import { Suspense, lazy, useEffect, type ComponentType } from "react";
+
+// One chunk per page. React.lazy suspends on first render even when the chunk
+// is already cached, so once a page's module has loaded we render it directly.
+function lazyPage(load: () => Promise<{ default: ComponentType }>) {
+  let loaded: ComponentType | null = null;
+  const loader = () =>
+    load().then((mod) => {
+      loaded = mod.default;
+      return mod;
+    });
+  const Lazy = lazy(loader);
+  function Page() {
+    const Loaded = loaded;
+    return Loaded ? <Loaded /> : <Lazy />;
+  }
+  return Object.assign(Page, { load: loader });
+}
+
+const Home = lazyPage(() => import("@/pages/Home"));
+const Product = lazyPage(() => import("@/pages/Product"));
+const Dashboard = lazyPage(() => import("@/pages/Dashboard"));
+const Blog = lazyPage(() => import("@/pages/Blog"));
+const Services = lazyPage(() => import("@/pages/Services"));
+const BlogPost = lazyPage(() => import("@/pages/BlogPost"));
+const NotFound = lazyPage(() => import("@/pages/not-found"));
+const loaders = {
+  home: Home.load,
+  product: Product.load,
+  dashboard: Dashboard.load,
+  blog: Blog.load,
+  services: Services.load,
+  blogPost: BlogPost.load,
+  notFound: NotFound.load,
+};
+
+function loaderFor(pathname: string) {
+  if (pathname === "/") return loaders.home;
+  if (pathname.startsWith("/dashboard")) return loaders.dashboard;
+  if (pathname.startsWith("/work/")) return loaders.product;
+  if (pathname === "/services") return loaders.services;
+  if (pathname === "/blog") return loaders.blog;
+  if (pathname.startsWith("/blog/")) return loaders.blogPost;
+  return loaders.notFound;
+}
+
+// Warm the public page chunks once the browser is idle so later
+// navigations never hit the Suspense fallback.
+function usePreloadPages() {
+  useEffect(() => {
+    const preload = () =>
+      [
+        loaders.home,
+        loaders.services,
+        loaders.blog,
+        loaders.blogPost,
+        loaders.product,
+      ].forEach((load) => void load().catch(() => {}));
+    if ("requestIdleCallback" in window) {
+      const id = window.requestIdleCallback(preload, { timeout: 3000 });
+      return () => window.cancelIdleCallback(id);
+    }
+    const id = setTimeout(preload, 1500);
+    return () => clearTimeout(id);
+  }, []);
+}
 
 // Scrolls to `#hash` once the new page has rendered, or to the top otherwise.
 // Retries for a few frames because the target section mounts after navigate().
 function scrollAfterNavigate(hash: string) {
   let frames = 0;
   const run = () => {
-    const target = hash ? document.getElementById(decodeURIComponent(hash.slice(1))) : null;
+    const target = hash
+      ? document.getElementById(decodeURIComponent(hash.slice(1)))
+      : null;
     if (target) {
-      target.scrollIntoView({ behavior: "instant" as ScrollBehavior, block: "start" });
+      target.scrollIntoView({
+        behavior: "instant" as ScrollBehavior,
+        block: "start",
+      });
     } else if (hash && frames++ < 20) {
       requestAnimationFrame(run);
     } else {
@@ -73,8 +136,13 @@ function useClientSideLinks() {
         return;
       }
 
-      navigate(url.pathname + url.search + url.hash);
-      scrollAfterNavigate(url.hash);
+      // Load the next page's chunk first so the current page stays on screen
+      // instead of flashing the empty Suspense fallback.
+      const go = () => {
+        navigate(url.pathname + url.search + url.hash);
+        scrollAfterNavigate(url.hash);
+      };
+      loaderFor(url.pathname)().then(go, go);
     };
 
     document.addEventListener("click", onClick);
@@ -85,6 +153,7 @@ function useClientSideLinks() {
 function Router() {
   const [location] = useLocation();
   useClientSideLinks();
+  usePreloadPages();
 
   // Dashboard tabs are one screen; don't replay the entrance when switching them.
   const pageKey = location.startsWith("/dashboard") ? "/dashboard" : location;
@@ -93,16 +162,18 @@ function Router() {
     // Opacity only: a transform here would re-anchor the fixed chat button
     // mid-fade. Reduced motion is handled by the global CSS rule.
     <div key={pageKey} className="page-enter">
-      <Switch>
-        <Route path="/dashboard" component={Dashboard} />
-        <Route path="/dashboard/settings" component={Dashboard} />
-        <Route path="/work/:slug" component={Product} />
-        <Route path="/services" component={Services} />
-        <Route path="/blog" component={Blog} />
-        <Route path="/blog/:slug" component={BlogPost} />
-        <Route path="/" component={Home} />
-        <Route component={NotFound} />
-      </Switch>
+      <Suspense fallback={null}>
+        <Switch>
+          <Route path="/dashboard" component={Dashboard} />
+          <Route path="/dashboard/settings" component={Dashboard} />
+          <Route path="/work/:slug" component={Product} />
+          <Route path="/services" component={Services} />
+          <Route path="/blog" component={Blog} />
+          <Route path="/blog/:slug" component={BlogPost} />
+          <Route path="/" component={Home} />
+          <Route component={NotFound} />
+        </Switch>
+      </Suspense>
     </div>
   );
 }

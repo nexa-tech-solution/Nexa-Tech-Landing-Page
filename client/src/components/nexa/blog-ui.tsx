@@ -55,7 +55,7 @@ export function PostCover({
     >
       <img
         src={post.cover}
-        alt=""
+        alt={post.title}
         className="h-full w-full object-cover transition duration-500 ease-out group-hover:scale-[1.04]"
         loading={eager ? "eager" : "lazy"}
       />

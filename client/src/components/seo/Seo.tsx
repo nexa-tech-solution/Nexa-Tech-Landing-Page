@@ -10,13 +10,15 @@ import {
   getHomeStructuredData,
 } from "@/lib/seo";
 
-type SeoProps = {
+export type SeoProps = {
   title?: string;
   description?: string;
   path?: string;
   image?: string;
   noindex?: boolean;
   structuredData?: unknown;
+  // App Store id ("6779862851") → iOS Smart App Banner on this page.
+  appleAppId?: string;
 };
 
 function setMeta(selector: string, attributes: Record<string, string>) {
@@ -44,14 +46,24 @@ function setLink(rel: string, href: string) {
   element.href = href;
 }
 
-export default function Seo({
-  title = DEFAULT_TITLE,
-  description = DEFAULT_DESCRIPTION,
-  path = "/",
-  image = DEFAULT_OG_IMAGE,
-  noindex = false,
-  structuredData,
-}: SeoProps) {
+// Set by the pre-renderer (entry-server.tsx) to capture the page's head tags.
+let ssrCollector: ((props: SeoProps) => void) | null = null;
+export function collectSeo(collector: typeof ssrCollector) {
+  ssrCollector = collector;
+}
+
+export default function Seo(props: SeoProps) {
+  const {
+    title = DEFAULT_TITLE,
+    description = DEFAULT_DESCRIPTION,
+    path = "/",
+    image = DEFAULT_OG_IMAGE,
+    noindex = false,
+    structuredData,
+  } = props;
+
+  ssrCollector?.(props);
+
   useEffect(() => {
     const absoluteUrl = getAbsoluteUrl(path);
     const absoluteImage = getAbsoluteUrl(image);
@@ -117,6 +129,16 @@ export default function Seo({
 
     setLink("canonical", absoluteUrl);
 
+    const banner = document.head.querySelector('meta[name="apple-itunes-app"]');
+    if (props.appleAppId) {
+      setMeta('meta[name="apple-itunes-app"]', {
+        name: "apple-itunes-app",
+        content: `app-id=${props.appleAppId}, app-argument=${absoluteUrl}`,
+      });
+    } else {
+      banner?.remove();
+    }
+
     let script = document.head.querySelector<HTMLScriptElement>(
       'script[data-seo-structured-data="true"]'
     );
@@ -133,7 +155,7 @@ export default function Seo({
       null,
       0
     );
-  }, [description, image, noindex, path, structuredData, title]);
+  }, [description, image, noindex, path, structuredData, title, props.appleAppId]);
 
   return null;
 }

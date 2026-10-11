@@ -15,8 +15,10 @@ import {
   SiteHeader,
   shotStats,
 } from "@/components/nexa/layout";
-import { DEFAULT_OG_IMAGE, getProjectStructuredData } from "@/lib/seo";
+import { DEFAULT_OG_IMAGE, getAppleAppId, getProjectStructuredData } from "@/lib/seo";
 import NotFound from "@/pages/not-found";
+import { usePosts } from "@/services/blog";
+import { PostCard } from "@/components/nexa/blog-ui";
 import { useEffect, useState, type ReactNode } from "react";
 import {
   ArrowUpRight,
@@ -150,7 +152,7 @@ function PhoneFrame({ children }: { children: ReactNode }) {
   );
 }
 
-type Screen = { image: GalleryImage; title?: string; body?: string };
+type Screen = { image: GalleryImage; title?: string; body?: string; alt?: string };
 
 function Shot({
   screen,
@@ -171,7 +173,7 @@ function Shot({
     >
       <img
         src={image.src}
-        alt={screen.title ?? ""}
+        alt={screen.title ?? screen.alt ?? ""}
         width={image.width}
         height={image.height}
         loading="lazy"
@@ -407,6 +409,7 @@ export default function Product() {
   const [saved, setSaved] = useState(false);
   const [copied, setCopied] = useState(false);
   const [open, setOpen] = useState<number | null>(null);
+  const { data: allPosts = [] } = usePosts();
 
   if (!project) {
     return <NotFound />;
@@ -421,6 +424,9 @@ export default function Product() {
   const highlights = store?.highlights ?? [];
   const useCases = narrative?.useCases ?? [];
   const relatedProjects = getRelatedProjects(project, 4);
+  const relatedPosts = allPosts
+    .filter((post) => post.relatedProject === getProjectSlug(project))
+    .slice(0, 3);
   const image = project.image ?? DEFAULT_OG_IMAGE;
   const gallery = galleries[getProjectSlug(project)] ?? [];
   // Each product gets its own CTA backdrop, tinted with its screenshots' colour.
@@ -486,6 +492,7 @@ export default function Product() {
         path={detailPath}
         image={image}
         structuredData={getProjectStructuredData(project)}
+        appleAppId={project.comingSoon ? undefined : getAppleAppId(project)}
       />
 
       <SiteHeader />
@@ -646,7 +653,10 @@ export default function Product() {
               </h2>
               <div className="mt-12 md:mt-16">
                 <Screens
-                  screens={screens}
+                  screens={screens.map((screen, index) => ({
+                    ...screen,
+                    alt: `${project.title} app screenshot ${index + 1}`,
+                  }))}
                   url={project.primaryUrl}
                   onOpen={(img) => setOpen(gallery.indexOf(img))}
                 />
@@ -789,16 +799,42 @@ export default function Product() {
           </section>
         </article>
 
+        {relatedPosts.length ? (
+          <section className="mx-auto mt-24 max-w-[1200px]" aria-labelledby="from-the-blog">
+            <div className="flex items-end justify-between gap-4 border-b border-[#ececee] pb-4">
+              <h2 id="from-the-blog" className="font-display text-2xl font-bold tracking-[-0.03em] md:text-3xl">
+                How we built {project.title}
+              </h2>
+              <a href="/blog" className="text-sm font-semibold text-[#ea4c89] hover:text-[#0d0c22]">
+                All posts
+              </a>
+            </div>
+            <ul className="mt-10 grid gap-x-8 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
+              {relatedPosts.map((post, index) => (
+                <PostCard key={post.slug} post={post} index={index} />
+              ))}
+            </ul>
+          </section>
+        ) : null}
+
         {relatedProjects.length ? (
           <section className="mx-auto mt-24 max-w-[1600px]">
             <div className="flex items-center justify-between">
               <h2 className="font-semibold">More by Nexa Tech</h2>
-              <a
-                href="/#work"
-                className="text-sm font-semibold text-[#ea4c89] hover:text-[#0d0c22]"
-              >
-                View all
-              </a>
+              <div className="flex items-center gap-5">
+                <a
+                  href="/services"
+                  className="text-sm font-semibold text-[#3d3d4e] hover:text-[#ea4c89]"
+                >
+                  Build an app like this
+                </a>
+                <a
+                  href="/#work"
+                  className="text-sm font-semibold text-[#ea4c89] hover:text-[#0d0c22]"
+                >
+                  View all
+                </a>
+              </div>
             </div>
             <ul className="mt-6 grid gap-x-9 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
               {relatedProjects.map((item, index) => (

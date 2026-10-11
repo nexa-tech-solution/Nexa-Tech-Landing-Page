@@ -1,4 +1,5 @@
 import Seo from "@/components/seo/Seo";
+import { getBlogStructuredData } from "@/lib/seo";
 import {
   PostCard,
   formatPostDate,
@@ -99,6 +100,7 @@ export default function Blog() {
   const [query, setQuery] = useState("");
   const reduceMotion = useReducedMotion();
   const { data: posts = [], isPending, isError } = usePosts();
+  const structuredData = useMemo(() => getBlogStructuredData(posts), [posts]);
   const [featured] = posts;
   const needle = query.trim().toLowerCase();
 
@@ -121,6 +123,7 @@ export default function Blog() {
         title="Blog | Nexa Tech"
         description="Notes from the Nexa Tech studio on building React Native apps, web tools, browser extensions and open-source libraries."
         path="/blog"
+        structuredData={structuredData}
       />
 
       <SiteHeader />
