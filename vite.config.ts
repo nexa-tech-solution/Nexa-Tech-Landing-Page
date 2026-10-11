@@ -5,6 +5,10 @@ import path from "path";
 import runtimeErrorOverlay from "@replit/vite-plugin-runtime-error-modal";
 import { metaImagesPlugin } from "./vite-plugin-meta-images";
 
+// Absolute URLs (canonical, og:image, sitemap) need the public origin.
+// VITE_SITE_URL overrides it (e.g. for preview deployments).
+process.env.VITE_SITE_URL ||= "https://www.nexateam.dev";
+
 export default defineConfig({
   plugins: [
     react(),

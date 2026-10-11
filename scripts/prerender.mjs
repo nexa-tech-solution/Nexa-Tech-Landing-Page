@@ -8,7 +8,7 @@ import { pathToFileURL } from "node:url";
 const root = path.resolve(import.meta.dirname, "..");
 const distDir = path.join(root, "client", "dist");
 const ssrDir = path.join(root, "client", "dist-ssr");
-const siteUrl = (process.env.VITE_SITE_URL ?? "").trim().replace(/\/+$/, "");
+const siteUrl = (process.env.VITE_SITE_URL || "https://www.nexateam.dev").trim().replace(/\/+$/, "");
 
 const { render, getRoutes, getLlmsFiles, seoDefaults: seoLib } = await import(
   pathToFileURL(path.join(ssrDir, "entry-server.js")).href
