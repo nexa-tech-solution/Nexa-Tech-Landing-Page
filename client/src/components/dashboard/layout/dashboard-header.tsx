@@ -18,9 +18,6 @@ export function DashboardHeader({ onLogout }: { onLogout: () => void }) {
           <span className="font-display text-lg font-bold">
             Bảng điều khiển Nexa
           </span>
-          <span className="hidden rounded-full bg-amber-100 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-amber-700 sm:inline">
-            Dữ liệu mẫu
-          </span>
           <nav className="ml-2 flex items-center gap-1 sm:ml-4">
             {NAV.map(({ href, label, icon: Icon }) => {
               const active = location === href;

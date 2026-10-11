@@ -40,7 +40,7 @@ export function RevenueCatPanel({ totals, daily, apps }: Pick<DashboardData, "to
           ) : (
             <ul className="space-y-2">
               {subApps.slice(0, 6).map((a) => (
-                <li key={a.project.title} className="flex items-center gap-2.5 text-sm">
+                <li key={a.slug} className="flex items-center gap-2.5 text-sm">
                   <ProjectAvatar project={a.project} className="h-7 w-7 text-[9px]" />
                   <span className="min-w-0 flex-1 truncate">{a.project.title}</span>
                   <span className="font-medium tabular-nums">{usd(a.subRevenue)}</span>

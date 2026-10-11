@@ -51,6 +51,12 @@ export type TestIntegrationResult = {
   checkedAt: number; // epoch ms
 };
 
+// POST /admin/integrations/sync: every connection that could start syncing, and why others were skipped.
+export type SyncAllResult = {
+  queued: { id: number; name: string; jobId: string }[];
+  skipped: { id: number; name: string; reason: string }[];
+};
+
 export type SyncIntegrationResult = {
   jobId: string;
   startedAt: number; // epoch ms

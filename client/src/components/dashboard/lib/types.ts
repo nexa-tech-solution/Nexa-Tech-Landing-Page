@@ -20,6 +20,7 @@ export type DayPoint = {
 export type SummableMetric = Exclude<keyof DayPoint, "date" | "activeSubs">;
 
 export type AppStats = {
+  slug: string; // catalog slug: unique per app and store, used as the React key
   project: Project;
   platform: "Google Play" | "App Store";
   current: DayPoint[];

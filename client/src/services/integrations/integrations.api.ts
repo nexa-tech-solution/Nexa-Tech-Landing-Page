@@ -5,6 +5,7 @@ import type {
   IntegrationKey,
   IntegrationList,
   SaveIntegrationInput,
+  SyncAllResult,
   SyncIntegrationResult,
   TestIntegrationResult,
 } from "./integrations.types";
@@ -115,6 +116,10 @@ export const integrationsApi = {
     apiClient
       .post<ApiResponse<SyncIntegrationResult>>(`${BASE}/${key}/sync`)
       .then(unwrap),
+
+  // Queues a sync for every connected source; the list then reports progress per connection.
+  syncAll: () =>
+    apiClient.post<ApiResponse<SyncAllResult>>(`${BASE}/sync`).then(unwrap),
 
   remove: (key: IntegrationKey) =>
     apiClient.delete<ApiResponse<null>>(`${BASE}/${key}`).then(unwrap),

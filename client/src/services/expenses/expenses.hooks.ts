@@ -1,8 +1,18 @@
-import { keepPreviousData, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import {
+  keepPreviousData,
+  useMutation,
+  useQuery,
+  useQueryClient,
+} from "@tanstack/react-query";
 import type { ApiError, Paginated } from "@/lib/http";
 import { queryKeys } from "@/lib/query/query-keys";
 import { expensesApi } from "./expenses.api";
-import type { Expense, ExpenseInput, ExpenseListParams, UpdateExpenseVariables } from "./expenses.types";
+import type {
+  Expense,
+  ExpenseInput,
+  ExpenseListParams,
+  UpdateExpenseVariables,
+} from "./expenses.types";
 
 export function useExpenses(params: ExpenseListParams = {}) {
   return useQuery<Paginated<Expense>, ApiError>({
@@ -15,7 +25,12 @@ export function useExpenses(params: ExpenseListParams = {}) {
 // Every write changes list contents, so all expense lists are invalidated after success.
 function useInvalidateExpenses() {
   const queryClient = useQueryClient();
-  return () => queryClient.invalidateQueries({ queryKey: queryKeys.expenses.lists() });
+  return () =>
+    Promise.all([
+      queryClient.invalidateQueries({ queryKey: queryKeys.expenses.lists() }),
+      // The P&L subtracts expenses on the backend.
+      queryClient.invalidateQueries({ queryKey: queryKeys.dashboard.all }),
+    ]);
 }
 
 export function useCreateExpense() {

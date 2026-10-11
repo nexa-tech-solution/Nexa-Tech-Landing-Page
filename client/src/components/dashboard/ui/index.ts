@@ -7,5 +7,6 @@ export * from "./empty-state";
 export * from "./icon-action";
 export * from "./mini-stat";
 export * from "./panel";
+export * from "./scrollbar";
 export * from "./segmented";
 export * from "./sparkline";

@@ -13,6 +13,7 @@ import type {
   IntegrationKey,
   IntegrationList,
   SaveIntegrationInput,
+  SyncAllResult,
   SyncIntegrationResult,
   TestIntegrationResult,
 } from "./integrations.types";
@@ -92,6 +93,14 @@ export function useTestIntegration() {
   const invalidate = useInvalidateIntegrations();
   return useMutation<TestIntegrationResult, ApiError, IntegrationKey>({
     mutationFn: integrationsApi.test,
+    onSettled: invalidate,
+  });
+}
+
+export function useSyncAllIntegrations() {
+  const invalidate = useInvalidateIntegrations();
+  return useMutation<SyncAllResult, ApiError, void>({
+    mutationFn: () => integrationsApi.syncAll(),
     onSettled: invalidate,
   });
 }

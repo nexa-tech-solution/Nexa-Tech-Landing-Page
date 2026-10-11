@@ -5,6 +5,7 @@ export {
   useDeleteIntegration,
   useIntegration,
   useIntegrations,
+  useSyncAllIntegrations,
   useSyncIntegration,
   useTestIntegration,
   useUpdateIntegration,

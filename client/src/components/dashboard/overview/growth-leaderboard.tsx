@@ -32,7 +32,7 @@ export function GrowthLeaderboard({ apps }: { apps: AppStats[] }) {
       ) : (
         <ol className="space-y-1">
           {list.map((app, i) => (
-            <li key={app.project.title} className="flex items-center gap-3 rounded-xl px-2 py-2 hover:bg-gray-50">
+            <li key={app.slug} className="flex items-center gap-3 rounded-xl px-2 py-2 hover:bg-gray-50">
               <span className="w-4 text-xs font-semibold text-gray-400">{i + 1}</span>
               <ProjectAvatar project={app.project} className="h-9 w-9 text-[10px]" />
               <div className="min-w-0 flex-1">
