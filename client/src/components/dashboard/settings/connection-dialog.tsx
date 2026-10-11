@@ -3,6 +3,8 @@ import * as Dialog from "@radix-ui/react-dialog";
 import { ExternalLink, X } from "lucide-react";
 import type { Integration, IntegrationProvider } from "@/services/integrations";
 import { ConnectionForm } from "./connection-form";
+import { EditConnectionForm } from "./edit-connection-form";
+import { ProviderGuidePanel } from "./provider-guide";
 import { PROVIDERS } from "./providers";
 
 export type DialogState =
@@ -127,17 +129,29 @@ export function ConnectionDialog({
                 })}
               </div>
             )}
-            {def && state?.mode !== "pick" && (
-              <ConnectionForm
-                key={
-                  state?.mode === "edit"
-                    ? String(state.integration.key)
-                    : def.id
-                }
+            {def?.guide && state?.mode !== "pick" && (
+              <ProviderGuidePanel
+                key={def.id}
+                id={def.id}
+                guide={def.guide}
+                color={def.color}
+                // New connections need the steps; when editing, keep them out of the way.
+                defaultOpen={state?.mode === "create"}
+              />
+            )}
+            {def && state?.mode === "edit" && (
+              <EditConnectionForm
+                key={String(state.integration.key)}
                 def={def}
-                integration={
-                  state?.mode === "edit" ? state.integration : undefined
-                }
+                integration={state.integration}
+                legacy={legacy}
+                onDone={close}
+              />
+            )}
+            {def && state?.mode === "create" && (
+              <ConnectionForm
+                key={def.id}
+                def={def}
                 legacy={legacy}
                 onDone={close}
               />

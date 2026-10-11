@@ -1,5 +1,6 @@
 export * from "./animated-number";
 export * from "./chart-theme";
+export * from "./clamped-text";
 export * from "./confirm-dialog";
 export * from "./delta";
 export * from "./empty-state";

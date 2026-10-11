@@ -3,6 +3,9 @@ export type IntegrationProvider =
 
 export type IntegrationStatus = "NOT_CONFIGURED" | "CONNECTED" | "ERROR";
 
+// Latest sync job: QUEUED/RUNNING while the backend imports, then DONE or FAILED.
+export type SyncStatus = "QUEUED" | "RUNNING" | "DONE" | "FAILED";
+
 // Secrets are write-only: the backend never returns them, only whether one is stored.
 export type SecretState = {
   configured: boolean;
@@ -26,6 +29,8 @@ export type Integration = {
   lastCheckedAt: number | null; // epoch ms
   lastSyncAt: number | null; // epoch ms
   lastError: string | null;
+  syncStatus: SyncStatus | null; // null before the first sync (and on the legacy backend)
+  syncMessage: string | null; // import summary, or why it failed
 };
 
 export type SaveIntegrationInput = {

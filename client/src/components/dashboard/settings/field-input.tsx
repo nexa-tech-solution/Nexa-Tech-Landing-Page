@@ -25,8 +25,14 @@ export function FieldInput({
 }) {
   const fileRef = useRef<HTMLInputElement>(null);
   const stored = def.secret && secretState?.configured;
+  // A key's suffix gets an ellipsis; a service-account email is shown whole.
+  const hint = secretState?.hint
+    ? secretState.hint.includes("@")
+      ? secretState.hint
+      : `…${secretState.hint}`
+    : null;
   const placeholder = stored
-    ? `Đã lưu${secretState?.hint ? ` (…${secretState.hint})` : ""} · để trống nếu không đổi`
+    ? `Đã lưu${hint ? ` (${hint})` : ""} · để trống nếu không đổi`
     : def.placeholder;
   const id = `${idPrefix}-${def.key}`;
 

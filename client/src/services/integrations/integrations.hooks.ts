@@ -17,10 +17,26 @@ import type {
   TestIntegrationResult,
 } from "./integrations.types";
 
+export const isSyncing = (i: Pick<Integration, "syncStatus">) =>
+  i.syncStatus === "QUEUED" || i.syncStatus === "RUNNING";
+
 export function useIntegrations() {
   return useQuery<IntegrationList, ApiError>({
     queryKey: queryKeys.integrations.list(),
     queryFn: integrationsApi.list,
+    // Imports run in a backend job: poll while one is queued or running.
+    refetchInterval: (query) =>
+      query.state.data?.items.some(isSyncing) ? 3000 : false,
+  });
+}
+
+// Fresh copy of one connection for the edit form; the list row may be stale.
+export function useIntegration(id: number | null) {
+  return useQuery<Integration, ApiError>({
+    queryKey: queryKeys.integrations.detail(id ?? "none"),
+    queryFn: () => integrationsApi.get(id!),
+    enabled: id !== null,
+    staleTime: 0,
   });
 }
 
@@ -60,7 +76,14 @@ export function useUpdateIntegration() {
   >({
     mutationFn: ({ key, input }) =>
       integrationsApi.update(key, input, isLegacy(queryClient)),
-    onSuccess: invalidate,
+    onSuccess: (saved) => {
+      // The PUT response already is the fresh detail (status, connection check), so only the
+      // list needs reloading.
+      queryClient.setQueryData(queryKeys.integrations.detail(saved.key), saved);
+      return queryClient.invalidateQueries({
+        queryKey: queryKeys.integrations.list(),
+      });
+    },
     onError: reloadIfStale(invalidate),
   });
 }

@@ -10,12 +10,17 @@ import {
   XCircle,
 } from "lucide-react";
 import {
+  isSyncing,
   useDeleteIntegration,
   useSyncIntegration,
   useTestIntegration,
   type Integration,
 } from "@/services/integrations";
-import { ConfirmDialog, IconAction } from "@/components/dashboard/ui";
+import {
+  ClampedText,
+  ConfirmDialog,
+  IconAction,
+} from "@/components/dashboard/ui";
 import { fadeIn } from "./motion";
 import type { ProviderDef } from "./providers";
 import { STATUS, errorMessage, formatTime } from "./shared";
@@ -40,13 +45,24 @@ export function AccountCard({ def, integration, readOnly, onEdit }: Props) {
   // Delete errors are shown inside the confirm dialog.
   const actionError = test.error ?? sync.error;
 
-  const message = actionError
-    ? { ok: false, text: errorMessage(actionError) }
+  // The sync itself runs in a backend job; the list polls until it is DONE or FAILED.
+  const syncing = isSyncing(integration) || sync.isPending;
+
+  type Tone = "ok" | "error" | "busy";
+  const message: { tone: Tone; text: string } | null = actionError
+    ? { tone: "error", text: errorMessage(actionError) }
     : test.data && !test.isPending
-      ? { ok: test.data.ok, text: test.data.message }
-      : sync.isSuccess
-        ? { ok: true, text: "Đã đưa vào hàng đợi đồng bộ" }
-        : null;
+      ? { tone: test.data.ok ? "ok" : "error", text: test.data.message }
+      : syncing
+        ? { tone: "busy", text: "Đang đồng bộ dữ liệu…" }
+        : integration.syncStatus === "DONE" && integration.syncMessage
+          ? { tone: "ok", text: integration.syncMessage }
+          : integration.syncStatus === "FAILED"
+            ? {
+                tone: "error",
+                text: `Đồng bộ thất bại: ${integration.syncMessage ?? "không rõ lý do"}`,
+              }
+            : null;
 
   return (
     <article
@@ -92,11 +108,9 @@ export function AccountCard({ def, integration, readOnly, onEdit }: Props) {
       </dl>
 
       {integration.status === "ERROR" && integration.lastError && !message && (
-        <p
-          className="mt-2 line-clamp-2 text-[11px] text-red-600"
-          title={integration.lastError}
-        >
-          {integration.lastError}
+        <p className="mt-2 flex items-start gap-1.5 text-[11px] text-red-600">
+          <XCircle size={13} className="mt-px shrink-0" />
+          <ClampedText text={integration.lastError} />
         </p>
       )}
       <AnimatePresence mode="wait" initial={false}>
@@ -104,14 +118,22 @@ export function AccountCard({ def, integration, readOnly, onEdit }: Props) {
           <motion.p
             key={message.text}
             {...fadeIn}
-            className={`mt-2 flex items-start gap-1.5 text-[11px] ${message.ok ? "text-green-700" : "text-red-600"}`}
+            className={`mt-2 flex items-start gap-1.5 text-[11px] ${
+              message.tone === "ok"
+                ? "text-green-700"
+                : message.tone === "busy"
+                  ? "text-gray-500"
+                  : "text-red-600"
+            }`}
           >
-            {message.ok ? (
+            {message.tone === "ok" ? (
               <CheckCircle2 size={13} className="mt-px shrink-0" />
+            ) : message.tone === "busy" ? (
+              <Loader2 size={13} className="mt-px shrink-0 animate-spin" />
             ) : (
               <XCircle size={13} className="mt-px shrink-0" />
             )}
-            <span className="line-clamp-2">{message.text}</span>
+            <ClampedText text={message.text} />
           </motion.p>
         )}
       </AnimatePresence>
@@ -149,7 +171,7 @@ export function AccountCard({ def, integration, readOnly, onEdit }: Props) {
             <IconAction
               label="Đồng bộ dữ liệu ngay"
               disabledReason={
-                sync.isPending
+                syncing
                   ? "Đang đồng bộ..."
                   : !integration.enabled
                     ? "Bật đồng bộ để có thể đồng bộ"
@@ -158,14 +180,11 @@ export function AccountCard({ def, integration, readOnly, onEdit }: Props) {
               disabled={
                 integration.status !== "CONNECTED" ||
                 !integration.enabled ||
-                sync.isPending
+                syncing
               }
               onClick={() => sync.mutate(integration.key)}
             >
-              <RefreshCw
-                size={15}
-                className={sync.isPending ? "animate-spin" : ""}
-              />
+              <RefreshCw size={15} className={syncing ? "animate-spin" : ""} />
             </IconAction>
             <IconAction label="Sửa cấu hình" onClick={onEdit}>
               <Pencil size={15} />
@@ -194,8 +213,12 @@ export function AccountCard({ def, integration, readOnly, onEdit }: Props) {
         description={
           <>
             Kết nối <b className="text-[#0d0c22]">{integration.name}</b> (
-            {def.name}) sẽ bị xoá cùng toàn bộ khoá bí mật. Backend ngừng lấy dữ
-            liệu từ tài khoản này; số liệu đã nhập trước đó vẫn được giữ lại.
+            {def.name}) sẽ bị xoá hẳn khỏi hệ thống cùng toàn bộ khoá bí mật và
+            các lượt đồng bộ đang chờ. Backend ngừng lấy dữ liệu từ tài khoản
+            này; số liệu đã nhập trước đó vẫn được giữ lại.
+            {def.revokeHint && (
+              <span className="mt-2 block text-xs">{def.revokeHint}</span>
+            )}
           </>
         }
         confirmLabel="Xoá kết nối"

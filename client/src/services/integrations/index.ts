@@ -1,7 +1,9 @@
 export { integrationsApi } from "./integrations.api";
 export {
+  isSyncing,
   useCreateIntegration,
   useDeleteIntegration,
+  useIntegration,
   useIntegrations,
   useSyncIntegration,
   useTestIntegration,

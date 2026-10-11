@@ -10,16 +10,27 @@ import type {
 } from "./integrations.types";
 
 const BASE = "/admin/integrations";
+// Create, update and test call the provider live (several round-trips), so allow longer than
+// the client-wide 15s.
+const LIVE_CHECK = { timeout: 45_000 } as const;
 const LEGACY_NAME = "Tài khoản mặc định";
 
 type IntegrationDto = Omit<
   Integration,
-  "key" | "name" | "lastCheckedAt" | "lastSyncAt" | "lastError"
+  | "key"
+  | "name"
+  | "lastCheckedAt"
+  | "lastSyncAt"
+  | "lastError"
+  | "syncStatus"
+  | "syncMessage"
 > & {
   name?: string;
   lastCheckedAt?: number | null;
   lastSyncAt?: number | null;
   lastError?: string | null;
+  syncStatus?: Integration["syncStatus"];
+  syncMessage?: string | null;
 };
 
 const normalize = (dto: IntegrationDto): Integration => ({
@@ -29,6 +40,8 @@ const normalize = (dto: IntegrationDto): Integration => ({
   lastCheckedAt: dto.lastCheckedAt ?? null,
   lastSyncAt: dto.lastSyncAt ?? null,
   lastError: dto.lastError ?? null,
+  syncStatus: dto.syncStatus ?? null,
+  syncMessage: dto.syncMessage ?? null,
 });
 
 // The legacy backend rejects unknown fields it doesn't model, so `name` is dropped there.
@@ -57,14 +70,22 @@ export const integrationsApi = {
     return { items, legacy };
   },
 
+  // One connection as saved now (status, last check, secret hints). Id-based backend only.
+  get: (id: number) =>
+    apiClient
+      .get<ApiResponse<IntegrationDto>>(`${BASE}/${id}`)
+      .then(unwrap)
+      .then(normalize),
+
   create: (input: CreateIntegrationInput, legacy: boolean) => {
     const { provider, ...rest } = input;
     const request = legacy
       ? apiClient.put<ApiResponse<IntegrationDto>>(
           `${BASE}/${provider}`,
           legacyBody(rest),
+          LIVE_CHECK,
         )
-      : apiClient.post<ApiResponse<IntegrationDto>>(BASE, input);
+      : apiClient.post<ApiResponse<IntegrationDto>>(BASE, input, LIVE_CHECK);
     return request.then(unwrap).then(normalize);
   },
 
@@ -74,6 +95,7 @@ export const integrationsApi = {
       .put<ApiResponse<IntegrationDto>>(
         `${BASE}/${key}`,
         legacy ? legacyBody(input) : input,
+        LIVE_CHECK,
       )
       .then(unwrap)
       .then(normalize),
@@ -81,7 +103,11 @@ export const integrationsApi = {
   // Validates stored credentials against the provider without importing data.
   test: (key: IntegrationKey) =>
     apiClient
-      .post<ApiResponse<TestIntegrationResult>>(`${BASE}/${key}/test`)
+      .post<ApiResponse<TestIntegrationResult>>(
+        `${BASE}/${key}/test`,
+        undefined,
+        LIVE_CHECK,
+      )
       .then(unwrap),
 
   // Queues a data import job for this connection.

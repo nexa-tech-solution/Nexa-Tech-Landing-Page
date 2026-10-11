@@ -19,5 +19,7 @@ export const queryKeys = {
   integrations: {
     all: ["integrations"] as const,
     list: () => [...queryKeys.integrations.all, "list"] as const,
+    detail: (key: number | string) =>
+      [...queryKeys.integrations.all, "detail", key] as const,
   },
 } as const;

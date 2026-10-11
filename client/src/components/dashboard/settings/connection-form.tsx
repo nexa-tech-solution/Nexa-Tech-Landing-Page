@@ -59,7 +59,10 @@ export function ConnectionForm({ def, integration, legacy, onDone }: Props) {
       name: name.trim() || def.name,
       enabled,
       config: Object.fromEntries(
-        Object.entries(config).map(([k, v]) => [k, v.trim()]),
+        Object.entries(config).map(([k, v]) => {
+          const normalize = def.fields.find((f) => f.key === k)?.normalize;
+          return [k, normalize ? normalize(v.trim()) : v.trim()];
+        }),
       ),
       secrets: Object.fromEntries(
         Object.entries(secrets).filter(([, v]) => v.trim()),
@@ -147,7 +150,11 @@ export function ConnectionForm({ def, integration, legacy, onDone }: Props) {
           className="flex h-9 items-center gap-1.5 rounded-lg bg-[#0d0c22] px-4 text-sm font-semibold text-white hover:brightness-125 disabled:opacity-60"
         >
           {saving && <Loader2 size={14} className="animate-spin" />}
-          {integration ? "Lưu thay đổi" : "Thêm kết nối"}
+          {saving && def.liveCheck && enabled
+            ? `Đang kết nối ${def.name}…`
+            : integration
+              ? "Lưu thay đổi"
+              : "Thêm kết nối"}
         </button>
       </div>
     </form>
