@@ -53,12 +53,43 @@ export const PROVIDERS: ProviderDef[] = [
     icon: Coins,
     color: "#f2545b",
     docsUrl: "https://www.revenuecat.com/docs/api-v2",
+    guide: {
+      steps: [
+        {
+          title: "Mở trang API keys của project",
+          body: "RevenueCat dashboard → chọn project → Project settings → API keys.",
+          link: {
+            label: "Mở RevenueCat",
+            href: "https://app.revenuecat.com/",
+          },
+        },
+        {
+          title: "Tạo secret key v2 chỉ đọc",
+          body: "Bấm “+ New secret API key”, đặt tên VD: Nexa Dashboard, API version chọn V2. Phân quyền: Charts & metrics → Read only, Project configuration → Read only, các mục khác → No access. Key v1 không dùng được.",
+        },
+        {
+          title: "Sao chép key",
+          body: "Sao chép key dạng sk_… và dán vào ô Secret API key bên dưới.",
+        },
+        {
+          title: "Lấy Project ID",
+          body: "Mở project trên dashboard; Project ID nằm trong URL: app.revenuecat.com/projects/<Project ID>/… Dán nguyên URL cũng được, hệ thống tự lấy ID.",
+        },
+      ],
+      note: "Mỗi project RevenueCat cần một kết nối riêng. Key chỉ đọc không thể hoàn tiền, cấp quyền hay sửa cấu hình.",
+    },
+    liveCheck: true,
+    revokeHint:
+      "Để thu hồi hẳn quyền phía RevenueCat: Project settings → API keys → xoá key này.",
     fields: [
       {
         key: "projectId",
         label: "Project ID",
         placeholder: "proj1a2b3c4d",
         required: true,
+        help: "Lấy trong URL app.revenuecat.com/projects/<id>/… — dán nguyên URL cũng được.",
+        // "https://app.revenuecat.com/projects/proj1a2b/overview" → "proj1a2b"
+        normalize: (v) => v.match(/\/projects\/([^/?#]+)/)?.[1] ?? v,
       },
       {
         key: "secretApiKey",
@@ -66,7 +97,7 @@ export const PROVIDERS: ProviderDef[] = [
         placeholder: "sk_...",
         secret: true,
         required: true,
-        help: "Project settings → API keys → tạo Secret key, quyền chỉ đọc (read-only).",
+        help: "Project settings → API keys → secret key V2, quyền Read only cho Charts & metrics và Project configuration.",
       },
     ],
   },
@@ -328,6 +359,50 @@ export const PROVIDERS: ProviderDef[] = [
     color: "#f97316",
     docsUrl:
       "https://developers.google.com/analytics/devguides/reporting/data/v1",
+    guide: {
+      steps: [
+        {
+          title: "Bật 2 API Google Analytics",
+          body: "Trong Google Cloud (có thể dùng chung project với Google Play), bấm Enable cho “Google Analytics Admin API” và “Google Analytics Data API”.",
+          link: {
+            label: "Mở Analytics Data API",
+            href: "https://console.cloud.google.com/apis/library/analyticsdata.googleapis.com",
+          },
+        },
+        {
+          title: "Chuẩn bị service account + key JSON",
+          body: "Dùng lại service account của Google Play (cùng file JSON) hoặc tạo mới: IAM & Admin → Service accounts → Create → Keys → Add key → JSON.",
+          link: {
+            label: "Mở Service accounts",
+            href: "https://console.cloud.google.com/iam-admin/serviceaccounts",
+          },
+        },
+        {
+          title: "Cấp quyền Viewer trong GA4",
+          body: "Google Analytics → Admin → Property access management → + → Add users → dán email service account (…@<project>.iam.gserviceaccount.com) → role Viewer → Add. Có hiệu lực ngay.",
+          link: {
+            label: "Mở Google Analytics",
+            href: "https://analytics.google.com/analytics/web/",
+          },
+        },
+        {
+          title: "Lấy GA4 Property ID",
+          body: "Google Analytics → Admin → Property details → Property ID (dãy số). Hoặc Firebase → Project settings → Integrations → Google Analytics.",
+        },
+        {
+          title: "Lấy Firebase project ID",
+          body: "Firebase console → Project settings → General → Project ID (VD: nexa-apps).",
+          link: {
+            label: "Mở Firebase console",
+            href: "https://console.firebase.google.com/",
+          },
+        },
+      ],
+      note: "Chỉ lấy số liệu từ các app stream Android/iOS. App iOS cần có trong catalog trước — hãy đồng bộ App Store Connect trước khi đồng bộ Firebase.",
+    },
+    liveCheck: true,
+    revokeHint:
+      "Để thu hồi hẳn quyền phía Google: Google Analytics → Admin → Property access management → xoá service account; và xoá key JSON trong Google Cloud → Service accounts → Keys.",
     fields: [
       {
         key: "projectId",
@@ -340,7 +415,8 @@ export const PROVIDERS: ProviderDef[] = [
         label: "GA4 property ID",
         placeholder: "123456789",
         required: true,
-        help: "Firebase → Project settings → Integrations → Google Analytics.",
+        help: "Google Analytics → Admin → Property details. Dán cả properties/123… cũng được.",
+        normalize: (v) => v.replace(/^properties\//, ""),
       },
       {
         key: "serviceAccountJson",
@@ -350,7 +426,7 @@ export const PROVIDERS: ProviderDef[] = [
         multiline: true,
         required: true,
         file: { accept: ".json,application/json", json: true },
-        help: "Thêm email service account vào GA4 property với quyền Viewer.",
+        help: "Thêm email service account vào GA4 → Admin → Property access management, quyền Viewer.",
       },
     ],
   },
