@@ -15,6 +15,7 @@ import { ChatLauncher } from "@/components/nexa/chat-launcher";
 
 export const navLinks = [
   ["Explore", "/#work"],
+  ["Services", "/services"],
   ["About", "/#about"],
   ["Team", "/#team"],
   ["FAQ", "/#faq"],
@@ -116,13 +117,18 @@ export function ShotCard({
         </a>
         <div className="pointer-events-none absolute inset-0 flex items-end bg-gradient-to-t from-black/60 via-black/0 to-black/0 p-4 opacity-0 transition-opacity duration-200 group-hover:opacity-100 group-focus-within:opacity-100">
           <div className="pointer-events-auto flex w-full items-center justify-between gap-3">
-            <a href={path} className="truncate text-sm font-semibold text-white">
+            <a
+              href={path}
+              className="truncate text-sm font-semibold text-white"
+            >
               {project.title}
             </a>
             <div className="flex shrink-0 gap-2">
               <a
                 href={project.comingSoon ? path : project.primaryUrl}
-                {...(project.comingSoon ? {} : { target: "_blank", rel: "noreferrer" })}
+                {...(project.comingSoon
+                  ? {}
+                  : { target: "_blank", rel: "noreferrer" })}
                 aria-label={`Open ${project.title}`}
                 className="grid h-9 w-9 place-items-center rounded-full bg-white text-[#0d0c22] transition hover:text-[#6e6d7a]"
               >
@@ -211,7 +217,11 @@ export function SiteHeader() {
             aria-label="Toggle menu"
             aria-expanded={menuOpen}
           >
-            {menuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            {menuOpen ? (
+              <X className="h-5 w-5" />
+            ) : (
+              <Menu className="h-5 w-5" />
+            )}
           </button>
         </div>
       </nav>
