@@ -19,7 +19,7 @@ export const DEFAULT_OG_IMAGE_ALT =
 export const DEFAULT_OG_LOCALE = "en_US";
 export const SOCIAL_LINKS = [
   "https://github.com/nexa-tech-solution",
-  "https://www.linkedin.com/in/tech-nexa-ba02a9387/",
+  "https://www.linkedin.com/in/nexa-tech-ba02a9387/",
 ];
 
 export function getSiteUrl() {

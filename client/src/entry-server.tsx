@@ -48,6 +48,8 @@ export async function getRoutes(): Promise<SitemapEntry[]> {
   return [
     { path: "/", group: "pages" },
     { path: "/services", group: "pages" },
+    { path: "/privacy", group: "pages" },
+    { path: "/terms", group: "pages" },
     { path: "/blog", group: "pages", lastmod: posts.map((p) => p.publishedAt).sort().at(-1) },
     ...posts.map((post) => ({
       path: `/blog/${post.slug}`,

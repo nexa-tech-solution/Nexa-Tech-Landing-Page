@@ -37,7 +37,7 @@ const actionClass =
 const subject = "Project enquiry";
 // Opens Gmail's compose window in a new tab: works in any browser, unlike a
 // bare mailto: which needs a desktop mail app to be configured.
-const gmailComposeUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(
+export const gmailComposeUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(
   socials.email,
 )}&su=${encodeURIComponent(subject)}`;
 

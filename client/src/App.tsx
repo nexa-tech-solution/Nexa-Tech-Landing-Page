@@ -24,6 +24,8 @@ const Dashboard = lazyPage(() => import("@/pages/Dashboard"));
 const Blog = lazyPage(() => import("@/pages/Blog"));
 const Services = lazyPage(() => import("@/pages/Services"));
 const BlogPost = lazyPage(() => import("@/pages/BlogPost"));
+const Privacy = lazyPage(() => import("@/pages/Privacy"));
+const Terms = lazyPage(() => import("@/pages/Terms"));
 const NotFound = lazyPage(() => import("@/pages/not-found"));
 const loaders = {
   home: Home.load,
@@ -32,6 +34,8 @@ const loaders = {
   blog: Blog.load,
   services: Services.load,
   blogPost: BlogPost.load,
+  privacy: Privacy.load,
+  terms: Terms.load,
   notFound: NotFound.load,
 };
 
@@ -42,6 +46,8 @@ function loaderFor(pathname: string) {
   if (pathname === "/services") return loaders.services;
   if (pathname === "/blog") return loaders.blog;
   if (pathname.startsWith("/blog/")) return loaders.blogPost;
+  if (pathname === "/privacy") return loaders.privacy;
+  if (pathname === "/terms") return loaders.terms;
   return loaders.notFound;
 }
 
@@ -171,6 +177,8 @@ function Router() {
           <Route path="/services" component={Services} />
           <Route path="/blog" component={Blog} />
           <Route path="/blog/:slug" component={BlogPost} />
+          <Route path="/privacy" component={Privacy} />
+          <Route path="/terms" component={Terms} />
           <Route path="/" component={Home} />
           <Route component={NotFound} />
         </Switch>

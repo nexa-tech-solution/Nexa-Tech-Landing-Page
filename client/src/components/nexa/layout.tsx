@@ -11,7 +11,7 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 import { useReveal } from "@/components/nexa/use-reveal";
-import { ChatLauncher } from "@/components/nexa/chat-launcher";
+import { ChatLauncher, gmailComposeUrl } from "@/components/nexa/chat-launcher";
 
 export const navLinks = [
   ["Explore", "/#work"],
@@ -278,8 +278,10 @@ export function SiteFooter() {
               </a>
               <a
                 className="social-button"
-                href={`mailto:${socials.email}`}
-                aria-label="Email Nexa"
+                href={gmailComposeUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Write us in Gmail"
               >
                 <Mail />
               </a>
@@ -287,6 +289,14 @@ export function SiteFooter() {
           </div>
           <div className="mt-10 flex flex-col items-center gap-3 text-sm text-[#6e6d7a] sm:flex-row sm:justify-between">
             <p>© {new Date().getFullYear()} Nexa Tech. All rights reserved.</p>
+            <div className="flex gap-5">
+              <a href="/privacy" className="hover:text-[#0d0c22]">
+                Privacy
+              </a>
+              <a href="/terms" className="hover:text-[#0d0c22]">
+                Terms
+              </a>
+            </div>
             <p>Web · Mobile · Open source</p>
           </div>
         </div>

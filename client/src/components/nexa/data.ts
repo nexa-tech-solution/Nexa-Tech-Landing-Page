@@ -1937,7 +1937,7 @@ export const team = [
 
 export const socials = {
   github: "https://github.com/nexa-tech-solution",
-  linkedin: "https://www.linkedin.com/in/tech-nexa-ba02a9387/",
+  linkedin: "https://www.linkedin.com/in/nexa-tech-ba02a9387/",
   email: "cs.nexatech@gmail.com",
 };
 
