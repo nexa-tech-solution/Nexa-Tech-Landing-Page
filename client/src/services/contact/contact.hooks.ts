@@ -8,6 +8,7 @@ import type { ApiError } from "@/lib/http";
 import { queryKeys } from "@/lib/query/query-keys";
 import { contactApi } from "./contact.api";
 import type {
+  ContactInboxFetchResult,
   ContactListParams,
   ContactReplyInput,
   ContactStatus,
@@ -85,6 +86,20 @@ export function useDeleteContact() {
   return useMutation<unknown, ApiError, number>({
     mutationFn: contactApi.remove,
     onSuccess: invalidate,
+  });
+}
+
+// Imports new emails from the contact mailbox, then reloads the list if any arrived.
+export function useFetchContactInbox() {
+  const queryClient = useQueryClient();
+  return useMutation<ContactInboxFetchResult, ApiError, boolean>({
+    mutationFn: (force) => contactApi.fetchInbox(force),
+    onSuccess: (result) => {
+      if (result.imported > 0) {
+        queryClient.invalidateQueries({ queryKey: queryKeys.contact.lists() });
+        queryClient.invalidateQueries({ queryKey: queryKeys.contact.unread() });
+      }
+    },
   });
 }
 

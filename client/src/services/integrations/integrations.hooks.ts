@@ -114,6 +114,33 @@ export function useSyncIntegration() {
   });
 }
 
+// Queues the chosen connections one request each; a failure on one does not stop the others.
+export function useSyncIntegrations() {
+  const invalidate = useInvalidateIntegrations();
+  return useMutation<SyncManyResult, ApiError, Integration[]>({
+    mutationFn: async (targets) => {
+      const results = await Promise.allSettled(
+        targets.map((i) => integrationsApi.sync(i.key)),
+      );
+      return results.reduce<SyncManyResult>(
+        (acc, result, index) => {
+          const { name } = targets[index];
+          if (result.status === "fulfilled") acc.queued.push(name);
+          else acc.failed.push({ name, error: result.reason as ApiError });
+          return acc;
+        },
+        { queued: [], failed: [] },
+      );
+    },
+    onSettled: invalidate,
+  });
+}
+
+export type SyncManyResult = {
+  queued: string[];
+  failed: { name: string; error: ApiError }[];
+};
+
 export function useDeleteIntegration() {
   const invalidate = useInvalidateIntegrations();
   return useMutation<null, ApiError, IntegrationKey>({

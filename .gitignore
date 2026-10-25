@@ -3,4 +3,7 @@ dist
 .DS_Store
 server/public
 vite.config.ts.*
-*.tar.gzclient/dist-ssr
+*.tar.gz
+client/dist-ssr
+
+*.local

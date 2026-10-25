@@ -1,17 +1,20 @@
-import { useEffect, useState } from "react";
-import { Archive, ArchiveRestore, CheckCircle2, Inbox, Loader2, MailOpen, Search, Trash2, XCircle } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { Archive, ArchiveRestore, CheckCircle2, Inbox, Loader2, Mail, MailOpen, RefreshCw, Search, Trash2, XCircle } from "lucide-react";
 import {
   useContactMessage,
   useContactMessages,
   useDeleteContact,
+  useFetchContactInbox,
   useSetContactStatus,
   type ContactMessage,
   type ContactStatus,
 } from "@/services/contact";
 import { ReplyComposer } from "./reply-composer";
 import { errorMessage } from "./shared";
+import { EmailFrame } from "./email-frame";
 import { DashboardHeader } from "@/components/dashboard/layout/dashboard-header";
 import { ConfirmDialog, EmptyState, Panel, SLIM_SCROLLBAR, Segmented } from "@/components/dashboard/ui";
+import { API_ERROR_CODES } from "@/lib/http";
 
 type Tab = "inbox" | ContactStatus;
 
@@ -28,6 +31,9 @@ const STATUS_LABEL: Record<ContactStatus, { label: string; tone: string }> = {
   REPLIED: { label: "Đã trả lời", tone: "bg-green-50 text-green-700" },
   ARCHIVED: { label: "Lưu trữ", tone: "bg-gray-100 text-gray-400" },
 };
+
+// sourcePage of messages imported from the contact mailbox instead of the website form.
+const EMAIL_SOURCE = "email";
 
 const fullTime = (ms: number) => new Date(ms).toLocaleString("vi-VN");
 const shortTime = (ms: number) => {
@@ -57,15 +63,41 @@ export function ContactsView({ onLogout }: { onLogout: () => void }) {
   });
   const items = list.data?.items ?? [];
 
+  // Emails sent straight to the contact address: pulled in when the page opens (the server skips
+  // it if the last fetch was moments ago) and on the button.
+  const inbox = useFetchContactInbox();
+  const { mutate: fetchInbox } = inbox;
+  const autoFetched = useRef(false); // once per visit, also under StrictMode's double effect
+  useEffect(() => {
+    if (autoFetched.current) return;
+    autoFetched.current = true;
+    fetchInbox(false);
+  }, [fetchInbox]);
+  const inboxNotice = inboxStatus(inbox);
+
   return (
     <div className="min-h-screen bg-[#f7f8fa] text-[#0d0c22]">
       <DashboardHeader onLogout={onLogout} />
       <main className="mx-auto max-w-7xl space-y-5 px-4 py-6 sm:px-6">
-        <div>
-          <h1 className="font-display text-2xl font-bold">Liên hệ</h1>
-          <p className="mt-1 text-sm text-gray-500">
-            Tin nhắn khách gửi từ form “Liên hệ” trên trang chủ. Trả lời tại đây — email được gửi tới người gửi và lưu lại lịch sử.
-          </p>
+        <div className="flex flex-wrap items-start justify-between gap-3">
+          <div>
+            <h1 className="font-display text-2xl font-bold">Liên hệ</h1>
+            <p className="mt-1 text-sm text-gray-500">
+              Tin nhắn từ form “Liên hệ” trên trang chủ và email gửi thẳng tới hộp thư liên hệ. Trả lời tại đây — email được gửi tới người gửi và lưu lại lịch sử.
+            </p>
+          </div>
+          <div className="flex flex-col items-end gap-1">
+            <button
+              type="button"
+              onClick={() => inbox.mutate(true)}
+              disabled={inbox.isPending}
+              className="flex h-9 items-center gap-1.5 rounded-lg border border-gray-200 bg-white px-3 text-sm font-semibold hover:border-gray-400 disabled:opacity-60"
+            >
+              <RefreshCw size={14} className={inbox.isPending ? "animate-spin" : ""} />
+              {inbox.isPending ? "Đang lấy email…" : "Lấy email"}
+            </button>
+            {inboxNotice && <span className={`text-[11px] ${inboxNotice.tone}`}>{inboxNotice.text}</span>}
+          </div>
         </div>
 
         <div className="grid gap-5 lg:grid-cols-[380px_1fr]">
@@ -135,6 +167,7 @@ function MessageRow({ message: m, active, onSelect }: { message: ContactMessage;
         <div className="flex items-center gap-2">
           <span className={`h-2 w-2 shrink-0 rounded-full ${unread ? "bg-[#ea4c89]" : "bg-transparent"}`} />
           <span className={`min-w-0 flex-1 truncate text-sm ${unread ? "font-semibold" : "font-medium"}`}>{m.name}</span>
+          {m.sourcePage === EMAIL_SOURCE && <EmailBadge />}
           <span className="shrink-0 text-[11px] text-gray-400">{shortTime(m.createdAt)}</span>
         </div>
         <div className="ml-4 truncate text-xs text-gray-500">{m.email}</div>
@@ -173,7 +206,9 @@ function MessageDetail({ id, onClosed }: { id: number; onClosed: () => void }) {
   return (
     <Panel
       title={message.name}
-      subtitle={`${message.email} · ${fullTime(message.createdAt)}${message.sourcePage ? ` · từ ${message.sourcePage}` : ""}`}
+      subtitle={`${message.email} · ${fullTime(message.createdAt)}${
+        message.sourcePage === EMAIL_SOURCE ? " · qua email" : message.sourcePage ? ` · từ ${message.sourcePage}` : ""
+      }`}
       className="lg:h-[calc(100vh-220px)] lg:min-h-[520px]"
       action={
         <div className="flex items-center gap-1">
@@ -211,7 +246,11 @@ function MessageDetail({ id, onClosed }: { id: number; onClosed: () => void }) {
                   <span className="ml-auto text-gray-400">{fullTime(r.sentAt)}</span>
                 </div>
                 {r.status === "FAILED" && <p className="mb-1 text-xs text-red-600">Gửi thất bại: {r.error}</p>}
-                <p className="whitespace-pre-wrap text-gray-700">{r.body}</p>
+                {r.format === "HTML" ? (
+                  <HtmlReply subject={r.subject} html={r.body} />
+                ) : (
+                  <p className="whitespace-pre-wrap text-gray-700">{r.body}</p>
+                )}
               </div>
             ))}
           </div>
@@ -247,4 +286,44 @@ function IconButton({ label, danger, onClick, children }: { label: string; dange
       {children}
     </button>
   );
+}
+
+// A sent HTML email, collapsed by default. The frame is mounted only once opened: inside a closed
+// <details> it would load at zero size and measure its height as empty.
+function HtmlReply({ subject, html }: { subject: string; html: string }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <details className="text-xs text-gray-500" onToggle={(e) => setOpen(e.currentTarget.open)}>
+      <summary className="cursor-pointer select-none">Email HTML · xem nội dung</summary>
+      {open && <EmailFrame title={subject} html={html} className="mt-2 rounded-lg border border-gray-100" />}
+    </details>
+  );
+}
+
+function EmailBadge() {
+  return (
+    <span className="flex shrink-0 items-center gap-1 rounded-full bg-blue-50 px-1.5 py-0.5 text-[10px] font-medium text-blue-700">
+      <Mail size={10} /> Email
+    </span>
+  );
+}
+
+// One line under the "Lấy email" button about the last fetch. A missing mailbox setup is only
+// mentioned when the button was clicked, not on every page open.
+function inboxStatus(inbox: ReturnType<typeof useFetchContactInbox>): { tone: string; text: string } | null {
+  if (inbox.isPending) return null;
+  if (inbox.error) {
+    if (inbox.error.errorCode === API_ERROR_CODES.MAIL_INBOX_NOT_CONFIGURED) {
+      return inbox.variables ? { tone: "text-amber-600", text: "Chưa cấu hình hộp thư (MAIL_INBOX_USERNAME / PASSWORD)" } : null;
+    }
+    return { tone: "text-red-600", text: errorMessage(inbox.error) };
+  }
+  const r = inbox.data;
+  if (!r) return null;
+  if (r.fetched && !r.complete) {
+    return { tone: "text-amber-600", text: `Đã lấy ${r.imported} email mới · còn email cũ hơn, bấm “Lấy email” để lấy tiếp` };
+  }
+  if (r.imported > 0) return { tone: "text-green-700", text: `Đã lấy ${r.imported} email mới` };
+  if (r.fetched) return { tone: "text-gray-400", text: "Không có email mới" };
+  return r.lastFetchedAt ? { tone: "text-gray-400", text: `Đã kiểm tra lúc ${new Date(r.lastFetchedAt).toLocaleTimeString("vi-VN", { hour: "2-digit", minute: "2-digit" })}` } : null;
 }

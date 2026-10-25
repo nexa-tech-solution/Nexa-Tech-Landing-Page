@@ -6,6 +6,7 @@ export {
   useContactTemplates,
   useContactUnreadCount,
   useDeleteContact,
+  useFetchContactInbox,
   useReplyContact,
   useSetContactStatus,
   useSubmitContact,

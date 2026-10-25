@@ -9,6 +9,7 @@ import {
 import type {
   ContactEmailPreview,
   ContactEmailTemplate,
+  ContactInboxFetchResult,
   ContactListParams,
   ContactMessage,
   ContactMessageDetail,
@@ -51,6 +52,15 @@ export const contactApi = {
     apiClient
       .post<ApiResponse<ContactMessageDetail>>(`${ADMIN}/${id}/reply`, input, {
         timeout: 45_000,
+      })
+      .then(unwrap),
+
+  // Reads the contact mailbox (IMAP) and imports new emails. force: skip the 2-minute throttle.
+  fetchInbox: (force: boolean) =>
+    apiClient
+      .post<ApiResponse<ContactInboxFetchResult>>(`${ADMIN}/inbox/fetch`, undefined, {
+        params: { force },
+        timeout: 60_000,
       })
       .then(unwrap),
 

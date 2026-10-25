@@ -22,10 +22,14 @@ export type ContactMessage = {
   repliedAt: number | null;
 };
 
+// TEXT: written in the composer and wrapped in the built-in design. HTML: a pasted email, sent as is.
+export type ContactReplyFormat = "TEXT" | "HTML";
+
 export type ContactReply = {
   id: number;
   subject: string;
   body: string;
+  format?: ContactReplyFormat; // absent on older backends = TEXT
   status: "SENT" | "FAILED";
   error: string | null;
   sentAt: number;
@@ -65,9 +69,20 @@ export type ContactEmailTemplate = {
 export type ContactReplyInput = {
   subject: string;
   body: string;
+  format?: ContactReplyFormat; // default TEXT; HTML ignores template and button
   template?: ContactEmailTemplateKey; // default GENERAL
   ctaLabel?: string; // button shown only with both label and url
   ctaUrl?: string; // http(s):// or mailto:
 };
 
 export type ContactEmailPreview = { subject: string; html: string; text: string };
+
+// POST /admin/contact-messages/inbox/fetch: emails imported from the contact mailbox.
+// fetched=false: answered from the previous fetch (too soon, or one already running).
+export type ContactInboxFetchResult = {
+  fetched: boolean;
+  complete: boolean; // false: stopped at its time limit with more emails left; fetch again
+  imported: number;
+  skipped: number; // newsletters / notifications, not shown
+  lastFetchedAt: number | null; // epoch ms
+};

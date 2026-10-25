@@ -40,6 +40,8 @@ export default defineConfig({
     },
   },
   root: path.resolve(import.meta.dirname, "client"),
+  // .env lives next to package.json, not in client/ (Vite defaults envDir to root).
+  envDir: import.meta.dirname,
   build: {
     outDir: "dist",
     emptyOutDir: true,
