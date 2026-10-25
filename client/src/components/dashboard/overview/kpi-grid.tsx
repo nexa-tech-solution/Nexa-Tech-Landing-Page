@@ -10,7 +10,7 @@ type Card = {
   icon: ReactNode;
   label: string;
   value: number;
-  delta: number;
+  delta: number | null;
   color: string;
   spark: number[];
   format: (v: number) => string;

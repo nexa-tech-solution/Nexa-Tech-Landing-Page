@@ -25,12 +25,13 @@ export type AppStats = {
   platform: "Google Play" | "App Store";
   current: DayPoint[];
   installs: number;
-  growth: number;
+  installsPrev: number | null;
+  growth: number | null;
   activeUsers: number;
   adRevenue: number;
   subRevenue: number;
   revenue: number;
-  revenueGrowth: number;
+  revenueGrowth: number | null;
   activeSubs: number;
   mrr: number;
   rating: number;

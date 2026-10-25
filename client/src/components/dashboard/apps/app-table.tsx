@@ -8,9 +8,9 @@ import {
   Search,
 } from "lucide-react";
 import { ProjectAvatar } from "@/components/nexa/layout";
-import { num, percent, usd } from "@/components/dashboard/lib/format";
+import { installChange, num, percent, usd } from "@/components/dashboard/lib/format";
 import {
-  Delta,
+  InstallDelta,
   Panel,
   Segmented,
   SLIM_SCROLLBAR,
@@ -41,8 +41,14 @@ const COLUMNS: Array<{ key: SortKey; label: string }> = [
   { key: "crashFree", label: "Không lỗi" },
 ];
 
-const sortValue = (a: AppStats, key: SortKey) =>
-  key === "name" ? a.project.title.toLowerCase() : a[key];
+// Growth sorts by % where there is one; apps without (tiny or missing previous period) go last.
+const sortValue = (a: AppStats, key: SortKey): string | number | null =>
+  key === "name" ? a.project.title.toLowerCase() : key === "growth" ? a.growth : a[key];
+
+const trendOf = (a: AppStats) => {
+  const change = installChange(a);
+  return change == null ? null : change.value >= 0 ? "up" : "down";
+};
 
 export function AppTable({ apps }: { apps: AppStats[] }) {
   const [query, setQuery] = useState("");
@@ -58,11 +64,12 @@ export function AppTable({ apps }: { apps: AppStats[] }) {
       .filter((a) => !q || a.project.title.toLowerCase().includes(q))
       .filter(
         (a) =>
-          trend === "all" || (trend === "up" ? a.growth >= 0 : a.growth < 0),
+          trend === "all" || trendOf(a) === trend,
       )
       .sort((a, b) => {
         const va = sortValue(a, sort.key);
         const vb = sortValue(b, sort.key);
+        if (va == null || vb == null) return va == null ? (vb == null ? 0 : 1) : -1;
         const cmp = va < vb ? -1 : va > vb ? 1 : 0;
         return sort.dir === "asc" ? cmp : -cmp;
       });
@@ -166,7 +173,7 @@ export function AppTable({ apps }: { apps: AppStats[] }) {
                   {num(a.installs)}
                 </td>
                 <td className="px-4 py-3 text-right sm:px-5">
-                  <Delta value={a.growth} />
+                  <InstallDelta change={installChange(a)} />
                 </td>
                 <td className="px-4 py-3 text-right tabular-nums sm:px-5">
                   {num(a.activeUsers)}

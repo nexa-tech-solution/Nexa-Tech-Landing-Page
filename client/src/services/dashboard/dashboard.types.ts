@@ -31,12 +31,15 @@ export type AppStatsDto = {
   iconUrl: string | null; // store icon saved by the sync; null until found
   current: DayPointDto[];
   installs: number;
-  growth: number;
+  // null: synced history doesn't cover the whole previous period, so there is nothing to compare.
+  installsPrev: number | null;
+  // % change; also null when the previous period had too few installs (see installsPrev instead).
+  growth: number | null;
   activeUsers: number;
   adRevenue: number;
   subRevenue: number;
   revenue: number;
-  revenueGrowth: number;
+  revenueGrowth: number | null;
   activeSubs: number;
   mrr: number;
   rating: number;
@@ -83,6 +86,8 @@ export type DashboardDto = {
   to: string;
   previousFrom: string;
   previousTo: string;
+  // false: synced history starts inside the previous period, so its totals are partial.
+  previousComplete: boolean;
   apps: AppStatsDto[];
   totals: DashboardTotalsDto;
   daily: DailyRowDto[];

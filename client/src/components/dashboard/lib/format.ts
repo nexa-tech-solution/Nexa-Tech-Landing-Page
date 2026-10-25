@@ -12,4 +12,11 @@ export const usdCompact = (n: number) => usdCompactFmt.format(n);
 export const percent = (n: number, digits = 1) => `${n.toLocaleString("vi-VN", { maximumFractionDigits: digits })}%`;
 
 export const sum = (arr: DayPoint[], key: SummableMetric) => arr.reduce((t, p) => t + p[key], 0);
-export const pct = (cur: number, prev: number) => (prev ? ((cur - prev) / prev) * 100 : 0);
+// null when there is no previous value to compare with (the UI shows "—", not "0%").
+export const pct = (cur: number, prev: number): number | null => (prev ? ((cur - prev) / prev) * 100 : null);
+
+// Install change for an app: % when the previous period is a fair base, the absolute change when
+// it was too small for a % to mean anything, null when there is no full previous period.
+export type InstallChange = { kind: "pct" | "abs"; value: number } | null;
+export const installChange = (a: { installs: number; installsPrev: number | null; growth: number | null }): InstallChange =>
+  a.growth != null ? { kind: "pct", value: a.growth } : a.installsPrev != null ? { kind: "abs", value: a.installs - a.installsPrev } : null;

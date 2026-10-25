@@ -42,10 +42,26 @@ function toAppStats(app: AppStatsDto): AppStats {
   };
 }
 
+// A previous period only partly covered by synced history looks artificially small, so its totals
+// are dropped: the KPI deltas then show "—" instead of a made-up +200%.
+function comparableTotals(dto: DashboardDto) {
+  if (dto.previousComplete) return dto.totals;
+  return {
+    ...dto.totals,
+    revenuePrev: 0,
+    adRevenuePrev: 0,
+    subRevenuePrev: 0,
+    installsPrev: 0,
+    activeUsersPrev: 0,
+    impressionsPrev: 0,
+    activeSubsPrev: 0,
+  };
+}
+
 function toDashboardData(dto: DashboardDto) {
   return {
     apps: dto.apps.map(toAppStats),
-    totals: dto.totals,
+    totals: comparableTotals(dto),
     daily: dto.daily,
     countries: dto.countries as CountryStat[],
     adFormats: dto.adFormats as AdFormatStat[],
@@ -57,6 +73,7 @@ const EMPTY = toDashboardData({
   to: "",
   previousFrom: "",
   previousTo: "",
+  previousComplete: false,
   apps: [],
   daily: [],
   countries: [],
