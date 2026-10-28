@@ -9,13 +9,13 @@ import type { Post, PostSummary } from "@/services/blog/blog.types";
 
 export const SITE_NAME = "Nexa Tech";
 export const DEFAULT_TITLE =
-  "Nexa Tech | React Native, Web & Mobile Product Studio";
+  "Nexa | Launch, rank and grow your mobile app";
 export const DEFAULT_DESCRIPTION =
-  "Nexa Tech builds shipping-ready React Native apps, web products, browser tools, and open-source libraries for real users.";
+  "Nexa Rankings is where new iOS and Android apps get discovered. Launch for free, climb the daily charts, and grow with publishing, ASO, mail and a revenue dashboard in one plan.";
 export const DEFAULT_OG_IMAGE = "/opengraph.webp?v=2";
 export const DEFAULT_LOGO_IMAGE = "/favicon.webp";
 export const DEFAULT_OG_IMAGE_ALT =
-  "Nexa Tech showcase featuring apps, tools, and team";
+  "Nexa Rankings: today's top new mobile apps";
 export const DEFAULT_OG_LOCALE = "en_US";
 export const SOCIAL_LINKS = [
   "https://github.com/nexa-tech-solution",
@@ -412,4 +412,65 @@ export function getAppleAppId(project: Project) {
     if (id) return id;
   }
   return undefined;
+}
+
+// One growth service page (/services/publish, /services/aso-seo, …).
+export function getGrowthServiceStructuredData(service: {
+  slug: string;
+  kicker: string;
+  description: string;
+  faq: FaqItem[];
+}, plans: Array<{ name: string; monthly: number }>) {
+  const path = `/services/${service.slug}`;
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      organizationNode(),
+      {
+        "@type": "Service",
+        name: service.kicker,
+        description: service.description,
+        serviceType: service.kicker,
+        provider: organizationRef(),
+        url: getAbsoluteUrl(path),
+        offers: plans.map((plan) => ({
+          "@type": "Offer",
+          name: plan.name,
+          price: plan.monthly,
+          priceCurrency: "USD",
+          url: getAbsoluteUrl("/pricing"),
+        })),
+      },
+      faqNode(service.faq),
+      breadcrumbNode([
+        { name: "Home", path: "/" },
+        { name: "Services", path: "/services" },
+        { name: service.kicker, path },
+      ]),
+    ],
+  };
+}
+
+export function getPricingStructuredData(plans: Array<{ name: string; monthly: number; yearly: number; blurb: string }>, faq: FaqItem[]) {
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      organizationNode(),
+      {
+        "@type": "Product",
+        name: "Nexa app growth plan",
+        description: "App publishing, SEO/ASO, mail and a revenue dashboard in one subscription.",
+        brand: organizationRef(),
+        offers: plans.flatMap((plan) => [
+          { "@type": "Offer", name: `${plan.name} (monthly)`, description: plan.blurb, price: plan.monthly, priceCurrency: "USD", url: getAbsoluteUrl("/pricing") },
+          { "@type": "Offer", name: `${plan.name} (yearly)`, description: plan.blurb, price: plan.yearly, priceCurrency: "USD", url: getAbsoluteUrl("/pricing") },
+        ]),
+      },
+      faqNode(faq),
+      breadcrumbNode([
+        { name: "Home", path: "/" },
+        { name: "Pricing", path: "/pricing" },
+      ]),
+    ],
+  };
 }

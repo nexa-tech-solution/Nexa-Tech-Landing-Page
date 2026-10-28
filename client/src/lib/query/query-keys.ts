@@ -1,3 +1,4 @@
+import type { RankHistoryParams, RankingParams } from "@/services/rankings/rankings.types";
 import type { ExpenseListParams } from "@/services/expenses/expenses.types";
 import type {
   DashboardParams,
@@ -44,6 +45,25 @@ export const queryKeys = {
     templates: () => [...queryKeys.contact.all, "templates"] as const,
     preview: (id: number, input: ContactReplyInput) =>
       [...queryKeys.contact.all, "preview", id, input] as const,
+  },
+  rankings: {
+    all: ["rankings"] as const,
+    home: () => [...queryKeys.rankings.all, "home"] as const,
+    categories: () => [...queryKeys.rankings.all, "categories"] as const,
+    app: (slug: string) => [...queryKeys.rankings.all, "app", slug] as const,
+    rankHistory: (slug: string, params: RankHistoryParams) =>
+      [...queryKeys.rankings.all, "rank-history", slug, params] as const,
+    maker: (slug: string) => [...queryKeys.rankings.all, "maker", slug] as const,
+    comments: (slug: string) => [...queryKeys.rankings.all, "comments", slug] as const,
+    list: (params: RankingParams) =>
+      [...queryKeys.rankings.all, "list", params] as const,
+  },
+  account: {
+    all: ["account"] as const,
+    workspace: (customerId: number) => [...queryKeys.account.all, "workspace", customerId] as const,
+    invite: (token: string) => [...queryKeys.account.all, "invite", token] as const,
+    notifications: (customerId: number) => [...queryKeys.account.all, "notifications", customerId] as const,
+    settings: (customerId: number) => [...queryKeys.account.all, "settings", customerId] as const,
   },
   integrations: {
     all: ["integrations"] as const,

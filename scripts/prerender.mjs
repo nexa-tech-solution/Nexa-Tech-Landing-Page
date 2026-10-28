@@ -10,7 +10,7 @@ const distDir = path.join(root, "client", "dist");
 const ssrDir = path.join(root, "client", "dist-ssr");
 const siteUrl = (process.env.VITE_SITE_URL || "https://www.nexateam.dev").trim().replace(/\/+$/, "");
 
-const { render, getRoutes, getLlmsFiles, seoDefaults: seoLib } = await import(
+const { render, getRoutes, getLlmsFiles, getBadgeFiles, seoDefaults: seoLib } = await import(
   pathToFileURL(path.join(ssrDir, "entry-server.js")).href
 );
 
@@ -127,7 +127,11 @@ write(
   ].join("\n"),
 );
 
+// Embed badges for makers' sites: /badges/{slug}-{light|dark}.svg
+const badgeFiles = await getBadgeFiles();
+for (const [file, svg] of Object.entries(badgeFiles)) write(path.join(distDir, file), svg);
+
 fs.rmSync(ssrDir, { recursive: true, force: true });
 console.log(
-  `[prerender] wrote ${routes.length} pages + 404.html, sitemaps, robots.txt, ${Object.keys(llmsFiles).length} llms/markdown files`,
+  `[prerender] wrote ${routes.length} pages + 404.html, sitemaps, robots.txt, ${Object.keys(llmsFiles).length} llms/markdown files, ${Object.keys(badgeFiles).length} badges`,
 );

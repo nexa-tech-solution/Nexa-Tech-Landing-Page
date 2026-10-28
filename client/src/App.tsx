@@ -24,6 +24,15 @@ const Dashboard = lazyPage(() => import("@/pages/Dashboard"));
 const Blog = lazyPage(() => import("@/pages/Blog"));
 const Services = lazyPage(() => import("@/pages/Services"));
 const BlogPost = lazyPage(() => import("@/pages/BlogPost"));
+const ResetPassword = lazyPage(() => import("@/pages/ResetPassword"));
+const Invite = lazyPage(() => import("@/pages/Invite"));
+const Pricing = lazyPage(() => import("@/pages/Pricing"));
+const ServiceDetail = lazyPage(() => import("@/pages/ServiceDetail"));
+const Account = lazyPage(() => import("@/pages/Account"));
+const Submit = lazyPage(() => import("@/pages/Submit"));
+const Maker = lazyPage(() => import("@/pages/Maker"));
+const AppDetail = lazyPage(() => import("@/pages/AppDetail"));
+const Rankings = lazyPage(() => import("@/pages/Rankings"));
 const Privacy = lazyPage(() => import("@/pages/Privacy"));
 const Terms = lazyPage(() => import("@/pages/Terms"));
 const NotFound = lazyPage(() => import("@/pages/not-found"));
@@ -34,6 +43,15 @@ const loaders = {
   blog: Blog.load,
   services: Services.load,
   blogPost: BlogPost.load,
+  rankings: Rankings.load,
+  appDetail: AppDetail.load,
+  maker: Maker.load,
+  submit: Submit.load,
+  account: Account.load,
+  serviceDetail: ServiceDetail.load,
+  pricing: Pricing.load,
+  invite: Invite.load,
+  resetPassword: ResetPassword.load,
   privacy: Privacy.load,
   terms: Terms.load,
   notFound: NotFound.load,
@@ -44,8 +62,17 @@ function loaderFor(pathname: string) {
   if (pathname.startsWith("/dashboard")) return loaders.dashboard;
   if (pathname.startsWith("/work/")) return loaders.product;
   if (pathname === "/services") return loaders.services;
+  if (pathname.startsWith("/services/")) return loaders.serviceDetail;
+  if (pathname === "/pricing") return loaders.pricing;
+  if (pathname.startsWith("/invite/")) return loaders.invite;
+  if (pathname === "/reset-password") return loaders.resetPassword;
   if (pathname === "/blog") return loaders.blog;
   if (pathname.startsWith("/blog/")) return loaders.blogPost;
+  if (pathname.startsWith("/app/")) return loaders.appDetail;
+  if (pathname.startsWith("/makers/")) return loaders.maker;
+  if (pathname === "/submit") return loaders.submit;
+  if (pathname === "/me") return loaders.account;
+  if (pathname === "/rankings" || pathname.startsWith("/rankings/")) return loaders.rankings;
   if (pathname === "/privacy") return loaders.privacy;
   if (pathname === "/terms") return loaders.terms;
   return loaders.notFound;
@@ -60,6 +87,7 @@ function usePreloadPages() {
         loaders.home,
         loaders.services,
         loaders.blog,
+        loaders.rankings,
         loaders.blogPost,
         loaders.product,
       ].forEach((load) => void load().catch(() => {}));
@@ -175,8 +203,18 @@ function Router() {
           <Route path="/dashboard/contacts" component={Dashboard} />
           <Route path="/work/:slug" component={Product} />
           <Route path="/services" component={Services} />
+          <Route path="/services/:slug" component={ServiceDetail} />
+          <Route path="/pricing" component={Pricing} />
+          <Route path="/invite/:token" component={Invite} />
+          <Route path="/reset-password" component={ResetPassword} />
           <Route path="/blog" component={Blog} />
           <Route path="/blog/:slug" component={BlogPost} />
+          <Route path="/app/:slug" component={AppDetail} />
+          <Route path="/makers/:slug" component={Maker} />
+          <Route path="/submit" component={Submit} />
+          <Route path="/me" component={Account} />
+          <Route path="/rankings" component={Rankings} />
+          <Route path="/rankings/:category" component={Rankings} />
           <Route path="/privacy" component={Privacy} />
           <Route path="/terms" component={Terms} />
           <Route path="/" component={Home} />

@@ -4,6 +4,11 @@ import { ShotCard, SiteFooter, SiteHeader } from "@/components/nexa/layout";
 import { Roadmap } from "@/components/nexa/roadmap";
 import { TechMarquee } from "@/components/nexa/tech-marquee";
 import { CountUp } from "@/components/nexa/count-up";
+import { HomeRankings } from "@/components/rankings/home-rankings";
+import { Hero } from "@/components/home/hero";
+import { AppMarquee, HowItWorks, Showcase } from "@/components/home/sections";
+import { getGrowthService } from "@/components/services/growth-services";
+import { useSearch } from "wouter";
 import {
   EMPTY_FILTERS,
   FilterPanel,
@@ -20,7 +25,6 @@ import {
   Github,
   Linkedin,
   Mail,
-  Search,
 } from "lucide-react";
 import { useMemo, useState, type FormEvent } from "react";
 import { API_ERROR_CODES } from "@/lib/http";
@@ -29,15 +33,21 @@ import { useSubmitContact } from "@/services/contact";
 const categories = ["All", "Web", "Mobile", "Extension", "Library"] as const;
 type Category = (typeof categories)[number];
 
-const trendingTags = [
-  "React Native",
-  "Next.js",
-  "Chrome extension",
-  "TypeScript",
-];
 
 function ContactForm() {
   const submit = useSubmitContact();
+  // Service pages link here as /?service=aso#contact.
+  const requested = new URLSearchParams(useSearch()).get("service") ?? undefined;
+  const service = getGrowthService(requested);
+  const planNotes: Record<string, string> = {
+    trial: "Hi Nexa, I'd like to start the 7-day free trial. My app: ",
+    starter: "Hi Nexa, I'd like the Starter plan ($15/month). My app: ",
+    pro: "Hi Nexa, I'd like the Pro plan ($49/month). My app: ",
+    custom: "Hi Nexa, I need a plan for more than 5 apps. My apps: ",
+  };
+  const serviceNote = service
+    ? `Hi Nexa, I'd like to start the free trial for ${service.kicker}. My app: `
+    : requested ? planNotes[requested] : undefined;
   const [sentTo, setSentTo] = useState<string | null>(null);
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
@@ -114,6 +124,7 @@ function ContactForm() {
           rows={5}
           maxLength={5000}
           placeholder="What are you hoping to build?"
+          defaultValue={serviceNote}
         />
       </label>
       {/* Honeypot: hidden from people, filled in by bots; the server drops those messages. */}
@@ -174,77 +185,25 @@ export default function Home() {
     setFilters(EMPTY_FILTERS);
   };
 
-  const searchFor = (value: string) => {
-    setQuery(value);
-    document.getElementById("work")?.scrollIntoView({ behavior: "smooth" });
-  };
-
   return (
     <div
       id="top"
       className="dribbble min-h-screen overflow-x-hidden bg-white text-[#0d0c22]"
     >
       <Seo
-        title="Nexa Tech | React Native, Web & Mobile Product Studio"
-        description="Nexa Tech builds React Native apps, web products, open-source tools, and showcase libraries like react-native-simple-fs."
+        title="Nexa | Launch, rank and grow your mobile app"
+        description="Nexa Rankings is where new iOS and Android apps get discovered. Launch for free, climb the daily charts, and grow with publishing, ASO, mail and a revenue dashboard in one plan."
       />
 
       <SiteHeader />
 
       <main>
-        <section className="px-5 pb-16 pt-14 text-center md:pt-20">
-          <div className="mx-auto max-w-[900px]">
-            <h1 className="font-display text-[2.6rem] font-bold leading-[1.05] tracking-[-0.04em] sm:text-6xl md:text-[4.5rem]">
-              Discover the products
-              <br className="hidden sm:block" /> we build &amp; ship
-            </h1>
-            <p className="mx-auto mt-5 max-w-xl text-base text-[#3d3d4e] md:text-lg">
-              Nexa is a product studio turning simple ideas into React Native
-              apps, web products, and open-source tools people can use today.
-            </p>
+        <Hero />
+        <AppMarquee />
 
-            <form
-              className="mx-auto mt-10 flex max-w-[640px] items-center rounded-full bg-[#f3f3f4] p-1.5 pl-6 transition focus-within:bg-white focus-within:shadow-[0_0_0_4px_rgba(234,76,137,0.1)] focus-within:ring-1 focus-within:ring-[#ea4c89]/40"
-              onSubmit={(event) => {
-                event.preventDefault();
-                searchFor(query);
-              }}
-              role="search"
-            >
-              <input
-                value={query}
-                onChange={(event) => setQuery(event.target.value)}
-                placeholder="What are you looking for?"
-                className="min-w-0 flex-1 bg-transparent text-base outline-none placeholder:text-[#9e9ea7]"
-                aria-label="Search products"
-              />
-              <span className="mr-3 hidden items-center gap-1 text-sm font-semibold text-[#3d3d4e] sm:flex">
-                Products <ChevronDown className="h-4 w-4" />
-              </span>
-              <button
-                type="submit"
-                className="grid h-12 w-12 place-items-center rounded-full bg-[#ea4c89] text-white transition hover:bg-[#f082ac]"
-                aria-label="Search"
-              >
-                <Search className="h-5 w-5" />
-              </button>
-            </form>
-
-            <div className="mt-5 flex flex-wrap items-center justify-center gap-2 text-sm">
-              <span className="text-[#6e6d7a]">Trending searches</span>
-              {trendingTags.map((tag) => (
-                <button
-                  key={tag}
-                  type="button"
-                  onClick={() => searchFor(tag)}
-                  className="rounded-full border border-[#e7e7e9] px-3 py-1 text-[13px] font-medium text-[#3d3d4e] transition hover:border-[#dbdbde] hover:bg-[#f3f3f4]"
-                >
-                  {tag}
-                </button>
-              ))}
-            </div>
-          </div>
-        </section>
+        <HomeRankings />
+        <HowItWorks />
+        <Showcase />
 
         <section id="work" className="scroll-mt-20 px-5 pb-24 md:px-10">
           <div className="mx-auto max-w-[1600px]">

@@ -1,6 +1,9 @@
 // Build-time renderer used by scripts/prerender.ts. Never shipped to the browser.
 import { prerenderToNodeStream } from "react-dom/static";
 import { Router } from "wouter";
+import { rankingsApi } from "@/services/rankings";
+import { badgePath, badgeThemes, renderBadgeSvg } from "@/lib/badge";
+import { growthServices } from "@/components/services/growth-services";
 import { QueryClient, QueryClientProvider, dehydrate } from "@tanstack/react-query";
 import { JSDOM } from "jsdom";
 import { Analytics } from "@vercel/analytics/react";
@@ -48,6 +51,12 @@ export async function getRoutes(): Promise<SitemapEntry[]> {
   return [
     { path: "/", group: "pages" },
     { path: "/services", group: "pages" },
+    { path: "/pricing", group: "pages" },
+    ...growthServices.map((service) => ({ path: `/services/${service.slug}`, group: "pages" as const })),
+    { path: "/rankings", group: "pages" },
+    ...(await rankingsApi.categories()).map((c) => ({ path: `/rankings/${c.slug}`, group: "pages" as const })),
+    ...(await rankingsApi.makerSlugs()).map((slug) => ({ path: `/makers/${slug}`, group: "pages" as const })),
+    ...(await rankingsApi.slugs()).map((slug) => ({ path: `/app/${slug}`, group: "pages" as const })),
     { path: "/privacy", group: "pages" },
     { path: "/terms", group: "pages" },
     { path: "/blog", group: "pages", lastmod: posts.map((p) => p.publishedAt).sort().at(-1) },
@@ -61,6 +70,28 @@ export async function getRoutes(): Promise<SitemapEntry[]> {
 }
 
 async function prefetch(client: QueryClient, path: string) {
+  if (path === "/") {
+    await client.prefetchQuery({ queryKey: queryKeys.rankings.home(), queryFn: rankingsApi.home });
+  }
+  const makerSlug = path.match(/^\/makers\/([^/]+)$/)?.[1];
+  if (makerSlug) {
+    await client.prefetchQuery({ queryKey: queryKeys.rankings.maker(makerSlug), queryFn: () => rankingsApi.maker(makerSlug) });
+    await client.prefetchQuery({ queryKey: queryKeys.rankings.categories(), queryFn: rankingsApi.categories });
+  }
+  const appSlug = path.match(/^\/app\/([^/]+)$/)?.[1];
+  if (appSlug) {
+    await client.prefetchQuery({ queryKey: queryKeys.rankings.app(appSlug), queryFn: () => rankingsApi.app(appSlug) });
+    await client.prefetchQuery({ queryKey: queryKeys.rankings.categories(), queryFn: rankingsApi.categories });
+  }
+  // Prerendered ranking pages show the default view: today, global, both stores.
+  const ranking = path.match(/^\/rankings(?:\/([^/]+))?$/);
+  if (ranking) {
+    const categories = await rankingsApi.categories();
+    await client.prefetchQuery({ queryKey: queryKeys.rankings.categories(), queryFn: () => categories });
+    const category = categories.find((c) => c.slug === ranking[1])?.slug;
+    const params = { period: "day", country: "all", category } as const;
+    await client.prefetchQuery({ queryKey: queryKeys.rankings.list(params), queryFn: () => rankingsApi.list(params) });
+  }
   // /work pages list the posts written about each product.
   if (path === "/blog" || path.startsWith("/blog/") || path.startsWith("/work/")) {
     await client.prefetchQuery({ queryKey: queryKeys.blog.list(), queryFn: blogApi.list });
@@ -205,5 +236,15 @@ export async function getLlmsFiles(siteUrl: string): Promise<Record<string, stri
     ...posts.map((p) => files[`/blog/${p.slug}.md`]),
   ].join("\n\n---\n\n");
 
+  return files;
+}
+// Static embed badges, one per app and theme. The backend will serve these
+// live (rank changes daily); until then they're refreshed on every build.
+export async function getBadgeFiles(): Promise<Record<string, string>> {
+  const files: Record<string, string> = {};
+  for (const slug of await rankingsApi.slugs()) {
+    const app = await rankingsApi.app(slug);
+    for (const theme of badgeThemes) files[badgePath(slug, theme).slice(1)] = renderBadgeSvg(app, theme);
+  }
   return files;
 }

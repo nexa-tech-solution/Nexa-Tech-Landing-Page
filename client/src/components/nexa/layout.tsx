@@ -1,4 +1,5 @@
 import { getProjectPath, socials, type Project } from "@/components/nexa/data";
+import { CustomerAccount, LoginDialog } from "@/components/auth/customer-account";
 import {
   Bookmark,
   Eye,
@@ -14,12 +15,12 @@ import { useReveal } from "@/components/nexa/use-reveal";
 import { ChatLauncher, gmailComposeUrl } from "@/components/nexa/chat-launcher";
 
 export const navLinks = [
-  ["Explore", "/#work"],
-  ["Services", "/services"],
-  ["About", "/#about"],
-  ["Team", "/#team"],
-  ["FAQ", "/#faq"],
+  ["Rankings", "/rankings"],
+  ["Launch", "/submit"],
+  ["Services", "/#grow"],
+  ["Pricing", "/pricing"],
   ["Blog", "/blog"],
+  ["Studio", "/#work"],
   ["Contact", "/#contact"],
 ];
 
@@ -33,11 +34,35 @@ export function shotStats(title: string) {
   };
 }
 
+// The N's right leg rises into an arrow: launch, rank, grow.
+// Same artwork as /favicon.svg; keep the two in sync.
+export function NexaMark({ size = 32 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 32 32" aria-hidden="true" className="shrink-0">
+      <defs>
+        <linearGradient id="nexa-mark" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stopColor="#ea4c89" />
+          <stop offset="1" stopColor="#8b5cf6" />
+        </linearGradient>
+      </defs>
+      <rect width="32" height="32" rx="9" fill="url(#nexa-mark)" />
+      <path
+        d="M9 23V9.5l13 13V8.5M18.6 11.9 22 8.5l3.4 3.4"
+        fill="none"
+        stroke="#fff"
+        strokeWidth="3.2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 export function NexaLogo() {
   return (
-    <a href="/" className="flex items-center gap-2" aria-label="Nexa Tech home">
-      <img src="/favicon.webp" alt="" className="h-8 w-8 rounded-md" />
-      <span className="font-display text-[1.6rem] font-bold italic tracking-[-0.04em] text-[#0d0c22]">
+    <a href="/" className="flex items-center gap-2.5" aria-label="Nexa home">
+      <NexaMark />
+      <span className="font-display text-[1.55rem] font-bold tracking-[-0.045em] text-[#0d0c22]">
         nexa
       </span>
     </a>
@@ -207,9 +232,13 @@ export function SiteHeader() {
           >
             GitHub
           </a>
-          <a href="/#contact" className="btn-dark">
-            Start a project
-          </a>
+          <CustomerAccount />
+          {/* .btn-dark is unlayered CSS, so `hidden` on it would lose; hide a wrapper instead. */}
+          <span className="hidden sm:contents">
+            <a href="/submit" className="btn-dark">
+              Submit your app
+            </a>
+          </span>
           <button
             type="button"
             className="grid h-10 w-10 place-items-center rounded-full lg:hidden"
@@ -239,6 +268,7 @@ export function SiteHeader() {
           ))}
         </div>
       )}
+      <LoginDialog />
     </header>
   );
 }
@@ -288,7 +318,7 @@ export function SiteFooter() {
             </div>
           </div>
           <div className="mt-10 flex flex-col items-center gap-3 text-sm text-[#6e6d7a] sm:flex-row sm:justify-between">
-            <p>© {new Date().getFullYear()} Nexa Tech. All rights reserved.</p>
+            <p>© {new Date().getFullYear()} Nexa Tech. Nexa Rankings is made in Vietnam.</p>
             <div className="flex gap-5">
               <a href="/privacy" className="hover:text-[#0d0c22]">
                 Privacy
@@ -297,7 +327,7 @@ export function SiteFooter() {
                 Terms
               </a>
             </div>
-            <p>Web · Mobile · Open source</p>
+            <p>Launch · Rank · Grow</p>
           </div>
         </div>
       </footer>
