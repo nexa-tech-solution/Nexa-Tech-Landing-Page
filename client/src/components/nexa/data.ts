@@ -1357,6 +1357,9 @@ export const projects: Project[] = [
     primaryUrl:
       "https://play.google.com/store/apps/details?id=com.nexa.ai_lecture_recorder",
     primaryLabel: "Google Play",
+    secondaryUrl:
+      "https://apps.apple.com/us/app/ai-lecture-recorder/id6791456539",
+    secondaryLabel: "App Store",
     marketing: {
       aso: {
         title: "AI Lecture Recorder",
