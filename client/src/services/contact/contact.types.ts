@@ -20,6 +20,7 @@ export type ContactMessage = {
   createdAt: number; // epoch ms
   readAt: number | null;
   repliedAt: number | null;
+  lastActivityAt?: number; // newest email or reply in the conversation (absent on older backends)
 };
 
 // TEXT: written in the composer and wrapped in the built-in design. HTML: a pasted email, sent as is.
@@ -33,10 +34,26 @@ export type ContactReply = {
   status: "SENT" | "FAILED";
   error: string | null;
   sentAt: number;
+  viaGmail?: boolean; // written in Gmail, picked up from the Sent folder (absent on older backends)
+  attachments?: ContactAttachment[]; // files sent with it; only name, type and size are kept
+};
+
+export type ContactAttachment = {
+  fileName: string;
+  contentType: string | null;
+  sizeBytes: number | null;
+};
+
+// A later email from the sender in the same conversation (answered one of ours).
+export type ContactFollowup = {
+  id: number;
+  body: string;
+  receivedAt: number;
 };
 
 export type ContactMessageDetail = {
   message: ContactMessage;
+  followups?: ContactFollowup[]; // oldest first (absent on older backends)
   replies: ContactReply[]; // oldest first
 };
 
@@ -84,5 +101,6 @@ export type ContactInboxFetchResult = {
   complete: boolean; // false: stopped at its time limit with more emails left; fetch again
   imported: number;
   skipped: number; // newsletters / notifications, not shown
+  replies?: number; // replies written in Gmail added to the reply history (absent on older backends)
   lastFetchedAt: number | null; // epoch ms
 };

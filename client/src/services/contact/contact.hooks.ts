@@ -65,9 +65,9 @@ export function useReplyContact() {
   return useMutation<
     unknown,
     ApiError,
-    { id: number; input: ContactReplyInput }
+    { id: number; input: ContactReplyInput; files?: File[] }
   >({
-    mutationFn: ({ id, input }) => contactApi.reply(id, input),
+    mutationFn: ({ id, input, files }) => contactApi.reply(id, input, files),
     // A failed send is still recorded on the server, so refresh either way.
     onSettled: invalidate,
   });
@@ -89,15 +89,20 @@ export function useDeleteContact() {
   });
 }
 
-// Imports new emails from the contact mailbox, then reloads the list if any arrived.
+// Imports new emails (and replies written in Gmail) from the contact mailbox, then reloads what
+// changed.
 export function useFetchContactInbox() {
   const queryClient = useQueryClient();
   return useMutation<ContactInboxFetchResult, ApiError, boolean>({
     mutationFn: (force) => contactApi.fetchInbox(force),
     onSuccess: (result) => {
-      if (result.imported > 0) {
+      if (result.imported > 0 || (result.replies ?? 0) > 0) {
         queryClient.invalidateQueries({ queryKey: queryKeys.contact.lists() });
         queryClient.invalidateQueries({ queryKey: queryKeys.contact.unread() });
+      }
+      // A Gmail reply lands in a message's history and can mark it "Đã trả lời".
+      if ((result.replies ?? 0) > 0) {
+        queryClient.invalidateQueries({ queryKey: [...queryKeys.contact.all, "detail"] });
       }
     },
   });

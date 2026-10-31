@@ -1,5 +1,5 @@
-import { useEffect, useMemo, useState, type FormEvent } from "react";
-import { CheckCircle2, Code2, Eye, Loader2, Mail, PenLine, Send, Type } from "lucide-react";
+import { useEffect, useMemo, useRef, useState, type FormEvent } from "react";
+import { CheckCircle2, Code2, Eye, Loader2, Mail, Paperclip, PenLine, Send, Type } from "lucide-react";
 import { API_ERROR_CODES, type ApiError } from "@/lib/http";
 import {
   useContactPreview,
@@ -14,6 +14,7 @@ import {
 import { Segmented } from "@/components/dashboard/ui";
 import { errorMessage } from "./shared";
 import { EmailFrame } from "./email-frame";
+import { AttachmentPicker, MAX_FILES, MAX_TOTAL_BYTES, totalSize } from "./attachments";
 
 const INPUT = "w-full rounded-lg border border-gray-200 px-3 py-2 text-sm outline-none focus:border-gray-400";
 const URL_RE = /^(https?:\/\/|mailto:)\S+$/;
@@ -22,6 +23,8 @@ function mailError(error: ApiError) {
   if (error.errorCode === API_ERROR_CODES.MAIL_NOT_CONFIGURED)
     return "Máy chủ chưa cấu hình gửi email (MAIL_HOST / MAIL_FROM). Phản hồi chưa được gửi.";
   if (error.errorCode === API_ERROR_CODES.MAIL_SEND_FAILED) return `Gửi email thất bại: ${error.message}`;
+  if (error.errorCode === API_ERROR_CODES.CONTACT_ATTACHMENTS_TOO_LARGE || error.status === 413)
+    return "File đính kèm quá lớn cho Gmail. Gửi file lớn qua link Google Drive / YouTube trong nội dung.";
   return errorMessage(error);
 }
 
@@ -50,6 +53,9 @@ export function ReplyComposer({ message }: { message: ContactMessage }) {
   const [ctaLabel, setCtaLabel] = useState("");
   const [ctaUrl, setCtaUrl] = useState("");
   const [mode, setMode] = useState<"write" | "preview">("write");
+  const [files, setFiles] = useState<File[]>([]);
+  const fileInput = useRef<HTMLInputElement>(null);
+  const tooLarge = files.length > MAX_FILES || totalSize(files) > MAX_TOTAL_BYTES;
 
   const apply = (t: ContactEmailTemplate) => {
     setTemplateKey(t.key);
@@ -88,7 +94,15 @@ export function ReplyComposer({ message }: { message: ContactMessage }) {
 
   const send = (e: FormEvent) => {
     e.preventDefault();
-    reply.mutate({ id: message.id, input }, { onSuccess: () => setMode("write") });
+    reply.mutate(
+      { id: message.id, input, files },
+      {
+        onSuccess: () => {
+          setMode("write");
+          setFiles([]);
+        },
+      },
+    );
   };
 
   return (
@@ -220,6 +234,8 @@ export function ReplyComposer({ message }: { message: ContactMessage }) {
         </div>
       )}
 
+      <AttachmentPicker files={files} onChange={setFiles} inputRef={fileInput} />
+
       {/* Pinned to the bottom of the scrolling panel so Send is always in reach. */}
       <div className="sticky bottom-0 z-10 -mx-1 space-y-2 border-t border-gray-100 bg-white px-1 py-3">
         {reply.error && (
@@ -233,14 +249,26 @@ export function ReplyComposer({ message }: { message: ContactMessage }) {
           </p>
         )}
         <div className="flex items-center justify-end gap-3">
-          <span className="mr-auto text-[11px] text-gray-400">{isHtml ? "Email HTML" : "Văn bản"} · tới {message.email}</span>
+          <button
+            type="button"
+            onClick={() => fileInput.current?.click()}
+            title="Đính kèm ảnh, video, file"
+            aria-label="Đính kèm file"
+            className="grid h-9 w-9 place-items-center rounded-lg border border-gray-200 text-gray-500 hover:border-gray-400 hover:text-[#0d0c22]"
+          >
+            <Paperclip size={15} />
+          </button>
+          <span className="mr-auto text-[11px] text-gray-400">
+            {isHtml ? "Email HTML" : "Văn bản"} · tới {message.email}
+            {files.length > 0 && ` · ${files.length} file`}
+          </span>
           <button
             type="submit"
-            disabled={reply.isPending || !content.trim() || !subject.trim() || urlInvalid}
+            disabled={reply.isPending || !content.trim() || !subject.trim() || urlInvalid || tooLarge}
             className="flex h-9 items-center gap-1.5 rounded-lg bg-[#0d0c22] px-4 text-sm font-semibold text-white hover:brightness-125 disabled:opacity-60"
           >
             {reply.isPending ? <Loader2 size={14} className="animate-spin" /> : <Send size={14} />}
-            {reply.isPending ? "Đang gửi…" : "Gửi trả lời"}
+            {reply.isPending ? (files.length > 0 ? "Đang tải lên & gửi…" : "Đang gửi…") : "Gửi trả lời"}
           </button>
         </div>
       </div>

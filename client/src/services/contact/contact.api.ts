@@ -31,7 +31,7 @@ export const contactApi = {
         params: {
           page: 1,
           size: 50,
-          sortBy: "createdAt",
+          sortBy: "lastActivityAt",
           sortDirection: "DESC",
           ...params,
         },
@@ -48,12 +48,25 @@ export const contactApi = {
       .then(unwrap),
 
   // Emails the sender (original quoted below) and records the reply; 502/503 when mail fails.
-  reply: (id: number, input: ContactReplyInput) =>
-    apiClient
-      .post<ApiResponse<ContactMessageDetail>>(`${ADMIN}/${id}/reply`, input, {
-        timeout: 45_000,
+  // With files it goes as multipart: the reply as a JSON part, the files beside it.
+  reply: (id: number, input: ContactReplyInput, files: File[] = []) => {
+    if (files.length === 0) {
+      return apiClient
+        .post<ApiResponse<ContactMessageDetail>>(`${ADMIN}/${id}/reply`, input, {
+          timeout: 45_000,
+        })
+        .then(unwrap);
+    }
+    const form = new FormData();
+    form.append("reply", new Blob([JSON.stringify(input)], { type: "application/json" }));
+    files.forEach((f) => form.append("files", f, f.name));
+    // Axios drops the JSON content type for FormData so the browser sets the multipart boundary.
+    return apiClient
+      .post<ApiResponse<ContactMessageDetail>>(`${ADMIN}/${id}/reply`, form, {
+        timeout: 180_000,
       })
-      .then(unwrap),
+      .then(unwrap);
+  },
 
   // Reads the contact mailbox (IMAP) and imports new emails. force: skip the 2-minute throttle.
   fetchInbox: (force: boolean) =>

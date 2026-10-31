@@ -7,11 +7,14 @@ import {
   useFetchContactInbox,
   useSetContactStatus,
   type ContactMessage,
+  type ContactMessageDetail,
+  type ContactReply,
   type ContactStatus,
 } from "@/services/contact";
 import { ReplyComposer } from "./reply-composer";
 import { errorMessage } from "./shared";
 import { EmailFrame } from "./email-frame";
+import { AttachmentChips } from "./attachments";
 import { DashboardHeader } from "@/components/dashboard/layout/dashboard-header";
 import { ConfirmDialog, EmptyState, Panel, SLIM_SCROLLBAR, Segmented } from "@/components/dashboard/ui";
 import { API_ERROR_CODES } from "@/lib/http";
@@ -168,7 +171,7 @@ function MessageRow({ message: m, active, onSelect }: { message: ContactMessage;
           <span className={`h-2 w-2 shrink-0 rounded-full ${unread ? "bg-[#ea4c89]" : "bg-transparent"}`} />
           <span className={`min-w-0 flex-1 truncate text-sm ${unread ? "font-semibold" : "font-medium"}`}>{m.name}</span>
           {m.sourcePage === EMAIL_SOURCE && <EmailBadge />}
-          <span className="shrink-0 text-[11px] text-gray-400">{shortTime(m.createdAt)}</span>
+          <span className="shrink-0 text-[11px] text-gray-400">{shortTime(m.lastActivityAt ?? m.createdAt)}</span>
         </div>
         <div className="ml-4 truncate text-xs text-gray-500">{m.email}</div>
         <div className="ml-4 mt-0.5 line-clamp-2 text-xs text-gray-600">{m.message}</div>
@@ -229,32 +232,7 @@ function MessageDetail({ id, onClosed }: { id: number; onClosed: () => void }) {
       }
     >
       <div className={`flex h-full flex-col gap-4 overflow-y-auto pr-1 ${SLIM_SCROLLBAR}`}>
-        <div className="rounded-xl bg-gray-50 p-4 text-sm leading-relaxed whitespace-pre-wrap">{message.message}</div>
-
-        {detail.data.replies.length > 0 && (
-          <div className="space-y-2">
-            <div className="text-xs font-semibold text-gray-500">Đã trả lời ({detail.data.replies.length})</div>
-            {detail.data.replies.map((r) => (
-              <div key={r.id} className="rounded-xl border border-gray-200 p-3 text-sm">
-                <div className="mb-1 flex items-center gap-2 text-xs">
-                  {r.status === "SENT" ? (
-                    <CheckCircle2 size={13} className="text-green-600" />
-                  ) : (
-                    <XCircle size={13} className="text-red-600" />
-                  )}
-                  <span className="font-medium">{r.subject}</span>
-                  <span className="ml-auto text-gray-400">{fullTime(r.sentAt)}</span>
-                </div>
-                {r.status === "FAILED" && <p className="mb-1 text-xs text-red-600">Gửi thất bại: {r.error}</p>}
-                {r.format === "HTML" ? (
-                  <HtmlReply subject={r.subject} html={r.body} />
-                ) : (
-                  <p className="whitespace-pre-wrap text-gray-700">{r.body}</p>
-                )}
-              </div>
-            ))}
-          </div>
-        )}
+        <Conversation detail={detail.data} />
 
         <ReplyComposer key={message.id} message={message} />
       </div>
@@ -271,6 +249,67 @@ function MessageDetail({ id, onClosed }: { id: number; onClosed: () => void }) {
         onConfirm={() => remove.mutate(id, { onSuccess: () => { setConfirmDelete(false); onClosed(); } })}
       />
     </Panel>
+  );
+}
+
+type TimelineItem =
+  | { kind: "received"; key: string; at: number; body: string; first: boolean }
+  | { kind: "reply"; key: string; at: number; reply: ContactReply };
+
+// The whole conversation in time order: the first message, the sender's later emails in the same
+// thread, and our replies (from the dashboard or Gmail).
+function Conversation({ detail }: { detail: ContactMessageDetail }) {
+  const { message, followups = [], replies } = detail;
+  const items: TimelineItem[] = [
+    { kind: "received" as const, key: "m", at: message.createdAt, body: message.message, first: true },
+    ...followups.map((f): TimelineItem => ({ kind: "received", key: `f${f.id}`, at: f.receivedAt, body: f.body, first: false })),
+    ...replies.map((r): TimelineItem => ({ kind: "reply", key: `r${r.id}`, at: r.sentAt, reply: r })),
+  ].sort((a, b) => a.at - b.at || (a.kind === "received" ? -1 : 1));
+  const count = followups.length + replies.length;
+
+  return (
+    <div className="space-y-2">
+      {count > 0 && <div className="text-xs font-semibold text-gray-500">Hội thoại · {count + 1} email</div>}
+      {items.map((item) =>
+        item.kind === "received" ? (
+          <div key={item.key} className="mr-8 rounded-xl bg-gray-50 p-4 text-sm leading-relaxed">
+            {(count > 0 || !item.first) && (
+              <div className="mb-1 flex items-center gap-2 text-xs text-gray-400">
+                <span className="font-medium text-gray-600">{message.name}</span>
+                {!item.first && <span>· trả lời tiếp</span>}
+                <span className="ml-auto">{fullTime(item.at)}</span>
+              </div>
+            )}
+            <p className="whitespace-pre-wrap">{item.body}</p>
+          </div>
+        ) : (
+          <ReplyCard key={item.key} reply={item.reply} />
+        ),
+      )}
+    </div>
+  );
+}
+
+function ReplyCard({ reply: r }: { reply: ContactReply }) {
+  return (
+    <div className="ml-8 rounded-xl border border-gray-200 p-3 text-sm">
+      <div className="mb-1 flex items-center gap-2 text-xs">
+        {r.status === "SENT" ? <CheckCircle2 size={13} className="text-green-600" /> : <XCircle size={13} className="text-red-600" />}
+        <span className="min-w-0 truncate font-medium">{r.subject}</span>
+        {r.viaGmail && (
+          <span
+            title="Trả lời trực tiếp trong Gmail, được đồng bộ từ thư mục Đã gửi"
+            className="flex shrink-0 items-center gap-1 rounded-full bg-gray-100 px-1.5 py-0.5 text-[10px] font-medium text-gray-600"
+          >
+            <Mail size={10} /> Gmail
+          </span>
+        )}
+        <span className="ml-auto shrink-0 text-gray-400">{fullTime(r.sentAt)}</span>
+      </div>
+      {r.status === "FAILED" && <p className="mb-1 text-xs text-red-600">Gửi thất bại: {r.error}</p>}
+      {r.format === "HTML" ? <HtmlReply subject={r.subject} html={r.body} /> : <p className="whitespace-pre-wrap text-gray-700">{r.body}</p>}
+      {r.attachments && r.attachments.length > 0 && <AttachmentChips attachments={r.attachments} />}
+    </div>
   );
 }
 
@@ -320,10 +359,14 @@ function inboxStatus(inbox: ReturnType<typeof useFetchContactInbox>): { tone: st
   }
   const r = inbox.data;
   if (!r) return null;
+  const got = [
+    `${r.imported} email mới`,
+    ...((r.replies ?? 0) > 0 ? [`${r.replies} câu trả lời từ Gmail`] : []),
+  ].join(" · ");
   if (r.fetched && !r.complete) {
-    return { tone: "text-amber-600", text: `Đã lấy ${r.imported} email mới · còn email cũ hơn, bấm “Lấy email” để lấy tiếp` };
+    return { tone: "text-amber-600", text: `Đã lấy ${got} · còn email cũ hơn, bấm “Lấy email” để lấy tiếp` };
   }
-  if (r.imported > 0) return { tone: "text-green-700", text: `Đã lấy ${r.imported} email mới` };
+  if (r.imported > 0 || (r.replies ?? 0) > 0) return { tone: "text-green-700", text: `Đã lấy ${got}` };
   if (r.fetched) return { tone: "text-gray-400", text: "Không có email mới" };
   return r.lastFetchedAt ? { tone: "text-gray-400", text: `Đã kiểm tra lúc ${new Date(r.lastFetchedAt).toLocaleTimeString("vi-VN", { hour: "2-digit", minute: "2-digit" })}` } : null;
 }
