@@ -16,9 +16,12 @@ import type {
   ContactReplyInput,
   ContactStatus,
   ContactSubmitInput,
+  ContactTag,
+  ContactTagInput,
 } from "./contact.types";
 
 const ADMIN = "/admin/contact-messages";
+const TAGS = "/admin/contact-tags";
 
 export const contactApi = {
   // Public landing-page form; rate-limited per IP on the server.
@@ -95,4 +98,23 @@ export const contactApi = {
 
   remove: (id: number) =>
     apiClient.delete<ApiResponse<null>>(`${ADMIN}/${id}`).then(unwrap),
+
+  // The full set of tags for a message; [] removes them all.
+  setTags: (id: number, tagIds: number[]) =>
+    apiClient
+      .put<ApiResponse<ContactMessage>>(`${ADMIN}/${id}/tags`, { tagIds })
+      .then(unwrap),
+
+  tags: () =>
+    apiClient.get<ApiResponse<ContactTag[]>>(TAGS).then(unwrap),
+
+  createTag: (input: ContactTagInput) =>
+    apiClient.post<ApiResponse<ContactTag>>(TAGS, input).then(unwrap),
+
+  updateTag: (id: number, input: ContactTagInput) =>
+    apiClient.put<ApiResponse<ContactTag>>(`${TAGS}/${id}`, input).then(unwrap),
+
+  // Also takes the tag off every message.
+  deleteTag: (id: number) =>
+    apiClient.delete<ApiResponse<null>>(`${TAGS}/${id}`).then(unwrap),
 };

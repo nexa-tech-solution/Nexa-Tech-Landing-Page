@@ -42,6 +42,7 @@ export const queryKeys = {
     unread: () => [...queryKeys.contact.all, "unread"] as const,
     detail: (id: number) => [...queryKeys.contact.all, "detail", id] as const,
     templates: () => [...queryKeys.contact.all, "templates"] as const,
+    tags: () => [...queryKeys.contact.all, "tags"] as const,
     preview: (id: number, input: ContactReplyInput) =>
       [...queryKeys.contact.all, "preview", id, input] as const,
   },

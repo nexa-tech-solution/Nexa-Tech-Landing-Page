@@ -13,6 +13,8 @@ import type {
   ContactReplyInput,
   ContactStatus,
   ContactSubmitInput,
+  ContactTag,
+  ContactTagInput,
 } from "./contact.types";
 
 export function useSubmitContact() {
@@ -124,5 +126,38 @@ export function useContactPreview(id: number, input: ContactReplyInput | null) {
     enabled: input !== null,
     placeholderData: keepPreviousData,
     staleTime: 60_000,
+  });
+}
+
+export function useContactTags() {
+  return useQuery({
+    queryKey: queryKeys.contact.tags(),
+    queryFn: contactApi.tags,
+  });
+}
+
+// Tag changes touch the list, the detail and the counts, so every contact query is refreshed.
+export function useSetContactTags() {
+  const invalidate = useInvalidateContact();
+  return useMutation<unknown, ApiError, { id: number; tagIds: number[] }>({
+    mutationFn: ({ id, tagIds }) => contactApi.setTags(id, tagIds),
+    onSuccess: invalidate,
+  });
+}
+
+export function useSaveContactTag() {
+  const invalidate = useInvalidateContact();
+  return useMutation<ContactTag, ApiError, { id?: number; input: ContactTagInput }>({
+    mutationFn: ({ id, input }) =>
+      id === undefined ? contactApi.createTag(input) : contactApi.updateTag(id, input),
+    onSuccess: invalidate,
+  });
+}
+
+export function useDeleteContactTag() {
+  const invalidate = useInvalidateContact();
+  return useMutation<unknown, ApiError, number>({
+    mutationFn: contactApi.deleteTag,
+    onSuccess: invalidate,
   });
 }

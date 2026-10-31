@@ -6,6 +6,7 @@ import {
   useDeleteContact,
   useFetchContactInbox,
   useSetContactStatus,
+  useSetContactTags,
   type ContactMessage,
   type ContactMessageDetail,
   type ContactReply,
@@ -15,6 +16,7 @@ import { ReplyComposer } from "./reply-composer";
 import { errorMessage } from "./shared";
 import { EmailFrame } from "./email-frame";
 import { AttachmentChips } from "./attachments";
+import { TagChip, TagFilter, TagPicker } from "./tags";
 import { DashboardHeader } from "@/components/dashboard/layout/dashboard-header";
 import { ConfirmDialog, EmptyState, Panel, SLIM_SCROLLBAR, Segmented } from "@/components/dashboard/ui";
 import { API_ERROR_CODES } from "@/lib/http";
@@ -53,6 +55,7 @@ export function ContactsView({ onLogout }: { onLogout: () => void }) {
   const [search, setSearch] = useState("");
   const [query, setQuery] = useState("");
   const [selectedId, setSelectedId] = useState<number | null>(null);
+  const [tagId, setTagId] = useState<number | undefined>(undefined);
 
   // Debounce the search box.
   useEffect(() => {
@@ -63,6 +66,7 @@ export function ContactsView({ onLogout }: { onLogout: () => void }) {
   const list = useContactMessages({
     status: tab === "inbox" ? undefined : tab,
     searchTerm: query || undefined,
+    tagId,
   });
   const items = list.data?.items ?? [];
 
@@ -111,6 +115,7 @@ export function ContactsView({ onLogout }: { onLogout: () => void }) {
           >
             <div className="flex h-full flex-col gap-3">
               <Segmented value={tab} onChange={(v) => setTab(v)} options={TABS} />
+              <TagFilter value={tagId} onChange={setTagId} />
               <label className="flex items-center gap-2 rounded-lg border border-gray-200 px-3 py-2 text-sm focus-within:border-gray-400">
                 <Search size={14} className="text-gray-400" />
                 <input
@@ -175,6 +180,13 @@ function MessageRow({ message: m, active, onSelect }: { message: ContactMessage;
         </div>
         <div className="ml-4 truncate text-xs text-gray-500">{m.email}</div>
         <div className="ml-4 mt-0.5 line-clamp-2 text-xs text-gray-600">{m.message}</div>
+        {m.tags && m.tags.length > 0 && (
+          <div className="ml-4 mt-1.5 flex flex-wrap gap-1">
+            {m.tags.map((t) => (
+              <TagChip key={t.id} tag={t} />
+            ))}
+          </div>
+        )}
       </button>
     </li>
   );
@@ -183,6 +195,7 @@ function MessageRow({ message: m, active, onSelect }: { message: ContactMessage;
 function MessageDetail({ id, onClosed }: { id: number; onClosed: () => void }) {
   const detail = useContactMessage(id);
   const setStatus = useSetContactStatus();
+  const setTags = useSetContactTags();
   const remove = useDeleteContact();
   const [confirmDelete, setConfirmDelete] = useState(false);
   const message = detail.data?.message;
@@ -216,6 +229,7 @@ function MessageDetail({ id, onClosed }: { id: number; onClosed: () => void }) {
       action={
         <div className="flex items-center gap-1">
           <span className={`mr-1 rounded-full px-2 py-0.5 text-[11px] font-medium ${status.tone}`}>{status.label}</span>
+          <TagPicker message={message} />
           <IconButton
             label={archived ? "Bỏ lưu trữ" : "Lưu trữ"}
             onClick={() => setStatus.mutate({ id, status: archived ? "READ" : "ARCHIVED" })}
@@ -232,6 +246,17 @@ function MessageDetail({ id, onClosed }: { id: number; onClosed: () => void }) {
       }
     >
       <div className={`flex h-full flex-col gap-4 overflow-y-auto pr-1 ${SLIM_SCROLLBAR}`}>
+        {message.tags && message.tags.length > 0 && (
+          <div className="flex flex-wrap gap-1.5">
+            {message.tags.map((t) => (
+              <TagChip
+                key={t.id}
+                tag={t}
+                onRemove={() => setTags.mutate({ id, tagIds: message.tags!.filter((x) => x.id !== t.id).map((x) => x.id) })}
+              />
+            ))}
+          </div>
+        )}
         <Conversation detail={detail.data} />
 
         <ReplyComposer key={message.id} message={message} />

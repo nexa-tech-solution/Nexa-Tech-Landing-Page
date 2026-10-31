@@ -21,7 +21,18 @@ export type ContactMessage = {
   readAt: number | null;
   repliedAt: number | null;
   lastActivityAt?: number; // newest email or reply in the conversation (absent on older backends)
+  tags?: ContactTag[]; // by name (absent on older backends)
 };
+
+// A label for sorting the inbox (customer, marketing…). messageCount only in the tag list.
+export type ContactTag = {
+  id: number;
+  name: string;
+  color: string; // #rrggbb
+  messageCount?: number | null;
+};
+
+export type ContactTagInput = { name: string; color: string };
 
 // TEXT: written in the composer and wrapped in the built-in design. HTML: a pasted email, sent as is.
 export type ContactReplyFormat = "TEXT" | "HTML";
@@ -60,6 +71,7 @@ export type ContactMessageDetail = {
 export type ContactListParams = {
   status?: ContactStatus; // none = everything except ARCHIVED
   searchTerm?: string;
+  tagId?: number;
   page?: number;
   size?: number;
 };
