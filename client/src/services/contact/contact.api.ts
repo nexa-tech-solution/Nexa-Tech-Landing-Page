@@ -63,7 +63,7 @@ export const contactApi = {
     const form = new FormData();
     form.append("reply", new Blob([JSON.stringify(input)], { type: "application/json" }));
     files.forEach((f) => form.append("files", f, f.name));
-    // Axios drops the JSON content type for FormData so the browser sets the multipart boundary.
+    // Do not set Content-Type here: the browser supplies multipart/form-data and its boundary.
     return apiClient
       .post<ApiResponse<ContactMessageDetail>>(`${ADMIN}/${id}/reply`, form, {
         timeout: 180_000,

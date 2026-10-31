@@ -10,7 +10,6 @@ type RetriableConfig = InternalAxiosRequestConfig & { _retried?: boolean };
 const baseConfig = {
   baseURL: env.apiBaseUrl,
   timeout: 15_000,
-  headers: { "Content-Type": "application/json" },
 };
 
 // Bare instance for public auth calls: no auth header, no refresh loop.
