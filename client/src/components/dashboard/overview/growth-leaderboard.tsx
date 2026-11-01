@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Apple, Play } from "lucide-react";
 import { ProjectAvatar } from "@/components/nexa/layout";
 import { COLORS } from "@/components/dashboard/lib/constants";
 import { shortLabel } from "@/components/dashboard/lib/dates";
@@ -76,7 +77,10 @@ export function GrowthLeaderboard({ apps }: { apps: AppStats[] }) {
               <ProjectAvatar project={app.project} className="h-9 w-9 text-[10px]" />
               <div className="min-w-0 flex-1">
                 <div className="truncate text-sm font-medium">{app.project.title}</div>
-                <div className="text-[11px] text-gray-500">{num(app.installs)} lượt cài</div>
+                <div className="flex items-center gap-1 text-[11px] text-gray-500">
+                  {app.platform === "App Store" ? <Apple size={11} /> : <Play size={11} />}
+                  {app.platform === "App Store" ? "iOS" : "Android"} · {num(app.installs)} lượt cài
+                </div>
               </div>
               <div className="hidden w-20 sm:block">
                 <Sparkline

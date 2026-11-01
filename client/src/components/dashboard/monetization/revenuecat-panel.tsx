@@ -3,14 +3,34 @@ import { ProjectAvatar } from "@/components/nexa/layout";
 import { COLORS } from "@/components/dashboard/lib/constants";
 import { longLabel, shortLabel } from "@/components/dashboard/lib/dates";
 import { num, pct, percent, usd } from "@/components/dashboard/lib/format";
-import { Delta, MiniStat, Panel, axisTick, chartTooltip } from "@/components/dashboard/ui";
+import { Delta, InfoTip, MiniStat, Panel, axisTick, chartTooltip } from "@/components/dashboard/ui";
 import type { DashboardData } from "@/components/dashboard/data/use-dashboard-data";
 
 export function RevenueCatPanel({ totals, daily, apps }: Pick<DashboardData, "totals" | "daily" | "apps">) {
   const subApps = apps.filter((a) => a.subRevenue > 0).sort((a, b) => b.subRevenue - a.subRevenue);
 
   return (
-    <Panel title="Gói đăng ký (RevenueCat)" subtitle="Doanh thu mua trong ứng dụng & thuê bao">
+    <Panel
+      title="Gói đăng ký (RevenueCat)"
+      subtitle="Doanh thu mua trong ứng dụng & thuê bao"
+      info={
+        <InfoTip label="Giải thích biểu đồ">
+          <p className="font-semibold text-white">Biểu đồ theo ngày</p>
+          <ul className="mt-1 list-disc space-y-1 pl-4">
+            <li>
+              <b>Dùng thử mới</b>: số người bắt đầu gói dùng thử miễn phí (free trial) trong ngày. Chưa trả tiền; hết thời gian dùng
+              thử mà không hủy thì mới bị tính phí.
+            </li>
+            <li>
+              <b>Thuê bao mới</b>: số gói chuyển sang trả phí trong ngày, gồm người dùng thử xong được tính phí, người mua với giá ưu
+              đãi giới thiệu và người mua thẳng không qua dùng thử.
+            </li>
+            <li>Một người dùng thử hôm nay có thể thành thuê bao mới vài ngày sau, nên hai cột không cùng ngày.</li>
+            <li>Số lấy từ biểu đồ &ldquo;New Trials&rdquo; và &ldquo;New Paid Subscriptions&rdquo; của RevenueCat.</li>
+          </ul>
+        </InfoTip>
+      }
+    >
       <div className="mb-5 grid grid-cols-2 gap-2 md:grid-cols-3 xl:grid-cols-6">
         <MiniStat label="Doanh thu" value={usd(totals.subRevenue)} hint={<Delta value={pct(totals.subRevenue, totals.subRevenuePrev)} />} />
         <MiniStat label="Doanh thu định kỳ / tháng (MRR)" value={usd(totals.mrr)} />

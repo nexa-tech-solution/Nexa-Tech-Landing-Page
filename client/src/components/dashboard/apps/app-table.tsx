@@ -160,7 +160,12 @@ export function AppTable({
                     className={`sticky top-0 z-10 bg-white px-4 py-2.5 font-medium sm:px-5 ${i > 0 ? "text-right" : "text-left"}`}
                   >
                     <span className="inline-flex items-center gap-0.5">
+                      {c.key === "name" && <AppsTip />}
                       {c.key === "installs" && <InstallsSourceTip />}
+                      {c.key === "growth" && <GrowthTip />}
+                      {c.key === "adRevenue" && <AdRevenueTip />}
+                      {c.key === "subRevenue" && <SubRevenueTip />}
+                      {c.key === "revenue" && <RevenueTip />}
                       {c.key === "rating" && <RatingSourceTip />}
                       {c.key === "activeDevices" && <ActiveDevicesTip />}
                       <button
@@ -220,18 +225,20 @@ export function AppTable({
                   <InstallDelta change={installChange(a)} />
                 </td>
                 <td className="px-4 py-3 text-right tabular-nums sm:px-5">
-                  {a.activeDevices ? (
-                    <span
-                      title={
-                        a.activeUsers > 0
-                          ? `Firebase: ${num(a.activeUsers)} người dùng hoạt động/ngày`
-                          : undefined
-                      }
+                  <div>
+                    {a.activeDevices ? (
+                      num(a.activeDevices)
+                    ) : (
+                      <span className="text-gray-400">—</span>
+                    )}
+                  </div>
+                  {a.activeUsers > 0 && (
+                    <div
+                      className="text-[11px] text-gray-400"
+                      title="Người dùng hoạt động trung bình mỗi ngày, theo Firebase"
                     >
-                      {num(a.activeDevices)}
-                    </span>
-                  ) : (
-                    <span className="text-gray-400">—</span>
+                      Firebase {num(a.activeUsers)}/ngày
+                    </div>
                   )}
                 </td>
                 <td className="px-4 py-3 text-right tabular-nums text-amber-600 sm:px-5">
@@ -316,30 +323,127 @@ function InstallLagNotice({ lags }: { lags: InstallLag[] }) {
 }
 
 // ⓘ on the "Lượt thu nạp" header: what the numbers are and where each store's come from.
+function AppsTip() {
+  return (
+    <InfoTip label="Danh sách ứng dụng">
+      <p className="font-semibold text-white">Ứng dụng</p>
+      <ul className="mt-1 list-disc space-y-1 pl-4">
+        <li>
+          Mỗi dòng là một bản app trên một store: cùng một app có bản Google
+          Play và bản App Store thì thành hai dòng.
+        </li>
+        <li>
+          App được thêm tự động khi đồng bộ store và có lượt tải. Tên, icon lấy
+          từ store.
+        </li>
+      </ul>
+    </InfoTip>
+  );
+}
+
+function GrowthTip() {
+  return (
+    <InfoTip label="Cách tính tăng trưởng">
+      <p className="font-semibold text-white">Tăng trưởng</p>
+      <ul className="mt-1 list-disc space-y-1 pl-4">
+        <li>
+          So lượt thu nạp của khoảng ngày đang chọn với khoảng ngay trước đó,
+          dài bằng nhau (ví dụ 7 ngày này so với 7 ngày trước).
+        </li>
+        <li>
+          <span className="font-medium text-white">%</span> khi kỳ trước có từ
+          10 lượt trở lên;{" "}
+          <span className="font-medium text-white">±N lượt</span> khi kỳ trước
+          quá ít để tính % cho có nghĩa.
+        </li>
+        <li>
+          <span className="font-medium text-white">—</span> = chưa có đủ dữ liệu
+          kỳ trước để so (app mới, hoặc store chưa có số những ngày đó).
+        </li>
+      </ul>
+    </InfoTip>
+  );
+}
+
+function AdRevenueTip() {
+  return (
+    <InfoTip label="Nguồn doanh thu quảng cáo">
+      <p className="font-semibold text-white">Quảng cáo</p>
+      <ul className="mt-1 list-disc space-y-1 pl-4">
+        <li>
+          &ldquo;Thu nhập ước tính&rdquo; (USD) từ AdMob, cộng các ngày trong
+          khoảng đang chọn. Ngày tính theo múi giờ của tài khoản AdMob.
+        </li>
+        <li>
+          Số của những ngày gần nhất AdMob còn điều chỉnh. Khi so với AdMob,
+          chọn cùng khoảng ngày (&ldquo;7 ngày qua&rdquo; của AdMob không tính
+          hôm nay) và đồng bộ lại trước khi so.
+        </li>
+      </ul>
+    </InfoTip>
+  );
+}
+
+function SubRevenueTip() {
+  return (
+    <InfoTip label="Nguồn doanh thu RevenueCat">
+      <p className="font-semibold text-white">RevenueCat</p>
+      <ul className="mt-1 list-disc space-y-1 pl-4">
+        <li>
+          Doanh thu gói đăng ký và mua trong app (USD) từ biểu đồ Revenue của
+          RevenueCat, cộng các ngày trong khoảng đang chọn.
+        </li>
+        <li>
+          <span className="font-medium text-white">—</span> = app không bán gói
+          hoặc chưa gắn RevenueCat.
+        </li>
+      </ul>
+    </InfoTip>
+  );
+}
+
+function RevenueTip() {
+  return (
+    <InfoTip label="Cách tính tổng doanh thu">
+      <p className="font-semibold text-white">Tổng doanh thu</p>
+      <ul className="mt-1 list-disc space-y-1 pl-4">
+        <li>
+          = Quảng cáo + RevenueCat, trong khoảng ngày đang chọn (USD). Bảng mặc
+          định sắp xếp theo cột này.
+        </li>
+      </ul>
+    </InfoTip>
+  );
+}
+
 function ActiveDevicesTip() {
   return (
     <InfoTip label="Nguồn số liệu thiết bị hoạt động">
-      <p className="mb-1.5 font-semibold text-white">
-        Thiết bị hoạt động lấy từ đâu?
-      </p>
-      <p className="mb-1.5">
-        Lấy trực tiếp từ store, trung bình mỗi ngày trong khoảng ngày đang chọn
-        (chỉ tính các ngày store đã báo cáo).
-      </p>
-      <p className="mb-1.5">
-        <span className="font-medium text-white">Google Play:</span> =
-        &ldquo;Thiết bị đang hoạt động&rdquo; trong Play Console (số máy đang
-        cài app). Báo cáo chậm khoảng 4–5 ngày.
-      </p>
-      <p className="mb-1.5">
-        <span className="font-medium text-white">App Store:</span> số thiết bị
-        có mở app trong ngày, từ báo cáo Analytics của App Store Connect. Apple
-        chỉ đếm người dùng đồng ý chia sẻ dữ liệu, nên thấp hơn thực tế.
-      </p>
-      <p>
-        Đưa chuột lên số để xem người dùng hoạt động từ Firebase (với app có
-        gắn Firebase).
-      </p>
+      <p className="font-semibold text-white">Thiết bị hoạt động lấy từ đâu?</p>
+      <ul className="mt-1 list-disc space-y-1 pl-4">
+        <li>
+          Lấy trực tiếp từ store, trung bình mỗi ngày trong khoảng ngày đang
+          chọn (chỉ tính các ngày store đã báo cáo).
+        </li>
+        <li>
+          <span className="font-medium text-white">Google Play:</span> =
+          &ldquo;Thiết bị đang hoạt động&rdquo; trong Play Console (số máy đang
+          cài app). Báo cáo chậm khoảng 4–5 ngày.
+        </li>
+        <li>
+          <span className="font-medium text-white">App Store:</span> số thiết bị
+          có mở app trong ngày, từ báo cáo Analytics của App Store Connect.
+          Apple chỉ đếm người dùng đồng ý chia sẻ dữ liệu, nên thấp hơn thực tế.
+        </li>
+        <li>
+          <span className="font-medium text-white">
+            &ldquo;Firebase …/ngày&rdquo;
+          </span>{" "}
+          (dòng nhỏ, chỉ có ở app gắn Firebase) = người dùng hoạt động trung
+          bình mỗi ngày theo Firebase; thường khác số của store vì cách đo khác
+          nhau.
+        </li>
+      </ul>
     </InfoTip>
   );
 }
@@ -347,22 +451,24 @@ function ActiveDevicesTip() {
 function RatingSourceTip() {
   return (
     <InfoTip label="Nguồn số liệu đánh giá">
-      <p className="mb-1.5 font-semibold text-white">Đánh giá lấy từ đâu?</p>
-      <p className="mb-1.5">
-        <span className="font-medium text-white">Google Play:</span> điểm trung
-        bình tổng (Total Average Rating) trong báo cáo Ratings của Play
-        Console. Google không xuất số lượt đánh giá nên không hiện số trong
-        ngoặc.
-      </p>
-      <p className="mb-1.5">
-        <span className="font-medium text-white">App Store:</span> Apple tính
-        điểm riêng cho từng quốc gia; đây là điểm trung bình gộp các quốc gia
-        app có lượt tải, (số) = tổng số lượt đánh giá.
-      </p>
-      <p>
-        <span className="font-medium text-white">—</span> = chưa có đánh giá.
-        Cập nhật mỗi lần đồng bộ.
-      </p>
+      <p className="font-semibold text-white">Đánh giá lấy từ đâu?</p>
+      <ul className="mt-1 list-disc space-y-1 pl-4">
+        <li>
+          <span className="font-medium text-white">Google Play:</span> điểm
+          trung bình tổng (Total Average Rating) trong báo cáo Ratings của Play
+          Console. Google không xuất số lượt đánh giá nên không hiện số trong
+          ngoặc.
+        </li>
+        <li>
+          <span className="font-medium text-white">App Store:</span> Apple tính
+          điểm riêng cho từng quốc gia; đây là điểm trung bình gộp các quốc gia
+          app có lượt tải, (số) = tổng số lượt đánh giá.
+        </li>
+        <li>
+          <span className="font-medium text-white">—</span> = chưa có đánh giá.
+          Cập nhật mỗi lần đồng bộ.
+        </li>
+      </ul>
     </InfoTip>
   );
 }
@@ -370,31 +476,31 @@ function RatingSourceTip() {
 function InstallsSourceTip() {
   return (
     <InfoTip label="Nguồn số liệu lượt thu nạp">
-      <p className="mb-1.5 font-semibold text-white">
-        Lượt thu nạp lấy từ đâu?
-      </p>
-      <p className="mb-1.5">
-        <span className="font-medium text-white">Số lớn</span> = lượt thu nạp
-        trong khoảng ngày đang chọn.{" "}
-        <span className="font-medium text-white">&ldquo;Tổng&rdquo;</span> = từ
-        khi phát hành đến nay, không phụ thuộc khoảng ngày.
-      </p>
-      <p className="mb-1.5">
-        <span className="font-medium text-white">Google Play:</span> =
-        &ldquo;Lượt thu nạp theo thiết bị&rdquo; trong Play Console;
-        &ldquo;Tổng&rdquo; = &ldquo;Tổng số lượt cài đặt&rdquo;. Google xuất báo
-        cáo chậm khoảng 3–5 ngày, nên các ngày gần nhất tạm hiện 0.
-      </p>
-      <p className="mb-1.5">
-        <span className="font-medium text-white">App Store:</span> = lượt tải
-        lần đầu (First-time downloads) từ báo cáo Sales &amp; Trends, thường
-        chậm 1 ngày. Apple chỉ giữ báo cáo ngày trong 365 ngày, nên
-        &ldquo;Tổng&rdquo; chỉ đầy đủ với app phát hành chưa quá 1 năm.
-      </p>
-      <p>
-        Play Console mặc định tính 28 ngày gần nhất; dashboard tính theo khoảng
-        ngày đang chọn.
-      </p>
+      <p className="font-semibold text-white">Lượt thu nạp lấy từ đâu?</p>
+      <ul className="mt-1 list-disc space-y-1 pl-4">
+        <li>
+          <span className="font-medium text-white">Số lớn</span> = lượt thu nạp
+          trong khoảng ngày đang chọn.{" "}
+          <span className="font-medium text-white">&ldquo;Tổng&rdquo;</span> =
+          từ khi phát hành đến nay, không phụ thuộc khoảng ngày.
+        </li>
+        <li>
+          <span className="font-medium text-white">Google Play:</span> =
+          &ldquo;Lượt thu nạp theo thiết bị&rdquo; trong Play Console;
+          &ldquo;Tổng&rdquo; = &ldquo;Tổng số lượt cài đặt&rdquo;. Google xuất
+          báo cáo chậm khoảng 3–5 ngày, nên các ngày gần nhất tạm hiện 0.
+        </li>
+        <li>
+          <span className="font-medium text-white">App Store:</span> = lượt tải
+          lần đầu (First-time downloads) từ báo cáo Sales &amp; Trends, thường
+          chậm 1 ngày. Apple chỉ giữ báo cáo ngày trong 365 ngày, nên
+          &ldquo;Tổng&rdquo; chỉ đầy đủ với app phát hành chưa quá 1 năm.
+        </li>
+        <li>
+          Play Console mặc định tính 28 ngày gần nhất; dashboard tính theo
+          khoảng ngày đang chọn.
+        </li>
+      </ul>
     </InfoTip>
   );
 }
