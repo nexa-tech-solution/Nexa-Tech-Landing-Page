@@ -24,7 +24,7 @@ export function KpiGrid({ totals, daily }: Pick<DashboardData, "totals" | "daily
     { icon: <Wallet size={16} />, label: "Tổng doanh thu", value: totals.revenue, delta: pct(totals.revenue, totals.revenuePrev), color: COLORS.revenue, spark: series("revenue"), format: usd, featured: true },
     { icon: <Megaphone size={16} />, label: "Doanh thu quảng cáo (AdMob)", value: totals.adRevenue, delta: pct(totals.adRevenue, totals.adRevenuePrev), color: COLORS.ads, spark: series("adRevenue"), format: usd },
     { icon: <Coins size={16} />, label: "Doanh thu gói (RevenueCat)", value: totals.subRevenue, delta: pct(totals.subRevenue, totals.subRevenuePrev), color: COLORS.revenueCat, spark: series("subRevenue"), format: usd },
-    { icon: <Download size={16} />, label: "Lượt cài đặt", value: totals.installs, delta: pct(totals.installs, totals.installsPrev), color: COLORS.installs, spark: series("installs"), format: num },
+    { icon: <Download size={16} />, label: "Lượt thu nạp", value: totals.installs, delta: pct(totals.installs, totals.installsPrev), color: COLORS.installs, spark: series("installs"), format: num },
     { icon: <Users size={16} />, label: "Người dùng hoạt động / ngày", value: totals.activeUsers, delta: pct(totals.activeUsers, totals.activeUsersPrev), color: COLORS.users, spark: series("activeUsers"), format: num },
     { icon: <Crown size={16} />, label: "Thuê bao đang hoạt động", value: totals.activeSubs, delta: pct(totals.activeSubs, totals.activeSubsPrev), color: COLORS.trials, spark: series("newSubs"), format: num },
   ];

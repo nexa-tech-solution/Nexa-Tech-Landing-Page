@@ -13,7 +13,7 @@ const SERIES: Record<Mode, Array<{ key: keyof DailyRow; name: string; color: str
     { key: "adRevenue", name: "Quảng cáo (AdMob)", color: COLORS.ads },
     { key: "subRevenue", name: "Gói đăng ký (RevenueCat)", color: COLORS.revenueCat },
   ],
-  installs: [{ key: "installs", name: "Lượt cài đặt", color: COLORS.installs }],
+  installs: [{ key: "installs", name: "Lượt thu nạp", color: COLORS.installs }],
   activeUsers: [{ key: "activeUsers", name: "Người dùng hoạt động", color: COLORS.users }],
 };
 
@@ -32,7 +32,7 @@ export function OverviewChart({ daily }: { daily: DailyRow[] }) {
           onChange={setMode}
           options={[
             { value: "revenue", label: "Doanh thu" },
-            { value: "installs", label: "Lượt cài" },
+            { value: "installs", label: "Lượt thu nạp" },
             { value: "activeUsers", label: "Người dùng" },
           ]}
         />

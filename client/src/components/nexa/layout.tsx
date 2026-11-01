@@ -51,7 +51,10 @@ export function ProjectAvatar({
   project: Project;
   className?: string;
 }) {
-  const [failed, setFailed] = useState(false);
+  // Remember which URL failed, not just "failed": a new icon URL (e.g. after a store icon change
+  // or a data refetch) gets a fresh attempt instead of staying on initials until reload.
+  const [failedSrc, setFailedSrc] = useState<string | null>(null);
+  const failed = failedSrc !== null && failedSrc === project.icon;
   const initials = project.title
     .split(/[^a-zA-Z0-9]+/)
     .filter(Boolean)
@@ -75,7 +78,7 @@ export function ProjectAvatar({
       alt=""
       className={`${className} shrink-0 rounded-full object-cover`}
       loading="lazy"
-      onError={() => setFailed(true)}
+      onError={() => setFailedSrc(project.icon ?? null)}
     />
   );
 }

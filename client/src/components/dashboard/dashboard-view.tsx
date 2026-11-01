@@ -85,7 +85,7 @@ export function DashboardView({ onLogout }: { onLogout: () => void }) {
 
         <PnlReport expenses={expenses} />
 
-        <AppTable apps={data.apps} />
+        <AppTable apps={data.apps} range={filters.range} />
       </main>
     </div>
   );

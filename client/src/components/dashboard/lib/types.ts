@@ -26,6 +26,8 @@ export type AppStats = {
   current: DayPoint[];
   installs: number;
   installsPrev: number | null;
+  installsAllTime?: number; // whole synced history, ignores the range
+  activeDevices?: number; // store active devices, average of the days the store reported
   growth: number | null;
   activeUsers: number;
   adRevenue: number;

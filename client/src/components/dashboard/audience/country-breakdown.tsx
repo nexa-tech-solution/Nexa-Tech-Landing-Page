@@ -42,7 +42,7 @@ export function CountryBreakdown({ countries }: { countries: CountryStat[] }) {
           value={mode}
           onChange={setMode}
           options={[
-            { value: "installs", label: "Lượt cài" },
+            { value: "installs", label: "Lượt thu nạp" },
             { value: "revenue", label: "Doanh thu" },
           ]}
         />

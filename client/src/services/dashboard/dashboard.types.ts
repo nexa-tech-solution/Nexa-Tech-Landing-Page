@@ -33,6 +33,10 @@ export type AppStatsDto = {
   installs: number;
   // null: synced history doesn't cover the whole previous period, so there is nothing to compare.
   installsPrev: number | null;
+  // Installs over the app's whole synced history (ignores the date range), like the stores'
+  // "Total installs". Optional: an older API build does not send it.
+  installsAllTime?: number;
+  activeDevices?: number;
   // % change; also null when the previous period had too few installs (see installsPrev instead).
   growth: number | null;
   activeUsers: number;
