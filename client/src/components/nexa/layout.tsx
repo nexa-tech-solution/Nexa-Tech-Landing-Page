@@ -1,6 +1,5 @@
 import { getProjectPath, socials, type Project } from "@/components/nexa/data";
 import {
-  Bookmark,
   Eye,
   Github,
   Heart,
@@ -98,45 +97,32 @@ export function ShotCard({
   return (
     <li
       ref={reveal.ref}
-      className={`min-w-0 ${reveal.className}`}
+      className={`group relative min-w-0 ${reveal.className}`}
       style={reveal.style}
     >
-      <div className="group relative aspect-[4/3] overflow-hidden rounded-lg bg-[#f3f3f4]">
-        <a href={path} aria-label={project.title}>
-          {project.image ? (
-            <img
-              src={project.image}
-              alt={`${project.title} preview`}
-              className="h-full w-full object-cover"
-              loading="lazy"
-            />
-          ) : (
-            <div className="grid h-full w-full place-items-center bg-gradient-to-br from-[#fde2ee] to-[#e7e7ff]">
-              <span className="font-display text-5xl font-bold tracking-[-0.06em] text-[#0d0c22]/80">
-                N/{String(index + 1).padStart(2, "0")}
-              </span>
-            </div>
-          )}
-        </a>
+      {/* One link per card (stretched over it from the caption below) so crawlers
+          don't see the same anchor text three times. */}
+      <div className="relative aspect-[4/3] overflow-hidden rounded-lg bg-[#f3f3f4]">
+        {project.image ? (
+          <img
+            src={project.image}
+            alt={`${project.title} preview`}
+            className="h-full w-full object-cover"
+            loading="lazy"
+          />
+        ) : (
+          <div className="grid h-full w-full place-items-center bg-gradient-to-br from-[#fde2ee] to-[#e7e7ff]">
+            <span className="font-display text-5xl font-bold tracking-[-0.06em] text-[#0d0c22]/80">
+              N/{String(index + 1).padStart(2, "0")}
+            </span>
+          </div>
+        )}
         <div className="pointer-events-none absolute inset-0 flex items-end bg-gradient-to-t from-black/60 via-black/0 to-black/0 p-4 opacity-0 transition-opacity duration-200 group-hover:opacity-100 group-focus-within:opacity-100">
           <div className="pointer-events-auto flex w-full items-center justify-between gap-3">
-            <a
-              href={path}
-              className="truncate text-sm font-semibold text-white"
-            >
+            <span className="truncate text-sm font-semibold text-white">
               {project.title}
-            </a>
-            <div className="flex shrink-0 gap-2">
-              <a
-                href={project.comingSoon ? path : project.primaryUrl}
-                {...(project.comingSoon
-                  ? {}
-                  : { target: "_blank", rel: "noreferrer" })}
-                aria-label={`Open ${project.title}`}
-                className="grid h-9 w-9 place-items-center rounded-full bg-white text-[#0d0c22] transition hover:text-[#6e6d7a]"
-              >
-                <Bookmark className="h-4 w-4" />
-              </a>
+            </span>
+            <div className="relative z-10 flex shrink-0 gap-2">
               <button
                 type="button"
                 onClick={() => setLiked((value) => !value)}
@@ -153,7 +139,10 @@ export function ShotCard({
         </div>
       </div>
       <div className="mt-2.5 flex items-center justify-between gap-3 text-[13px]">
-        <a href={path} className="flex min-w-0 items-center gap-2">
+        <a
+          href={path}
+          className="flex min-w-0 items-center gap-2 after:absolute after:inset-0 after:content-['']"
+        >
           <ProjectAvatar project={project} />
           <span className="truncate font-semibold text-[#0d0c22]">
             {project.title}
