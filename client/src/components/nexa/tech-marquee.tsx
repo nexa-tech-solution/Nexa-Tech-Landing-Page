@@ -30,7 +30,7 @@ function TechPill({ tech }: { tech: Tech }) {
     <li className="flex shrink-0 items-center gap-3 rounded-full bg-white py-2.5 pl-3 pr-5 ring-1 ring-[#ececee]">
       <img
         src={`/tech/${tech.logo}.svg`}
-        alt=""
+        alt={`${tech.name} logo`}
         loading="lazy"
         className="h-7 w-7"
       />

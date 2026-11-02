@@ -27,7 +27,7 @@ import { useRoute } from "wouter";
 // them full-bleed blurs them, so those sit at native size on a cream mat.
 const FULL_BLEED_MIN_WIDTH = 1000;
 
-function CoverFigure({ src }: { src: string }) {
+function CoverFigure({ src, alt }: { src: string; alt: string }) {
   const [naturalWidth, setNaturalWidth] = useState<number>();
   const small = naturalWidth !== undefined && naturalWidth < FULL_BLEED_MIN_WIDTH;
   return (
@@ -40,7 +40,7 @@ function CoverFigure({ src }: { src: string }) {
     >
       <img
         src={src}
-        alt=""
+        alt={alt}
         onLoad={(event) => setNaturalWidth(event.currentTarget.naturalWidth)}
         style={small ? { width: naturalWidth } : undefined}
         className={
@@ -156,7 +156,7 @@ export default function BlogPost() {
               </div>
             </header>
 
-            <CoverFigure key={post.cover} src={post.cover} />
+            <CoverFigure key={post.cover} src={post.cover} alt={post.title} />
 
             <div className="mt-12 md:mt-16 lg:grid lg:grid-cols-[200px_minmax(0,680px)] lg:justify-center lg:gap-12 xl:grid-cols-[minmax(0,1fr)_680px_minmax(0,1fr)]">
               <aside className="hidden lg:block">

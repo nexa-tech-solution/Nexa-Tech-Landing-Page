@@ -25,7 +25,7 @@ export function PostByline({
     <div className="flex items-center gap-3">
       <img
         src={author.avatar}
-        alt=""
+        alt={author.name}
         className={`${md ? "h-11 w-11" : "h-6 w-6"} shrink-0 rounded-full object-cover`}
         loading="lazy"
       />
@@ -95,7 +95,7 @@ export function PostCard({ post, index }: { post: Post; index: number }) {
           <span className="flex min-w-0 items-center gap-2">
             <img
               src={author.avatar}
-              alt=""
+              alt={author.name}
               className="h-6 w-6 shrink-0 rounded-full object-cover"
               loading="lazy"
             />

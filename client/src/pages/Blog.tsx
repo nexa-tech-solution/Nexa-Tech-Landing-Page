@@ -38,7 +38,7 @@ function FeaturedPost({ post }: { post: Post }) {
     >
       <img
         src={post.cover}
-        alt=""
+        alt={post.title}
         className="aspect-[4/5] w-full object-cover transition duration-700 ease-out group-hover:scale-[1.02] sm:aspect-[16/9] lg:aspect-[2/1]"
       />
       <div className="absolute inset-x-3 bottom-3 rounded-2xl bg-[#0d0c22]/70 p-5 text-white backdrop-blur-md sm:inset-x-5 sm:bottom-5 sm:p-7">
@@ -63,7 +63,7 @@ function FeaturedPost({ post }: { post: Post }) {
             <span className="flex items-center gap-2 font-semibold">
               <img
                 src={author.avatar}
-                alt=""
+                alt={author.name}
                 className="h-7 w-7 rounded-full object-cover ring-2 ring-white/20"
               />
               {author.name}
