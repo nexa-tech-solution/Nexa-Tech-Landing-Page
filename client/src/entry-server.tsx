@@ -9,7 +9,7 @@ import { faqItems, getProjectSlug, socials } from "@/components/nexa/data";
 import { HOURLY_RATE, serviceFaq, services } from "@/pages/Services";
 import { preparePostHtml } from "@/components/nexa/post-content";
 import { SITE_NAME, SOCIAL_LINKS } from "@/lib/seo";
-import App from "./App";
+import App, { preloadPage } from "./App";
 import { setServerWindow } from "@/components/nexa/post-content";
 import { collectSeo, type SeoProps } from "@/components/seo/Seo";
 import { getProjectPath, projects } from "@/components/nexa/data";
@@ -73,7 +73,7 @@ async function prefetch(client: QueryClient, path: string) {
 
 export async function render(path: string): Promise<RenderedPage> {
   const client = new QueryClient({ defaultOptions: { queries: { staleTime: Infinity, retry: false } } });
-  await prefetch(client, path);
+  await Promise.all([prefetch(client, path), preloadPage(path)]);
 
   let seo: SeoProps | null = null;
   collectSeo((props) => {

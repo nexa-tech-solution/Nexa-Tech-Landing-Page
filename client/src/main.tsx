@@ -3,7 +3,7 @@ import { Router } from "wouter";
 import { Analytics } from "@vercel/analytics/react";
 import { QueryClientProvider, hydrate } from "@tanstack/react-query";
 import { queryClient } from "@/lib/query/query-client";
-import App from "./App";
+import App, { preloadPage } from "./App";
 import "@fontsource-variable/inter/wght.css";
 import "@fontsource-variable/mona-sans/wght.css";
 import "./index.css";
@@ -32,7 +32,8 @@ const tree = (
 );
 
 if (container.hasChildNodes()) {
-  hydrateRoot(container, tree);
+  // Match the server, which rendered the page module directly (no Suspense).
+  preloadPage(window.location.pathname).finally(() => hydrateRoot(container, tree));
 } else {
   createRoot(container).render(tree);
 }

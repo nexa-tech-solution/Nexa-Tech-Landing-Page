@@ -3,6 +3,9 @@ import { Suspense, lazy, useEffect, type ComponentType } from "react";
 
 // One chunk per page. React.lazy suspends on first render even when the chunk
 // is already cached, so once a page's module has loaded we render it directly.
+// The Suspense boundary wraps only the not-yet-loaded case: React 19 outlines
+// large boundaries into hidden <div>s during prerender, which crawlers without
+// JS read as an empty page.
 function lazyPage(load: () => Promise<{ default: ComponentType }>) {
   let loaded: ComponentType | null = null;
   const loader = () =>
@@ -13,7 +16,13 @@ function lazyPage(load: () => Promise<{ default: ComponentType }>) {
   const Lazy = lazy(loader);
   function Page() {
     const Loaded = loaded;
-    return Loaded ? <Loaded /> : <Lazy />;
+    return Loaded ? (
+      <Loaded />
+    ) : (
+      <Suspense fallback={null}>
+        <Lazy />
+      </Suspense>
+    );
   }
   return Object.assign(Page, { load: loader });
 }
@@ -49,6 +58,13 @@ function loaderFor(pathname: string) {
   if (pathname === "/privacy") return loaders.privacy;
   if (pathname === "/terms") return loaders.terms;
   return loaders.notFound;
+}
+
+// Load the page chunk before rendering so it renders directly instead of
+// suspending. Otherwise prerendered HTML ships inside a hidden Suspense
+// boundary that crawlers without JS read as an empty page.
+export function preloadPage(pathname: string) {
+  return loaderFor(pathname)();
 }
 
 // Warm the public page chunks once the browser is idle so later
@@ -168,21 +184,19 @@ function Router() {
     // Opacity only: a transform here would re-anchor the fixed chat button
     // mid-fade. Reduced motion is handled by the global CSS rule.
     <div key={pageKey} className="page-enter">
-      <Suspense fallback={null}>
-        <Switch>
-          <Route path="/dashboard" component={Dashboard} />
-          <Route path="/dashboard/settings" component={Dashboard} />
-          <Route path="/dashboard/contacts" component={Dashboard} />
-          <Route path="/work/:slug" component={Product} />
-          <Route path="/services" component={Services} />
-          <Route path="/blog" component={Blog} />
-          <Route path="/blog/:slug" component={BlogPost} />
-          <Route path="/privacy" component={Privacy} />
-          <Route path="/terms" component={Terms} />
-          <Route path="/" component={Home} />
-          <Route component={NotFound} />
-        </Switch>
-      </Suspense>
+      <Switch>
+        <Route path="/dashboard" component={Dashboard} />
+        <Route path="/dashboard/settings" component={Dashboard} />
+        <Route path="/dashboard/contacts" component={Dashboard} />
+        <Route path="/work/:slug" component={Product} />
+        <Route path="/services" component={Services} />
+        <Route path="/blog" component={Blog} />
+        <Route path="/blog/:slug" component={BlogPost} />
+        <Route path="/privacy" component={Privacy} />
+        <Route path="/terms" component={Terms} />
+        <Route path="/" component={Home} />
+        <Route component={NotFound} />
+      </Switch>
     </div>
   );
 }
