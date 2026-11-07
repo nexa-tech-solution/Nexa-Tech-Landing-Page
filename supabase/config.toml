@@ -1,0 +1,7 @@
+project_id = "alvemfxvwyeckparkkci"
+
+[functions.api]
+# The function owns its legacy-compatible JWT verification while the API is
+# migrated incrementally from Spring Boot. Public routes (such as health and
+# contact submission) are dispatched explicitly in the function.
+verify_jwt = false

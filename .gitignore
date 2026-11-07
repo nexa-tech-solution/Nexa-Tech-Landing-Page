@@ -1,9 +1,13 @@
 node_modules
 dist
 .DS_Store
+._*
 server/public
 vite.config.ts.*
 *.tar.gz
 client/dist-ssr
+
+# Supabase CLI machine-local link/cache metadata. Function source remains tracked.
+supabase/.temp/
 
 *.local

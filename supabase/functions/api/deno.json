@@ -1,0 +1,6 @@
+{
+  "fmt": { "exclude": ["**/._*"] },
+  "imports": {
+    "npm:postgres@3.4.5": "npm:postgres@3.4.5"
+  }
+}
