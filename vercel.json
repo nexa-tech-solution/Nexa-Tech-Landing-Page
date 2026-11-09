@@ -1,4 +1,5 @@
 {
+  "outputDirectory": "client/dist",
   "trailingSlash": false,
   "rewrites": [
     { "source": "/dashboard", "destination": "/index.html" },
