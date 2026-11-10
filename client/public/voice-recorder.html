@@ -137,7 +137,7 @@
         <p class="subtitle"><strong>AI Lecture Recorder</strong></p>
 
         <div class="meta">
-          <div><strong>Effective date:</strong> <span>06/11/2026</span></div>
+          <div><strong>Effective date:</strong> <span>11/10/2026</span></div>
           <div>
             <strong>Contact:</strong>
             <a class="contact" href="mailto:cs.nexatech@gmail.com"
@@ -174,7 +174,10 @@
             Reward points, daily chest progress, and quest status, stored on your
             device
           </li>
-          <li>Your Groq API key, if you choose to use Groq transcription</li>
+          <li>
+            Your Groq API key, if you choose to use Groq transcription. It is
+            stored only on your device.
+          </li>
           <li>
             Advertising and device information collected by Google AdMob, as
             described in Section 6
@@ -220,15 +223,47 @@
             privacy policy.
           </li>
           <li>
-            <strong>Groq transcription (optional):</strong> Groq, Inc. is a
-            third-party AI service. If you add your own Groq API key and agree to
-            the in-app permission prompt, the selected audio file and your API
-            key are sent directly from your device to Groq, which returns the
-            transcription text. The audio is used only to create your transcript,
-            and nothing is sent to Groq without your permission. You can withdraw
-            permission by removing your API key in Settings. We do not receive or
-            store your Groq API key on our servers. Groq processes data under its
-            own <a href="https://groq.com/privacy-policy/">privacy policy</a>.
+            <strong>Groq transcription (optional):</strong> Groq, Inc. (United
+            States) is a third-party AI service that runs the Whisper
+            speech-to-text model. This option is used only if you add your own
+            Groq API key and choose Groq for a recording.
+          </li>
+        </ul>
+        <h3>Data shared with a third-party AI service (Groq)</h3>
+        <ul>
+          <li>
+            <strong>What is sent:</strong> the audio of the recording you choose
+            to transcribe, the audio language you select, and your Groq API key
+            (used to authorize the request). No name, email, contacts, location,
+            advertising identifier, or other recordings are sent.
+          </li>
+          <li>
+            <strong>Who receives it:</strong> Groq, Inc. only. The data is sent
+            directly from your device to Groq over an encrypted (HTTPS)
+            connection. It does not pass through our servers.
+          </li>
+          <li>
+            <strong>How we ask:</strong> before anything is sent, the App shows a
+            permission prompt that explains this data sharing. Nothing is sent
+            unless you tap <em>Allow</em>. If you tap <em>Don't Allow</em>, no
+            data is shared and you can use the offline or on-device options
+            instead.
+          </li>
+          <li>
+            <strong>How it is used:</strong> only to create and return the
+            transcription text, which is saved on your device. We do not use it
+            for advertising, and it is never shared with advertisers.
+          </li>
+          <li>
+            <strong>Withdrawing permission:</strong> you can withdraw permission
+            anytime with <em>Withdraw Groq consent</em> in the App's Settings, or
+            by removing your API key. After that, no audio is sent to Groq until
+            you allow it again.
+          </li>
+          <li>
+            <strong>Protection:</strong> Groq processes the data under its own
+            <a href="https://groq.com/privacy-policy/">privacy policy</a>, which
+            provides the same or equal protection of user data as this policy.
           </li>
         </ul>
         <p>
@@ -264,6 +299,11 @@
           interact with ads, to serve, measure, and personalize ads and to
           prevent fraud.
         </p>
+        <p>
+          The App is rated for all ages, so ads are limited to content suitable
+          for general audiences (Google's "G" ad content rating), and sensitive
+          ad categories are blocked.
+        </p>
         <ul>
           <li>
             On iOS, the advertising identifier is used only if you allow tracking
@@ -293,7 +333,10 @@
         <ul>
           <li>Google AdMob, for advertising</li>
           <li>Hugging Face, to download offline transcription models</li>
-          <li>Groq, for optional transcription with your own API key</li>
+          <li>
+            Groq, Inc., for optional cloud transcription with your own API key
+            and only after you allow it (see Section 4)
+          </li>
           <li>
             Apple and Google speech recognition, Apple Intelligence, and other
             platform services needed to run the App
