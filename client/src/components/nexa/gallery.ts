@@ -87,6 +87,18 @@ export const galleries: Record<string, GalleryImage[]> = {
     { src: "/products/dayflow/07.webp", width: 720, height: 1565, tone: "#9ea6d9" },
     { src: "/products/dayflow/08.webp", width: 720, height: 1565, tone: "#ab9de9" },
   ],
+  "hablito": [
+    { src: "/products/hablito/01.webp", width: 720, height: 1565, tone: "#87c5cc" },
+    { src: "/products/hablito/02.webp", width: 720, height: 1565, tone: "#a3d4d4" },
+    { src: "/products/hablito/03.webp", width: 720, height: 1565, tone: "#a5d4d0" },
+    { src: "/products/hablito/04.webp", width: 720, height: 1565, tone: "#a5d4d1" },
+    { src: "/products/hablito/05.webp", width: 720, height: 1565, tone: "#a9d5d3" },
+    { src: "/products/hablito/06.webp", width: 720, height: 1565, tone: "#a3d3ce" },
+    { src: "/products/hablito/07.webp", width: 720, height: 1565, tone: "#a2d3ce" },
+    { src: "/products/hablito/08.webp", width: 720, height: 1565, tone: "#9ccfcf" },
+    { src: "/products/hablito/09.webp", width: 720, height: 1565, tone: "#97cecb" },
+    { src: "/products/hablito/10.webp", width: 720, height: 1565, tone: "#9ed0d0" },
+  ],
   "fieldstamp-gps-camera": [
     { src: "/products/fieldstamp-gps-camera/01.webp", width: 720, height: 1280, tone: "#8ca1a8" },
     { src: "/products/fieldstamp-gps-camera/02.webp", width: 720, height: 1561, tone: "#4d5273" },

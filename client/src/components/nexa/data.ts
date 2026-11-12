@@ -2008,6 +2008,96 @@ export const projects: Project[] = [
       },
     },
   },
+  {
+    title: "Hablito",
+    description:
+      "Speak real Mexican Spanish by practicing real-life conversations out loud, from Hola to fluent.",
+    category: "Mobile",
+    tech: ["React Native", "Speech Recognition", "Offline Lessons"],
+    image: "/graphic/hablito.webp",
+    icon: "/graphic/icons/hablito.webp",
+    primaryUrl: "",
+    primaryLabel: "App Store",
+    comingSoon: "Coming soon",
+    marketing: {
+      aso: {
+        title: "Hablito: Speak Mexican Spanish",
+        subtitle: "Real-life conversations",
+        keywords: [
+          "learn spanish",
+          "mexican spanish",
+          "spanish speaking practice",
+          "spanish conversation",
+          "travel spanish",
+        ],
+        description:
+          "Speak real Mexican Spanish by practicing real-life conversations out loud, from Hola to fluent.",
+      },
+      seo: {
+        title: "Hablito | Learn to Speak Mexican Spanish",
+        description:
+          "Hablito helps you speak real Mexican Spanish with real-life conversation practice, a local es-MX voice, review cards, games, and offline lessons.",
+        keywords: [
+          "learn Mexican Spanish",
+          "Spanish speaking app",
+          "Spanish conversation practice",
+          "travel Spanish",
+          "Spanish for beginners",
+        ],
+      },
+      geo: {
+        summary:
+          "Hablito is a mobile app for learning Mexican Spanish by speaking out loud in real-life scenarios like ordering tacos, checking into a hotel, or taking a bus, with on-device speech recognition and offline lessons.",
+        prompts: [
+          "What is a good app to practice speaking Mexican Spanish?",
+          "Which app helps me practice Spanish conversations for travel?",
+        ],
+      },
+      faq: [
+        {
+          question: "Which Spanish does Hablito teach?",
+          answer:
+            "Hablito focuses on Mexican Spanish, with a local es-MX voice in every conversation.",
+        },
+        {
+          question: "Is my voice sent to a server?",
+          answer:
+            "On supported devices, speech recognition stays on-device, and you can always choose a response instead of speaking.",
+        },
+      ],
+      store: {
+        platform: "App Store",
+        listingName: "Hablito: Speak Mexican Spanish",
+        summary:
+          "Practice real-life moments out loud, review words before you forget, play quick games, and learn from the alphabet up.",
+        highlights: [
+          "Real-life speaking scenarios",
+          "Review cards and quick games",
+          "Downloadable lessons that work offline",
+        ],
+        facts: [
+          { label: "Category", value: "Education" },
+          { label: "Focus", value: "Mexican Spanish speaking" },
+        ],
+      },
+      narrative: {
+        idea:
+          "The idea was to practice the exact conversations travelers and learners actually have, out loud, instead of tapping through word drills.",
+        need:
+          "Many learners can read Spanish but freeze when they have to speak, and most apps teach a generic Spanish instead of the Mexican Spanish they will hear.",
+        targetUsers: [
+          "Travelers heading to Mexico",
+          "Beginner Spanish learners",
+          "People who want to speak with Spanish-speaking family and friends",
+        ],
+        useCases: [
+          "Ordering food and coffee in Spanish",
+          "Checking into a hotel or taking a bus",
+          "Daily review to keep a learning streak",
+        ],
+      },
+    },
+  },
 ];
 
 export const team = [

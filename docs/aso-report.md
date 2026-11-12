@@ -20,6 +20,7 @@ Keep this data in sync with what is live in App Store Connect / Play Console.
 | [CleanMaster](/work/cleanmaster) | 26/30 | 24/30 | 65/100 | 130/80 | short desc 130>80; title missing main keyword "phone cleaner"; keyword field uses 65/100 chars |
 | [Coloring Book: Paint & Draw](/work/coloring-book-paint-and-draw) | 27/30 | 22/30 | 36/100 | 91/80 | short desc 91>80; keyword field uses 36/100 chars |
 | [Dayflow](/work/dayflow) | 28/30 | 18/30 | 36/100 | 99/80 | short desc 99>80; keyword field uses 36/100 chars |
+| [Hablito](/work/hablito) | 30/30 | 23/30 | 43/100 | 95/80 | short desc 95>80; keyword field uses 43/100 chars |
 
 ### Tarot Destiny
 - Title: `Tarot Destiny`
@@ -118,3 +119,10 @@ Keep this data in sync with what is live in App Store Connect / Play Console.
 - iOS keyword field (deduped, no spaces): `timer,daily,routine,brain,dump,focus`
 - Already in title/subtitle (removed): adhd, planner, visual
 - Play short description: `A visual day planner for ADHD brains, with timers, routines, a brain dump inbox, and gentle nudges.`
+
+### Hablito
+- Title: `Hablito: Speak Mexican Spanish`
+- Subtitle: `Real-life conversations`
+- iOS keyword field (deduped, no spaces): `learn,speaking,practice,conversation,travel`
+- Already in title/subtitle (removed): spanish, mexican
+- Play short description: `Speak real Mexican Spanish by practicing real-life conversations out loud, from Hola to fluent.`
