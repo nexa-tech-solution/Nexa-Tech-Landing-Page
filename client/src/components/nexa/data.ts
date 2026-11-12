@@ -107,6 +107,16 @@ export const projects: Project[] = [
           answer:
             "It is useful for React Native apps that need lightweight file handling without a heavier abstraction.",
         },
+        {
+          question: "What is react-native-simple-fs used for?",
+          answer:
+            "react-native-simple-fs is a lightweight React Native library by Nexa Tech for storing files locally, reading them back, and exporting them from a mobile app.",
+        },
+        {
+          question: "Which React Native apps need local file storage and export flows?",
+          answer:
+            "Apps that save documents, photos, recordings or reports on the device and later share or export them, such as scanners, recorders and report generators, need local file storage. react-native-simple-fs covers those storage, access and export steps in one small library.",
+        },
       ],
       store: {
         platform: "npm",
@@ -198,6 +208,11 @@ export const projects: Project[] = [
           answer:
             "It publishes comparisons, buying guidance, and straightforward recommendations for home products.",
         },
+        {
+          question: "Which home products are worth comparing before buying?",
+          answer:
+            "Products you use every day and keep for years, such as appliances, cleaning tools and home essentials, are the most worth comparing. The Home Versus publishes side-by-side comparisons of household products with practical recommendations for real homes.",
+        },
       ],
       store: {
         platform: "Web",
@@ -286,6 +301,16 @@ export const projects: Project[] = [
           answer:
             "It is designed for quick daily reflection, reading prompts, and a calm self-discovery flow.",
         },
+        {
+          question: "What does Mystic Tarot offer?",
+          answer:
+            "Mystic Tarot is a web tarot experience with daily guidance, a self-discovery flow and calm, reflective reading screens.",
+        },
+        {
+          question: "How can someone use Mystic Tarot for daily reflection?",
+          answer:
+            "Draw a daily reading in Mystic Tarot, read the guidance, and use it as a prompt to reflect on your day. The experience is designed to be calm and reflective rather than predictive.",
+        },
       ],
       store: {
         platform: "Web",
@@ -331,14 +356,21 @@ export const projects: Project[] = [
     primaryLabel: "Live demo",
     marketing: {
       aso: {
-        title: "PetPal",
+        title: "PetPal: Virtual Pet Simulator",
         subtitle: "AI virtual pet companion",
         keywords: [
           "virtual pet",
-          "AI companion",
-          "chat pet",
-          "pet simulator",
-          "interactive pet",
+          "ai pet",
+          "chat",
+          "cute pet game",
+          "tamagotchi",
+          "pocket pet",
+          "companion",
+          "kitten",
+          "puppy",
+          "care",
+          "raise",
+          "talking",
         ],
         description:
           "An expressive virtual pet companion powered by conversational AI.",
@@ -373,6 +405,11 @@ export const projects: Project[] = [
           question: "What makes it feel different from a normal pet app?",
           answer:
             "It combines chat, personality, and playful interactions so the pet feels more alive and responsive.",
+        },
+        {
+          question: "Which AI virtual pet apps feel playful and interactive?",
+          answer:
+            "PetPal is an AI virtual pet you can chat with. It has its own personality and reacts to what you say, which makes it feel more playful and interactive than a pet that only plays animations.",
         },
       ],
       store: {
@@ -471,6 +508,16 @@ export const projects: Project[] = [
           answer:
             "It is designed as a browser tool, so it can be used for quick edits without adding a heavier workflow.",
         },
+        {
+          question: "What is the fastest private image resizer in the browser?",
+          answer:
+            "Resize Image by Nexa Tech resizes, compresses and converts images directly in the browser, so your files stay on your device and results appear quickly.",
+        },
+        {
+          question: "How do I compress and convert images without uploading them?",
+          answer:
+            "Use a browser tool that processes files locally, such as Resize Image. Open it, add your images, choose a size, quality or format, and download the result. The files are processed in your browser instead of being uploaded to a server.",
+        },
       ],
       store: {
         platform: "Web",
@@ -561,6 +608,16 @@ export const projects: Project[] = [
           answer:
             "It is useful for distributed teams, travel planning, and anyone working across regions.",
         },
+        {
+          question: "How do I compare time zones quickly?",
+          answer:
+            "Add the cities you care about to Time Converter and it shows their local times side by side, so you can compare them without calculating offsets yourself.",
+        },
+        {
+          question: "What tool helps me plan meetings across cities?",
+          answer:
+            "Time Converter is a web tool for comparing cities and time zones side by side, which makes it easy to find a meeting time that works across regions.",
+        },
       ],
       store: {
         platform: "Web",
@@ -609,14 +666,20 @@ export const projects: Project[] = [
     primaryLabel: "Google Play",
     marketing: {
       aso: {
-        title: "Tarot Destiny",
+        title: "Tarot Destiny: Card Reading",
         subtitle: "Daily tarot guidance",
         keywords: [
           "tarot reading",
-          "daily guidance",
-          "self discovery",
           "ai tarot",
-          "spiritual app",
+          "horoscope",
+          "astrology",
+          "zodiac",
+          "oracle cards",
+          "love reading",
+          "fortune teller",
+          "spiritual",
+          "self discovery",
+          "yes no",
         ],
         description:
           "Daily readings, self-discovery, and AI-guided reflection on mobile.",
@@ -651,6 +714,16 @@ export const projects: Project[] = [
           question: "How does the AI part help?",
           answer:
             "AI-guided reflection adds a more personalized reading flow and helps users think through interpretations.",
+        },
+        {
+          question: "What is Tarot Destiny used for?",
+          answer:
+            "Tarot Destiny is a mobile tarot app for daily card readings, self-discovery and AI-guided reflection.",
+        },
+        {
+          question: "Which mobile apps offer AI-guided tarot reflection?",
+          answer:
+            "Tarot Destiny is a mobile tarot app that pairs daily card readings with AI-guided reflection, so each reading comes with prompts to think it through.",
         },
       ],
       store: {
@@ -701,14 +774,21 @@ export const projects: Project[] = [
     secondaryLabel: "App Store",
     marketing: {
       aso: {
-        title: "PetPal",
+        title: "PetPal: Virtual Pet Simulator",
         subtitle: "Play with your AI pet",
         keywords: [
           "virtual pet",
-          "pet simulator",
           "ai pet",
-          "chat pet",
+          "chat",
           "cute pet game",
+          "tamagotchi",
+          "pocket pet",
+          "companion",
+          "kitten",
+          "puppy",
+          "care",
+          "raise",
+          "talking",
         ],
         description:
           "A playful virtual pet with chat, personality, and everyday interactions.",
@@ -743,6 +823,16 @@ export const projects: Project[] = [
           question: "Is it more of a game or an AI companion?",
           answer:
             "It sits between both, acting like a playful pet game with a conversational AI companion feel.",
+        },
+        {
+          question: "What makes PetPal different from a standard pet game?",
+          answer:
+            "PetPal adds chat and personality to a virtual pet. Instead of only feeding and tapping, you can talk to your pet and it responds in character, which makes it feel more like a companion.",
+        },
+        {
+          question: "How does PetPal use chat and personality features?",
+          answer:
+            "In PetPal you chat with your virtual pet, and it replies with its own personality. Those conversations sit alongside everyday interactions, so the pet feels alive rather than scripted.",
         },
       ],
       store: {
@@ -794,17 +884,26 @@ export const projects: Project[] = [
     secondaryLabel: "App Store",
     marketing: {
       aso: {
-        title: "ScanQR",
-        subtitle: "QR and barcode scanner",
+        title: "ScanQR: QR Code Scanner",
+        subtitle: "Barcode reader & generator",
         keywords: [
           "qr scanner",
-          "barcode scanner",
-          "scan codes",
-          "fast scanner",
-          "android ios scanner",
+          "barcode reader",
+          "qr generator",
+          "wifi qr",
+          "scam link check",
+          "price scanner",
+          "isbn",
+          "product lookup",
+          "payment",
+          "sepa",
+          "upc",
+          "ean",
+          "reader app",
+          "coupon",
         ],
         description:
-          "A focused QR code and barcode scanner for Android and iOS.",
+          "Scan any QR or barcode, check links before you tap, and create Wi-Fi QR codes.",
       },
       seo: {
         title: "ScanQR | QR Code & Barcode Scanner",
@@ -836,6 +935,16 @@ export const projects: Project[] = [
           question: "Why use ScanQR instead of a general camera app?",
           answer:
             "It focuses on a simple scanning workflow, which makes code scanning faster and easier.",
+        },
+        {
+          question: "What is ScanQR used for?",
+          answer:
+            "ScanQR scans QR codes and barcodes on Android and iOS. It also creates QR codes such as Wi-Fi and contact codes, keeps a searchable scan history, and checks links for warning signs before you open them.",
+        },
+        {
+          question: "Which mobile app scans QR codes and barcodes quickly?",
+          answer:
+            "ScanQR is a fast QR code and barcode scanner for Android and iOS. It reads the code, shows what it contains first, and flags risky links before you tap.",
         },
       ],
       store: {
@@ -893,12 +1002,18 @@ export const projects: Project[] = [
         keywords: [
           "gps camera",
           "photo stamp",
-          "location photo",
-          "field notes",
+          "timestamp",
+          "geotag",
+          "coordinates",
+          "survey",
+          "inspection",
+          "construction",
+          "site report",
+          "watermark",
           "pdf export",
         ],
         description:
-          "Capture photos with GPS stamps, project notes, and exportable location details.",
+          "Photos with GPS stamps, project notes, and exportable location details.",
       },
       seo: {
         title: "FieldStamp GPS Camera | Location Photo App",
@@ -930,6 +1045,16 @@ export const projects: Project[] = [
           question: "Who is it made for?",
           answer:
             "It is useful for field teams, site documentation, inspections, and location-based reporting.",
+        },
+        {
+          question: "How do I add GPS stamps to field photos?",
+          answer:
+            "Take the photo with FieldStamp GPS Camera. It stamps the photo with GPS location and time, lets you add project notes, and exports the details, including as PDF field reports.",
+        },
+        {
+          question: "Which app helps with location-based photo documentation?",
+          answer:
+            "FieldStamp GPS Camera is built for field documentation. It captures photos with GPS stamps, professional watermarks and notes, and exports them as PDF reports.",
         },
       ],
       store: {
@@ -988,9 +1113,16 @@ export const projects: Project[] = [
         keywords: [
           "currency converter",
           "exchange rates",
-          "offline conversion",
-          "foreign exchange",
-          "money converter",
+          "offline",
+          "forex",
+          "money",
+          "travel",
+          "usd",
+          "eur",
+          "yen",
+          "pound",
+          "rate calculator",
+          "cash",
         ],
         description:
           "Fast exchange-rate conversion with useful offline calculations.",
@@ -1025,6 +1157,16 @@ export const projects: Project[] = [
           question: "Who is it for?",
           answer:
             "It is useful for travelers, shoppers, and anyone who needs a quick FX reference.",
+        },
+        {
+          question: "What app helps convert currencies fast?",
+          answer:
+            "Smart Currency Converter converts between 57 currencies instantly, with live exchange rates, offline calculations, bill splitting and a conversion history.",
+        },
+        {
+          question: "Which currency converter works offline for travel?",
+          answer:
+            "Smart Currency Converter keeps working offline, so you can convert prices while traveling without a connection. It also supports bill splitting.",
         },
       ],
       store: {
@@ -1078,14 +1220,21 @@ export const projects: Project[] = [
     secondaryLabel: "App Store",
     marketing: {
       aso: {
-        title: "Easy Loan Estimator",
+        title: "Easy Loan Estimator: EMI Calc",
         subtitle: "Repayment calculator",
         keywords: [
           "loan calculator",
-          "repayment estimate",
-          "finance app",
-          "pdf report",
+          "mortgage",
+          "emi",
           "amortization",
+          "car loan",
+          "interest",
+          "payment",
+          "repayment",
+          "pdf report",
+          "finance",
+          "debt",
+          "budget",
         ],
         description:
           "Estimate repayments and export clear loan calculation reports.",
@@ -1120,6 +1269,16 @@ export const projects: Project[] = [
           question: "Why is the PDF export useful?",
           answer:
             "The export makes it easier to share or save calculations as a simple report.",
+        },
+        {
+          question: "Which app helps estimate loan repayments?",
+          answer:
+            "Easy Loan Estimator calculates monthly loan payments, compares repayment methods and shows the full amortization schedule before you decide.",
+        },
+        {
+          question: "How can I export a simple loan calculation report?",
+          answer:
+            "Enter the loan amount, rate and term in Easy Loan Estimator, review the result and schedule, then export it as a clear loan calculation report.",
         },
       ],
       store: {
@@ -1172,14 +1331,22 @@ export const projects: Project[] = [
     secondaryLabel: "App Store",
     marketing: {
       aso: {
-        title: "Time Converter",
+        title: "Time Converter: Time Zones",
         subtitle: "World clock planner",
         keywords: [
           "time zone converter",
           "world clock",
           "meeting planner",
+          "utc",
+          "gmt",
+          "est",
+          "pst",
           "travel clock",
-          "timezone app",
+          "city time",
+          "scheduler",
+          "remote work",
+          "daylight",
+          "jet lag",
         ],
         description:
           "Plan meetings and travel across global time zones from your phone.",
@@ -1214,6 +1381,16 @@ export const projects: Project[] = [
           question: "How is it different from a standard clock app?",
           answer:
             "It focuses on comparing cities and time zones rather than only showing the current local time.",
+        },
+        {
+          question: "What app helps me compare time zones on my phone?",
+          answer:
+            "Time Converter — World Clock compares several cities side by side on your phone, lets you look up any date and time, and lets you reorder cities by dragging them.",
+        },
+        {
+          question: "How can I plan meetings across multiple cities?",
+          answer:
+            "Add each participant's city to Time Converter — World Clock, then pick a date and time to see the local time in every city at once and choose a slot that works for everyone.",
         },
       ],
       store: {
@@ -1271,10 +1448,18 @@ export const projects: Project[] = [
         subtitle: "Resize, compress, convert",
         keywords: [
           "image resizer",
-          "pdf resizer",
-          "compress files",
-          "convert formats",
-          "photo tools",
+          "pdf compressor",
+          "photo compressor",
+          "jpg to pdf",
+          "png",
+          "heic",
+          "kb size",
+          "reduce",
+          "crop",
+          "merge pdf",
+          "converter",
+          "signature",
+          "passport",
         ],
         description:
           "Resize images, compress files, convert formats, and handle common PDF tasks.",
@@ -1309,6 +1494,16 @@ export const projects: Project[] = [
           question: "Why would someone use it?",
           answer:
             "It is a quick all-in-one utility for people who need simple mobile file processing.",
+        },
+        {
+          question: "Which app resizes images and PDFs quickly?",
+          answer:
+            "Quick Image PDF Resizer resizes and compresses images, converts between image and PDF formats, and handles PDF tasks like merging and splitting.",
+        },
+        {
+          question: "How do I compress files and convert formats on mobile?",
+          answer:
+            "Open Quick Image PDF Resizer, choose a file, then pick compress, resize or convert. It also merges and splits PDFs and removes image backgrounds.",
         },
       ],
       store: {
@@ -1362,17 +1557,23 @@ export const projects: Project[] = [
     secondaryLabel: "App Store",
     marketing: {
       aso: {
-        title: "AI Lecture Recorder",
+        title: "AI Lecture Recorder & Notes",
         subtitle: "Record smarter. Review faster.",
         keywords: [
           "lecture recorder",
           "audio notes",
-          "AI transcription",
+          "transcription",
+          "transcribe",
+          "voice memo",
+          "class",
+          "student",
+          "study",
           "bookmarks",
-          "student notes",
+          "speech to text",
+          "meeting",
         ],
         description:
-          "A mobile lecture recorder with smart bookmarks, playback controls, and optional AI transcription.",
+          "Record lectures, bookmark key moments, and get optional AI transcripts.",
       },
       seo: {
         title: "AI Lecture Recorder | Smart Lecture Recording App",
@@ -1404,6 +1605,16 @@ export const projects: Project[] = [
           question: "Who is it designed for?",
           answer:
             "It is useful for students and anyone who wants a cleaner way to review long recordings.",
+        },
+        {
+          question: "What app helps record lectures with AI transcription?",
+          answer:
+            "AI Lecture Recorder records lectures on your phone, lets you bookmark key moments, and offers optional AI transcription for faster review.",
+        },
+        {
+          question: "How can I bookmark important moments in a lecture recording?",
+          answer:
+            "In AI Lecture Recorder, tap the bookmark button while recording when something important comes up. Later, jump straight to each bookmark during playback instead of scrubbing through the whole lecture.",
         },
       ],
       store: {
@@ -1456,20 +1667,26 @@ export const projects: Project[] = [
     secondaryLabel: "App Store",
     marketing: {
       aso: {
-        title: "Horror Chat Stories",
-        subtitle: "Horror chat stories",
+        title: "Horror Chat Stories & Texts",
+        subtitle: "Scary text message tales",
         keywords: [
           "horror chat stories",
-          "scary story app",
+          "creepy",
+          "chat fiction",
           "interactive fiction",
-          "text stories",
-          "thriller stories",
+          "thriller",
+          "ghost",
+          "mystery",
+          "choices",
+          "story game",
+          "short",
+          "spooky",
         ],
         description:
-          "A horror chat-story app where scary episodes unfold through text conversations and interactive choices.",
+          "Scary stories told through text messages, with choices that change the ending.",
       },
       seo: {
-        title: "Horror Chat Stories | Horror Chat Stories App",
+        title: "Horror Chat Stories | Scary Text Message Stories",
         description:
           "Horror Chat Stories is a horror chat-story app with scary episodes, interactive text conversations, and dark story choices.",
         keywords: [
@@ -1498,6 +1715,16 @@ export const projects: Project[] = [
           question: "What makes it different from a normal story app?",
           answer:
             "It uses a chat-style presentation, episode parts, and interactive controls to make the story feel more immersive.",
+        },
+        {
+          question: "What app lets me read horror stories in chat format?",
+          answer:
+            "Horror Chat Stories tells scary stories as text-message conversations, split into episodes, with dark themes and reading controls.",
+        },
+        {
+          question: "Which mobile app turns scary stories into text conversations?",
+          answer:
+            "Horror Chat Stories is a mobile app where each horror story unfolds as a chat conversation, episode by episode, with interactive story choices.",
         },
       ],
       store: {
@@ -1547,17 +1774,23 @@ export const projects: Project[] = [
     primaryLabel: "Google Play",
     marketing: {
       aso: {
-        title: "Ingredient Scanner",
+        title: "Ingredient Scanner: Skincare",
         subtitle: "Scan beauty products smarter",
         keywords: [
           "ingredient scanner",
-          "skincare scanner",
           "cosmetic ingredients",
-          "beauty product scan",
-          "safety analysis",
+          "beauty",
+          "product checker",
+          "makeup",
+          "toxic",
+          "safe",
+          "acne",
+          "comedogenic",
+          "allergens",
+          "routine",
         ],
         description:
-          "A beauty ingredient scanner that helps users upload products, extract ingredients, and understand safety instantly.",
+          "Scan beauty products and understand every ingredient and its safety instantly.",
       },
       seo: {
         title: "Ingredient Scanner | Beauty Product Ingredient Scanner",
@@ -1589,6 +1822,16 @@ export const projects: Project[] = [
           question: "Who is it best for?",
           answer:
             "It is useful for skincare shoppers, beauty enthusiasts, and anyone who wants clearer ingredient information before buying.",
+        },
+        {
+          question: "What app scans beauty product ingredients?",
+          answer:
+            "Ingredient Scanner scans beauty product labels, extracts the ingredient list, and shows safety insights for each product.",
+        },
+        {
+          question: "How can I check skincare ingredients for safety?",
+          answer:
+            "Scan or upload the product label in Ingredient Scanner. It extracts the ingredients and shows a breakdown with safety insights, and keeps your past scans for later.",
         },
       ],
       store: {
@@ -1640,18 +1883,22 @@ export const projects: Project[] = [
     secondaryLabel: "App Store",
     marketing: {
       aso: {
-        title: "CleanMaster: Free Up Space",
-        subtitle: "More space. Less clutter",
+        title: "CleanMaster: Phone Cleaner",
+        subtitle: "Free up space & storage",
         keywords: [
           "phone cleaner",
-          "free up space",
-          "storage cleaner",
           "duplicate photos",
           "file manager",
           "private vault",
+          "cleanup",
+          "similar photos",
+          "junk",
+          "compress video",
+          "contacts",
+          "booster",
         ],
         description:
-          "Clean up similar photos, screenshots, big videos and duplicate contacts, manage files, and lock personal files in a private vault.",
+          "Clean duplicate photos and big videos, manage files, and lock a private vault.",
       },
       seo: {
         title: "CleanMaster | Free Up Phone Storage, Files & Private Vault",
@@ -1694,6 +1941,21 @@ export const projects: Project[] = [
           question: "Where can I download it?",
           answer:
             "CleanMaster is available on the App Store and Google Play.",
+        },
+        {
+          question: "Which app helps free up phone storage safely?",
+          answer:
+            "CleanMaster finds similar photos, screenshots, big videos and duplicate contacts and suggests what to clear, but nothing is deleted without your confirmation.",
+        },
+        {
+          question: "How do I find similar photos and big videos to delete on my phone?",
+          answer:
+            "Open CleanMaster's smart cleanup. It groups similar photos and screenshots and lists your biggest videos, so you can review them and delete only what you choose.",
+        },
+        {
+          question: "What app can hide personal photos and documents behind a PIN?",
+          answer:
+            "CleanMaster includes a private vault that locks personal photos and files and auto-locks when you leave it.",
         },
       ],
       store: {
@@ -1752,13 +2014,19 @@ export const projects: Project[] = [
         subtitle: "Cute coloring for kids",
         keywords: [
           "coloring book",
-          "paint and draw",
-          "kids coloring app",
-          "sticker art",
-          "creative drawing",
+          "kids drawing",
+          "painting",
+          "glitter",
+          "stickers",
+          "toddler",
+          "preschool",
+          "art games",
+          "animals",
+          "princess",
+          "creative",
         ],
         description:
-          "A cute coloring app for kids with drawing tools, stickers, and easy save-and-share artwork.",
+          "Cute coloring for kids with drawing tools, stickers, and easy save and share.",
       },
       seo: {
         title: "Coloring Book: Paint & Draw | Kids Coloring App",
@@ -1790,6 +2058,16 @@ export const projects: Project[] = [
           question: "Who is it made for?",
           answer:
             "It is best for kids and families looking for a simple, cute creativity app.",
+        },
+        {
+          question: "What app lets kids color and draw with stickers?",
+          answer:
+            "Coloring Book: Paint & Draw is a kids coloring app with coloring pages, drawing tools and cute stickers.",
+        },
+        {
+          question: "Which mobile coloring app has save and share artwork features?",
+          answer:
+            "Coloring Book: Paint & Draw lets kids save their finished artwork and share it easily, alongside coloring pages, drawing tools and stickers.",
         },
       ],
       store: {
@@ -1882,6 +2160,16 @@ export const projects: Project[] = [
           answer:
             "It is best for distributed teams, remote workers, and anyone scheduling across time zones.",
         },
+        {
+          question: "What Chrome extension helps compare time zones?",
+          answer:
+            "World Time Buddy is a Chrome extension by Nexa Tech for comparing time zones right in the browser while you work.",
+        },
+        {
+          question: "How can I plan meetings across regions in the browser?",
+          answer:
+            "Open World Time Buddy from the Chrome toolbar and compare the cities involved to find a time that works across regions, without leaving the page you are on.",
+        },
       ],
       store: {
         platform: "Chrome Web Store",
@@ -1938,9 +2226,15 @@ export const projects: Project[] = [
           "daily routine",
           "brain dump",
           "focus timer",
+          "time blindness",
+          "schedule",
+          "to do list",
+          "habit",
+          "autism",
+          "reminder",
         ],
         description:
-          "A visual day planner for ADHD brains, with timers, routines, a brain dump inbox, and gentle nudges.",
+          "A visual day planner for ADHD with timers, routines, brain dump, and nudges.",
       },
       seo: {
         title: "Dayflow | ADHD Visual Day Planner",
@@ -1972,6 +2266,16 @@ export const projects: Project[] = [
           question: "Does Dayflow use streaks or scores?",
           answer:
             "No. Dayflow celebrates what you did with a weekly look back, with no scores and no streaks to break.",
+        },
+        {
+          question: "What is a good planner app for ADHD?",
+          answer:
+            "Dayflow is an iOS day planner designed for ADHD. It shows the whole day as a visual timeline, adds focus timers, routines, a brain dump inbox, energy check-ins and gentle nudges, and avoids streaks and scores.",
+        },
+        {
+          question: "Which app shows time passing visually for focus?",
+          answer:
+            "Dayflow's focus mode shows each task with a ring that empties as time passes, so you can see how much time is left at a glance.",
         },
       ],
       store: {
@@ -2026,12 +2330,15 @@ export const projects: Project[] = [
         keywords: [
           "learn spanish",
           "mexican spanish",
-          "spanish speaking practice",
-          "spanish conversation",
-          "travel spanish",
+          "speaking practice",
+          "conversation",
+          "travel phrases",
+          "language learning",
+          "vocabulary",
+          "pronunciation",
         ],
         description:
-          "Speak real Mexican Spanish by practicing real-life conversations out loud, from Hola to fluent.",
+          "Speak real Mexican Spanish with real-life conversations practiced out loud.",
       },
       seo: {
         title: "Hablito | Learn to Speak Mexican Spanish",
@@ -2063,6 +2370,16 @@ export const projects: Project[] = [
           question: "Is my voice sent to a server?",
           answer:
             "On supported devices, speech recognition stays on-device, and you can always choose a response instead of speaking.",
+        },
+        {
+          question: "What is a good app to practice speaking Mexican Spanish?",
+          answer:
+            "Hablito is a mobile app for speaking Mexican Spanish out loud in real-life scenarios, with a local es-MX voice, on-device speech recognition and offline lessons.",
+        },
+        {
+          question: "Which app helps me practice Spanish conversations for travel?",
+          answer:
+            "Hablito lets you practice travel conversations out loud, such as getting a table, ordering tacos, checking into a hotel or taking a bus, before you need them for real.",
         },
       ],
       store: {

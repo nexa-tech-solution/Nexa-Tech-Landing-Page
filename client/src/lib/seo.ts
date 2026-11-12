@@ -182,6 +182,10 @@ export function getProjectStructuredData(project: Project) {
               applicationCategory: getApplicationCategory(project.category),
               operatingSystem: getOperatingSystem(project.category),
               ...(listings.length ? { downloadUrl: listings[0], installUrl: listings[0] } : {}),
+              // Free to download (in-app purchases aside). Google requires `offers` for app rich results.
+              ...(listings.length && !project.comingSoon
+                ? { offers: { "@type": "Offer", price: "0", priceCurrency: "USD" } }
+                : {}),
             }),
         ...(listings.length ? { sameAs: listings } : {}),
       },

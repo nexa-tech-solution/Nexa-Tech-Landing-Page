@@ -47,6 +47,61 @@ type PostMeta = {
 // Newest first, as the list endpoint would return them.
 const meta: PostMeta[] = [
   {
+    slug: "how-to-spot-a-qr-code-scam",
+    title: "How to spot a QR code scam (quishing): 7 warning signs",
+    excerpt:
+      "Fake parking stickers, fines and emails use QR codes to steal payments and passwords. Here is how to spot them before you tap.",
+    tag: "Product",
+    publishedAt: "2026-11-12",
+    author: "Ethan",
+    cover: "/graphic/scanqr.webp",
+    relatedProject: "scanqr",
+  },
+  {
+    slug: "spanish-phrases-for-mexico-travel",
+    title: "50 Spanish phrases for traveling in Mexico",
+    excerpt:
+      "Greetings, food, buses, hotels and paying: the Mexican Spanish phrases that cover most of a trip, grouped by situation.",
+    tag: "Product",
+    publishedAt: "2026-11-11",
+    author: "Tina",
+    cover: "/graphic/hablito.webp",
+    relatedProject: "hablito",
+  },
+  {
+    slug: "adhd-time-blindness-tools",
+    title: "ADHD time blindness: 7 tools that actually help",
+    excerpt:
+      "Calendars store time as text. These tools make time visible, which is what many ADHD brains need to stay on track.",
+    tag: "Product",
+    publishedAt: "2026-11-10",
+    author: "Tina",
+    cover: "/graphic/dayflow.webp",
+    relatedProject: "dayflow",
+  },
+  {
+    slug: "how-to-order-tacos-in-spanish",
+    title: "How to order tacos in Spanish like a local",
+    excerpt:
+      "The taquería script, the fillings on the menu, what \"con todo\" means, and a full example conversation to practice.",
+    tag: "Product",
+    publishedAt: "2026-11-06",
+    author: "Ethan",
+    cover: "/graphic/hablito.webp",
+    relatedProject: "hablito",
+  },
+  {
+    slug: "visual-timers-for-adhd",
+    title: "Visual timers for ADHD: how they work and how to use them",
+    excerpt:
+      "A shrinking ring instead of digits. Why visual timers help with starting, focus and transitions, and what to look for in one.",
+    tag: "Product",
+    publishedAt: "2026-11-03",
+    author: "Ethan",
+    cover: "/graphic/dayflow.webp",
+    relatedProject: "dayflow",
+  },
+  {
     slug: "ai-in-app-design",
     title: "AI can design an app now. Are designers redundant?",
     excerpt:

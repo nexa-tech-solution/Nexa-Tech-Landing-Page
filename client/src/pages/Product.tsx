@@ -34,6 +34,7 @@ import {
   X,
 } from "lucide-react";
 import { useRoute } from "wouter";
+import { trackStoreUrl } from "@/lib/store-links";
 
 // Live-site captures get a device frame; store screenshots already ship designed.
 const isCapture = (image: GalleryImage) =>
@@ -512,6 +513,12 @@ export default function Product() {
             </a>
             <h1 className="mt-6 max-w-4xl font-display text-5xl font-bold leading-[0.98] tracking-[-0.045em] md:text-7xl lg:text-[5.5rem]">
               {project.title}
+              {/* Main search phrase from seo.title ("Name | Phrase"), so the H1 carries the keyword. */}
+              {seo?.title?.includes(" | ") ? (
+                <span className="mt-4 block text-2xl font-semibold leading-tight tracking-[-0.02em] text-[#6e6d7a] md:text-3xl lg:text-4xl">
+                  {seo.title.split(" | ").slice(1).join(" | ")}
+                </span>
+              ) : null}
             </h1>
             <p className="mt-6 max-w-2xl text-xl leading-8 text-[#3d3d4e] md:text-2xl md:leading-9">
               {aso?.subtitle ? `${aso.subtitle}. ` : ""}
@@ -523,7 +530,7 @@ export default function Product() {
               ) : (
                 <>
                   <a
-                    href={project.primaryUrl}
+                    href={trackStoreUrl(project.primaryUrl, `${getProjectSlug(project)}-hero`)}
                     target="_blank"
                     rel="noreferrer"
                     className="inline-flex h-12 items-center gap-2 rounded-full bg-[#ea4c89] px-6 text-sm font-semibold text-white transition hover:bg-[#f082ac]"
@@ -533,7 +540,7 @@ export default function Product() {
                   </a>
                   {project.secondaryUrl ? (
                     <a
-                      href={project.secondaryUrl}
+                      href={trackStoreUrl(project.secondaryUrl, `${getProjectSlug(project)}-hero`)}
                       target="_blank"
                       rel="noreferrer"
                       className="inline-flex h-12 items-center gap-2 rounded-full border border-[#e7e7e9] px-6 text-sm font-semibold transition hover:border-[#dbdbde]"
@@ -545,7 +552,7 @@ export default function Product() {
                   {project.extraLinks?.map((link) => (
                     <a
                       key={link.url}
-                      href={link.url}
+                      href={trackStoreUrl(link.url, `${getProjectSlug(project)}-hero`)}
                       target="_blank"
                       rel="noreferrer"
                       className="inline-flex h-12 items-center gap-2 rounded-full border border-[#e7e7e9] px-6 text-sm font-semibold transition hover:border-[#dbdbde]"
@@ -657,7 +664,7 @@ export default function Product() {
                     ...screen,
                     alt: `${project.title} app screenshot ${index + 1}`,
                   }))}
-                  url={project.primaryUrl}
+                  url={trackStoreUrl(project.primaryUrl, `${getProjectSlug(project)}-screens`)}
                   onOpen={(img) => setOpen(gallery.indexOf(img))}
                 />
               </div>
@@ -746,7 +753,7 @@ export default function Product() {
               ) : (
                 <>
                   <a
-                    href={project.primaryUrl}
+                    href={trackStoreUrl(project.primaryUrl, `${getProjectSlug(project)}-bottom`)}
                     target="_blank"
                     rel="noreferrer"
                     className="inline-flex h-12 items-center gap-2 rounded-full bg-[#ea4c89] px-6 text-sm font-semibold transition hover:bg-[#f082ac]"
@@ -756,7 +763,7 @@ export default function Product() {
                   </a>
                   {project.secondaryUrl ? (
                     <a
-                      href={project.secondaryUrl}
+                      href={trackStoreUrl(project.secondaryUrl, `${getProjectSlug(project)}-bottom`)}
                       target="_blank"
                       rel="noreferrer"
                       className="inline-flex h-12 items-center gap-2 rounded-full bg-white px-6 text-sm font-semibold text-[#0d0c22] transition hover:bg-white/85"
@@ -768,7 +775,7 @@ export default function Product() {
                   {project.extraLinks?.map((link) => (
                     <a
                       key={link.url}
-                      href={link.url}
+                      href={trackStoreUrl(link.url, `${getProjectSlug(project)}-bottom`)}
                       target="_blank"
                       rel="noreferrer"
                       className="inline-flex h-12 items-center gap-2 rounded-full bg-white px-6 text-sm font-semibold text-[#0d0c22] transition hover:bg-white/85"
