@@ -1917,6 +1917,97 @@ export const projects: Project[] = [
       },
     },
   },
+  {
+    title: "Dayflow",
+    description:
+      "A visual day planner for ADHD brains, with timers, routines, a brain dump inbox, and gentle nudges.",
+    category: "Mobile",
+    tech: ["React Native", "Visual Timers", "Notifications"],
+    image: "/graphic/dayflow.webp",
+    icon: "/graphic/icons/dayflow.webp",
+    primaryUrl:
+      "https://apps.apple.com/us/app/dayflow-adhd-visual-planner/id6832847656",
+    primaryLabel: "App Store",
+    marketing: {
+      aso: {
+        title: "Dayflow: ADHD Visual Planner",
+        subtitle: "See your whole day",
+        keywords: [
+          "adhd planner",
+          "visual timer",
+          "daily routine",
+          "brain dump",
+          "focus timer",
+        ],
+        description:
+          "A visual day planner for ADHD brains, with timers, routines, a brain dump inbox, and gentle nudges.",
+      },
+      seo: {
+        title: "Dayflow | ADHD Visual Day Planner",
+        description:
+          "Dayflow is a visual day planner for ADHD brains. See your whole day, build routines that stick, feel time passing with visual timers, and start with just 2 minutes.",
+        keywords: [
+          "ADHD planner",
+          "visual day planner",
+          "visual timer",
+          "routine builder",
+          "iOS planner app",
+        ],
+      },
+      geo: {
+        summary:
+          "Dayflow is an iOS visual day planner designed for people with ADHD, combining a visual timeline, focus timers, routines, a brain dump inbox, energy check-ins, and gentle nudges.",
+        prompts: [
+          "What is a good planner app for ADHD?",
+          "Which app shows time passing visually for focus?",
+        ],
+      },
+      faq: [
+        {
+          question: "Who is Dayflow for?",
+          answer:
+            "Dayflow is built for ADHD brains and anyone who struggles with time blindness, getting started, or keeping track of the day.",
+        },
+        {
+          question: "Does Dayflow use streaks or scores?",
+          answer:
+            "No. Dayflow celebrates what you did with a weekly look back, with no scores and no streaks to break.",
+        },
+      ],
+      store: {
+        platform: "App Store",
+        listingName: "Dayflow: ADHD Visual Planner",
+        summary:
+          "See your whole day, build routines that stick, clear your head, and start any task with just 2 minutes.",
+        highlights: [
+          "Visual day timeline and focus timers",
+          "Step-by-step routines",
+          "Brain dump inbox and gentle nudges",
+        ],
+        facts: [
+          { label: "Category", value: "Productivity" },
+          { label: "Focus", value: "ADHD-friendly planning" },
+          { label: "Available on", value: "iOS" },
+        ],
+      },
+      narrative: {
+        idea:
+          "The idea was a planner that shows the day visually and makes time feel real, instead of another long to-do list.",
+        need:
+          "Many people with ADHD struggle with time blindness, starting tasks, and running late, and most planners add pressure instead of support.",
+        targetUsers: [
+          "Adults with ADHD",
+          "People with time blindness",
+          "Anyone overwhelmed by traditional to-do lists",
+        ],
+        useCases: [
+          "Planning the day around current energy",
+          "Running a morning routine step by step",
+          "Getting reminded before it is time to leave",
+        ],
+      },
+    },
+  },
 ];
 
 export const team = [

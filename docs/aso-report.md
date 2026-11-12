@@ -19,6 +19,7 @@ Keep this data in sync with what is live in App Store Connect / Play Console.
 | [Ingredient Scanner](/work/ingredient-scanner) | 18/30 | 28/30 | 53/100 | 115/80 | short desc 115>80; title uses 18/30 chars; keyword field uses 53/100 chars |
 | [CleanMaster](/work/cleanmaster) | 26/30 | 24/30 | 65/100 | 130/80 | short desc 130>80; title missing main keyword "phone cleaner"; keyword field uses 65/100 chars |
 | [Coloring Book: Paint & Draw](/work/coloring-book-paint-and-draw) | 27/30 | 22/30 | 36/100 | 91/80 | short desc 91>80; keyword field uses 36/100 chars |
+| [Dayflow](/work/dayflow) | 28/30 | 18/30 | 36/100 | 99/80 | short desc 99>80; keyword field uses 36/100 chars |
 
 ### Tarot Destiny
 - Title: `Tarot Destiny`
@@ -110,3 +111,10 @@ Keep this data in sync with what is live in App Store Connect / Play Console.
 - iOS keyword field (deduped, no spaces): `and,app,sticker,art,creative,drawing`
 - Already in title/subtitle (removed): coloring, book, paint, draw, kids
 - Play short description: `A cute coloring app for kids with drawing tools, stickers, and easy save-and-share artwork.`
+
+### Dayflow
+- Title: `Dayflow: ADHD Visual Planner`
+- Subtitle: `See your whole day`
+- iOS keyword field (deduped, no spaces): `timer,daily,routine,brain,dump,focus`
+- Already in title/subtitle (removed): adhd, planner, visual
+- Play short description: `A visual day planner for ADHD brains, with timers, routines, a brain dump inbox, and gentle nudges.`

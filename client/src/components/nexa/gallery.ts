@@ -77,6 +77,16 @@ export const galleries: Record<string, GalleryImage[]> = {
     { src: "/products/scanqr/07.webp", width: 720, height: 1565, tone: "#97a4d3" },
     { src: "/products/scanqr/08.webp", width: 720, height: 1565, tone: "#a2adda" },
   ],
+  "dayflow": [
+    { src: "/products/dayflow/01.webp", width: 720, height: 1565, tone: "#b0a5e7" },
+    { src: "/products/dayflow/02.webp", width: 720, height: 1565, tone: "#9e93d6" },
+    { src: "/products/dayflow/03.webp", width: 720, height: 1565, tone: "#b6a3c1" },
+    { src: "/products/dayflow/04.webp", width: 720, height: 1565, tone: "#b3a8e9" },
+    { src: "/products/dayflow/05.webp", width: 720, height: 1565, tone: "#b7a6e0" },
+    { src: "/products/dayflow/06.webp", width: 720, height: 1565, tone: "#a196d8" },
+    { src: "/products/dayflow/07.webp", width: 720, height: 1565, tone: "#9ea6d9" },
+    { src: "/products/dayflow/08.webp", width: 720, height: 1565, tone: "#ab9de9" },
+  ],
   "fieldstamp-gps-camera": [
     { src: "/products/fieldstamp-gps-camera/01.webp", width: 720, height: 1280, tone: "#8ca1a8" },
     { src: "/products/fieldstamp-gps-camera/02.webp", width: 720, height: 1561, tone: "#4d5273" },
