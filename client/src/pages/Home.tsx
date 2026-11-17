@@ -335,8 +335,8 @@ export default function Home() {
               <dl className="grid grid-cols-2 gap-x-10 gap-y-6 sm:grid-cols-4 lg:pb-2">
                 {[
                   { to: 2024, from: 2015, label: "Founded" },
-                  { to: 21, suffix: "+", label: "Products shipped" },
-                  { to: 12, label: "Mobile apps" },
+                  { to: 20, suffix: "+", label: "Products shipped" },
+                  { to: 14, label: "Mobile apps" },
                   { to: 3, label: "Platforms" },
                 ].map(({ label, ...count }, index) => (
                   <div key={label}>

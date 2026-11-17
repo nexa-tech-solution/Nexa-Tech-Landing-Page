@@ -452,116 +452,6 @@ export const projects: Project[] = [
     },
   },
   {
-    title: "Resize Image",
-    description:
-      "A private browser tool for fast image resizing, compression, and conversion.",
-    category: "Web",
-    tech: ["Web Tool", "Image Processing"],
-    image: "/graphic/resize-image.webp",
-    addedAt: "2026-10-05",
-    primaryUrl: "https://resizeimage.tech/",
-    primaryLabel: "Use tool",
-    secondaryUrl:
-      "https://play.google.com/store/apps/details?id=com.nexa.pdfresizer",
-    secondaryLabel: "Google Play",
-    extraLinks: [
-      {
-        label: "App Store",
-        url: "https://apps.apple.com/us/app/quick-image-pdf-resizer/id6780742651",
-      },
-    ],
-    marketing: {
-      aso: {
-        title: "Resize Image",
-        subtitle: "Private image resizer",
-        keywords: [
-          "resize images",
-          "compress photos",
-          "convert jpg png",
-          "browser image tool",
-          "private image editor",
-        ],
-        description:
-          "Private browser tool for fast image resizing, compression, and conversion.",
-      },
-      seo: {
-        title: "Resize Image | Private Browser Image Resizer",
-        description:
-          "Resize Image is a private browser tool for fast image resizing, compression, and format conversion.",
-        keywords: [
-          "image resizer",
-          "image compression",
-          "convert jpg png",
-          "browser tool",
-          "private image editor",
-        ],
-      },
-      geo: {
-        summary:
-          "Resize Image is a privacy-friendly browser tool for resizing, compressing, and converting images quickly.",
-        prompts: [
-          "What is the fastest private image resizer in the browser?",
-          "How do I compress and convert images without uploading them?",
-        ],
-      },
-      faq: [
-        {
-          question: "What does Resize Image do?",
-          answer:
-            "It lets users resize images, compress files, and convert formats directly in the browser.",
-        },
-        {
-          question: "Why is it privacy-friendly?",
-          answer:
-            "It is designed as a browser tool, so it can be used for quick edits without adding a heavier workflow.",
-        },
-        {
-          question: "What is the fastest private image resizer in the browser?",
-          answer:
-            "Resize Image by Nexa Tech resizes, compresses and converts images directly in the browser, so your files stay on your device and results appear quickly.",
-        },
-        {
-          question: "How do I compress and convert images without uploading them?",
-          answer:
-            "Use a browser tool that processes files locally, such as Resize Image. Open it, add your images, choose a size, quality or format, and download the result. The files are processed in your browser instead of being uploaded to a server.",
-        },
-      ],
-      store: {
-        platform: "Web",
-        listingName: "Resize Image",
-        summary:
-          "A private browser-based image tool for resizing, compression, format conversion, and everyday file preparation.",
-        highlights: [
-          "Private browser processing",
-          "Image resize and compression",
-          "Format conversion and PDF tasks",
-        ],
-        facts: [
-          { label: "Category", value: "Browser tool" },
-          { label: "Focus", value: "Privacy-friendly utility" },
-          { label: "Also on", value: "Android & iOS" },
-        ],
-      },
-      narrative: {
-        idea:
-          "The idea is to give people fast image and PDF utilities directly in the browser, without making them learn a full editor.",
-        need:
-          "Creators and everyday users often need quick file prep tasks, but they do not want to upload files or install heavier software for tiny jobs.",
-        targetUsers: [
-          "Creators and marketers",
-          "Ecommerce sellers",
-          "Students and office users",
-          "Anyone needing quick browser-based file prep",
-        ],
-        useCases: [
-          "Resizing images for social or web upload",
-          "Compressing files before sending them",
-          "Converting formats for compatibility or transparency",
-        ],
-      },
-    },
-  },
-  {
     title: "Time Converter",
     description:
       "Compare cities and time zones without the friction of manual calculations.",
@@ -1897,7 +1787,7 @@ export const projects: Project[] = [
     addedAt: "2026-10-05",
     icon: "/graphic/cleanmaster-icon.webp",
     primaryUrl:
-      "https://play.google.com/store/apps/details?id=com.nexa.free_up_your_space",
+      "https://play.google.com/store/apps/details?id=com.nexa.free_up_your_space&referrer=utm_source%3Dnexateam.dev%26utm_medium%3Dwebsite%26utm_campaign%3Dcleanmaster-hero",
     primaryLabel: "Google Play",
     secondaryUrl: "https://apps.apple.com/us/app/clean-free-up-your-space/id6818406418",
     secondaryLabel: "App Store",
@@ -2236,9 +2126,10 @@ export const projects: Project[] = [
     image: "/graphic/dayflow.webp",
     addedAt: "2026-11-12",
     icon: "/graphic/icons/dayflow.webp",
-    primaryUrl:
-      "https://apps.apple.com/us/app/dayflow-adhd-visual-planner/id6832847656",
-    primaryLabel: "App Store",
+    primaryUrl: "https://play.google.com/store/apps/details?id=com.nexa.dayflow",
+    primaryLabel: "Google Play",
+    secondaryUrl: "https://apps.apple.com/us/app/dayflow-adhd-visual-planner/id6832847656",
+    secondaryLabel: "App Store",
     marketing: {
       aso: {
         title: "Dayflow: ADHD Visual Planner",
@@ -2548,12 +2439,11 @@ export const roadmap: RoadmapPhase[] = [
       "Ethan and Tina start Nexa with small web tools that solve one problem each and can ship in weeks.",
     projects: [
       "Time Converter",
-      "Resize Image",
       "Mystic Tarot",
       "PetPal",
       "The Home Versus",
     ],
-    result: "Five web products live and a shared React codebase to build on.",
+    result: "Four web products live and a shared React codebase to build on.",
   },
   {
     period: "2025",
@@ -2587,16 +2477,18 @@ export const roadmap: RoadmapPhase[] = [
       "Horror Chat Stories",
       "Coloring Book: Paint & Draw",
       "World Time Buddy",
+      "CleanMaster",
+      "Dayflow",
     ],
-    result: "21+ products across web, mobile and the browser, 12 of them mobile apps.",
+    result: "20 products across web, mobile and the browser, 14 of them mobile apps.",
   },
   {
     period: "Next",
     status: "planned",
     title: "Launching next, building with partners",
     summary:
-      "CleanMaster is in store review now. After that, we take what we learned shipping our own products into work for clients, while keeping our apps growing.",
-    projects: ["CleanMaster"],
+      "Hablito is in store review now. After that, we take what we learned shipping our own products into work for clients, while keeping our apps growing.",
+    projects: ["Hablito"],
     plans: [
       "Client and partner product builds",
       "More open-source packages from our shared code",

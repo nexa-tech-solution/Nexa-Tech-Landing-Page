@@ -1,6 +1,9 @@
 {
   "outputDirectory": "client/dist",
   "trailingSlash": false,
+  "redirects": [
+    { "source": "/work/resize-image", "destination": "/work/quick-image-pdf-resizer", "permanent": true }
+  ],
   "rewrites": [
     { "source": "/dashboard", "destination": "/index.html" },
     { "source": "/dashboard/(.*)", "destination": "/index.html" }
