@@ -47,6 +47,39 @@ type PostMeta = {
 // Newest first, as the list endpoint would return them.
 const meta: PostMeta[] = [
   {
+    slug: "how-to-make-a-passport-photo-on-your-phone",
+    title: "How to make a passport photo on your phone (that gets accepted)",
+    excerpt:
+      "The right size for your country, light, background and framing, plus the most common reasons passport photos get rejected.",
+    tag: "Product",
+    publishedAt: "2026-11-17",
+    author: "Ethan",
+    cover: "/graphic/resize-image.webp",
+    relatedProject: "quick-image-pdf-resizer",
+  },
+  {
+    slug: "how-to-free-up-iphone-storage",
+    title: "How to free up iPhone storage: 6 places space is hiding",
+    excerpt:
+      "Duplicate photos, old screenshots, large videos and chat attachments. Where your storage goes and how to win it back safely in ten minutes.",
+    tag: "Product",
+    publishedAt: "2026-11-16",
+    author: "Tina",
+    cover: "/graphic/cleanmaster.webp",
+    relatedProject: "cleanmaster",
+  },
+  {
+    slug: "how-to-plan-your-day-with-adhd",
+    title: "How to plan your day with ADHD: a simple system that sticks",
+    excerpt:
+      "Brain dump, pick the essentials, put tasks on a timeline and make the first step tiny. A forgiving way to plan when to-do lists do not work.",
+    tag: "Product",
+    publishedAt: "2026-11-15",
+    author: "Tina",
+    cover: "/graphic/dayflow.webp",
+    relatedProject: "dayflow",
+  },
+  {
     slug: "how-to-spot-a-qr-code-scam",
     title: "How to spot a QR code scam (quishing): 7 warning signs",
     excerpt:
@@ -279,7 +312,7 @@ const meta: PostMeta[] = [
     slug: "saying-no-in-a-utility-app",
     title: "The features we said no to in an image and PDF tool",
     excerpt:
-      "Quick Image PDF Resizer could have become an editor. Keeping a written list of things it will not do kept it fast and easy to explain.",
+      "PixPDF could have become an editor. Keeping a written list of things it will not do kept it fast and easy to explain.",
     tag: "Process",
     publishedAt: "2026-01-08",
     author: "Ethan",

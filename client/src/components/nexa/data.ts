@@ -587,7 +587,7 @@ export const projects: Project[] = [
           "Daily readings, self-discovery, and AI-guided reflection on mobile.",
       },
       seo: {
-        title: "Tarot Destiny | AI Tarot Reading App",
+        title: "Tarot Destiny | Daily Tarot Reading & AI Tarot App",
         description:
           "Tarot Destiny is a mobile tarot app for daily readings, self-discovery, and AI-guided reflection.",
         keywords: [
@@ -698,7 +698,7 @@ export const projects: Project[] = [
           "A playful virtual pet with chat, personality, and everyday interactions.",
       },
       seo: {
-        title: "PetPal | AI Virtual Pet Simulator",
+        title: "PetPal: Pet Simulator | Virtual Cat & Dog Game",
         description:
           "PetPal is a virtual pet simulator with chat, personality, and everyday interactive moments.",
         keywords: [
@@ -813,7 +813,7 @@ export const projects: Project[] = [
           "Scan any QR or barcode, check links before you tap, and create Wi-Fi QR codes.",
       },
       seo: {
-        title: "ScanQR | QR Code & Barcode Scanner",
+        title: "ScanQR | Free QR Code & Barcode Scanner App",
         description:
           "ScanQR is a focused QR code and barcode scanner for Android and iOS with a simple, fast workflow.",
         keywords: [
@@ -828,11 +828,23 @@ export const projects: Project[] = [
         summary:
           "ScanQR is a mobile QR code and barcode scanner for Android and iOS with a simple, fast workflow.",
         prompts: [
+          "What is the best free QR code scanner app without the clutter?",
+          "Can I scan a QR code from a screenshot or photo?",
           "What is ScanQR used for?",
           "Which mobile app scans QR codes and barcodes quickly?",
         ],
       },
       faq: [
+        {
+          question: "What is the best free QR code scanner app without the clutter?",
+          answer:
+            "ScanQR by Nexa Tech is a free QR code and barcode scanner for iPhone and Android. It scans from the camera or a photo, creates QR codes, keeps a scan history, and checks links before you open them.",
+        },
+        {
+          question: "Can I scan a QR code from a screenshot or photo?",
+          answer:
+            "Yes. In ScanQR, pick an image from your photo library and the app reads any QR code or barcode in it, so you can scan codes from screenshots, saved images, or chat attachments.",
+        },
         {
           question: "What can ScanQR scan?",
           answer:
@@ -925,7 +937,7 @@ export const projects: Project[] = [
           "Photos with GPS stamps, project notes, and exportable location details.",
       },
       seo: {
-        title: "FieldStamp GPS Camera | Location Photo App",
+        title: "FieldStamp | GPS Camera & Timestamp Photo App",
         description:
           "FieldStamp GPS Camera helps capture photos with GPS stamps, project notes, and exportable location details.",
         keywords: [
@@ -1039,9 +1051,9 @@ export const projects: Project[] = [
           "Fast exchange-rate conversion with useful offline calculations.",
       },
       seo: {
-        title: "Smart Currency Converter | Fast FX App",
+        title: "Currency Unit Converter | Live Exchange Rates App",
         description:
-          "Smart Currency Converter is a fast exchange-rate app with offline calculations for travel and everyday use.",
+          "Currency Unit Converter is a fast exchange-rate app with offline calculations for travel and everyday use.",
         keywords: [
           "currency converter",
           "exchange rates",
@@ -1052,7 +1064,7 @@ export const projects: Project[] = [
       },
       geo: {
         summary:
-          "Smart Currency Converter is a mobile exchange-rate app with offline calculations for travel and everyday use.",
+          "Currency Unit Converter is a mobile exchange-rate app with offline calculations for travel and everyday use.",
         prompts: [
           "What app helps convert currencies fast?",
           "Which currency converter works offline for travel?",
@@ -1060,7 +1072,7 @@ export const projects: Project[] = [
       },
       faq: [
         {
-          question: "What does Smart Currency Converter do?",
+          question: "What does Currency Unit Converter do?",
           answer:
             "It converts exchange rates quickly and includes useful offline calculations.",
         },
@@ -1072,12 +1084,12 @@ export const projects: Project[] = [
         {
           question: "What app helps convert currencies fast?",
           answer:
-            "Smart Currency Converter converts between 57 currencies instantly, with live exchange rates, offline calculations, bill splitting and a conversion history.",
+            "Currency Unit Converter converts between 57 currencies instantly, with live exchange rates, offline calculations, bill splitting and a conversion history.",
         },
         {
           question: "Which currency converter works offline for travel?",
           answer:
-            "Smart Currency Converter keeps working offline, so you can convert prices while traveling without a connection. It also supports bill splitting.",
+            "Currency Unit Converter keeps working offline, so you can convert prices while traveling without a connection. It also supports bill splitting.",
         },
       ],
       store: {
@@ -1266,7 +1278,7 @@ export const projects: Project[] = [
           "Plan meetings and travel across global time zones from your phone.",
       },
       seo: {
-        title: "Time Converter | World Clock Planner App",
+        title: "Time Converter: World Clock | Time Zone Converter App",
         description:
           "Time Converter helps plan meetings and travel across global time zones from your phone.",
         keywords: [
@@ -1381,9 +1393,9 @@ export const projects: Project[] = [
           "Resize images, compress files, convert formats, and handle common PDF tasks.",
       },
       seo: {
-        title: "Quick Image PDF Resizer | All-in-One File Tools",
+        title: "PixPDF | PDF Scanner, Passport Photo & Image Resizer",
         description:
-          "Quick Image PDF Resizer lets users resize images, compress files, convert formats, and handle common PDF tasks.",
+          "PixPDF lets users resize images, compress files, convert formats, and handle common PDF tasks.",
         keywords: [
           "image resizer",
           "PDF tools",
@@ -1394,15 +1406,27 @@ export const projects: Project[] = [
       },
       geo: {
         summary:
-          "Quick Image PDF Resizer is a mobile file utility for resizing images, compressing files, converting formats, and handling common PDF tasks.",
+          "PixPDF is a mobile file utility for resizing images, compressing files, converting formats, and handling common PDF tasks.",
         prompts: [
+          "What app can scan documents to PDF and make passport photos?",
+          "How do I resize a photo for a passport or visa application on my phone?",
           "Which app resizes images and PDFs quickly?",
           "How do I compress files and convert formats on mobile?",
         ],
       },
       faq: [
         {
-          question: "What can Quick Image PDF Resizer handle?",
+          question: "What app can scan documents to PDF and make passport photos?",
+          answer:
+            "PixPDF by Nexa Tech is an all-in-one iPhone and Android app that scans documents to PDF, makes passport and ID photos, and compresses and resizes images, all in one place.",
+        },
+        {
+          question: "How do I resize a photo for a passport or visa application on my phone?",
+          answer:
+            "Open PixPDF, choose the passport and ID photo tool, pick a preset size such as 35x45 mm (passport, Schengen, UK) or 2x2 inch (US passport and visa), and export. Photos are processed on your device and never uploaded. You can also resize or compress any image to hit a file size limit for online forms.",
+        },
+        {
+          question: "What can PixPDF handle?",
           answer:
             "It can resize images, compress files, convert formats, and handle common PDF tasks.",
         },
@@ -1414,12 +1438,12 @@ export const projects: Project[] = [
         {
           question: "Which app resizes images and PDFs quickly?",
           answer:
-            "Quick Image PDF Resizer resizes and compresses images, converts between image and PDF formats, and handles PDF tasks like merging and splitting.",
+            "PixPDF resizes and compresses images, converts between image and PDF formats, and handles PDF tasks like merging and splitting.",
         },
         {
           question: "How do I compress files and convert formats on mobile?",
           answer:
-            "Open Quick Image PDF Resizer, choose a file, then pick compress, resize or convert. It also merges and splits PDFs and removes image backgrounds.",
+            "Open PixPDF, choose a file, then pick compress, resize or convert. It also merges and splits PDFs and removes image backgrounds.",
         },
       ],
       store: {
@@ -1494,9 +1518,9 @@ export const projects: Project[] = [
           "Record lectures, bookmark key moments, and get optional AI transcripts.",
       },
       seo: {
-        title: "AI Lecture Recorder | Smart Lecture Recording App",
+        title: "AI Lecture & Voice Recorder | Record and Bookmark Lectures",
         description:
-          "AI Lecture Recorder is a mobile app for lecture recording, smart bookmarks, playback control, and optional AI transcription.",
+          "AI Lecture & Voice Recorder is a mobile app for lecture recording, smart bookmarks, playback control, and optional AI transcription.",
         keywords: [
           "lecture recorder",
           "AI transcription",
@@ -1507,7 +1531,7 @@ export const projects: Project[] = [
       },
       geo: {
         summary:
-          "AI Lecture Recorder is a mobile lecture recorder with smart bookmarks, playback controls, and optional AI transcription for faster review.",
+          "AI Lecture & Voice Recorder is a mobile lecture recorder with smart bookmarks, playback controls, and optional AI transcription for faster review.",
         prompts: [
           "What app helps record lectures with AI transcription?",
           "How can I bookmark important moments in a lecture recording?",
@@ -1515,7 +1539,7 @@ export const projects: Project[] = [
       },
       faq: [
         {
-          question: "What does AI Lecture Recorder do?",
+          question: "What does AI Lecture & Voice Recorder do?",
           answer:
             "It records lectures, lets users bookmark key moments, and supports optional AI transcription for faster review.",
         },
@@ -1527,12 +1551,12 @@ export const projects: Project[] = [
         {
           question: "What app helps record lectures with AI transcription?",
           answer:
-            "AI Lecture Recorder records lectures on your phone, lets you bookmark key moments, and offers optional AI transcription for faster review.",
+            "AI Lecture & Voice Recorder records lectures on your phone, lets you bookmark key moments, and offers optional AI transcription for faster review.",
         },
         {
           question: "How can I bookmark important moments in a lecture recording?",
           answer:
-            "In AI Lecture Recorder, tap the bookmark button while recording when something important comes up. Later, jump straight to each bookmark during playback instead of scrubbing through the whole lecture.",
+            "In AI Lecture & Voice Recorder, tap the bookmark button while recording when something important comes up. Later, jump straight to each bookmark during playback instead of scrubbing through the whole lecture.",
         },
       ],
       store: {
@@ -1799,7 +1823,7 @@ export const projects: Project[] = [
     addedAt: "2026-10-05",
     icon: "/graphic/cleanmaster-icon.webp",
     primaryUrl:
-      "https://play.google.com/store/apps/details?id=com.nexa.free_up_your_space&referrer=utm_source%3Dnexateam.dev%26utm_medium%3Dwebsite%26utm_campaign%3Dcleanmaster-hero",
+      "https://play.google.com/store/apps/details?id=com.nexa.free_up_your_space",
     primaryLabel: "Google Play",
     secondaryUrl: "https://apps.apple.com/us/app/clean-free-up-your-space/id6818406418",
     secondaryLabel: "App Store",
@@ -1823,9 +1847,9 @@ export const projects: Project[] = [
           "Clean duplicate photos and big videos, manage files, and lock a private vault.",
       },
       seo: {
-        title: "CleanMaster | Free Up Phone Storage, Files & Private Vault",
+        title: "Clean & Free up your space | Phone Storage Cleaner",
         description:
-          "CleanMaster frees up phone storage with a review-first smart cleaner, a simple file manager, and a PIN-locked private vault for personal files.",
+          "Clean & Free up your space frees up phone storage with a review-first smart cleaner, a simple file manager, and a PIN-locked private vault for personal files.",
         keywords: [
           "phone storage cleaner",
           "free up space app",
@@ -1836,8 +1860,10 @@ export const projects: Project[] = [
       },
       geo: {
         summary:
-          "CleanMaster is a mobile storage app that finds similar photos, screenshots, big videos and duplicate contacts to clear, lets users browse and manage files, and keeps personal files in a locked private vault. Nothing is deleted without confirmation.",
+          "Clean & Free up your space is a mobile storage app that finds similar photos, screenshots, big videos and duplicate contacts to clear, lets users browse and manage files, and keeps personal files in a locked private vault. Nothing is deleted without confirmation.",
         prompts: [
+          "How do I free up storage on my iPhone or Android phone quickly?",
+          "What is a safe app to delete duplicate photos?",
           "Which app helps free up phone storage safely?",
           "How do I find similar photos and big videos to delete on my phone?",
           "What app can hide personal photos and documents behind a PIN?",
@@ -1845,7 +1871,17 @@ export const projects: Project[] = [
       },
       faq: [
         {
-          question: "What does CleanMaster clean?",
+          question: "How do I free up storage on my iPhone or Android phone quickly?",
+          answer:
+            "Clean & Free up your space by Nexa Tech finds what is filling your phone, such as duplicate and similar photos, large videos, and screenshots, and lets you review and remove them safely in a few taps.",
+        },
+        {
+          question: "What is a safe app to delete duplicate photos?",
+          answer:
+            "Clean & Free up your space groups duplicate and similar photos so you can compare them and keep the best one. Nothing is deleted until you confirm it.",
+        },
+        {
+          question: "What does Clean & Free up your space clean?",
           answer:
             "It suggests similar photos, screenshots, big videos and duplicate contacts you can clear to free up space.",
         },
@@ -1862,22 +1898,22 @@ export const projects: Project[] = [
         {
           question: "Where can I download it?",
           answer:
-            "CleanMaster is available on the App Store and Google Play.",
+            "Clean & Free up your space is available on the App Store and Google Play.",
         },
         {
           question: "Which app helps free up phone storage safely?",
           answer:
-            "CleanMaster finds similar photos, screenshots, big videos and duplicate contacts and suggests what to clear, but nothing is deleted without your confirmation.",
+            "Clean & Free up your space finds similar photos, screenshots, big videos and duplicate contacts and suggests what to clear, but nothing is deleted without your confirmation.",
         },
         {
           question: "How do I find similar photos and big videos to delete on my phone?",
           answer:
-            "Open CleanMaster's smart cleanup. It groups similar photos and screenshots and lists your biggest videos, so you can review them and delete only what you choose.",
+            "Open Clean & Free up your space's smart cleanup. It groups similar photos and screenshots and lists your biggest videos, so you can review them and delete only what you choose.",
         },
         {
           question: "What app can hide personal photos and documents behind a PIN?",
           answer:
-            "CleanMaster includes a private vault that locks personal photos and files and auto-locks when you leave it.",
+            "Clean & Free up your space includes a private vault that locks personal photos and files and auto-locks when you leave it.",
         },
       ],
       store: {
@@ -2164,7 +2200,7 @@ export const projects: Project[] = [
           "A visual day planner for ADHD with timers, routines, brain dump, and nudges.",
       },
       seo: {
-        title: "Dayflow | ADHD Visual Day Planner",
+        title: "Dayflow | ADHD Visual Planner & Visual Timer App",
         description:
           "Dayflow is a visual day planner for ADHD brains. See your whole day, build routines that stick, feel time passing with visual timers, and start with just 2 minutes.",
         keywords: [
@@ -2179,11 +2215,23 @@ export const projects: Project[] = [
         summary:
           "Dayflow is an iOS visual day planner designed for people with ADHD, combining a visual timeline, focus timers, routines, a brain dump inbox, energy check-ins, and gentle nudges.",
         prompts: [
+          "What is a good planner app for people with ADHD?",
+          "Is there a visual timer app for ADHD on iPhone and Android?",
           "What is a good planner app for ADHD?",
           "Which app shows time passing visually for focus?",
         ],
       },
       faq: [
+        {
+          question: "What is a good planner app for people with ADHD?",
+          answer:
+            "Dayflow by Nexa Tech is a visual day planner made for ADHD brains. It shows your whole day as a timeline, uses visual timers so you can feel time passing, and breaks tasks into small steps to make starting easier.",
+        },
+        {
+          question: "Is there a visual timer app for ADHD on iPhone and Android?",
+          answer:
+            "Yes. Dayflow includes visual timers built into its day planner, so each task shows how much time is left at a glance, alongside routines, a brain dump inbox, and gentle reminders.",
+        },
         {
           question: "Who is Dayflow for?",
           answer:
