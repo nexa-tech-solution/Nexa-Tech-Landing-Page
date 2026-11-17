@@ -1,5 +1,7 @@
 export type Project = {
   title: string;
+  // Pinned URL slug, so renaming a product never breaks its /work/ link.
+  slug?: string;
   description: string;
   category: "Web" | "Mobile" | "Extension" | "Library";
   tech: string[];
@@ -552,9 +554,10 @@ export const projects: Project[] = [
     },
   },
   {
-    title: "Tarot Destiny",
+    title: "Tarot Destiny: Daily Reading",
+    slug: "tarot-destiny",
     description:
-      "Daily readings, self-discovery, and AI-guided reflection on mobile.",
+      "Daily tarot readings, an AI tarot chat, numerology, and moon phases in one calm app.",
     category: "Mobile",
     tech: ["React Native", "Redux", "AI"],
     image: "/graphic/tarot-destiny.webp",
@@ -565,7 +568,7 @@ export const projects: Project[] = [
     primaryLabel: "Google Play",
     marketing: {
       aso: {
-        title: "Tarot Destiny: Card Reading",
+        title: "Tarot Destiny: Daily Reading",
         subtitle: "Daily tarot guidance",
         keywords: [
           "tarot reading",
@@ -659,9 +662,10 @@ export const projects: Project[] = [
     },
   },
   {
-    title: "PetPal — Pet Simulator",
+    title: "PetPal: Pet Simulator",
+    slug: "petpal-pet-simulator",
     description:
-      "A playful virtual pet with chat, personality, and everyday interactions.",
+      "A cozy virtual pet game: adopt cats and dogs, care for their daily needs, and play mini-games together.",
     category: "Mobile",
     tech: ["React Native", "Gemini", "Rive"],
     image: "/graphic/petpal.webp",
@@ -674,7 +678,7 @@ export const projects: Project[] = [
     secondaryLabel: "App Store",
     marketing: {
       aso: {
-        title: "PetPal: Virtual Pet Simulator",
+        title: "PetPal: Pet Simulator",
         subtitle: "Play with your AI pet",
         keywords: [
           "virtual pet",
@@ -737,7 +741,7 @@ export const projects: Project[] = [
       ],
       store: {
         platform: "Google Play",
-        listingName: "PetPal",
+        listingName: "PetPal: Pet Simulator",
         summary:
           "A playful virtual pet simulator with chat, personality, and everyday interactions.",
         highlights: [
@@ -770,8 +774,10 @@ export const projects: Project[] = [
     },
   },
   {
-    title: "ScanQR",
-    description: "A focused QR code and barcode scanner for Android and iOS.",
+    title: "ScanQR - QR Code & Barcode",
+    slug: "scanqr",
+    description:
+      "A fast QR code and barcode scanner, QR generator, and payment QR tool in one simple app.",
     category: "Mobile",
     tech: ["React Native", "Vision Camera", "QR Kit"],
     image: "/graphic/scanqr.webp",
@@ -785,7 +791,7 @@ export const projects: Project[] = [
     secondaryLabel: "App Store",
     marketing: {
       aso: {
-        title: "ScanQR: QR Code Scanner",
+        title: "ScanQR - QR Code & Barcode",
         subtitle: "Barcode reader & generator",
         keywords: [
           "qr scanner",
@@ -883,9 +889,10 @@ export const projects: Project[] = [
     },
   },
   {
-    title: "FieldStamp GPS Camera",
+    title: "FieldStamp: GPS Camera",
+    slug: "fieldstamp-gps-camera",
     description:
-      "Capture photos with GPS stamps, project notes, and exportable location details.",
+      "An all-in-one GPS photo stamping app for accurate field documentation, fast capture, and polished reports.",
     category: "Mobile",
     tech: ["React Native", "GPS", "Camera", "PDF"],
     image: "/graphic/fieldstamp-camera.webp",
@@ -899,7 +906,7 @@ export const projects: Project[] = [
     secondaryLabel: "App Store",
     marketing: {
       aso: {
-        title: "FieldStamp GPS Camera",
+        title: "FieldStamp: GPS Camera",
         subtitle: "GPS photo stamps",
         keywords: [
           "gps camera",
@@ -995,9 +1002,10 @@ export const projects: Project[] = [
     },
   },
   {
-    title: "Smart Currency Converter",
+    title: "Currency Unit Converter",
+    slug: "smart-currency-converter",
     description:
-      "Fast exchange-rate conversion with useful offline calculations.",
+      "Instant currency conversions with live rates, plus everyday unit conversions for travel and shopping.",
     category: "Mobile",
     tech: ["React Native", "Currency", "Offline"],
     image: "/graphic/currency-converter.webp",
@@ -1011,7 +1019,7 @@ export const projects: Project[] = [
     secondaryLabel: "App Store",
     marketing: {
       aso: {
-        title: "Smart Currency Converter",
+        title: "Currency Unit Converter",
         subtitle: "Fast FX conversion",
         keywords: [
           "currency converter",
@@ -1110,7 +1118,7 @@ export const projects: Project[] = [
   {
     title: "Easy Loan Estimator",
     description:
-      "Estimate repayments and export clear loan calculation reports.",
+      "Estimate loan payments, compare repayment methods, and see the total cost of borrowing before you commit.",
     category: "Mobile",
     tech: ["React Native", "Finance", "PDF"],
     image: "/graphic/easy-loan-calculator.webp",
@@ -1220,9 +1228,10 @@ export const projects: Project[] = [
     },
   },
   {
-    title: "Time Converter — World Clock",
+    title: "Time Converter: World Clock",
+    slug: "time-converter-world-clock",
     description:
-      "Plan meetings and travel across global time zones from your phone.",
+      "A reliable time zone converter and world clock for scheduling across countries and teams.",
     category: "Mobile",
     tech: ["React Native", "Time Zones", "Productivity"],
     image: "/graphic/time-converter.webp",
@@ -1236,7 +1245,7 @@ export const projects: Project[] = [
     secondaryLabel: "App Store",
     marketing: {
       aso: {
-        title: "Time Converter: Time Zones",
+        title: "Time Converter: World Clock",
         subtitle: "World clock planner",
         keywords: [
           "time zone converter",
@@ -1334,9 +1343,10 @@ export const projects: Project[] = [
     },
   },
   {
-    title: "Quick Image PDF Resizer",
+    title: "PixPDF: Scan & Photo Resizer",
+    slug: "quick-image-pdf-resizer",
     description:
-      "Resize images, compress files, convert formats, and handle common PDF tasks.",
+      "Scan documents, make passport and ID photos, compress and resize images, and create PDFs on your phone.",
     category: "Mobile",
     tech: ["React Native", "PDF", "Image Tools"],
     image: "/graphic/resize-image.webp",
@@ -1350,7 +1360,7 @@ export const projects: Project[] = [
     secondaryLabel: "App Store",
     marketing: {
       aso: {
-        title: "Quick Image PDF Resizer",
+        title: "PixPDF: Scan & Photo Resizer",
         subtitle: "Resize, compress, convert",
         keywords: [
           "image resizer",
@@ -1414,7 +1424,7 @@ export const projects: Project[] = [
       ],
       store: {
         platform: "App Store",
-        listingName: "Quick Image PDF Resizer",
+        listingName: "PixPDF: Scan & Photo Resizer",
         summary:
           "A fast, private, browser-based tool for resizing images, compressing files, converting formats, and handling common PDF tasks.",
         highlights: [
@@ -1448,9 +1458,10 @@ export const projects: Project[] = [
     },
   },
   {
-    title: "AI Lecture Recorder",
+    title: "AI Lecture & Voice Recorder",
+    slug: "ai-lecture-recorder",
     description:
-      "A mobile lecture recorder with smart bookmarks, playback controls, and optional AI transcription.",
+      "Record lectures and meetings, bookmark key moments live, and jump straight back to them later.",
     category: "Mobile",
     tech: ["React Native", "Groq", "AI Transcription"],
     image: "/graphic/ai-lecture-recorder.webp",
@@ -1464,7 +1475,7 @@ export const projects: Project[] = [
     secondaryLabel: "App Store",
     marketing: {
       aso: {
-        title: "AI Lecture Recorder & Notes",
+        title: "AI Lecture & Voice Recorder",
         subtitle: "Record smarter. Review faster.",
         keywords: [
           "lecture recorder",
@@ -1526,7 +1537,7 @@ export const projects: Project[] = [
       ],
       store: {
         platform: "Google Play",
-        listingName: "AI Lecture Recorder",
+        listingName: "AI Lecture & Voice Recorder",
         summary:
           "A lecture recorder for students and note-takers with bookmarks, playback controls, and optional AI transcription.",
         highlights: [
@@ -1561,7 +1572,7 @@ export const projects: Project[] = [
   {
     title: "Horror Chat Stories",
     description:
-      "A horror chat-story app where scary episodes unfold through text conversations and interactive choices.",
+      "Frightening stories that unfold through realistic text conversations, one message at a time.",
     category: "Mobile",
     tech: ["React Native", "Chat Stories", "Interactive Fiction"],
     image: "/graphic/horror-chat-stories.webp",
@@ -1672,7 +1683,7 @@ export const projects: Project[] = [
   {
     title: "Ingredient Scanner",
     description:
-      "A beauty ingredient scanner that helps users upload products, extract ingredients, and understand safety instantly.",
+      "An AI skincare ingredient scanner that checks cosmetic products for safe, suitable ingredients.",
     category: "Mobile",
     tech: ["React Native", "OCR", "Safety Analysis"],
     image: "/graphic/ingredient-scanner.webp",
@@ -1778,9 +1789,10 @@ export const projects: Project[] = [
     },
   },
   {
-    title: "CleanMaster",
+    title: "Clean & Free up your space",
+    slug: "cleanmaster",
     description:
-      "Free up phone storage with a guided smart cleaner, a file manager, and a private vault.",
+      "Find and remove what is filling your phone, from duplicate photos to large videos, quickly and safely.",
     category: "Mobile",
     tech: ["React Native", "Storage Cleaner", "Privacy"],
     image: "/graphic/cleanmaster.webp",
@@ -1793,7 +1805,7 @@ export const projects: Project[] = [
     secondaryLabel: "App Store",
     marketing: {
       aso: {
-        title: "CleanMaster: Phone Cleaner",
+        title: "Clean & Free up your space",
         subtitle: "Free up space & storage",
         keywords: [
           "phone cleaner",
@@ -1870,7 +1882,7 @@ export const projects: Project[] = [
       ],
       store: {
         platform: "App Store",
-        listingName: "CleanMaster",
+        listingName: "Clean & Free up your space",
         summary:
           "A friendly storage companion, Nova, that shows your phone storage at a glance, suggests what to clean, organises files and protects private ones in a vault.",
         highlights: [
@@ -1907,7 +1919,7 @@ export const projects: Project[] = [
   {
     title: "Coloring Book: Paint & Draw",
     description:
-      "A cute coloring app for kids with drawing tools, stickers, and easy save-and-share artwork.",
+      "A cozy coloring book for kids and families, with drawing contests, stars, and new pages to unlock.",
     category: "Mobile",
     tech: ["React Native", "Drawing Tools", "Kids Creativity"],
     image: "/graphic/coloring-book-paint-draw.webp",
@@ -2118,9 +2130,10 @@ export const projects: Project[] = [
     },
   },
   {
-    title: "Dayflow",
+    title: "Dayflow: ADHD Visual Planner",
+    slug: "dayflow",
     description:
-      "A visual day planner for ADHD brains, with timers, routines, a brain dump inbox, and gentle nudges.",
+      "A visual day planner for ADHD brains: see your whole day, start tasks without overwhelm, and feel time passing.",
     category: "Mobile",
     tech: ["React Native", "Visual Timers", "Notifications"],
     image: "/graphic/dayflow.webp",
@@ -2396,6 +2409,7 @@ export const faqItems: FaqItem[] = [
 ];
 
 export function getProjectSlug(project: Project) {
+  if (project.slug) return project.slug;
   return project.title
     .toLowerCase()
     .replace(/&/g, " and ")
@@ -2452,12 +2466,12 @@ export const roadmap: RoadmapPhase[] = [
     summary:
       "The tools people kept coming back to become React Native apps, and the shared file layer is open-sourced.",
     projects: [
-      "Tarot Destiny",
-      "PetPal — Pet Simulator",
-      "Time Converter — World Clock",
-      "Quick Image PDF Resizer",
-      "ScanQR",
-      "Smart Currency Converter",
+      "Tarot Destiny: Daily Reading",
+      "PetPal: Pet Simulator",
+      "Time Converter: World Clock",
+      "PixPDF: Scan & Photo Resizer",
+      "ScanQR - QR Code & Barcode",
+      "Currency Unit Converter",
       "Easy Loan Estimator",
       "react-native-simple-fs",
     ],
@@ -2471,14 +2485,14 @@ export const roadmap: RoadmapPhase[] = [
     summary:
       "Apps built for specific jobs, from site reports to study sessions, with AI only where it clearly helps.",
     projects: [
-      "FieldStamp GPS Camera",
-      "AI Lecture Recorder",
+      "FieldStamp: GPS Camera",
+      "AI Lecture & Voice Recorder",
       "Ingredient Scanner",
       "Horror Chat Stories",
       "Coloring Book: Paint & Draw",
       "World Time Buddy",
-      "CleanMaster",
-      "Dayflow",
+      "Clean & Free up your space",
+      "Dayflow: ADHD Visual Planner",
     ],
     result: "20 products across web, mobile and the browser, 14 of them mobile apps.",
   },
