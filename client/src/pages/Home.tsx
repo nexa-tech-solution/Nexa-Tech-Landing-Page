@@ -149,7 +149,7 @@ function ContactForm() {
 export default function Home() {
   const [category, setCategory] = useState<Category>("All");
   const [query, setQuery] = useState("");
-  const [sort, setSort] = useState<SortKey>("popular");
+  const [sort, setSort] = useState<SortKey>("newest");
   const [filters, setFilters] = useState<WorkFilters>(EMPTY_FILTERS);
   const [filtersOpen, setFiltersOpen] = useState(false);
   const options = useMemo(() => filterOptions(projects), []);

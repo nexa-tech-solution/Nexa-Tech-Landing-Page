@@ -4,6 +4,8 @@ export type Project = {
   category: "Web" | "Mobile" | "Extension" | "Library";
   tech: string[];
   image?: string;
+  // ISO date the product was added; drives the default "Newest" sort.
+  addedAt?: string;
   icon?: string;
   primaryUrl: string;
   primaryLabel: string;
@@ -59,6 +61,7 @@ export const projects: Project[] = [
     category: "Library",
     tech: ["React Native", "TypeScript", "File System"],
     image: "/generated-products/react-native-simple-fs.webp",
+    addedAt: "2026-10-08",
     icon: "/favicon.webp",
     primaryUrl: "https://www.npmjs.com/package/react-native-simple-fs",
     primaryLabel: "npm package",
@@ -158,6 +161,7 @@ export const projects: Project[] = [
     category: "Web",
     tech: ["React", "Next.js"],
     image: "/graphic/the-home-versus.webp",
+    addedAt: "2026-10-05",
     icon: "/graphic/icons/the-home-versus.webp",
     primaryUrl: "https://thehomeversus.com/",
     primaryLabel: "Visit website",
@@ -254,6 +258,7 @@ export const projects: Project[] = [
     category: "Web",
     tech: ["React", "Tailwind", "Node.js"],
     image: "/graphic/tarot-destiny.webp",
+    addedAt: "2026-07-13",
     primaryUrl: "https://tarrot-web-app.vercel.app/",
     primaryLabel: "Live demo",
     marketing: {
@@ -352,6 +357,7 @@ export const projects: Project[] = [
     category: "Web",
     tech: ["Next.js", "Gemini", "Rive"],
     image: "/graphic/petpal.webp",
+    addedAt: "2026-10-05",
     primaryUrl: "https://pet-simulator-sigma.vercel.app/",
     primaryLabel: "Live demo",
     marketing: {
@@ -452,6 +458,7 @@ export const projects: Project[] = [
     category: "Web",
     tech: ["Web Tool", "Image Processing"],
     image: "/graphic/resize-image.webp",
+    addedAt: "2026-10-05",
     primaryUrl: "https://resizeimage.tech/",
     primaryLabel: "Use tool",
     secondaryUrl:
@@ -561,6 +568,7 @@ export const projects: Project[] = [
     category: "Web",
     tech: ["React", "Productivity"],
     image: "/graphic/time-converter.webp",
+    addedAt: "2026-10-05",
     primaryUrl: "https://time-converter-woad-iota.vercel.app/",
     primaryLabel: "Live demo",
     marketing: {
@@ -660,6 +668,7 @@ export const projects: Project[] = [
     category: "Mobile",
     tech: ["React Native", "Redux", "AI"],
     image: "/graphic/tarot-destiny.webp",
+    addedAt: "2026-07-13",
     icon: "/graphic/icons/tarot-destiny.webp",
     primaryUrl:
       "https://play.google.com/store/apps/details?id=com.nexa_tarrot_app",
@@ -766,6 +775,7 @@ export const projects: Project[] = [
     category: "Mobile",
     tech: ["React Native", "Gemini", "Rive"],
     image: "/graphic/petpal.webp",
+    addedAt: "2026-10-05",
     icon: "/graphic/icons/petpal-pet-simulator.webp",
     primaryUrl:
       "https://play.google.com/store/apps/details?id=com.pet_simulator",
@@ -875,6 +885,7 @@ export const projects: Project[] = [
     category: "Mobile",
     tech: ["React Native", "Vision Camera", "QR Kit"],
     image: "/graphic/scanqr.webp",
+    addedAt: "2026-10-05",
     icon: "/graphic/icons/scanqr.webp",
     primaryUrl:
       "https://play.google.com/store/apps/details?id=com.nexa.qr_code",
@@ -988,6 +999,7 @@ export const projects: Project[] = [
     category: "Mobile",
     tech: ["React Native", "GPS", "Camera", "PDF"],
     image: "/graphic/fieldstamp-camera.webp",
+    addedAt: "2026-10-05",
     icon: "/graphic/icons/fieldstamp-gps-camera.webp",
     primaryUrl:
       "https://play.google.com/store/apps/details?id=com.fieldstamp.free",
@@ -1099,6 +1111,7 @@ export const projects: Project[] = [
     category: "Mobile",
     tech: ["React Native", "Currency", "Offline"],
     image: "/graphic/currency-converter.webp",
+    addedAt: "2026-10-05",
     icon: "/graphic/icons/smart-currency-converter.webp",
     primaryUrl:
       "https://play.google.com/store/apps/details?id=com.currencyunitconverter",
@@ -1211,6 +1224,7 @@ export const projects: Project[] = [
     category: "Mobile",
     tech: ["React Native", "Finance", "PDF"],
     image: "/graphic/easy-loan-calculator.webp",
+    addedAt: "2026-07-13",
     icon: "/graphic/icons/loan-estimator.webp",
     primaryUrl:
       "https://play.google.com/store/apps/details?id=com.nexa.loan.estimator",
@@ -1322,6 +1336,7 @@ export const projects: Project[] = [
     category: "Mobile",
     tech: ["React Native", "Time Zones", "Productivity"],
     image: "/graphic/time-converter.webp",
+    addedAt: "2026-10-05",
     icon: "/graphic/icons/time-converter-world-clock.webp",
     primaryUrl:
       "https://play.google.com/store/apps/details?id=nexa.timeconverter.com",
@@ -1435,6 +1450,7 @@ export const projects: Project[] = [
     category: "Mobile",
     tech: ["React Native", "PDF", "Image Tools"],
     image: "/graphic/resize-image.webp",
+    addedAt: "2026-10-05",
     icon: "/graphic/icons/quick-image-pdf-resizer.webp",
     primaryUrl:
       "https://play.google.com/store/apps/details?id=com.nexa.pdfresizer",
@@ -1548,6 +1564,7 @@ export const projects: Project[] = [
     category: "Mobile",
     tech: ["React Native", "Groq", "AI Transcription"],
     image: "/graphic/ai-lecture-recorder.webp",
+    addedAt: "2026-10-05",
     icon: "/graphic/ai-lecture-recorder-icon.webp",
     primaryUrl:
       "https://play.google.com/store/apps/details?id=com.nexa.ai_lecture_recorder",
@@ -1658,6 +1675,7 @@ export const projects: Project[] = [
     category: "Mobile",
     tech: ["React Native", "Chat Stories", "Interactive Fiction"],
     image: "/graphic/horror-chat-stories.webp",
+    addedAt: "2026-10-05",
     icon: "/graphic/icons/horror-chat-stories.webp",
     primaryUrl:
       "https://play.google.com/store/apps/details?id=com.nexa.horror.story",
@@ -1768,6 +1786,7 @@ export const projects: Project[] = [
     category: "Mobile",
     tech: ["React Native", "OCR", "Safety Analysis"],
     image: "/graphic/ingredient-scanner.webp",
+    addedAt: "2026-10-05",
     icon: "/graphic/icons/ingredient-scanner.webp",
     primaryUrl:
       "https://play.google.com/store/apps/details?id=com.nexa.ingredientscanner",
@@ -1875,6 +1894,7 @@ export const projects: Project[] = [
     category: "Mobile",
     tech: ["React Native", "Storage Cleaner", "Privacy"],
     image: "/graphic/cleanmaster.webp",
+    addedAt: "2026-10-05",
     icon: "/graphic/cleanmaster-icon.webp",
     primaryUrl:
       "https://play.google.com/store/apps/details?id=com.nexa.free_up_your_space",
@@ -2001,6 +2021,7 @@ export const projects: Project[] = [
     category: "Mobile",
     tech: ["React Native", "Drawing Tools", "Kids Creativity"],
     image: "/graphic/coloring-book-paint-draw.webp",
+    addedAt: "2026-10-05",
     icon: "/graphic/icons/coloring-book-paint-and-draw.webp",
     primaryUrl:
       "https://play.google.com/store/apps/details?id=com.nexa.coloring",
@@ -2111,6 +2132,7 @@ export const projects: Project[] = [
     category: "Extension",
     tech: ["Chrome Extension", "Time Zones", "Productivity"],
     image: "/graphic/time-converter-extension.webp",
+    addedAt: "2026-10-05",
     icon: "/graphic/icons/world-time-buddy.webp",
     primaryUrl:
       "https://chromewebstore.google.com/detail/world-time-buddy/mmlplefhfbacmbebleofnfligokkaljh",
@@ -2212,6 +2234,7 @@ export const projects: Project[] = [
     category: "Mobile",
     tech: ["React Native", "Visual Timers", "Notifications"],
     image: "/graphic/dayflow.webp",
+    addedAt: "2026-11-12",
     icon: "/graphic/icons/dayflow.webp",
     primaryUrl:
       "https://apps.apple.com/us/app/dayflow-adhd-visual-planner/id6832847656",
@@ -2319,6 +2342,7 @@ export const projects: Project[] = [
     category: "Mobile",
     tech: ["React Native", "Speech Recognition", "Offline Lessons"],
     image: "/graphic/hablito.webp",
+    addedAt: "2026-11-12",
     icon: "/graphic/icons/hablito.webp",
     primaryUrl: "",
     primaryLabel: "App Store",

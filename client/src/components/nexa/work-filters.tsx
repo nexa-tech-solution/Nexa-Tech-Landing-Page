@@ -3,9 +3,10 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Check, ChevronDown, SlidersHorizontal, X } from "lucide-react";
 import type { Project } from "@/components/nexa/data";
 
-export type SortKey = "popular" | "name-asc" | "name-desc" | "category";
+export type SortKey = "newest" | "popular" | "name-asc" | "name-desc" | "category";
 
 export const SORT_OPTIONS: Array<{ value: SortKey; label: string }> = [
+  { value: "newest", label: "Newest" },
   { value: "popular", label: "Popular" },
   { value: "name-asc", label: "Name A–Z" },
   { value: "name-desc", label: "Name Z–A" },
@@ -38,6 +39,9 @@ export function applyWorkFilters(list: Project[], filters: WorkFilters, sort: So
       (!filters.platforms.length || filters.platforms.includes(platformOf(p))) &&
       (!filters.techs.length || filters.techs.some((t) => p.tech.includes(t))),
   );
+  if (sort === "newest")
+    // Stable sort: same-day products keep their curated data order.
+    return [...filtered].sort((a, b) => (b.addedAt ?? "").localeCompare(a.addedAt ?? ""));
   if (sort === "popular") return filtered; // data order is the curated "popular" order
   return [...filtered].sort((a, b) => {
     if (sort === "category") return a.category.localeCompare(b.category) || a.title.localeCompare(b.title);

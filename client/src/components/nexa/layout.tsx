@@ -102,14 +102,25 @@ export function ShotCard({
     >
       {/* One link per card (stretched over it from the caption below) so crawlers
           don't see the same anchor text three times. */}
-      <div className="relative aspect-[4/3] overflow-hidden rounded-lg bg-[#f3f3f4]">
+      {/* Banners are wide (~2:1) with differing ratios: show the whole graphic
+          (contain) over a blurred copy of itself so nothing gets cropped. */}
+      <div className="relative aspect-[2/1] overflow-hidden rounded-lg bg-[#f3f3f4]">
         {project.image ? (
-          <img
-            src={project.image}
-            alt={`${project.title} preview`}
-            className="h-full w-full object-cover"
-            loading="lazy"
-          />
+          <>
+            <img
+              src={project.image}
+              alt=""
+              aria-hidden
+              className="absolute inset-0 h-full w-full scale-110 object-cover blur-2xl"
+              loading="lazy"
+            />
+            <img
+              src={project.image}
+              alt={`${project.title} preview`}
+              className="relative h-full w-full object-contain"
+              loading="lazy"
+            />
+          </>
         ) : (
           <div className="grid h-full w-full place-items-center bg-gradient-to-br from-[#fde2ee] to-[#e7e7ff]">
             <span className="font-display text-5xl font-bold tracking-[-0.06em] text-[#0d0c22]/80">
