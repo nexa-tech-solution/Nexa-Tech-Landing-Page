@@ -73,6 +73,16 @@ export const galleries: Record<string, GalleryImage[]> = {
     { src: "/products/scanqr/08.webp", width: 720, height: 1564, tone: "#d5d1d6" },
     { src: "/products/scanqr/09.webp", width: 720, height: 1564, tone: "#b7b2bf" },
   ],
+  "coc-classic-board-games": [
+    { src: "/products/coc-classic-board-games/01.webp", width: 720, height: 1565, tone: "#bf7d65" },
+    { src: "/products/coc-classic-board-games/02.webp", width: 720, height: 1565, tone: "#bd8b70" },
+    { src: "/products/coc-classic-board-games/03.webp", width: 720, height: 1565, tone: "#bd8766" },
+    { src: "/products/coc-classic-board-games/04.webp", width: 720, height: 1565, tone: "#c39379" },
+    { src: "/products/coc-classic-board-games/05.webp", width: 720, height: 1565, tone: "#c08968" },
+    { src: "/products/coc-classic-board-games/06.webp", width: 720, height: 1565, tone: "#b2846f" },
+    { src: "/products/coc-classic-board-games/07.webp", width: 720, height: 1565, tone: "#a87b6a" },
+    { src: "/products/coc-classic-board-games/08.webp", width: 720, height: 1565, tone: "#b98669" },
+  ],
   "dayflow": [
     { src: "/products/dayflow/01.webp", width: 720, height: 1564, tone: "#b0a5e6" },
     { src: "/products/dayflow/02.webp", width: 720, height: 1564, tone: "#9e93d5" },

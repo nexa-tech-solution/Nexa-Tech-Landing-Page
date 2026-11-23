@@ -80,7 +80,7 @@
     <main class="wrap">
       <div class="card">
         <h1>Privacy Policy</h1>
-        <p class="meta">Coc: Classic Board Games · Nexa · Effective date: November 17, 2026</p>
+        <p class="meta">Coc: Classic Board Games · Nexa · Effective date: November 23, 2026</p>
 
         <p>
           This Privacy Policy explains how Coc: Classic Board Games ("the app", "we",
@@ -91,8 +91,10 @@
 
         <div class="note">
           Short version: no sign-up, no personal profile on our servers. Your games,
-          stats, and settings stay on your device. The app shows ads from Google
-          AdMob, which may use device identifiers depending on your choices.
+          stats, and settings stay on your device. We use Google Firebase for
+          anonymous usage statistics and crash reports, RevenueCat to manage
+          purchases, and Google AdMob for ads, which may use device identifiers
+          depending on your choices.
         </div>
 
         <h2>1. Information Stored Only on Your Device</h2>
@@ -126,10 +128,19 @@
 
         <h2>4. In-App Purchases</h2>
         <p>
-          Purchases (for example, removing ads or unlocking content) are processed
-          entirely by the Apple App Store or Google Play. We never receive your
-          payment details. The app only receives confirmation of what was purchased
-          so it can unlock and restore it.
+          Purchases (for example, Coc Pro subscriptions, lifetime Pro, themes, puzzle
+          packs, or coins) are processed entirely by the Apple App Store or Google
+          Play. We never receive your payment details.
+        </p>
+        <p>
+          We use <a href="https://www.revenuecat.com/privacy" target="_blank" rel="noopener">RevenueCat</a>
+          to validate receipts and keep track of subscriptions, so your purchases can
+          be unlocked and restored across reinstalls and devices. RevenueCat receives
+          an anonymous app user ID it generates, your store receipts and transaction
+          history (product, price, currency, dates), and basic device information
+          such as platform, app version, and country. It does not receive your name,
+          email, or payment card. Subscriptions renew automatically until you cancel
+          them in your App Store or Google Play account settings.
         </p>
 
         <h2>5. Advertising (Google AdMob)</h2>
@@ -160,7 +171,23 @@
           <a href="https://policies.google.com/technologies/ads" target="_blank" rel="noopener">how Google uses information for ads</a>.
         </p>
 
-        <h2>6. What We Do Not Do</h2>
+        <h2>6. Analytics, Crash Reports, and Performance (Google Firebase)</h2>
+        <p>
+          To understand which features are used and to fix bugs, the app uses
+          Google Firebase services:
+        </p>
+        <ul>
+          <li><strong>Firebase Analytics</strong>: app events such as screens opened, games started and finished, and purchase screens viewed, together with an app-instance ID, device model, OS version, app version, language, and approximate country.</li>
+          <li><strong>Firebase Crashlytics</strong>: when the app crashes or hits an error, a crash report with the stack trace, device model, OS version, and app state at the time of the crash.</li>
+          <li><strong>Firebase Performance Monitoring</strong>: technical timings such as app start time, screen rendering speed, and network request duration.</li>
+        </ul>
+        <p>
+          This information is not linked to your name or contact details and is not
+          used to track you across other companies' apps. Learn more in
+          <a href="https://firebase.google.com/support/privacy" target="_blank" rel="noopener">Privacy and Security in Firebase</a>.
+        </p>
+
+        <h2>7. What We Do Not Do</h2>
         <ul>
           <li>We do not require an account, email, or phone number.</li>
           <li>We do not sell your personal information.</li>
@@ -168,7 +195,7 @@
           <li>We do not access your contacts, photos, location, camera, or microphone.</li>
         </ul>
 
-        <h2>7. Children</h2>
+        <h2>8. Children</h2>
         <p>
           The app is suitable for a general audience but is not directed to children
           under 13 (or the minimum age in your country). We do not knowingly collect
@@ -176,14 +203,18 @@
           personal information through the app, contact us and we will help.
         </p>
 
-        <h2>8. Data Retention and Deletion</h2>
+        <h2>9. Data Retention and Deletion</h2>
         <p>
           Because your data lives on your device, you control it. Deleting the app
-          removes all app data. Information collected by Google for advertising is
-          kept according to Google's own policies.
+          removes all app data from your device. Analytics and crash data are kept
+          by Firebase for a limited period according to Google's retention settings,
+          advertising data according to Google's own policies, and purchase records
+          by RevenueCat as needed to restore purchases and meet tax and accounting
+          obligations. To ask us to delete purchase records linked to your anonymous
+          ID, contact us.
         </p>
 
-        <h2>9. Your Rights</h2>
+        <h2>10. Your Rights</h2>
         <p>
           Depending on where you live (for example, under the GDPR or U.S. state
           privacy laws such as the CCPA), you may have rights to access, delete, or
@@ -193,19 +224,19 @@
           settings, but you can always contact us for help.
         </p>
 
-        <h2>10. Security</h2>
+        <h2>11. Security</h2>
         <p>
           Content is downloaded over secure HTTPS connections, and your data is stored
           in the app's private storage on your device.
         </p>
 
-        <h2>11. Changes to This Privacy Policy</h2>
+        <h2>12. Changes to This Privacy Policy</h2>
         <p>
           We may update this Privacy Policy when the app or the law changes. When we
           do, we will update the effective date at the top of this page.
         </p>
 
-        <h2>12. Contact Us</h2>
+        <h2>13. Contact Us</h2>
         <p>If you have any questions about this Privacy Policy, contact us at:</p>
         <p>
           Email:
@@ -213,7 +244,7 @@
         </p>
 
         <div class="footer">
-          <p class="small">© 2026 Nexa. Coc: Classic Board Games.</p>
+          <p class="small">© 2026 Nexa. Coc: Classic Board Games · <a href="/coc-terms-of-use.html">Terms of Use</a></p>
         </div>
       </div>
     </main>

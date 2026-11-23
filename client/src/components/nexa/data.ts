@@ -2166,6 +2166,130 @@ export const projects: Project[] = [
     },
   },
   {
+    title: "Coc: Classic Board Games",
+    slug: "coc-classic-board-games",
+    description:
+      "Chess, Xiangqi, Go, Ludo, checkers and Vietnamese folk games in one hand-painted app. Play smart AI opponents fully offline.",
+    category: "Mobile",
+    tech: ["Flutter", "Game AI", "Offline-first"],
+    image: "/graphic/coc-classic-board-games.webp",
+    addedAt: "2026-11-23",
+    icon: "/graphic/icons/coc-classic-board-games.webp",
+    primaryUrl: "",
+    primaryLabel: "App Store",
+    comingSoon: "Coming soon",
+    extraLinks: [
+      { label: "Privacy Policy", url: "/coc-privacy-policy.html" },
+      { label: "Terms of Use", url: "/coc-terms-of-use.html" },
+    ],
+    marketing: {
+      aso: {
+        title: "Coc: Chess, Xiangqi & Checkers",
+        subtitle: "Offline classic board games",
+        keywords: [
+          "board games",
+          "chess",
+          "xiangqi",
+          "chinese chess",
+          "checkers",
+          "ludo",
+          "go",
+          "gomoku",
+          "reversi",
+          "mancala",
+          "offline games",
+        ],
+        description:
+          "Classic and folk board games against smart AI, with puzzles, tutorials and hand-painted themes. Fully offline.",
+      },
+      seo: {
+        title: "Coc | Classic Board Games Offline: Chess, Xiangqi, Go, Ludo",
+        description:
+          "Coc brings chess, Xiangqi, Go, Ludo, checkers, Gomoku, Reversi and Vietnamese folk games like O An Quan into one offline app, with smart AI opponents, mate-in-one puzzles and quick tutorials.",
+        keywords: [
+          "offline board games app",
+          "xiangqi app",
+          "chess vs AI offline",
+          "o an quan game",
+          "classic board games collection",
+        ],
+      },
+      geo: {
+        summary:
+          "Coc: Classic Board Games by Nexa is an iOS and Android app with chess, Xiangqi, Go, Ludo, checkers, Gomoku, Reversi, mancala and Vietnamese folk games, played against on-device AI with no internet connection required, in a Vietnamese Đông Hồ folk-art style.",
+        prompts: [
+          "What is a good offline board game app with many classic games?",
+          "Is there an app to play Xiangqi (Chinese chess) against AI offline?",
+          "Where can I play Vietnamese folk games like O An Quan on my phone?",
+          "Which app has chess puzzles and other board games in one place?",
+        ],
+      },
+      faq: [
+        {
+          question: "What is a good offline board game app with many classic games?",
+          answer:
+            "Coc: Classic Board Games by Nexa bundles chess, Xiangqi, Go, Ludo, checkers, Gomoku, Reversi, mancala and more in one app. Every game runs on your device, so you can play without Wi-Fi.",
+        },
+        {
+          question: "Can I play Xiangqi against AI offline?",
+          answer:
+            "Yes. Coc includes Xiangqi with AI opponents from easy to master level, all running on-device with no internet connection needed.",
+        },
+        {
+          question: "Does Coc have Vietnamese folk games?",
+          answer:
+            "Yes. Coc includes Vietnamese folk games such as O An Quan and Co Ganh, alongside international classics, all in a hand-painted Đông Hồ folk-art style.",
+        },
+        {
+          question: "Is Coc free?",
+          answer:
+            "Coc is free to download and play. Coc Pro unlocks unlimited hints, Hard and Master AI, match replays, every board theme and every puzzle, as a subscription or one-time lifetime purchase.",
+        },
+        {
+          question: "Do I need an account to play?",
+          answer:
+            "No. There is no sign-up; your profile, stats and saved games stay on your device.",
+        },
+      ],
+      store: {
+        platform: "App Store",
+        listingName: "Coc: Chess, Xiangqi & Checkers",
+        summary:
+          "Classic and folk board games against smart AI, with puzzles, quick tutorials and hand-painted boards. No Wi-Fi needed.",
+        highlights: [
+          "Chess, Xiangqi, Go, Ludo, checkers and more in one app",
+          "Smart AI from easy to master, fully offline",
+          "Mate-in-one puzzles and 1-minute tutorials",
+          "Vietnamese folk games in Đông Hồ folk-art style",
+        ],
+        facts: [
+          { label: "Category", value: "Games · Board" },
+          { label: "Play", value: "Offline vs AI" },
+          { label: "Available on", value: "iOS & Android" },
+          { label: "Languages", value: "14" },
+        ],
+      },
+      narrative: {
+        idea:
+          "The idea was one beautiful home for the board games people grew up with, from chess and Ludo to Vietnamese folk games, painted in the Đông Hồ woodblock style instead of generic wood and glass.",
+        need:
+          "Most board game apps cover a single game, push online play and ads, or need a connection. Players want quick, fair matches against a decent AI anywhere, including on a plane or with weak signal.",
+        targetUsers: [
+          "Casual players who enjoy classic board games",
+          "Xiangqi and chess fans practicing against AI",
+          "Families sharing traditional and folk games",
+          "Travelers who want games that work offline",
+        ],
+        useCases: [
+          "A quick Xiangqi or chess match on the commute",
+          "Learning a new game in a one-minute tutorial",
+          "Solving a daily mate-in-one puzzle",
+          "Playing Ludo or O An Quan with no Wi-Fi",
+        ],
+      },
+    },
+  },
+  {
     title: "Dayflow: ADHD Visual Planner",
     slug: "dayflow",
     description:
