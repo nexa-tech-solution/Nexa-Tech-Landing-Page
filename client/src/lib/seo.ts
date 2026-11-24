@@ -47,7 +47,7 @@ export function getHomeStructuredData() {
   const siteUrl = getSiteUrl();
   const absoluteHomeUrl = getAbsoluteUrl("/");
   const absoluteLogoUrl = getAbsoluteUrl(DEFAULT_LOGO_IMAGE);
-  const featuredProjects = projects.slice(0, 8).map((project, index) => ({
+  const featuredProjects = projects.map((project, index) => ({
     "@type": "ListItem",
     position: index + 1,
     item: {
@@ -60,7 +60,7 @@ export function getHomeStructuredData() {
       url: getAbsoluteUrl(getProjectPath(project)),
       image: getAbsoluteUrl(project.image ?? DEFAULT_OG_IMAGE),
       applicationCategory: getApplicationCategory(project.category),
-      operatingSystem: getOperatingSystem(project.category),
+      operatingSystem: getOperatingSystem(project),
       keywords: project.marketing?.seo.keywords.join(", "),
     },
   }));
@@ -172,6 +172,12 @@ export function getProjectStructuredData(project: Project) {
         author: organizationRef(),
         publisher: organizationRef(),
         keywords: project.marketing?.seo.keywords.join(", "),
+        inLanguage: "en",
+        ...(project.addedAt ? { datePublished: project.addedAt } : {}),
+        ...(project.marketing?.store?.listingName &&
+        project.marketing.store.listingName !== project.title
+          ? { alternateName: project.marketing.store.listingName }
+          : {}),
         ...(productType === "SoftwareSourceCode"
           ? {
               programmingLanguage: "TypeScript",
@@ -180,7 +186,11 @@ export function getProjectStructuredData(project: Project) {
             }
           : {
               applicationCategory: getApplicationCategory(project.category),
-              operatingSystem: getOperatingSystem(project.category),
+              operatingSystem: getOperatingSystem(project),
+              isAccessibleForFree: true,
+              ...(project.marketing?.store?.highlights?.length
+                ? { featureList: project.marketing.store.highlights }
+                : {}),
               ...(listings.length ? { downloadUrl: listings[0], installUrl: listings[0] } : {}),
               // Free to download (in-app purchases aside). Google requires `offers` for app rich results.
               ...(listings.length && !project.comingSoon
@@ -216,10 +226,17 @@ function getApplicationCategory(category: string) {
   }
 }
 
-function getOperatingSystem(category: string) {
-  switch (category) {
-    case "Mobile":
-      return "Android, iOS";
+// Derived from real store links, so an Android-only app is never labelled iOS.
+function getOperatingSystem(project: Project) {
+  switch (project.category) {
+    case "Mobile": {
+      const urls = getListingUrls(project).join(" ");
+      const os = [
+        /play\.google\.com/.test(urls) && "Android",
+        /apps\.apple\.com/.test(urls) && "iOS",
+      ].filter(Boolean);
+      return os.length ? os.join(", ") : "Android, iOS";
+    }
     case "Extension":
       return "Web";
     case "Library":
