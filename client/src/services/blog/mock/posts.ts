@@ -47,6 +47,50 @@ type PostMeta = {
 // Newest first, as the list endpoint would return them.
 const meta: PostMeta[] = [
   {
+    slug: "how-to-play-xiangqi-for-beginners",
+    title: "How to play Xiangqi (Chinese chess): a beginner's guide",
+    excerpt:
+      "The board, how every piece moves, the three rules that surprise chess players, a simple opening plan and the mistakes beginners make most.",
+    tag: "Product",
+    publishedAt: "2026-11-24",
+    author: "Ethan",
+    cover: "/graphic/coc-classic-board-games.webp",
+    relatedProject: "coc-classic-board-games",
+  },
+  {
+    slug: "how-to-schedule-meetings-across-time-zones",
+    title: "How to schedule meetings across time zones without mistakes",
+    excerpt:
+      "Find the overlap of working hours, avoid the daylight saving trap and write times nobody has to convert. A practical guide for remote teams.",
+    tag: "Product",
+    publishedAt: "2026-11-23",
+    author: "Tina",
+    cover: "/graphic/time-converter.webp",
+    relatedProject: "time-converter-world-clock",
+  },
+  {
+    slug: "how-to-pick-a-virtual-pet-game",
+    title: "How to pick a virtual pet game that feels cosy, not like a chore",
+    excerpt:
+      "What to look for in a virtual pet app: a pet that reacts to you, gentle care loops, fun mini-games and fair ads and purchases.",
+    tag: "Product",
+    publishedAt: "2026-11-22",
+    author: "Tina",
+    cover: "/graphic/petpal.webp",
+    relatedProject: "petpal-pet-simulator",
+  },
+  {
+    slug: "how-to-use-tarot-for-journaling",
+    title: "How to use tarot for journaling: a 5-minute daily reflection",
+    excerpt:
+      "Use one tarot card a day as a journal prompt. Open questions, writing before looking up meanings, card prompts and a weekly look-back.",
+    tag: "Product",
+    publishedAt: "2026-11-21",
+    author: "Ethan",
+    cover: "/graphic/tarot-destiny.webp",
+    relatedProject: "mystic-tarot",
+  },
+  {
     slug: "how-to-make-a-passport-photo-on-your-phone",
     title: "How to make a passport photo on your phone (that gets accepted)",
     excerpt:
