@@ -2169,7 +2169,7 @@ export const projects: Project[] = [
     title: "Coc: Classic Board Games",
     slug: "coc-classic-board-games",
     description:
-      "Chess, Xiangqi, Go, Ludo, checkers and Vietnamese folk games in one hand-painted app. Play smart AI opponents fully offline.",
+      "20 classic board games in one hand-painted app: chess, Xiangqi, Go, Ludo, checkers and Vietnamese folk games. Play smart AI fully offline.",
     category: "Mobile",
     tech: ["Flutter", "Game AI", "Offline-first"],
     image: "/graphic/coc-classic-board-games.webp",
@@ -2200,12 +2200,12 @@ export const projects: Project[] = [
           "offline games",
         ],
         description:
-          "Classic and folk board games against smart AI, with puzzles, tutorials and hand-painted themes. Fully offline.",
+          "20 classic and folk board games against smart AI, with puzzles, tutorials and hand-painted themes. Fully offline.",
       },
       seo: {
         title: "Coc | Classic Board Games Offline: Chess, Xiangqi, Go, Ludo",
         description:
-          "Coc brings chess, Xiangqi, Go, Ludo, checkers, Gomoku, Reversi and Vietnamese folk games like O An Quan into one offline app, with smart AI opponents, mate-in-one puzzles and quick tutorials.",
+          "Coc brings 20 board games, including chess, Xiangqi, Go, Ludo, checkers, Gomoku, Reversi and Vietnamese folk games like O An Quan into one offline app, with smart AI opponents, mate-in-one puzzles and quick tutorials.",
         keywords: [
           "offline board games app",
           "xiangqi app",
@@ -2228,7 +2228,7 @@ export const projects: Project[] = [
         {
           question: "What is a good offline board game app with many classic games?",
           answer:
-            "Coc: Classic Board Games by Nexa bundles chess, Xiangqi, Go, Ludo, checkers, Gomoku, Reversi, mancala and more in one app. Every game runs on your device, so you can play without Wi-Fi.",
+            "Coc: Classic Board Games by Nexa bundles 20 games, including chess, Xiangqi, Go, Ludo, checkers, Gomoku, Reversi, mancala and more in one app. Every game runs on your device, so you can play without Wi-Fi.",
         },
         {
           question: "Can I play Xiangqi against AI offline?",
@@ -2243,7 +2243,7 @@ export const projects: Project[] = [
         {
           question: "Is Coc free?",
           answer:
-            "Coc is free to download and play. Coc Pro unlocks unlimited hints, Hard and Master AI, match replays, every board theme and every puzzle, as a subscription or one-time lifetime purchase.",
+            "Coc is free to download and play. Coc Pro unlocks unlimited hints, Hard and Master AI, match replays, every board theme and every puzzle, with weekly, monthly or yearly plans.",
         },
         {
           question: "Do I need an account to play?",
@@ -2257,13 +2257,14 @@ export const projects: Project[] = [
         summary:
           "Classic and folk board games against smart AI, with puzzles, quick tutorials and hand-painted boards. No Wi-Fi needed.",
         highlights: [
-          "Chess, Xiangqi, Go, Ludo, checkers and more in one app",
+          "20 games: chess, Xiangqi, Go, Ludo, checkers and more",
           "Smart AI from easy to master, fully offline",
           "Mate-in-one puzzles and 1-minute tutorials",
           "Vietnamese folk games in Đông Hồ folk-art style",
         ],
         facts: [
           { label: "Category", value: "Games · Board" },
+          { label: "Games", value: "20" },
           { label: "Play", value: "Offline vs AI" },
           { label: "Available on", value: "iOS & Android" },
           { label: "Languages", value: "14" },
