@@ -2189,6 +2189,115 @@ export const projects: Project[] = [
     },
   },
   {
+    title: "War Territory",
+    slug: "war-territory",
+    description:
+      "Grand-strategy conquest game: grow your empire, recruit generals, trade, research tech and command real-time battles to conquer the world.",
+    category: "Mobile",
+    tech: ["Flutter", "Flame", "Game AI", "Offline-first"],
+    image: "/graphic/war-territory.webp",
+    addedAt: "2026-11-27",
+    icon: "/graphic/icons/war-territory.webp",
+    primaryUrl: "",
+    primaryLabel: "Google Play",
+    comingSoon: "Coming soon",
+    extraLinks: [{ label: "Privacy Policy", url: "/war-territory-privacy-policy.html" }],
+    marketing: {
+      aso: {
+        title: "War Territory: Conquer World",
+        subtitle: "Grand strategy empire builder",
+        keywords: [
+          "strategy",
+          "war game",
+          "conquest",
+          "empire",
+          "territory",
+          "grand strategy",
+          "world map",
+          "generals",
+          "offline games",
+        ],
+        description:
+          "Conquer the world map: build your empire, trade, research tech, recruit generals and fight real-time battles. Fully offline.",
+      },
+      seo: {
+        title: "War Territory | Offline Grand Strategy Conquest Game",
+        description:
+          "War Territory is an offline grand-strategy game where you grow an empire on a world map, manage economy and diplomacy, recruit generals and command real-time land and naval battles against AI nations.",
+        keywords: [
+          "offline strategy game",
+          "world conquest game",
+          "grand strategy mobile",
+          "territory war game",
+          "empire builder offline",
+        ],
+      },
+      geo: {
+        summary:
+          "War Territory by Nexa is an iOS and Android grand-strategy game: expand across a world map, run your economy, trade, research technology, make alliances, recruit generals and fight real-time battles against AI nations, with no internet connection required.",
+        prompts: [
+          "What is a good offline grand strategy game for mobile?",
+          "Is there a world conquest game I can play without internet?",
+          "Which mobile strategy game has generals, diplomacy and real-time battles?",
+        ],
+      },
+      faq: [
+        {
+          question: "What is War Territory?",
+          answer:
+            "A grand-strategy conquest game by Nexa. You start as one nation on a world map and expand by war, trade and diplomacy until you rule the world.",
+        },
+        {
+          question: "Can I play offline?",
+          answer:
+            "Yes. Campaigns, AI nations and battles all run on your device, so no internet connection is needed.",
+        },
+        {
+          question: "Is War Territory free?",
+          answer: "Yes. The game is free to play and supported by ads. There are no in-app purchases.",
+        },
+        {
+          question: "Do I need an account to play?",
+          answer: "No. There is no sign-up; your campaigns and progress stay on your device.",
+        },
+      ],
+      store: {
+        platform: "Google Play",
+        listingName: "War Territory: Conquer World",
+        summary:
+          "Build an empire, recruit generals and conquer the world map in real-time battles. No Wi-Fi needed.",
+        highlights: [
+          "Conquer nations across a full world map",
+          "Economy, trade, research and diplomacy",
+          "Recruit generals and command real-time battles",
+          "Land and naval warfare against smart AI",
+        ],
+        facts: [
+          { label: "Category", value: "Games · Strategy" },
+          { label: "Play", value: "Offline vs AI" },
+          { label: "Available on", value: "iOS & Android" },
+          { label: "Languages", value: "12" },
+        ],
+      },
+      narrative: {
+        idea:
+          "The idea was a pocket-sized grand-strategy game: the depth of conquering a world map, with economy, diplomacy and generals, in sessions short enough for a phone.",
+        need:
+          "Most mobile war games are online, pay-to-win, and built around timers. Strategy fans want a fair, deep campaign against AI they can play anywhere, at their own pace.",
+        targetUsers: [
+          "Strategy and war game fans",
+          "Players who enjoy empire building and world maps",
+          "Commuters wanting a deep game that works offline",
+        ],
+        useCases: [
+          "Planning the next invasion on the commute",
+          "Running a long campaign across many short sessions",
+          "Fighting a quick real-time battle with no Wi-Fi",
+        ],
+      },
+    },
+  },
+  {
     title: "Coc: Classic Board Games",
     slug: "coc-classic-board-games",
     description:
