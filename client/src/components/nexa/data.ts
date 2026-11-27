@@ -789,6 +789,9 @@ export const projects: Project[] = [
     secondaryUrl:
       "https://apps.apple.com/us/app/scanqr-qr-code-barcode/id6779862851",
     secondaryLabel: "App Store",
+    extraLinks: [
+      { label: "Privacy Policy", url: "/scanqr-privacy-policy.html" },
+    ],
     marketing: {
       aso: {
         title: "ScanQR - QR Code & Barcode",
@@ -916,6 +919,9 @@ export const projects: Project[] = [
     secondaryUrl:
       "https://apps.apple.com/us/app/fieldstamp-gps-camera/id6786527961",
     secondaryLabel: "App Store",
+    extraLinks: [
+      { label: "Privacy Policy", url: "/fieldstamp-policy-privacy.html" },
+    ],
     marketing: {
       aso: {
         title: "FieldStamp: GPS Camera",
@@ -1142,6 +1148,9 @@ export const projects: Project[] = [
     secondaryUrl:
       "https://apps.apple.com/us/app/easy-loan-estimator/id6779272088",
     secondaryLabel: "App Store",
+    extraLinks: [
+      { label: "Privacy Policy", url: "/loan-estimator.html" },
+    ],
     marketing: {
       aso: {
         title: "Easy Loan Estimator: EMI Calc",
@@ -1370,6 +1379,10 @@ export const projects: Project[] = [
     secondaryUrl:
       "https://apps.apple.com/us/app/quick-image-pdf-resizer/id6780742651",
     secondaryLabel: "App Store",
+    extraLinks: [
+      { label: "Privacy Policy", url: "/quick-image-pdf-resizer-privacy-policy.html" },
+      { label: "Terms of Use", url: "/quick-image-pdf-resizer-terms-of-use.html" },
+    ],
     marketing: {
       aso: {
         title: "PixPDF: Scan & Photo Resizer",
@@ -1497,6 +1510,9 @@ export const projects: Project[] = [
     secondaryUrl:
       "https://apps.apple.com/us/app/ai-lecture-recorder/id6791456539",
     secondaryLabel: "App Store",
+    extraLinks: [
+      { label: "Privacy Policy", url: "/voice-recorder.html" },
+    ],
     marketing: {
       aso: {
         title: "AI Lecture & Voice Recorder",
@@ -1608,6 +1624,9 @@ export const projects: Project[] = [
     secondaryUrl:
       "https://apps.apple.com/us/app/horror-chat-stories/id6794671992",
     secondaryLabel: "App Store",
+    extraLinks: [
+      { label: "Privacy Policy", url: "/horror-chat-story.html" },
+    ],
     marketing: {
       aso: {
         title: "Horror Chat Stories & Texts",
@@ -1827,6 +1846,10 @@ export const projects: Project[] = [
     primaryLabel: "Google Play",
     secondaryUrl: "https://apps.apple.com/us/app/clean-free-up-your-space/id6818406418",
     secondaryLabel: "App Store",
+    extraLinks: [
+      { label: "Privacy Policy", url: "/free-up-your-space-privacy-policy.html" },
+      { label: "Terms of Use", url: "/free-up-your-space-terms-of-use.html" },
+    ],
     marketing: {
       aso: {
         title: "Clean & Free up your space",
@@ -2304,6 +2327,10 @@ export const projects: Project[] = [
     primaryLabel: "Google Play",
     secondaryUrl: "https://apps.apple.com/us/app/dayflow-adhd-visual-planner/id6832847656",
     secondaryLabel: "App Store",
+    extraLinks: [
+      { label: "Privacy Policy", url: "/dayflow-privacy-policy.html" },
+      { label: "Terms of Use", url: "/dayflow-terms-of-use.html" },
+    ],
     marketing: {
       aso: {
         title: "Dayflow: ADHD Visual Planner",
@@ -2421,9 +2448,14 @@ export const projects: Project[] = [
     image: "/graphic/hablito.webp",
     addedAt: "2026-11-12",
     icon: "/graphic/icons/hablito.webp",
-    primaryUrl: "",
-    primaryLabel: "App Store",
-    comingSoon: "Coming soon",
+    primaryUrl: "https://play.google.com/store/apps/details?id=com.nexa.hablito",
+    primaryLabel: "Google Play",
+    secondaryUrl:
+      "https://apps.apple.com/us/app/hablito-learn-spanish/id6832188791",
+    secondaryLabel: "App Store",
+    extraLinks: [
+      { label: "Privacy Policy", url: "/hablito-privacy-policy.html" },
+    ],
     marketing: {
       aso: {
         title: "Hablito: Speak Mexican Spanish",
