@@ -39,9 +39,9 @@ function FeaturedPost({ post }: { post: Post }) {
       <img
         src={post.cover}
         alt={post.title}
-        className="aspect-[4/5] w-full object-cover transition duration-700 ease-out group-hover:scale-[1.02] sm:aspect-[16/9] lg:aspect-[2/1]"
+        className="h-auto w-full transition duration-700 ease-out group-hover:scale-[1.02]"
       />
-      <div className="absolute inset-x-3 bottom-3 rounded-2xl bg-[#0d0c22]/70 p-5 text-white backdrop-blur-md sm:inset-x-5 sm:bottom-5 sm:p-7">
+      <div className="relative bg-[#0d0c22] p-5 text-white sm:p-7">
         <div className="flex items-start justify-between gap-4">
           <div className="min-w-0">
             <p className="text-xs font-semibold uppercase tracking-[0.12em] text-[#f082ac]">
@@ -144,7 +144,7 @@ export default function Blog() {
           </header>
 
           {isPending ? (
-            <div className="aspect-[4/5] animate-pulse rounded-3xl bg-[#f3f3f4] sm:aspect-[16/9] lg:aspect-[2/1]" />
+            <div className="aspect-[16/9] animate-pulse rounded-3xl bg-[#f3f3f4]" />
           ) : null}
           {isError ? (
             <p className="rounded-3xl bg-[#f8f7f4] px-6 py-16 text-center text-[#6e6d7a]">
@@ -210,7 +210,7 @@ export default function Blog() {
             <ul className="mt-10 grid gap-x-8 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
               {[0, 1, 2].map((item) => (
                 <li key={item} className="animate-pulse">
-                  <div className="aspect-[16/10] rounded-2xl bg-[#f3f3f4]" />
+                  <div className="aspect-[2/1] rounded-2xl bg-[#f3f3f4]" />
                   <div className="mt-5 h-3 w-20 rounded-full bg-[#f3f3f4]" />
                   <div className="mt-3 h-5 w-4/5 rounded-full bg-[#f3f3f4]" />
                   <div className="mt-3 h-4 w-full rounded-full bg-[#f3f3f4]" />

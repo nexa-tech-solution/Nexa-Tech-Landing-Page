@@ -47,6 +47,72 @@ type PostMeta = {
 // Newest first, as the list endpoint would return them.
 const meta: PostMeta[] = [
   {
+    slug: "best-coloring-apps-for-kids",
+    title: "How to choose the best coloring app for kids: a parent's checklist",
+    excerpt:
+      "What makes a kids coloring app good: no reading needed, big buttons, auto-save, stickers and fair ads. A 5-minute test and red flags to avoid.",
+    tag: "Product",
+    publishedAt: "2026-11-27",
+    author: "Tina",
+    cover: "/graphic/coloring-book-paint-draw.webp",
+    relatedProject: "coloring-book-paint-and-draw",
+  },
+  {
+    slug: "benefits-of-coloring-for-kids",
+    title: "6 benefits of coloring for kids (on paper and on a tablet)",
+    excerpt:
+      "Fine motor skills, colors, focus, calm and creativity: what coloring does for young kids, and how paper and coloring apps compare.",
+    tag: "Product",
+    publishedAt: "2026-11-27",
+    author: "Ethan",
+    cover: "/graphic/coloring-book-paint-draw.webp",
+    relatedProject: "coloring-book-paint-and-draw",
+  },
+  {
+    slug: "screen-time-coloring-apps-for-toddlers",
+    title: "Screen time for toddlers: why coloring apps are a better choice",
+    excerpt:
+      "Active vs passive screen time, simple rules that work for toddlers, and the parental settings to check before handing over a tablet.",
+    tag: "Product",
+    publishedAt: "2026-11-27",
+    author: "Tina",
+    cover: "/graphic/coloring-book-paint-draw.webp",
+    relatedProject: "coloring-book-paint-and-draw",
+  },
+  {
+    slug: "hotel-check-in-in-spanish",
+    title: "How to check into a hotel in Spanish: phrases and a full example",
+    excerpt:
+      "Reservations, passports, breakfast and wifi: the Mexican Spanish phrases for every step at the front desk, plus what to say when something is wrong.",
+    tag: "Product",
+    publishedAt: "2026-11-27",
+    author: "Tina",
+    cover: "/graphic/hablito.webp",
+    relatedProject: "hablito",
+  },
+  {
+    slug: "how-to-stop-freezing-when-speaking-spanish",
+    title: "How to stop freezing when you speak Spanish",
+    excerpt:
+      "You know the words but go blank when someone asks a question. Six practical habits that turn what you know into what you can say.",
+    tag: "Product",
+    publishedAt: "2026-11-26",
+    author: "Ethan",
+    cover: "/graphic/hablito.webp",
+    relatedProject: "hablito",
+  },
+  {
+    slug: "mexican-spanish-vs-spain-spanish",
+    title: "Mexican Spanish vs Spain Spanish: the differences that matter",
+    excerpt:
+      "Pronunciation, ustedes vs vosotros, past tense habits and the everyday words that change. What to learn if you are heading to Mexico.",
+    tag: "Product",
+    publishedAt: "2026-11-25",
+    author: "Tina",
+    cover: "/graphic/hablito.webp",
+    relatedProject: "hablito",
+  },
+  {
     slug: "how-to-play-xiangqi-for-beginners",
     title: "How to play Xiangqi (Chinese chess): a beginner's guide",
     excerpt:

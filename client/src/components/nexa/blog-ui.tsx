@@ -51,12 +51,12 @@ export function PostCover({
 }) {
   return (
     <div
-      className={`relative aspect-[16/10] overflow-hidden bg-[#f3f3f4] ${className}`}
+      className={`relative aspect-[2/1] overflow-hidden bg-[#f3f3f4] ${className}`}
     >
       <img
         src={post.cover}
         alt={post.title}
-        className="h-full w-full object-cover transition duration-500 ease-out group-hover:scale-[1.04]"
+        className="h-full w-full object-cover object-left transition duration-500 ease-out group-hover:scale-[1.04]"
         loading={eager ? "eager" : "lazy"}
       />
       <div
